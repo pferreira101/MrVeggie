@@ -1,0 +1,23 @@
+﻿@model IEnumerable<MrVeggie.Models.Utilizador>
+
+@{
+    ViewData["Title"] = "getUtilizadores";
+}
+
+<h1>Utilizadores</h1>
+
+<div class="col-xs-12" style="height:50px;"></div>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Nome</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var utilizador in Model) {
+            <tr>
+                <td>@utilizador.nome</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,3 +1,4 @@
+
 USE MrVeggie;
 
 CREATE TABLE Agenda (
@@ -49,6 +50,7 @@ CREATE TABLE Passo (
 
 CREATE TABLE Receita (
     id_receita int IDENTITY(1, 1) NOT NULL, 
+	nome varchar(50) NOT NULL,
     [desc] varchar(500) NOT NULL, 
     tempo_conf real NOT NULL, 
     avaliacao int NOT NULL,

@@ -2,3 +2,6 @@
 *.lck
 *.bak*
 *.vpp-journal
+MrVeggie/.vs
+MrVeggie/MrVeggie/obj
+MrVeggie/MrVeggie/bin

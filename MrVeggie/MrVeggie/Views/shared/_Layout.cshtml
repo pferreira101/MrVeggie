@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/css/site.css" rel="stylesheet" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3">
+            <div class="container" align="left">
+
+                    <ul class="navbar-nav">
+                        <li>
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">MrVeggie</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="ReceitaView" asp-action="showReceitas">Receitas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="IngredienteView" asp-action="showIngredientes">Ingredientes</a>
+                        </li>
+                    </ul>
+            </div>            
+            <div class="container">
+
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            @if (User.Identity.IsAuthenticated) {
+                                <a asp-controller="UserView" asp-action="Logout">Olá @User.Identity.Name (Sign Out)</a>
+                            }
+                            else {
+                                <a asp-controller="UserView" asp-action="RegistaUtilizador">Registar</a>
+                                <a asp-controller="UserView" asp-action="LoginUtilizador">Login</a>
+                            }
+                        </li>
+                    </ul>     
+            </div>
+        </nav>
+
+    </header>
+    <div class="container">
+
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2019 - MrVeggie
+        </div>
+    </footer>
+
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+</body>
+</html>

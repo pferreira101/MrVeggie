@@ -1,0 +1,100 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using MrVeggie.Models;
+using MrVeggie.Shared;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+
+namespace MrVeggie.Controllers {
+
+
+    [Route("[controller]/[action]")]
+    public class UserViewController : Controller {
+
+        private UtilizadorHandling utilizador_handling;
+
+        public UserViewController(UtilizadorContext context) {
+            utilizador_handling = new UtilizadorHandling(context);
+        }
+
+
+        [Authorize]
+        public IActionResult getUtilizadores() {
+            Utilizador[] users = utilizador_handling.getUtilizadores();
+
+            return View(users);
+        }
+
+
+        [HttpGet]
+        public IActionResult RegistaUtilizador() {
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult RegistaUtilizador([Bind] Utilizador u) {
+
+            if (ModelState.IsValid) {
+                bool RegistrationStatus = this.utilizador_handling.RegistaUtilizador(u);
+
+                if (RegistrationStatus) {
+                    ModelState.Clear();
+                    TempData["Success"] = "Registration Successful!";
+                }
+                else {
+                    TempData["Fail"] = "This User ID already exists. Registration Failed.";
+                }
+            }
+
+            return View();
+        }
+
+
+        [HttpGet]
+        public IActionResult LoginUtilizador() {
+
+            return View();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> LoginUtilizador([Bind] Utilizador u) {
+            ModelState.Remove("nome");
+            ModelState.Remove("email");
+
+            if (ModelState.IsValid) {
+                var LoginStatus = this.utilizador_handling.validaUtilizador(u);
+                if (LoginStatus) {
+                    var claims = new List<Claim> {
+                        new Claim(ClaimTypes.Name, u.email)
+                    };
+
+                    ClaimsIdentity userIdentity = new ClaimsIdentity(claims, "login");
+                    ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
+
+                    await HttpContext.SignInAsync(principal);
+                    return RedirectToAction("getUtilizadores", "UserView");
+                }
+                else {
+                    TempData["UserLoginFailed"] = "Login Failed. Please enter correct credentials";
+                }
+            }
+
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Logout() {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
+
+    }
+}

@@ -1,0 +1,47 @@
+﻿@model IEnumerable<MrVeggie.Models.Receita>
+
+@{
+    ViewData["Title"] = "Receitas";
+}
+
+<h1>Receitas</h1>
+
+
+<div class="container-fluid">
+    <div class="row">
+        @foreach (var receita in Model)
+        {
+            <div class="col-md-3 shadow p-3 mb-5 bg-white rounded" style="margin: 3px">
+                <div class="row">
+                    <div class="container">
+                        <img class="d-block w-100" src="~/images/teste.jpg">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container">
+                        <h2>
+                            @receita.nome
+                        </h2>
+                    </div>
+                    <div class="container">
+                        @receita.dificuldade + @receita.n_pessoas + @receita.tempo_conf
+                    </div>
+                </div>
+                <div class="row">
+
+                </div>
+                <div class="row">
+                    <div class="container">
+                        @receita.avaliacao
+                    </div>
+                    <div class="container" align="right">
+                        <a class="btn btn-success" asp-controller="ReceitaView" asp-action="showReceita" asp-route-id="@receita.id_receita">Ver</a>
+                    </div>
+                </div>
+
+            </div>
+        }
+
+    </div>
+</div>
+
