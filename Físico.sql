@@ -53,7 +53,7 @@ CREATE TABLE Receita (
 	nome varchar(50) NOT NULL,
     [desc] varchar(500) NOT NULL, 
     tempo_conf real NOT NULL, 
-    avaliacao int NOT NULL,
+    avaliacao real NOT NULL,
     n_avaliacoes int NOT NULL, 
     dificuldade int NOT NULL, 
     calorias int NOT NULL, 

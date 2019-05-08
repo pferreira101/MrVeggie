@@ -79,7 +79,8 @@ namespace MrVeggie.Controllers {
                     ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
 
                     await HttpContext.SignInAsync(principal);
-                    return RedirectToAction("getUtilizadores", "UserView");
+                    return RedirectToAction("Index", "Home");
+
                 }
                 else {
                     TempData["UserLoginFailed"] = "Login Failed. Please enter correct credentials";
@@ -96,5 +97,11 @@ namespace MrVeggie.Controllers {
         }
 
 
+
+        [HttpGet]
+        public IActionResult AboutUs() {
+
+            return View();
+        }
     }
 }

@@ -14,7 +14,7 @@ namespace MrVeggie.Shared {
         }
 
         public Ingrediente[] getIngredientes() {
-            return _context.ingrediente.ToArray();
+            return _context.Ingrediente.ToArray();
         }
     }
 }

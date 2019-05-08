@@ -4,7 +4,48 @@
     ViewData["Title"] = "showReceita";
 }
 
+<p></p>
 
+<div class="wrapper">
+    <div style="width: 30%; float: left;">
+        <img src="https://www.saberviver.pt/wp-content/uploads/2018/04/lasanhavegetariana_destaque-618x385.png" style="width: 100%">
 
-    <h1>TESTE</h1>
+    </div>
+    <div style="margin-left: 6%">
+        <h1>@Model.nome</h1>
+        <p>@Model.desc</p>
+    </div>
+
+</div>
+<p></p>
+<p></p>
+
+<h2>Ingredientes</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Quantidade</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ing in Model.ingredientes) {
+            <tr>
+                <td>@ing.Key.nome</td>
+                <td>@ing.Value</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+@if (User.Identity.IsAuthenticated) {
+    <a style="float:right" class="btn btn-success" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id="@Model.id_receita-1">Começar</a>
+}
+else {
+    <a style="float:right" class="btn btn-success" asp-controller="UserView" asp-action="LoginUtilizador" asp-route-id="@Model.id_receita">Começar</a>
+}
+
 

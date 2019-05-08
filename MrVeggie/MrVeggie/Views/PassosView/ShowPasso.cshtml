@@ -1,0 +1,48 @@
+﻿@model MrVeggie.Models.Passo
+
+@{ ViewData["Title"] = "ShowPasso";
+
+    int total_passos = Model.nr_total_passos;
+    int proximo = Model.nr + 1;
+    int anterior = Model.nr - 1;
+    string prox = Model.receita_id.ToString() + "-" + (Model.nr + 1).ToString();
+}
+
+<h1>ShowPasso</h1>
+
+<h1>@Model.id_passo</h1>
+
+<h3>@Model.tempo</h3>
+
+<h3>Total passos = @total_passos</h3>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Quantidade</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ing in Model.ingredientes) {
+            <tr>
+                <td>@ing.Key.nome</td>
+                <td>@ing.Value</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+@if (Model.nr == total_passos) {
+    <a align="left" class="btn btn-success" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id="@Model.receita_id-1">Anterior</a>
+    <a align="right" class="btn btn-success" asp-controller="AvaliacaoView" asp-action="AvaliarReceita">Finalizar</a>
+}
+else {
+    @if (Model.nr > 1) {
+        <a align="left" class="btn btn-success" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id="@Model.receita_id-1">Anterior</a>
+    }
+    <a align="right" class="btn btn-success" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id="@Model.receita_id-2">Próximo</a>
+}

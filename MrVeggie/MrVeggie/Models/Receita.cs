@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -28,7 +30,7 @@ namespace MrVeggie.Models {
 
         [Required]
         [Display(Name = "Avaliação")]
-        public int avaliacao { set; get; }
+        public float avaliacao { set; get; }
 
         [Required]
         [Display(Name = "Número de avaliações")]
@@ -53,8 +55,12 @@ namespace MrVeggie.Models {
 
 
 
-        public ICollection<Passo> passos { get; set; }
+        public IList<Passo> passos { get; set; }
 
+        [NotMapped]
+        public IDictionary<Ingrediente, int> ingredientes { get; set; }
+
+        
     }
 
     public class ReceitaContext : DbContext {
@@ -63,8 +69,24 @@ namespace MrVeggie.Models {
 
         }
 
-        public DbSet<Receita> receita { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
+
+            // configures one-to-many relationship
+            modelBuilder.Entity<Passo>()
+                        .HasOne<Receita>(p => p.receita)     
+                        .WithMany(r => r.passos)
+                        .HasForeignKey(p => p.receita_id)
+                        .HasConstraintName("FKPasso200762");
+        }
+
+
+
+        public DbSet<Receita> Receita { get; set; }
+        public DbSet<Passo> Passo { get; set; }
 
     }
+
 }
+
 

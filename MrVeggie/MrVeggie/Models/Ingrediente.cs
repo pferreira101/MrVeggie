@@ -22,8 +22,8 @@ namespace MrVeggie.Models {
         public float calorias { set; get; }
 
 
+        public ICollection<IngredientesPasso> ingredientes_passo { get; set; }
 
-        public virtual ICollection<Receita> receitas { get; set; }
 
     }
 
@@ -33,7 +33,7 @@ namespace MrVeggie.Models {
 
         }
 
-        public DbSet<Ingrediente> ingrediente { get; set; }
+        public DbSet<Ingrediente> Ingrediente { get; set; }
 
     }
 }
