@@ -5,7 +5,7 @@
     int total_passos = Model.nr_total_passos;
     int proximo = Model.nr + 1;
     int anterior = Model.nr - 1;
-    string prox = Model.receita_id.ToString() + "-" + (Model.nr + 1).ToString();
+
 }
 
 <h1>ShowPasso</h1>
@@ -37,12 +37,12 @@
 </table>
 
 @if (Model.nr == total_passos) {
-    <a align="left" class="btn btn-success" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id="@Model.receita_id-1">Anterior</a>
-    <a align="right" class="btn btn-success" asp-controller="AvaliacaoView" asp-action="AvaliarReceita">Finalizar</a>
+    <a align="left" class="btn btn-success" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id_receita="@Model.receita_id" asp-route-nr_passo="@anterior">Anterior</a>
+    <a align="right" class="btn btn-success" asp-controller="AvaliacaoView" asp-action="AvaliarReceita" asp-route-id="@Model.receita_id">Finalizar</a>
 }
 else {
     @if (Model.nr > 1) {
-        <a align="left" class="btn btn-success" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id="@Model.receita_id-1">Anterior</a>
+        <a align="left" class="btn btn-success" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id_receita="@Model.receita_id" asp-route-nr_passo="@anterior">Anterior</a>
     }
-    <a align="right" class="btn btn-success" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id="@Model.receita_id-2">Próximo</a>
+    <a align="right" class="btn btn-success" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id_receita="@Model.receita_id" asp-route-nr_passo="@proximo">Próximo</a>
 }
