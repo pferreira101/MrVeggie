@@ -1,4 +1,5 @@
 ﻿using MrVeggie.Models;
+using MrVeggie.Models.Auxiliary;
 using System;
 using System.Collections.Generic;
 using System.Linq;

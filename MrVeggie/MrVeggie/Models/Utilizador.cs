@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MrVeggie.Models.Auxiliary;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -36,6 +38,11 @@ namespace MrVeggie.Models {
         public char sexo { get; set; }
 
 
+        public ICollection<UtilizadorIngredientePref> utilizador_ingrediente_pref { get; set; }
+
+        [NotMapped]
+        public List<Ingrediente> ingredientes_pref { get; set; }
+
     }
 
 
@@ -46,6 +53,10 @@ namespace MrVeggie.Models {
 
         }
 
-        public DbSet<Utilizador> utilizador { get; set; }
+
+
+        public DbSet<Utilizador> Utilizador { get; set; }
+        public DbSet<UtilizadorIngredientePref> UtilizadorIngredientePref { get; set; }
+        public DbSet<Ingrediente> Ingrediente { get; set; }
     }
 }

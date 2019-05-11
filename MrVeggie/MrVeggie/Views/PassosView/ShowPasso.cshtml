@@ -8,33 +8,50 @@
 
 }
 
-<h1>ShowPasso</h1>
-
-<h1>@Model.id_passo</h1>
-
-<h3>@Model.tempo</h3>
-
-<h3>Total passos = @total_passos</h3>
 
 
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">Nome</th>
-            <th scope="col">Quantidade</th>
+<div class="row"  style="padding-top:30px">
 
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var ing in Model.ingredientes) {
-            <tr>
-                <td>@ing.Key.nome</td>
-                <td>@ing.Value</td>
-            </tr>
-        }
+    <div class="circle col-md-2">
+        @Model.nr
+    </div>
 
-    </tbody>
-</table>
+    <div class="col-md-1"> </div>
+
+    <div class="col-md-6">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Quantidade</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ing in Model.ingredientes) {
+                    <tr>
+                        <td>@ing.Key.nome</td>
+                        <td>@ing.Value</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-md-1"> </div>
+
+
+    <div class="col-md-2">
+        <p></p>
+        <figure>
+            <img id="no_border_img" src="~/images/relogio.png" style="width:60%"/>
+            <figcaption> <h3>@Model.tempo min</h3> </figcaption>
+        </figure>
+    </div>
+
+</div>
+
 
 @if (Model.nr == total_passos) {
     <a align="left" class="btn btn-success" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id_receita="@Model.receita_id" asp-route-nr_passo="@anterior">Anterior</a>

@@ -28,19 +28,29 @@
                 </ul>
             </div>
 
-            <div class="container">
-                <ul class="navbar-nav">
+            <div class="navbar-collapse collapse w-100 order-3 dual-collapse2" style="padding-right:35px">
+                <ul class="navbar-nav ml-auto">
                     @if (User.Identity.IsAuthenticated) {
-                        <li class="nav-item">
-                            <a class="nav-link" style="float:right" asp-controller="UserView" asp-action="Logout">Olá @User.Identity.Name (Sign Out)</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Olá @User.Identity.Name
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-controller="UserView" asp-action="ReceitasPref">Agenda</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" asp-controller="UserView" asp-action="ReceitasPref">Receitas preferidas</a>
+                                <a class="dropdown-item" asp-controller="UserView" asp-action="IngredientesPref">Ingredientes preferidos</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" asp-controller="UserView" asp-action="Logout">Logout</a>
+                            </div>
                         </li>
                     }
                     else {
                         <li class="nav-item">
-                            <a class="nav-link" style="float:right" asp-controller="UserView" asp-action="RegistaUtilizador">Registar</a>
+                            <a class="nav-link mr-sm-2" asp-controller="UserView" asp-action="RegistaUtilizador">Registar</a>
                         </li>
                         <li>
-                            <a class="nav-link" style="float:right" asp-controller="UserView" asp-action="LoginUtilizador">Login</a>
+                            <a class="nav-link my-2 my-sm-0" asp-controller="UserView" asp-action="LoginUtilizador">Login</a>
                         </li>
                     }
                 </ul>
@@ -50,17 +60,17 @@
     </header>
     <div class="container">
 
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-4">
             @RenderBody()
         </main>
     </div>
 
 
-    <footer class="border-top footer text-muted" style="background:lightgrey">
+    <footer class="border-top footer text-muted" style="background:lightgrey" >
 
         <div class="container">
             &copy; 2019 - MrVeggie
-            <a style="float:right" asp-controller="UserView" asp-action="AboutUs">Sobre Nós</a>
+            <a style="float:right" asp-controller="Home" asp-action="AboutUs">Sobre Nós</a>
 
         </div>
 

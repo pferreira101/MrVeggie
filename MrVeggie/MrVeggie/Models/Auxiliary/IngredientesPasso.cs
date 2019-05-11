@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MrVeggie.Models {
+namespace MrVeggie.Models.Auxiliary {
     
     public class IngredientesPasso {
 

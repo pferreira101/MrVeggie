@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MrVeggie.Models.Auxiliary;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

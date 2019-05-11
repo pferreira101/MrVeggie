@@ -1,0 +1,32 @@
+﻿@model MrVeggie.Models.Utilizador
+@{
+    ViewData["Title"] = "IngredientesPrefView";
+}
+
+<h1>IngredientesPrefView</h1>
+
+<div class="container-fluid">
+    <div class="row">
+        @foreach (var ingrediente in Model.ingredientes_pref) {
+            <div class="col-md-3 shadow p-3 mb-5 bg-white rounded" style="margin: 3px">
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <h2>
+                            <a asp-controller="Home" asp-action="Index" id="link_preto">@ingrediente.nome</a>
+                        </h2>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="container">
+                        <img class="d-block w-100" src="~/images/teste.jpg">
+
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+

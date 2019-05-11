@@ -97,11 +97,20 @@ namespace MrVeggie.Controllers {
         }
 
 
-
         [HttpGet]
-        public IActionResult AboutUs() {
+        public IActionResult ReceitasPref() {
 
             return View();
         }
+
+        [HttpGet]
+        public IActionResult IngredientesPref() {
+            int id = 1; // passar para argumento
+
+            Utilizador utilizador = utilizador_handling.getUtilizadorIngredientesPref(id);
+
+            return View(utilizador);
+        }
+
     }
 }

@@ -4,10 +4,13 @@
     ViewData["Title"] = "LoginUtilizador";
 }
 
-<h1>Login</h1>
 
-<div class="row">
-    <div class="col-md-4">
+<div class="row" style="align-content:center; padding-top:40px">
+    <div class="col-md-4"></div>
+
+    <div class="col-md-4 border shadow p-3 mb-5 bg-white rounded" >
+        <h1>Login</h1>
+
         @if (TempData["UserLoginFailed"] != null) {
             <p class="alert alert-danger">@TempData["UserLoginFailed"]</p>
         }
@@ -30,4 +33,7 @@
             </div>
         </form>
     </div>
+
+    <div class="col-md-4"></div>
+
 </div>  

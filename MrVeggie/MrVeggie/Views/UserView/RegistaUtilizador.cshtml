@@ -3,10 +3,14 @@
     ViewData["Title"] = "RegistaUtilizador";
 }
 
-<h4>Novo Utilizador</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+
+<div class="row" style="align-content:center; padding-top:40px">
+    <div class="col-md-4"></div>
+
+    <div class="col-md-4 border shadow p-3 mb-5 bg-white rounded">
+        <h4>Registar</h4>
+        <p></p>
+
         @if (TempData["Success"] != null) {
             <p class="alert alert-success">@TempData["Success"]  <a asp-action="LoginUtilizador">Click here to login</a></p>
         }
@@ -15,40 +19,40 @@
             <p class="alert alert-danger">@TempData["Fail"]</p>
         }
 
-            <form asp-action="RegistaUtilizador">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="nome" class="control-label"></label>
-                    <input asp-for="nome" class="form-control" />
-                    <span asp-validation-for="nome" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="email" class="control-label"></label>
-                    <input asp-for="email" class="form-control" />
-                    <span asp-validation-for="email" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="password" class="control-label"></label>
-                    <input asp-for="password" class="form-control" />
-                    <span asp-validation-for="password" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="idade" class="control-label"></label>
-                    <input asp-for="idade" class="form-control" />
-                    <span asp-validation-for="idade" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="sexo" class="control-label"></label>
-                    <input asp-for="sexo" type="radio" name="Masculino" value='M' checked />
-                    <input asp-for="sexo" type="radio" name="Feminino" value='F' />
-                    <span asp-validation-for="sexo" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Register" class="btn btn-default btn-primary" />
-                </div>
-            </form>
+        <form asp-action="RegistaUtilizador">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="nome" class="control-label"></label>
+                <input asp-for="nome" class="form-control" />
+                <span asp-validation-for="nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="email" class="control-label"></label>
+                <input asp-for="email" class="form-control" />
+                <span asp-validation-for="email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="password" class="control-label"></label>
+                <input asp-for="password" class="form-control" />
+                <span asp-validation-for="password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="idade" class="control-label"></label>
+                <input asp-for="idade" class="form-control" />
+                <span asp-validation-for="idade" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="sexo" class="control-label"></label>
+                <input asp-for="sexo" type="radio" name="Masculino" value='M' checked />
+                <input asp-for="sexo" type="radio" name="Feminino" value='F' />
+                <span asp-validation-for="sexo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Registar" class="btn btn-default btn-primary" />
+            </div>
+        </form>
     </div>
-</div>
-<div>
-    <a asp-action="LoginUtilizador">Back to User Login</a>
+
+    <div class="col-md-4"></div>
+
 </div>

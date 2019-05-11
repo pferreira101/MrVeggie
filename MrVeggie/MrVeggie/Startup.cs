@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using MrVeggie.Models;
+using MrVeggie.Models.Auxiliary;
 
 namespace MrVeggie {
 
@@ -22,6 +23,7 @@ namespace MrVeggie {
             services.AddDbContext<ReceitaContext>(options => options.UseSqlServer(connection));
             services.AddDbContext<PassoContext>(options => options.UseSqlServer(connection));
             services.AddDbContext<IngredientesPassoContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<UtilizadorIngredientePrefContext>(options => options.UseSqlServer(connection));
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                     .AddCookie(options =>

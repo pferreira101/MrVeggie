@@ -1,4 +1,5 @@
 ﻿using MrVeggie.Models;
+using MrVeggie.Models.Auxiliary;
 using MrVeggie.Shared;
 using System;
 using System.Collections.Generic;

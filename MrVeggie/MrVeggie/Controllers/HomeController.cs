@@ -12,5 +12,11 @@ namespace MrVeggie.Controllers {
             return View();
         }
 
+        [HttpGet]
+        public IActionResult AboutUs() {
+
+            return View();
+        }
+
     }
 }

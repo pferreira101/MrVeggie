@@ -57,6 +57,7 @@ namespace MrVeggie.Models {
 
         public IList<Passo> passos { get; set; }
 
+
         [NotMapped]
         public IDictionary<Ingrediente, int> ingredientes { get; set; }
 

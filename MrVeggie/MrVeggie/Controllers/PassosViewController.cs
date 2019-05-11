@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MrVeggie.Contexts;
 using MrVeggie.Models;
+using MrVeggie.Models.Auxiliary;
 using MrVeggie.Shared;
 using System;
 using System.Collections.Generic;

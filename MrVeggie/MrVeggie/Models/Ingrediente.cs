@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MrVeggie.Models.Auxiliary;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -22,9 +23,10 @@ namespace MrVeggie.Models {
         public float calorias { set; get; }
 
 
+
         public ICollection<IngredientesPasso> ingredientes_passo { get; set; }
 
-
+        public ICollection<UtilizadorIngredientePref> utilizadores_pref { get; set; }
     }
 
     public class IngredienteContext : DbContext {
@@ -34,6 +36,7 @@ namespace MrVeggie.Models {
         }
 
         public DbSet<Ingrediente> Ingrediente { get; set; }
+
 
     }
 }
