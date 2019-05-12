@@ -44,6 +44,7 @@ namespace MrVeggie.Contexts {
             //_context_passo.IngredientesPassos.Where(ip => ip.passo_id == id_passo)
             passo.ingredientes = getIngredientes(passo.id_passo);
             passo.nr_total_passos = _context_ip.IngredientesPasso.Where(ip => ip.passo_id == passo.id_passo).ToList().Count();
+            passo.operacao = _context_passo.Operacao.Find(passo.operacao_id);
 
             return passo;
         }

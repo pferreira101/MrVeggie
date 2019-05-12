@@ -52,6 +52,7 @@
 
 </div>
 
+<h1>@Model.operacao.desc</h1>
 
 @if (Model.nr == total_passos) {
     <a align="left" class="btn btn-success" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id_receita="@Model.receita_id" asp-route-nr_passo="@anterior">Anterior</a>

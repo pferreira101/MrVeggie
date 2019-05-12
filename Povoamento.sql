@@ -14,6 +14,8 @@ INSERT INTO Passo VALUES (2, 25, 1, 1, null);
 
 INSERT INTO IngredientesPasso VALUES (1, 1, 10), (1, 2, 20), (2, 3, 1), (2, 1, 30);
 
+INSERT INTO UtilizadorIngredientesPref VALUES (1, 1);
+
 SELECT * FROM Utilizador;
 SELECT * FROM Ingrediente;
 SELECT * FROM Receita;

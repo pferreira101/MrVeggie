@@ -10,9 +10,13 @@ namespace MrVeggie.Shared {
     public class UtilizadorHandling {
 
         private readonly UtilizadorContext _context;
+        private readonly UtilizadorIngredientesPrefContext _context_uip;
+        private readonly UtilizadorReceitasPrefContext _context_urp;
 
-        public UtilizadorHandling(UtilizadorContext context) {
+        public UtilizadorHandling(UtilizadorContext context, UtilizadorIngredientesPrefContext context_uip, UtilizadorReceitasPrefContext context_urp) {
             _context = context;
+            _context_uip = context_uip;
+            _context_urp = context_urp;
         }
 
         public Utilizador[] getUtilizadores() {
@@ -42,14 +46,26 @@ namespace MrVeggie.Shared {
 
             Utilizador utilizador = _context.Utilizador.Find(id);
 
-            List<UtilizadorIngredientePref> ings_ids = _context.UtilizadorIngredientePref.Where(uip => uip.utilizador_id == id).ToList();
+            List<UtilizadorIngredientesPref> ings_ids = _context.UtilizadorIngredientesPref.Where(uip => uip.utilizador_id == id).ToList();
 
-            foreach (var uip in ings_ids) {
+            foreach (UtilizadorIngredientesPref uip in ings_ids) {
                 utilizador.ingredientes_pref.Add(_context.Ingrediente.Find(uip.ingrediente_id));
             }
 
             return utilizador;
 
+        }
+
+        public Utilizador getUtilizadorReceitasPref(int id) {
+            Utilizador utilizador = _context.Utilizador.Find(id);
+
+            List<UtilizadorReceitasPref> receitas_ids = _context.UtilizadorReceitasPref.Where(uip => uip.utilizador_id == id).ToList();
+
+            foreach (var uip in receitas_ids) {
+                utilizador.receitas_pref.Add(_context.Receita.Find(uip.receita_id));
+            }
+
+            return utilizador;
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MrVeggie.Models;
+using MrVeggie.Models.Auxiliary;
 using MrVeggie.Shared;
 
 namespace Teste.Controllers { 
@@ -15,9 +16,9 @@ namespace Teste.Controllers {
 
         private UtilizadorHandling utilizador_handling;
 
-        public UtilizadorController(UtilizadorContext context) {
+        public UtilizadorController(UtilizadorContext context, UtilizadorIngredientesPrefContext context_uip, UtilizadorReceitasPrefContext context_urp) {
             //_context = context;
-            utilizador_handling = new UtilizadorHandling(context);
+            utilizador_handling = new UtilizadorHandling(context, context_uip, context_urp);
         }
 
         [Authorize]

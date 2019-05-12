@@ -26,7 +26,7 @@ namespace MrVeggie.Models {
 
         public ICollection<IngredientesPasso> ingredientes_passo { get; set; }
 
-        public ICollection<UtilizadorIngredientePref> utilizadores_pref { get; set; }
+        public List<UtilizadorIngredientesPref> utilizadores_pref { get; set; }
     }
 
     public class IngredienteContext : DbContext {

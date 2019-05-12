@@ -38,10 +38,17 @@ namespace MrVeggie.Models {
         public char sexo { get; set; }
 
 
-        public ICollection<UtilizadorIngredientePref> utilizador_ingrediente_pref { get; set; }
+        public List<UtilizadorIngredientesPref> utilizador_ingredientes_pref { get; set; }
 
         [NotMapped]
         public List<Ingrediente> ingredientes_pref { get; set; }
+
+
+
+        public List<UtilizadorReceitasPref> utilizador_receitas_pref { get; set; }
+
+        [NotMapped]
+        public List<Receita> receitas_pref { get; set; }
 
     }
 
@@ -56,7 +63,10 @@ namespace MrVeggie.Models {
 
 
         public DbSet<Utilizador> Utilizador { get; set; }
-        public DbSet<UtilizadorIngredientePref> UtilizadorIngredientePref { get; set; }
+        public DbSet<UtilizadorIngredientesPref> UtilizadorIngredientesPref { get; set; }
         public DbSet<Ingrediente> Ingrediente { get; set; }
+        public DbSet<UtilizadorReceitasPref> UtilizadorReceitasPref { get; set; }
+        public DbSet<Receita> Receita { get; set; }
+
     }
 }

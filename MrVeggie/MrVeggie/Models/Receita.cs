@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MrVeggie.Models.Auxiliary;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -61,7 +62,9 @@ namespace MrVeggie.Models {
         [NotMapped]
         public IDictionary<Ingrediente, int> ingredientes { get; set; }
 
-        
+        public List<UtilizadorReceitasPref> utilizadores_pref { get; set; }
+
+
     }
 
     public class ReceitaContext : DbContext {

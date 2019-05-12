@@ -8,6 +8,7 @@ using MrVeggie.Shared;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using MrVeggie.Models.Auxiliary;
 
 namespace MrVeggie.Controllers {
 
@@ -17,8 +18,9 @@ namespace MrVeggie.Controllers {
 
         private UtilizadorHandling utilizador_handling;
 
-        public UserViewController(UtilizadorContext context) {
-            utilizador_handling = new UtilizadorHandling(context);
+        public UserViewController(UtilizadorContext context, UtilizadorIngredientesPrefContext context_uip, UtilizadorReceitasPrefContext context_urp) {
+            //_context = context;
+            utilizador_handling = new UtilizadorHandling(context, context_uip, context_urp);
         }
 
 
@@ -97,17 +99,21 @@ namespace MrVeggie.Controllers {
         }
 
 
-        [HttpGet]
-        public IActionResult ReceitasPref() {
-
-            return View();
-        }
 
         [HttpGet]
         public IActionResult IngredientesPref() {
             int id = 1; // passar para argumento
 
             Utilizador utilizador = utilizador_handling.getUtilizadorIngredientesPref(id);
+
+            return View(utilizador);
+        }
+
+        [HttpGet]
+        public IActionResult ReceitasPref() {
+            int id = 1; // passar para argumento
+
+            Utilizador utilizador = utilizador_handling.getUtilizadorReceitasPref(id);
 
             return View(utilizador);
         }

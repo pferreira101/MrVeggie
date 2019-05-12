@@ -24,15 +24,16 @@ namespace MrVeggie.Models{
         [Required]
         [Display(Name = "Tempo")]
         public float tempo { set; get; }
-/*
+
+
         [Required]
         [Column("operacao")]
         public int operacao_id { set; get; }
 
         [NotMapped]
-        [JsonIgnore]
         public Operacao operacao { get; set; }
-*/
+
+
         [Required]
         [Column("receita")]
         public int receita_id { set; get; }
@@ -64,9 +65,20 @@ namespace MrVeggie.Models{
         public PassoContext(DbContextOptions<PassoContext> options) : base(options) {
 
         }
-        
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
+
+            // configures one-to-many relationship
+            modelBuilder.Entity<Passo>()
+                        .HasOne<Operacao>(p => p.operacao)
+                        .WithMany(op => op.passos)
+                        .HasForeignKey(p => p.operacao_id)
+                        .HasConstraintName("FKPasso568056");
+        }
+
         public DbSet<Passo> Passo { get; set; }
         public DbSet<IngredientesPasso> IngredientesPassos { get; set; }
+        public DbSet<Operacao> Operacao { get; set; }
 
     }
 }
