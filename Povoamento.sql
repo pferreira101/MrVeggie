@@ -32,33 +32,32 @@ INSERT INTO Operacao VALUES('Teste'),
 						   ('Deixar Ferver');
 
 
-INSERT INTO Passo VALUES (1, 20, 1, 1, null);
-INSERT INTO Passo VALUES (2, 25, 1, 1, null),
-						 (1, 0, 2, 2, null),
-						 (2, 0, 5, 2, null),
-						 (3, 0, 4, 2, null),
-						 (4, 2, 3, 2, null),
-						 (5, 0, 4, 2, null),
-						 (6, 8, 3, 2, null),
-						 (7, 0, 4, 2, null),
-						 (8, 0, 7, 2, null),
-						 (9, 0, 4, 2, null),
-						 (10, 15, 3, 2, null),
-						 (11, 0, 6, 2, null),
-						 (12, 0, 4, 2, null)
+INSERT INTO Passo VALUES (1, 20, 1, 1, null, 0); --1
+INSERT INTO Passo VALUES (2, 25, 1, 1, null, 1), --2
+						 (1, 0, 2, 2, null, 0), --3
+						 (2, 0, 5, 2, null, 0), --4
+						 (3, 0, 4, 2, null, 0),--5
+						 (4, 2, 3, 2, null, 0),--6
+						 (5, 0, 4, 2, null, 0),--7
+						 (6, 8, 3, 2, null, 0),--8
+						 (7, 0, 4, 2, null, 0),--9
+						 (8, 0, 7, 2, null, 0),--10
+						 (9, 0, 4, 2, null, 0),--11
+						 (10, 15, 3, 2, null, 0),--12
+						 (11, 0, 6, 2, null, 0),--13
+						 (12, 0, 4, 2, null, 1)--14
 						 ;
 
 INSERT INTO IngredientesPasso VALUES (1, 1, 10, 'teste'), 
 									 (1, 2, 20, 'teste'), 
-									 (2, 3, 1, 'teste'), 
-									 (2, 1, 30, 'teste'),
+									 (2, 3, 1, 'teste'),
 									 (2, 1, 30, 'teste'),
 									 (3, 4, 2, 'colheres de sopa'),
 									 (4, 6, 1, 'unidade'),
 									 (5, 6, 1, 'unidade'),
 									 (5, 5, 2, 'dentes'),
 									 (7, 1, 1, 'lata'),
-									 (7, 1, 0.5, 'colher de café'),
+									 (7, 2, 0.5, 'colher de café'),
 									 (9, 10, 1, 'litro'),
 									 (9, 11, 1, 'colher de sobremesa'),
 									 (11, 9, 150, 'gramas'),

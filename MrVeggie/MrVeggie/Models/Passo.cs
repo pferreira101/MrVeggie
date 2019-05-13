@@ -42,22 +42,27 @@ namespace MrVeggie.Models{
         [JsonIgnore]
         public Receita receita { get; set; }
 
-/*
-        [Column("sub_receita")]
-        public int sub_receita_id { set; get; }
+        /*
+                [Column("sub_receita")]
+                public int sub_receita_id { set; get; }
 
-        [NotMapped]
-        [JsonIgnore]
-        public Receita sub_receita { get; set; }
-*/
+                [NotMapped]
+                [JsonIgnore]
+                public Receita sub_receita { get; set; }
+        */
+
+        public bool ultimo { get; set; }
+
+
+
 
         public ICollection<IngredientesPasso> ingredientes_passo { get; set; }
 
         [NotMapped]
         public Dictionary<Ingrediente, int> ingredientes { get; set; }
 
-        [NotMapped]
-        public int nr_total_passos { get; set; }
+        
+        
     }
     
     public class PassoContext : DbContext {

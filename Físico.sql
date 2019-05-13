@@ -21,7 +21,7 @@ CREATE TABLE Ingrediente (
     id_ingrediente int IDENTITY(1, 1) NOT NULL, 
     nome varchar(50) NOT NULL, 
     calorias real NOT NULL, 
-    url_imagem varchar(100) NOT NULL, 
+    url_imagem varchar(300) NOT NULL, 
     PRIMARY KEY (id_ingrediente)
 );
 
@@ -46,6 +46,7 @@ CREATE TABLE Passo (
     operacao int NOT NULL, 
     receita int NOT NULL, 
     sub_receita int NULL, 
+	ultimo bit NOT NULL DEFAULT 0,
     PRIMARY KEY (id_passo)
 );
 
@@ -59,7 +60,7 @@ CREATE TABLE Receita (
     dificuldade int NOT NULL, 
     calorias int NOT NULL, 
     n_pessoas int NOT NULL, 
-    url_imagem varchar(100) NOT NULL, 
+    url_imagem varchar(300) NOT NULL, 
     PRIMARY KEY (id_receita)
 );
 

@@ -2,7 +2,6 @@
 
 @{ ViewData["Title"] = "ShowPasso";
 
-    int total_passos = Model.nr_total_passos;
     int proximo = Model.nr + 1;
     int anterior = Model.nr - 1;
 
@@ -54,9 +53,9 @@
 
 <h1>@Model.operacao.desc</h1>
 
-@if (Model.nr == total_passos) {
+@if (Model.ultimo == true) {
     <a align="left" class="btn btn-success" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id_receita="@Model.receita_id" asp-route-nr_passo="@anterior">Anterior</a>
-    <a align="right" class="btn btn-success" asp-controller="AvaliacaoView" asp-action="AvaliarReceita" asp-route-id="@Model.receita_id">Finalizar</a>
+    <a align="right" class="btn btn-success" asp-controller="AvaliacaoView" asp-action="AvaliarReceita" asp-route-id_receita="@Model.receita_id">Finalizar</a>
 }
 else {
     @if (Model.nr > 1) {

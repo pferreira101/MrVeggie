@@ -51,7 +51,7 @@ namespace MrVeggie.Models {
 
         [Required]
         [Display(Name = "Imagem")]
-        [StringLength(100)]
+        [StringLength(300)]
         public string url_imagem { set; get; }
 
 
@@ -62,6 +62,8 @@ namespace MrVeggie.Models {
         [NotMapped]
         public IDictionary<Ingrediente, int> ingredientes { get; set; }
 
+
+        [ForeignKey("receita_id")]
         public List<UtilizadorReceitasPref> utilizadores_pref { get; set; }
 
 

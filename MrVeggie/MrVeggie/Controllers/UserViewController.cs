@@ -113,7 +113,7 @@ namespace MrVeggie.Controllers {
         public IActionResult ReceitasPref() {
             int id = 1; // passar para argumento
 
-            Utilizador utilizador = utilizador_handling.getUtilizadorReceitasPref(id);
+            Utilizador utilizador = utilizador_handling.getUtilizadorReceitasPref(2);
 
             return View(utilizador);
         }

@@ -23,6 +23,11 @@ namespace MrVeggie.Models {
         [Display(Name = "Calorias")]
         public float calorias { set; get; }
 
+        [Required]
+        [Display(Name = "Imagem")]
+        [StringLength(300)]
+        public string url_imagem { set; get; }
+
 
 
         public ICollection<IngredientesPasso> ingredientes_passo { get; set; }

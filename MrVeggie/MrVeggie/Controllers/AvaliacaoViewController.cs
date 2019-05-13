@@ -19,20 +19,20 @@ namespace MrVeggie.Controllers{
 
 
 
-        [HttpGet("{id}")]
-        public IActionResult AvaliarReceita(int id) {
-            Receita receita = avaliacao.getReceita(id);
+        [HttpGet("{id_receita}")]
+        public IActionResult AvaliarReceita(int id_receita) {
+            Receita receita = avaliacao.getReceita(id_receita);
 
             return View(receita);
         }
 
 
-        [HttpPost("{id}")]
-        public IActionResult AvaliarReceita() {
+        [HttpPost("{id_receita}")]
+        public IActionResult AvaliarReceitaUtilizador(int id_receita) {  ///// PASSAR O UTILIZADOR COMO ARGUMENTO MAS COMO??
             int pontuacao = Int32.Parse(HttpContext.Request.Form["rate"]);
             int id_utilizador = 1;
 
-            avaliacao.avalia(1, id_utilizador, pontuacao);
+            avaliacao.avalia(id_receita, id_utilizador, pontuacao);
 
             return RedirectToAction("Index", "Home");
         }

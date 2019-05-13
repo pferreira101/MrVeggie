@@ -46,7 +46,7 @@ namespace MrVeggie.Models {
         public List<Ingrediente> ingredientes_pref { get; set; }
 
 
-
+        [ForeignKey("utilizador_id")]
         public List<UtilizadorReceitasPref> utilizador_receitas_pref { get; set; }
 
         [NotMapped]

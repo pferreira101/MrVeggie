@@ -44,14 +44,12 @@ namespace MrVeggie.Shared {
 
 
         public Utilizador getUtilizadorIngredientesPref(int id) {
-
             Utilizador utilizador = _context.Utilizador.Find(id);
 
             List<UtilizadorIngredientesPref> ings_ids = _context.UtilizadorIngredientesPref.Where(uip => uip.utilizador_id == id).ToList();
 
-            Console.WriteLine("*********************************** {0} ", utilizador == null);
-
             utilizador.ingredientes_pref = new List<Ingrediente>();
+
             foreach (var uip in ings_ids) {
                 utilizador.ingredientes_pref.Add(_context_uip.Ingrediente.Find(uip.ingrediente_id));
             }
@@ -64,6 +62,8 @@ namespace MrVeggie.Shared {
             Utilizador utilizador = _context.Utilizador.Find(id);
 
             List<UtilizadorReceitasPref> receitas_ids = _context.UtilizadorReceitasPref.Where(uip => uip.utilizador_id == id).ToList();
+
+            utilizador.receitas_pref = new List<Receita>();
 
             foreach (var uip in receitas_ids) {
                 utilizador.receitas_pref.Add(_context.Receita.Find(uip.receita_id));
