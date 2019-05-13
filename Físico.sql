@@ -29,6 +29,7 @@ CREATE TABLE IngredientesPasso (
     passo int NOT NULL, 
     ingrediente int NOT NULL,
     quantidade int NOT NULL, 
+	unidade varchar(100) NOT NULL,
     PRIMARY KEY (passo, ingrediente)
 );
 
