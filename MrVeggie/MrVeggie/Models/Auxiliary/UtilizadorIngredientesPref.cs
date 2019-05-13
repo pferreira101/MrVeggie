@@ -12,16 +12,18 @@ namespace MrVeggie.Models.Auxiliary {
     public class UtilizadorIngredientesPref {
 
         [NotMapped]
-        public Ingrediente ingrediente { get; set; }
+        public Ingrediente Ingrediente { get; set; }
 
         [Key]
         [Column("ingrediente")]
+        //[ForeignKey("Ingrediente")]
         public int ingrediente_id { get; set; }
 
         [NotMapped]
-        public Utilizador utilizador { get; set; }
+        public Utilizador Utilizador { get; set; }
 
         [Column("utilizador")]
+        //[ForeignKey("Utilizador")]
         public int utilizador_id { get; set; }
 
         
@@ -38,13 +40,13 @@ namespace MrVeggie.Models.Auxiliary {
             modelBuilder.Entity<UtilizadorIngredientesPref>().HasKey(uip => new { uip.utilizador_id, uip.ingrediente_id });
 
             modelBuilder.Entity<UtilizadorIngredientesPref>()
-                        .HasOne<Utilizador>(uip => uip.utilizador)
+                        .HasOne<Utilizador>(uip => uip.Utilizador)
                         .WithMany(u => u.utilizador_ingredientes_pref)
                         .HasForeignKey(uip => uip.utilizador_id)
                         .HasConstraintName("FKUtilizador595656");
 
             modelBuilder.Entity<UtilizadorIngredientesPref>()
-                        .HasOne<Ingrediente>(uip => uip.ingrediente)
+                        .HasOne<Ingrediente>(uip => uip.Ingrediente)
                         .WithMany(i => i.utilizadores_pref)
                         .HasForeignKey(uip => uip.ingrediente_id)
                         .HasConstraintName("FKUtilizador467783");

@@ -10,6 +10,7 @@ namespace MrVeggie.Shared {
     public class UtilizadorHandling {
 
         private readonly UtilizadorContext _context;
+        private readonly IngredienteContext _context_ing;
         private readonly UtilizadorIngredientesPrefContext _context_uip;
         private readonly UtilizadorReceitasPrefContext _context_urp;
 
@@ -48,8 +49,11 @@ namespace MrVeggie.Shared {
 
             List<UtilizadorIngredientesPref> ings_ids = _context.UtilizadorIngredientesPref.Where(uip => uip.utilizador_id == id).ToList();
 
-            foreach (UtilizadorIngredientesPref uip in ings_ids) {
-                utilizador.ingredientes_pref.Add(_context.Ingrediente.Find(uip.ingrediente_id));
+            Console.WriteLine("*********************************** {0} ", utilizador == null);
+
+            utilizador.ingredientes_pref = new List<Ingrediente>();
+            foreach (var uip in ings_ids) {
+                utilizador.ingredientes_pref.Add(_context_uip.Ingrediente.Find(uip.ingrediente_id));
             }
 
             return utilizador;

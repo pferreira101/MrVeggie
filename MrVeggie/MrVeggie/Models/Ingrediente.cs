@@ -3,6 +3,7 @@ using MrVeggie.Models.Auxiliary;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -26,6 +27,7 @@ namespace MrVeggie.Models {
 
         public ICollection<IngredientesPasso> ingredientes_passo { get; set; }
 
+        [ForeignKey("ingrediente_id")]
         public List<UtilizadorIngredientesPref> utilizadores_pref { get; set; }
     }
 

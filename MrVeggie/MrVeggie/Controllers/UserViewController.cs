@@ -104,7 +104,7 @@ namespace MrVeggie.Controllers {
         public IActionResult IngredientesPref() {
             int id = 1; // passar para argumento
 
-            Utilizador utilizador = utilizador_handling.getUtilizadorIngredientesPref(id);
+            Utilizador utilizador = utilizador_handling.getUtilizadorIngredientesPref(2);
 
             return View(utilizador);
         }
