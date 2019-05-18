@@ -19,33 +19,70 @@
 </div>
 <p></p>
 <p></p>
+<p></p>
 
-<h2>Ingredientes</h2>
+<div>
+    <h2>Requisitos</h2>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">Nome</th>
-            <th scope="col">Quantidade</th>
+    <a style="float:right" class="btn btn-link" asp-controller="Home" asp-action="View">Onde comprar?</a>
 
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var ing in Model.ingredientes) {
-            <tr>
-                <td>@ing.Key.nome</td>
-                <td>@ing.Value</td>
-            </tr>
-        }
+</div>
 
-    </tbody>
-</table>
 
-@if (User.Identity.IsAuthenticated) {
-    <a style="float:right" class="btn btn-success" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id="@Model.id_receita-1">Começar</a>
-}
-else {
-    <a style="float:right" class="btn btn-success" asp-controller="UserView" asp-action="LoginUtilizador" asp-route-id="@Model.id_receita">Começar</a>
-}
+<nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-ingredientes-tab" data-toggle="tab" href="#nav-ingredientes" role="tab" aria-controls="nav-ingredientes" aria-selected="true">Ingredientes</a>
+        <a class="nav-item nav-link" id="nav-utensilios-tab" data-toggle="tab" href="#nav-utensilios" role="tab" aria-controls="nav-utensilios" aria-selected="false">Utensilios</a>
+    </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-ingredientes" role="tabpanel" aria-labelledby="nav-ingredientes-tab">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Quantidade</th>
 
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ing in Model.ingredientes) {
+                    <tr>
+                        <td>@ing.Key.nome</td>
+                        <td>@ing.Value.quantidade @ing.Value.unidade</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <div class="tab-pane fade" id="nav-utensilios" role="tabpanel" aria-labelledby="nav-utensilios-tab">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Nome</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var utensilio in Model.utensilios) {
+                    <tr>
+                        <td>@utensilio.nome</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<p></p>
+
+
+<div>
+    @if (User.Identity.IsAuthenticated) {
+        <a style="float:right" class="btn btn-success" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id="@Model.id_receita-1">Começar</a>
+    }
+    else {
+        <a style="float:right" class="btn btn-success" asp-controller="UserView" asp-action="LoginUtilizador" asp-route-id="@Model.id_receita">Começar</a>
+    }
+</div>
 

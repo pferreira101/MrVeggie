@@ -9,7 +9,7 @@
 
 
 
-<div class="row"  style="padding-top:30px">
+<div class="row" style="padding-top:30px">
 
     <div class="circle col-md-2">
         @Model.nr
@@ -30,7 +30,7 @@
                 @foreach (var ing in Model.ingredientes) {
                     <tr>
                         <td>@ing.Key.nome</td>
-                        <td>@ing.Value</td>
+                        <td>@ing.Value.quantidade @ing.Value.unidade</td>
                     </tr>
                 }
 
@@ -44,22 +44,35 @@
     <div class="col-md-2">
         <p></p>
         <figure>
-            <img id="no_border_img" src="~/images/relogio.png" style="width:60%"/>
+            <img id="no_border_img" src="~/images/relogio.png" style="width:60%" />
             <figcaption> <h3>@Model.tempo min</h3> </figcaption>
         </figure>
     </div>
 
 </div>
 
+<p></p>
+
 <h1>@Model.operacao.desc</h1>
 
-@if (Model.ultimo == true) {
-    <a align="left" class="btn btn-success" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id_receita="@Model.receita_id" asp-route-nr_passo="@anterior">Anterior</a>
-    <a align="right" class="btn btn-success" asp-controller="AvaliacaoView" asp-action="AvaliarReceita" asp-route-id_receita="@Model.receita_id">Finalizar</a>
-}
-else {
-    @if (Model.nr > 1) {
-        <a align="left" class="btn btn-success" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id_receita="@Model.receita_id" asp-route-nr_passo="@anterior">Anterior</a>
+<p></p>
+
+<p>
+    @Model.desc
+</p>
+
+<p></p>
+
+<div>
+    @if (Model.ultimo == true) {
+        <a class="btn btn-success" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id_receita="@Model.receita_id" asp-route-nr_passo="@anterior">Anterior</a>
+        <a style="float:right" class="btn btn-success" asp-controller="AvaliacaoView" asp-action="AvaliarReceita" asp-route-id_receita="@Model.receita_id">Finalizar</a>
     }
-    <a align="right" class="btn btn-success" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id_receita="@Model.receita_id" asp-route-nr_passo="@proximo">Próximo</a>
-}
+    else {
+        @if (Model.nr > 1) {
+            <a class="btn btn-success" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id_receita="@Model.receita_id" asp-route-nr_passo="@anterior">Anterior</a>
+        }
+        <a style="float:right" class="btn btn-success" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id_receita="@Model.receita_id" asp-route-nr_passo="@proximo">Próximo</a>
+    }
+</div>
+

@@ -9,37 +9,37 @@ using System.Threading.Tasks;
 
 namespace MrVeggie.Models {
 
-    public class Ingrediente {
+    public class Utensilio {
 
         [Key]
-        public int id_ingrediente { set; get; }
+        public int id_utensilio { set; get; }
 
         [Required]
         [Display(Name = "Nome")]
         [StringLength(50)]
         public string nome { set; get; }
 
+
         [Required]
         [Display(Name = "Imagem")]
         [StringLength(300)]
         public string url_imagem { set; get; }
 
+        [ForeignKey("utensilio_id")]
+        public ICollection<UtensiliosReceita> utensilios_receita { get; set; }
 
-
-        public ICollection<IngredientesPasso> ingredientes_passo { get; set; }
-
-        [ForeignKey("ingrediente_id")]
-        public List<UtilizadorIngredientesPref> utilizadores_pref { get; set; }
+        
     }
 
-    public class IngredienteContext : DbContext {
+    public class UtensilioContext : DbContext {
 
-        public IngredienteContext(DbContextOptions<IngredienteContext> options) : base(options) {
+        public UtensilioContext(DbContextOptions<UtensilioContext> options) : base(options) {
 
         }
 
-        public DbSet<Ingrediente> Ingrediente { get; set; }
+        public DbSet<Utensilio> Utensilio { get; set; }
 
 
     }
+
 }

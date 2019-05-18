@@ -60,12 +60,17 @@ namespace MrVeggie.Models {
 
 
         [NotMapped]
-        public IDictionary<Ingrediente, int> ingredientes { get; set; }
+        public IDictionary<Ingrediente, Quantidade> ingredientes { get; set; }
 
 
         [ForeignKey("receita_id")]
         public List<UtilizadorReceitasPref> utilizadores_pref { get; set; }
 
+        [ForeignKey("receita_id")]
+        public ICollection<UtensiliosReceita> utensilios_receita { get; set; }
+
+        [NotMapped]
+        public IList<Utensilio> utensilios { get; set; }
 
     }
 
@@ -90,6 +95,8 @@ namespace MrVeggie.Models {
 
         public DbSet<Receita> Receita { get; set; }
         public DbSet<Passo> Passo { get; set; }
+        public DbSet<UtensiliosReceita> UtensiliosReceita { get; set; }
+        public DbSet<Utensilio> Utensilio { get; set; }
 
     }
 

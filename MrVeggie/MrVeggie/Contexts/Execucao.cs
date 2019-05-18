@@ -22,14 +22,17 @@ namespace MrVeggie.Contexts {
 
 
 
-        public Dictionary<Ingrediente, int> getIngredientes(int id_passo) {
-            Dictionary<Ingrediente, int> ingredientes = new Dictionary<Ingrediente, int>();
+        public Dictionary<Ingrediente, Quantidade> getIngredientes(int id_passo) {
+            Dictionary<Ingrediente, Quantidade> ingredientes = new Dictionary<Ingrediente, Quantidade>();
 
             List<IngredientesPasso> ips = _context_ip.IngredientesPasso.Where(ip => ip.passo_id == id_passo).ToList();
 
             foreach (var ip in ips) {
                 Ingrediente i = _context_ing.Ingrediente.Find(ip.ingrediente_id);
-                ingredientes.Add(i, ip.quantidade);
+                string unidade = _context_ip.Unidade.Find(ip.unidade_id).desc;
+                Quantidade q = new Quantidade(ip.quantidade, unidade);
+
+                ingredientes.Add(i, q);
 
                 Console.WriteLine("****** LISTA PASSO {2} = INGREDIENTE {0} - QUANTIDADE {1} **************", i.id_ingrediente, ip.quantidade, ip.passo_id);
             }
