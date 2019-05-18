@@ -27,7 +27,15 @@ namespace MrVeggie.Models.Auxiliary {
         public int ingrediente_id { get; set; }
 
         [Required]
-        public int quantidade { get; set; }
+        public float quantidade { get; set; }
+
+
+        [NotMapped]
+        public Unidade unidade { get; set; }
+
+        [Column("unidade")]
+        public int unidade_id { get; set; }
+
      
     }
 
@@ -52,11 +60,19 @@ namespace MrVeggie.Models.Auxiliary {
                         .WithMany(i => i.ingredientes_passo)
                         .HasForeignKey(ip => ip.passo_id)
                         .HasConstraintName("FKIngredient895049");
+
+            modelBuilder.Entity<IngredientesPasso>()
+                        .HasOne<Unidade>(ip => ip.unidade)
+                        .WithMany(u => u.ingredientes_passos)
+                        .HasForeignKey(ip => ip.unidade_id)
+                        .HasConstraintName("FKIngredient7679");
+                        
         }
 
         public DbSet<Ingrediente> Ingrediente { get; set; }
         public DbSet<Passo> Passo { get; set; }
         public DbSet<IngredientesPasso> IngredientesPasso { get; set; }
+        public DbSet<Unidade> Unidade { get; set; }
         
     }
     

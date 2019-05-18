@@ -25,6 +25,9 @@ namespace MrVeggie.Models{
         [Display(Name = "Tempo")]
         public float tempo { set; get; }
 
+        [Required]
+        [Display(Name = "Descrição")]
+        public string desc { set; get; }
 
         [Required]
         [Column("operacao")]
@@ -58,8 +61,9 @@ namespace MrVeggie.Models{
 
         public ICollection<IngredientesPasso> ingredientes_passo { get; set; }
 
+
         [NotMapped]
-        public Dictionary<Ingrediente, int> ingredientes { get; set; }
+        public Dictionary<Ingrediente, Quantidade> ingredientes { get; set; }
 
         
         

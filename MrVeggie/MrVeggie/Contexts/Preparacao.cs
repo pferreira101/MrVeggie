@@ -25,7 +25,7 @@ namespace MrVeggie.Contexts {
 
 
 
-        // o nome é para estar em conformidade com o diagrama 
+        // o nome é para estar em conformidade com o diagrama - getDetalhesReceita
         public Receita getIngredientes(int id_receita) {
             Receita receita = _context_r.Receita.Find(id_receita);
 
@@ -35,31 +35,44 @@ namespace MrVeggie.Contexts {
                 receita.passos.Add(p);
             }
 
-            Dictionary<Ingrediente, int> ingredientes = new Dictionary<Ingrediente, int>();
+            Dictionary<Ingrediente, Quantidade> ingredientes = new Dictionary<Ingrediente, Quantidade>();
 
             foreach (var p in receita.passos) {
-                Dictionary<Ingrediente, int> ings_passo = getIngredientesPasso(p.id_passo);
+                Dictionary<Ingrediente, Quantidade> ings_passo = getIngredientesPasso(p.id_passo);
 
                 foreach (var i in ings_passo) {
-                    if (!ingredientes.ContainsKey(i.Key)) ingredientes.Add(i.Key, 0);
-                    ingredientes[i.Key] += i.Value;
+                    if (!ingredientes.ContainsKey(i.Key)) {
+                        Quantidade q = new Quantidade(0, i.Value.unidade);
+                        ingredientes.Add(i.Key, q);
+                    } 
+                    ingredientes[i.Key].add(i.Value.quantidade);
 
                     Console.WriteLine("****** LISTA TOTAL : INGREDIENTE {0} - QUANTIDADE {1} **************", i.Key.id_ingrediente, i.Value);
                 }
             }
             receita.ingredientes = ingredientes;
 
+            var utensilios_ids = _context_r.UtensiliosReceita.Where(ur => ur.receita_id == id_receita);
+
+            receita.utensilios = new List<Utensilio>();
+            foreach (UtensiliosReceita ur in utensilios_ids) {
+                receita.utensilios.Add(_context_r.Utensilio.Find(ur.utensilio_id));
+            }
+
             return receita;
         }
 
-        private Dictionary<Ingrediente, int> getIngredientesPasso(int id_passo) {
-            Dictionary<Ingrediente, int> ingredientes = new Dictionary<Ingrediente, int>();
+
+        private Dictionary<Ingrediente, Quantidade> getIngredientesPasso(int id_passo) {
+            Dictionary<Ingrediente, Quantidade> ingredientes = new Dictionary<Ingrediente, Quantidade>();
 
             List<IngredientesPasso> ips = _context_ip.IngredientesPasso.Where(ip => ip.passo_id == id_passo).ToList();
 
             foreach (var ip in ips) {
                 Ingrediente i = _context_ing.Ingrediente.Find(ip.ingrediente_id);
-                ingredientes.Add(i, ip.quantidade);
+                string unidade = _context_ip.Unidade.Find(ip.unidade_id).desc;
+                Quantidade q = new Quantidade(ip.quantidade, unidade);
+                ingredientes.Add(i, q);
 
                 Console.WriteLine("****** LISTA PASSO {2} = INGREDIENTE {0} - QUANTIDADE {1} **************", i.id_ingrediente, ip.quantidade, ip.passo_id);
             }

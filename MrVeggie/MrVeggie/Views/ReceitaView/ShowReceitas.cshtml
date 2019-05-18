@@ -2,6 +2,8 @@
 @model ReceitaAndIngredienteViewModel
 @{
     ViewData["Title"] = "Receitas";
+    string dificuldade;
+    string dificuldade_img;
 }
 
 
@@ -45,8 +47,35 @@
                             @receita.nome
                         </h2>
                     </div>
-                    <div class="container">
-                        Dificuldade: @receita.dificuldade  em 5
+                    <div class="container" style="display:inline-block">
+                        <figure>
+                            @{
+                                if (receita.dificuldade == 1) {
+                                    dificuldade = "Fácil";
+                                    dificuldade_img = "facil.png";
+                                }
+                                else if (receita.dificuldade == 2) {
+                                    dificuldade = "Média";
+                                    dificuldade_img = "media.png";
+                                }
+                                else {
+                                    dificuldade = "Difícil";
+                                    dificuldade_img = "dificil.png";
+                                }
+                            }
+                            <img id="no_border_img" src="~/images/@dificuldade_img" style="width:10%" />
+                            <figcaption> @dificuldade </figcaption>
+                        </figure>
+
+                        <figure>
+                            <img id="no_border_img" src="~/images/pessoa.png" style="width:10%" />
+                            <figcaption> @receita.n_pessoas  </figcaption>
+                        </figure>
+                        
+                        <figure id="element3">
+                            <img id="no_border_img" src="~/images/relogio.png" style="width:10%" />
+                            <figcaption> @receita.tempo_conf </figcaption>
+                        </figure>
                     </div>
                 </div>
                 <div class="row">
