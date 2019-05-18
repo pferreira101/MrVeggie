@@ -15,7 +15,7 @@ namespace MrVeggie.Controllers {
         private Selecao selecao;
 
         public IngredienteViewController(IngredienteContext context) {
-            selecao = new Selecao(null, context);
+            selecao = new Selecao(null, context,null);
         }
 
 

@@ -11,13 +11,16 @@ using Microsoft.Extensions.DependencyInjection;
 using MrVeggie.Models;
 using MrVeggie.Models.Auxiliary;
 
-namespace MrVeggie {
+namespace MrVeggie
+{
 
-    public class Startup {
+    public class Startup
+    {
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
-        public void ConfigureServices(IServiceCollection services) {
-            var connection = @"Server=DESKTOP-CM5S8K1;Database=MrVeggie;Trusted_Connection=True;ConnectRetryCount=0";
+        public void ConfigureServices(IServiceCollection services)
+        {
+            var connection = @"Server=DESKTOP-F88H89P;Database=MrVeggie;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<UtilizadorContext>(options => options.UseSqlServer(connection));
             services.AddDbContext<IngredienteContext>(options => options.UseSqlServer(connection));
             services.AddDbContext<ReceitaContext>(options => options.UseSqlServer(connection));
@@ -37,8 +40,10 @@ namespace MrVeggie {
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env) {
-            if (env.IsDevelopment()) {
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
                 app.UseDeveloperExceptionPage();
             }
             app.UseAuthentication();
@@ -46,5 +51,5 @@ namespace MrVeggie {
             app.UseStaticFiles();
         }
     }
-    
+
 }
