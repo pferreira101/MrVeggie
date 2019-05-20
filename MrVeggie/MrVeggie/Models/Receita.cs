@@ -55,8 +55,7 @@ namespace MrVeggie.Models {
         public string url_imagem { set; get; }
 
 
-
-        public IList<Passo> passos { get; set; }
+        public virtual ICollection<Passo> passos { get; set; }
 
 
         [NotMapped]

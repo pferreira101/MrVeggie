@@ -1,17 +1,39 @@
-﻿@model IEnumerable<MrVeggie.Models.Receita>
-
+﻿
+@model ReceitaAndIngredienteViewModel
 @{
     ViewData["Title"] = "Receitas";
     string dificuldade;
     string dificuldade_img;
 }
 
+
+
+<link href="~/css/Style.css" rel="stylesheet" type="text/css" />
+
 <h1>Receitas</h1>
 
 
-<div class="container-fluid">
+
+<div class="dropdown" style="float:right">
+    <button class="dropbtn">Ingredientes</button>
+    <div class="dropdown-content">
+        <form asp-action="showReceitas" method="post">
+            @foreach (var ingrediente in Model.Ingredientes)
+            {
+                <input type="checkbox" name=checkboxes value=@ingrediente.id_ingrediente>@ingrediente.nome<br>
+            }
+            <div class="form-group">
+                <input type="submit" value="Filtrar" class="btn btn-default btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<div class="container-fluid" style="float:left">
     <div class="row">
-        @foreach (var receita in Model)
+        @foreach (var receita in Model.receitas)
         {
             <div class="col-md-3 shadow p-3 mb-5 bg-white rounded" style="margin: 3px">
                 <div class="row">
@@ -57,11 +79,18 @@
                     </div>
                 </div>
                 <div class="row">
-
+                    <div class="container">
+                        Dose: @receita.n_pessoas pessoas
+                    </div>
                 </div>
                 <div class="row">
                     <div class="container">
-                        @receita.avaliacao
+                        Tempo: @receita.tempo_conf minutos
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container">
+                        Avaliação: @receita.avaliacao estrelas
                     </div>
                     <div class="container" align="right">
                         <a class="btn btn-success" asp-controller="ReceitaView" asp-action="showReceita" asp-route-id="@receita.id_receita">Ver</a>
@@ -73,4 +102,5 @@
 
     </div>
 </div>
+
 
