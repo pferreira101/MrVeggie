@@ -25,5 +25,12 @@ namespace MrVeggie.Controllers {
 
             return View(ingredientes);
         }
+
+        [HttpGet]
+        public IActionResult ConfigInicial() {
+            Ingrediente[] ingredientes = selecao.getIngredientes();
+
+            return View(ingredientes);
+        }
     }
 }

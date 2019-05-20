@@ -1,7 +1,38 @@
-﻿
+﻿@model IEnumerable<MrVeggie.Models.Ingrediente>
+
 @{
-    ViewData["Title"] = "ConfigInicialView";
+    ViewData["Title"] = "Configuração Inicial";
 }
 
-<h1>ConfigInicialView</h1>
+<h1>Configuração Inicial</h1>
+
+<h3>Por favor, escolha 3 ingredientes.</h3>
+
+<div class="container-fluid">
+    <div class="row">
+        @foreach (var ingrediente in Model) {
+            <div class="col-md-3 shadow p-3 mb-5 bg-white rounded" style="margin: 3px">
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <h2>
+                            @ingrediente.nome
+                        </h2>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="container">
+                        <img class="d-block w-100" src="@ingrediente.url_imagem">
+
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+<a style="float:right" class="btn btn-success" asp-controller="UserView" asp-action="registaConfigInicial">Confirmar</a>
+
 

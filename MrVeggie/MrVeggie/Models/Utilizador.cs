@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 namespace MrVeggie.Models {
 
     public class Utilizador {
+        
 
         [Key]
         public int id_utilizador { set; get; }
@@ -37,6 +38,15 @@ namespace MrVeggie.Models {
         [Display(Name = "Sexo")]
         public char sexo { get; set; }
 
+        [Required]
+        [Display(Name = "Sexo")]
+        public bool admin { get; set; }
+
+        [Required]
+        [Display(Name = "Sexo")]
+        public bool config_inicial { get; set; }
+
+
 
         [ForeignKey("utilizador_id")]
         public List<UtilizadorIngredientesPref> utilizador_ingredientes_pref { get; set; }
@@ -52,6 +62,25 @@ namespace MrVeggie.Models {
         [NotMapped]
         public List<Receita> receitas_pref { get; set; }
 
+
+
+
+
+
+
+
+
+
+
+        public void print() {
+            Console.WriteLine("\nUTILIZADOR ------------------------------------------");
+            Console.WriteLine("ID = {0}", id_utilizador);
+            Console.WriteLine("Email = {0}", email);
+            Console.WriteLine("Admin = {0}", admin);
+            Console.WriteLine("Config = {0}", config_inicial);
+
+            Console.WriteLine("-------------------------------------------------------");
+        }
     }
 
 

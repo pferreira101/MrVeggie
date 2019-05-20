@@ -8,9 +8,9 @@ using MrVeggie.Models;
 using MrVeggie.Models.Auxiliary;
 using MrVeggie.Shared;
 
-namespace Teste.Controllers { 
+namespace Teste.Controllers {
 
-    [Route("api/[controller]")]
+    [Route("[controller]/[action]")]
     public class UtilizadorController : Controller {
 
 
@@ -28,6 +28,7 @@ namespace Teste.Controllers {
         }
 
 
+        
 
         /*
         private readonly UtilizadorContext _context;

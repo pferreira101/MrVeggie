@@ -13,8 +13,8 @@ namespace MrVeggie.Controllers{
 
         private Avaliacao avaliacao;
 
-        public AvaliacaoViewController(ReceitaContext context) {
-            avaliacao = new Avaliacao(context);
+        public AvaliacaoViewController(ReceitaContext context_r, UtilizadorContext context_u) {
+            avaliacao = new Avaliacao(context_r, context_u);
         }
 
 
@@ -28,11 +28,10 @@ namespace MrVeggie.Controllers{
 
 
         [HttpPost("{id_receita}")]
-        public IActionResult AvaliarReceitaUtilizador(int id_receita) {  ///// PASSAR O UTILIZADOR COMO ARGUMENTO MAS COMO??
+        public IActionResult AvaliarReceitaUtilizador(int id_receita) { 
             int pontuacao = Int32.Parse(HttpContext.Request.Form["rate"]);
-            int id_utilizador = 1;
 
-            avaliacao.avalia(id_receita, id_utilizador, pontuacao);
+            avaliacao.avalia(id_receita, User.Identity.Name, pontuacao);
 
             return RedirectToAction("Index", "Home");
         }

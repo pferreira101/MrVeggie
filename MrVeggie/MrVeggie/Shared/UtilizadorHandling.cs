@@ -1,4 +1,5 @@
-﻿using MrVeggie.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using MrVeggie.Models;
 using MrVeggie.Models.Auxiliary;
 using System;
 using System.Collections.Generic;
@@ -7,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace MrVeggie.Shared { 
 
-    public class UtilizadorHandling {
+    public class UtilizadorHandling : Controller {
 
-        private readonly UtilizadorContext _context;
+        public readonly UtilizadorContext _context;
         private readonly IngredienteContext _context_ing;
         private readonly UtilizadorIngredientesPrefContext _context_uip;
         private readonly UtilizadorReceitasPrefContext _context_urp;
@@ -71,5 +72,8 @@ namespace MrVeggie.Shared {
 
             return utilizador;
         }
+
+
+        
     }
 }

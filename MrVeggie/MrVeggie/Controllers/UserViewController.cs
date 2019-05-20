@@ -73,6 +73,11 @@ namespace MrVeggie.Controllers {
             if (ModelState.IsValid) {
                 var LoginStatus = this.utilizador_handling.validaUtilizador(u);
                 if (LoginStatus) {
+
+                    u.print();
+                    u = utilizador_handling._context.Utilizador.Where(user => user.email.Equals(u.email)).First(); // so sabe o email e a password de u. assim fica completo. 
+                    u.print();
+
                     var claims = new List<Claim> {
                         new Claim(ClaimTypes.Name, u.email)
                     };
@@ -81,7 +86,12 @@ namespace MrVeggie.Controllers {
                     ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
 
                     await HttpContext.SignInAsync(principal);
-                    return RedirectToAction("Index", "Home");
+
+                    
+
+                    if (u.admin) return RedirectToAction("Index", "Home");
+                    else if(!u.config_inicial) return RedirectToAction("ConfigInicial", "IngredienteView");
+                    else return RedirectToAction("Index", "Home");
 
                 }
                 else {
@@ -102,9 +112,9 @@ namespace MrVeggie.Controllers {
 
         [HttpGet]
         public IActionResult IngredientesPref() {
-            int id = 1; // passar para argumento
+            int id = utilizador_handling._context.Utilizador.Where(u => u.email.Equals(User.Identity.Name)).First().id_utilizador; // SERÁ ASSIM QUE SE VAI BUSCAR?? METER ID NA COOKIE? COMO?! 
 
-            Utilizador utilizador = utilizador_handling.getUtilizadorIngredientesPref(2);
+            Utilizador utilizador = utilizador_handling.getUtilizadorIngredientesPref(id);
 
             return View(utilizador);
         }
@@ -118,5 +128,16 @@ namespace MrVeggie.Controllers {
             return View(utilizador);
         }
 
+
+        public RedirectToActionResult registaConfigInicial() { // receber id como parametro??
+            int id = utilizador_handling._context.Utilizador.Where(user => user.email.Equals(User.Identity.Name)).First().id_utilizador; // SERÁ ASSIM QUE SE VAI BUSCAR?? METER ID NA COOKIE? COMO?! 
+
+            Utilizador u = utilizador_handling._context.Utilizador.Find(id);
+
+            u.config_inicial = true;
+            utilizador_handling._context.SaveChanges();
+
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

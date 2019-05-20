@@ -36,12 +36,14 @@ CREATE TABLE Passo (
   PRIMARY KEY (id_passo));
 
 CREATE TABLE Utilizador (
-  id_utilizador int IDENTITY(1, 1) NOT NULL, 
-  nome          varchar(50) NOT NULL, 
-  email         varchar(50) NOT NULL, 
-  password      varchar(50) NOT NULL, 
-  idade         int NOT NULL, 
-  sexo          char(1) NOT NULL, 
+  id_utilizador   int IDENTITY(1, 1) NOT NULL, 
+  nome            varchar(50) NOT NULL, 
+  email           varchar(50) NOT NULL, 
+  password        varchar(50) NOT NULL, 
+  idade           int NOT NULL, 
+  sexo            char(1) NOT NULL, 
+  admin           bit DEFAULT '0' NOT NULL, 
+  config_inicial  bit DEFAULT '0' NOT NULL, 
   PRIMARY KEY (id_utilizador));
 
 CREATE TABLE UtilizadorReceitasPref (
