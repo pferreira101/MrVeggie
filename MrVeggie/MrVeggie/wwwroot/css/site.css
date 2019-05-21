@@ -97,6 +97,11 @@ color: black;
 }
 /*************************************** NAVBAR ***************************************/
 
+a:hover, a:active {
+    color: #ffffff;
+    background-color: #ffc517;
+}
+
 .navbar {
     background-color: #62cc30;
 }
@@ -285,8 +290,8 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
 }
 .footer {
   position: absolute;

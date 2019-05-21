@@ -27,14 +27,17 @@ namespace MrVeggie.Contexts {
 
 
         public List<Receita> getSugestoes(string email) {
-            int id_utilizador = _context_u.Utilizador.Where(u => u.email == email).First().id_utilizador;
+           Utilizador utilizador = _context_u.Utilizador.Where(u => u.email == email).First();
             List<Receita> r = new List<Receita>(4);
 
-            //r.Add(getReceitaSugeridaPorHistorico(id_utilizador));
-            r.Add(getReceitaSugeridaPorReceitasFav(id_utilizador));
-            //r.Add(getReceitaSugeridaPorIngredientesFav(id_utilizador));
-            //r.Add(getReceitaSugeridaPorHistorico(id_utilizador));
-
+            if (utilizador != null)
+            {
+                int id_utilizador = utilizador.id_utilizador;
+                //r.Add(getReceitaSugeridaPorHistorico(id_utilizador));
+                r.Add(getReceitaSugeridaPorReceitasFav(id_utilizador));
+                //r.Add(getReceitaSugeridaPorIngredientesFav(id_utilizador));
+                //r.Add(getReceitaSugeridaPorHistorico(id_utilizador));
+            }
 
 
             return r;

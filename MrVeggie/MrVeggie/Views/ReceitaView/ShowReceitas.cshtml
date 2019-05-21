@@ -26,7 +26,7 @@
         <form asp-action="showReceitas" method="post">
             @foreach (var ingrediente in Model.Ingredientes)
             {
-                <input type="checkbox" name=checkboxes value=@ingrediente.id_ingrediente>@ingrediente.nome<br>
+                <input type="checkbox" name=checkboxes value=@ingrediente.id_ingrediente> @ingrediente.nome<br>
             }
             <div class="form-group">
                 <input type="submit" value="Filtrar" class="btn btn-default btn-primary" />
