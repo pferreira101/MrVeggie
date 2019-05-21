@@ -9,14 +9,16 @@
 </head>
 <body>
     <header>
-
-
+        <div class="container" align="center" style="padding-top:5px;padding-bottom:5px;height: 110px;">
+            <img id="no_border_img" src="~/images/Logo.png" height=100 />
+        </div>
+       
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3">
             <div class="container" align="left">
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="Home" asp-action="Index">
-                            <img id="no_border_img" src="~/images/Logo.png" style="height:23px" />
+                            Início
                         </a>
                     </li>
                     <li class="nav-item">
@@ -30,7 +32,8 @@
 
             <div class="navbar-collapse collapse w-100 order-3 dual-collapse2" style="padding-right:35px">
                 <ul class="navbar-nav ml-auto">
-                    @if (User.Identity.IsAuthenticated) {
+                    @if (User.Identity.IsAuthenticated)
+                    {
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Olá @User.Identity.Name
@@ -45,7 +48,8 @@
                             </div>
                         </li>
                     }
-                    else {
+                    else
+                    {
                         <li class="nav-item">
                             <a class="nav-link mr-sm-2" asp-controller="UserView" asp-action="RegistaUtilizador">Registar</a>
                         </li>
@@ -68,7 +72,7 @@
     </div>
 
 
-    <footer class="border-top footer text-muted" style="background:lightgrey" >
+    <footer class="border-top footer text-muted" style="background:lightgrey;" >
 
         <div class="container">
             &copy; 2019 - MrVeggie
