@@ -70,6 +70,10 @@ INSERT INTO IngredientesPasso VALUES (1, 1, 10, 1),
 
 --INSERT INTO UtilizadorIngredientesPref VALUES (2, 1);
 --INSERT INTO UtilizadorReceitasPref VALUES (2, 1);
+--INSERT INTO UtilizadorReceitasPref VALUES (3, 1);
+--INSERT INTO UtilizadorReceitasPref VALUES (3, 2);
+
+
 
 INSERT INTO Utensilio VALUES ('Colher', 'url');
 
