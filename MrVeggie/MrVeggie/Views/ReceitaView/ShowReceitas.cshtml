@@ -4,10 +4,17 @@
     ViewData["Title"] = "Receitas";
     string dificuldade;
     string dificuldade_img;
+    string star_img;
 }
 
 
 <link href="~/css/Style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    .checked {
+        color: orange;
+    }
+</style>
 
 <h1>Receitas</h1>
 
@@ -85,14 +92,48 @@
                             </div>
                         </div>
                     </div>
-                    <div class="container" align="right">
-                        <a class="btn btn-success" asp-controller="ReceitaView" asp-action="showReceita" asp-route-id="@receita.id_receita">Ver</a>
+
+
+                    <div class="row">
+                        <div class="column" style="float: left; width: 65%; padding: 25px">
+                            @{
+                                if (Math.Round(receita.avaliacao) == 1)
+                                {
+                                    star_img = "star1.png";
+                                }
+                                else if (Math.Round(receita.avaliacao) == 2)
+                                {
+                                    star_img = "star2.png";
+                                }
+                                else if (Math.Round(receita.avaliacao) == 3)
+                                {
+                                    star_img = "star3.png";
+                                }
+                                else if (Math.Round(receita.avaliacao) == 4)
+                                {
+                                    star_img = "star4.png";
+                                }
+                                else if (Math.Round(receita.avaliacao) == 5)
+                                {
+                                    star_img = "star5.png";
+                                }
+                                else
+                                {
+                                    star_img = "star0.png";
+                                }
+                            }
+                            <img id="no_border_img" src="~/images/@star_img" style="width:100%;"/>
+                        </div>
+                        <div class="column" style="float: left; width: 35%; padding: 25px">
+                            <a class="btn btn-success" asp-controller="ReceitaView" asp-action="showReceita" asp-route-id="@receita.id_receita">Ver</a>
+                        </div>
                     </div>
+                    
+
+                </div>
 
             </div>
-
-            </div>
-         }
+        }
     </div>
 </div>
 
