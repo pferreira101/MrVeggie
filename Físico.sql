@@ -59,7 +59,7 @@ CREATE TABLE UtilizadorIngredientesPref (
 CREATE TABLE HistoricoUtilizador (
   utilizador int NOT NULL, 
   receita    int NOT NULL, 
-  data_conf  int NOT NULL, 
+  data_conf  datetime NOT NULL, 
   avaliacao  int NULL, 
   PRIMARY KEY (utilizador, receita, data_conf));
 

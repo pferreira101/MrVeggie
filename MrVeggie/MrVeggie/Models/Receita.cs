@@ -65,6 +65,8 @@ namespace MrVeggie.Models {
         [ForeignKey("receita_id")]
         public List<UtilizadorReceitasPref> utilizadores_pref { get; set; }
 
+
+
         [ForeignKey("receita_id")]
         public ICollection<UtensiliosReceita> utensilios_receita { get; set; }
 

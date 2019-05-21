@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MrVeggie.Contexts;
 using MrVeggie.Models;
+using MrVeggie.Models.Auxiliary;
 
 namespace MrVeggie.Controllers {
 
@@ -26,7 +27,18 @@ namespace MrVeggie.Controllers {
             else receitas = selecao.getSugestoes();
 
             return View(receitas);
+        /*
+        private Sugestao sugestao;
+
+        public HomeController(ReceitaContext context_r, UtilizadorContext context_u)
+        {
+            sugestao = new Sugestao(context_r, context_u);
         }
+
+        public IActionResult Index() {
+            return View(new HomeModel { sugestoes = sugestao.getReceitasSugeridas(1)});
+        }
+         */
 
         [HttpGet]
         public IActionResult AboutUs() {

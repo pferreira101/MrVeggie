@@ -59,6 +59,8 @@ namespace MrVeggie.Models {
         [ForeignKey("utilizador_id")]
         public List<UtilizadorReceitasPref> utilizador_receitas_pref { get; set; }
 
+
+
         [NotMapped]
         public List<Receita> receitas_pref { get; set; }
 
@@ -89,6 +91,8 @@ namespace MrVeggie.Models {
 
         public UtilizadorContext(DbContextOptions<UtilizadorContext> options) : base(options) {
 
+
+
         }
 
 
@@ -98,6 +102,7 @@ namespace MrVeggie.Models {
         public DbSet<Ingrediente> Ingrediente { get; set; }
         public DbSet<UtilizadorReceitasPref> UtilizadorReceitasPref { get; set; }
         public DbSet<Receita> Receita { get; set; }
+
 
     }
 }
