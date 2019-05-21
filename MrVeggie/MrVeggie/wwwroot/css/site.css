@@ -256,6 +256,8 @@ color: black;
 
 
 #receita {
+    color: white;
+    font-size: 40px;
     -webkit-text-stroke: 1px black;
 }
 
