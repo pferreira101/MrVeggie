@@ -14,7 +14,7 @@
 
 
 <div class="dropdown" style="float:right">
-    <button class="dropbtn">Ingredientes</button>
+    <button class="dropbtn">Filtrar por ingrediente</button>
     <div class="dropdown-content">
         <form asp-action="showReceitas" method="post">
             @foreach (var ingrediente in Model.Ingredientes)
@@ -30,25 +30,25 @@
 
 
 
-<div class="container-fluid" style="float:left">
+<div class="container-fluid" style="float:left;padding-bottom:75px;">
     <div class="row">
         @foreach (var receita in Model.receitas)
         {
-            <div class="col-md-3 shadow p-3 mb-5 bg-white rounded" style="margin: 3px">
+            <div class="col-md-3 shadow p-3 mb-5 bg-white rounded" style="margin: 3px;">
                 <div class="row">
                     <div class="container">
                         <img class="d-block w-100" src="@receita.url_imagem">
                     </div>
                 </div>
                 <div class="row">
-                    <div class="container">
+                    <div class="container" style="max-height: 30px;padding-top: 20px">
                         <h2>
                             @receita.nome
                         </h2>
                     </div>
                     <div class="container" style="display:inline-block">
-                        <div class="row" style="display: flex">
-                            <div class="column" style="flex: 33.33%; padding: 5px">
+                        <div class="row" style="padding-top: 70px">
+                            <div class="column" style="float: left; width: 33.33%; padding: 35px;">
                                 <figure>
                                     @{
                                         if (receita.dificuldade == 1)
@@ -67,48 +67,33 @@
                                             dificuldade_img = "dificil.png";
                                         }
                                     }
-                                    <img id="no_border_img" src="~/images/@dificuldade_img" style="width:10%" />
-                                    <figcaption> @dificuldade </figcaption>
+                                    <img id="no_border_img" src="~/images/@dificuldade_img" style="width:100%" />
+                                    <figcaption style="text-align: center"> @dificuldade </figcaption>
                                 </figure>
                             </div>
-                            <div class="column" style="flex: 33.33%; padding: 5px">
+                            <div class="column" style="float: left; width: 33.33%; padding: 35px;">
                                 <figure>
-                                    <img id="no_border_img" src="~/images/pessoa.png" style="width:10%" />
-                                    <figcaption> @receita.n_pessoas  </figcaption>
+                                    <img id="no_border_img" src="~/images/pessoa.png" style="width:100%" />
+                                    <figcaption style="text-align: center"> @receita.n_pessoas  </figcaption>
                                 </figure>
                             </div>
-                            <div class="column" style="flex: 33.33%; padding: 5px">
+                            <div class="column" style="float: left; width: 33.33%; padding: 35px;">
                                 <figure id="element3">
-                                    <img id="no_border_img" src="~/images/relogio.png" style="width:10%" />
-                                    <figcaption> @receita.tempo_conf </figcaption>
+                                    <img id="no_border_img" src="~/images/relogio.png" style="width:100%" />
+                                    <figcaption style="text-align: center"> @receita.tempo_conf </figcaption>
                                 </figure>
                             </div>
                         </div>
                     </div>
-                <div class="row">
-                    <div class="container">
-                        Dose: @receita.n_pessoas pessoas
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="container">
-                        Tempo: @receita.tempo_conf minutos
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="container">
-                        Avaliação: @receita.avaliacao estrelas
-                    </div>
                     <div class="container" align="right">
                         <a class="btn btn-success" asp-controller="ReceitaView" asp-action="showReceita" asp-route-id="@receita.id_receita">Ver</a>
                     </div>
-                </div>
 
             </div>
 
             </div>
          }
     </div>
-    </div>
+</div>
 
 
