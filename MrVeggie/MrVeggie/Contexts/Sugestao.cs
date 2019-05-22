@@ -5,14 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MrVeggie.Contexts
-{
+namespace MrVeggie.Contexts {
 
-    public class Sugestao
-    {
+    public class Sugestao {
+
         private readonly ReceitaContext _context_r;
         private readonly UtilizadorContext _context_u;
         private readonly IngredientesPassoContext _context_ip;
+
 
         public Sugestao(ReceitaContext context_r, UtilizadorContext context_u, IngredientesPassoContext context_ip)
         {
@@ -21,21 +21,31 @@ namespace MrVeggie.Contexts
             _context_ip = context_ip;
         }
 
+        public List<Receita> getSugestoes() {
+            List<Receita> r = new List<Receita>();
 
-        public Receita[] getReceitasSugeridas(int idUtilizador)
-        {
-            List<Receita> r = new List<Receita>(4);
-
-            //r.Add(getReceitaSugeridaPorHistorico(idUtilizador));
-            r.Add(getReceitaSugeridaPorReceitasFav(idUtilizador));
-            r.Add(getReceitaSugeridaPorIngredientesFav(idUtilizador));
-            //r.Add(getReceitaSugeridaPorHistorico(idUtilizador));
-
-
-
-            return r.ToArray();
+            r.Add(_context_r.Receita.Find(1));
+            Console.WriteLine("********************************************************* {0}", r.Count());
+            return r;
         }
 
+
+        public List<Receita> getSugestoes(string email) {
+            Utilizador utilizador = _context_u.Utilizador.Where(u => u.email == email).First();
+            List<Receita> r = new List<Receita>(4);
+
+            if (utilizador != null)
+            {
+                int id_utilizador = utilizador.id_utilizador;
+                //r.Add(getReceitaSugeridaPorHistorico(id_utilizador));
+                r.Add(getReceitaSugeridaPorReceitasFav(id_utilizador));
+                r.Add(getReceitaSugeridaPorIngredientesFav(id_utilizador));
+                //r.Add(getReceitaSugeridaPorHistorico(id_utilizador));
+            }
+
+
+            return r;
+        }
         private Receita getReceitaSugeridaPorReceitasFav(int idUtilizador)
         {
             Receita x;
@@ -99,8 +109,7 @@ namespace MrVeggie.Contexts
 
         }
 
-        private Receita getReceitaSugeridaPorHistorico(int idUtilizador)
-        {
+        private Receita getReceitaSugeridaPorHistorico(int id_utilizador) {
             
             throw new NotImplementedException();
         }

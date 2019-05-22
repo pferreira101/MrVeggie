@@ -19,7 +19,7 @@ INSERT INTO Ingrediente VALUES ('Alface', 'teste'),
 								('Iogurte Grego', 'https://cdn1.medicalnewstoday.com/content/images/articles/323/323169/greek-yoghurt-in-bowl.jpg');
 
 
-INSERT INTO Receita VALUES ('Lasanha', 'lasanha asdfsadf', 40, 4, 2, 1, 200, 2, 'teste'), 
+INSERT INTO Receita VALUES ('Lasanha', 'lasanha asdfsadf', 40, 4, 2, 1, 200, 2, 'https://www.pingodoce.pt/wp-content/uploads/2016/07/lasanhadelegumes617.jpg'), 
 							('Sopa de tomate com lentilhas', 'Esta sopa de tomate com lentilhas vermelhas e espinafres é uma excelente forma de começar a sua refeição. Sirva com folhas de manjericão e iogurte grego.', 
 							 25, 0, 0, 1, 157, 6, 'https://www.pingodoce.pt/wp-content/uploads/2019/01/sopa-tomate-com-lentilhas.jpg');
 
@@ -66,6 +66,12 @@ INSERT INTO IngredientesPasso VALUES (1, 1, 10, 1),
 									 (14, 12, 0, 2),
 									 (14, 13, 0, 2)
 									 ;
+
+
+--INSERT INTO UtilizadorIngredientesPref VALUES (2, 1);
+--INSERT INTO UtilizadorReceitasPref VALUES (2, 1);
+--INSERT INTO UtilizadorReceitasPref VALUES (3, 1);
+--INSERT INTO UtilizadorReceitasPref VALUES (3, 2);
 
 
 

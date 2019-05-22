@@ -18,7 +18,7 @@ namespace MrVeggie.Controllers {
         
 
         public ReceitaViewController(ReceitaContext context_r, PassoContext context_p, IngredientesPassoContext context_ip, IngredienteContext context_i) {
-            selecao = new Selecao(context_r, context_i, context_ip);
+            selecao = new Selecao(context_r, context_i, context_ip, null);
             preparacao = new Preparacao(context_r, context_p, context_ip, context_i);
         }
 
