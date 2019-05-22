@@ -1,0 +1,34 @@
+﻿@model IEnumerable<MrVeggie.Models.Receita>
+
+@{
+    ViewData["Title"] = "HistóricoUtilizador";
+}
+
+<h1>HistóricoUtilizador</h1>
+
+<div class="container-fluid">
+    <div class="row">
+        @foreach (var receita in Model) {
+            <div class="col-md-3 shadow p-3 mb-5 bg-white rounded" style="margin: 3px">
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <h2>
+                            <a asp-controller="Home" asp-action="Index" id="link_preto">@receita.nome</a>
+                        </h2>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="container">
+                        <img class="d-block w-100" src="@receita.url_imagem" width="100" height="200">
+
+                    </div>
+                </div>
+            </div>
+          
+        }
+
+    </div>
+</div>
+

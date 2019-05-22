@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace MrVeggie.Models {
 
     public class Utilizador {
-        
+
 
         [Key]
         public int id_utilizador { set; get; }
@@ -60,15 +60,15 @@ namespace MrVeggie.Models {
         public List<UtilizadorReceitasPref> utilizador_receitas_pref { get; set; }
 
 
-
         [NotMapped]
         public List<Receita> receitas_pref { get; set; }
 
 
+        [ForeignKey("utilizador_id")]
+        public List<HistoricoUtilizador> historico { get; set; }
 
-
-
-
+        [NotMapped]
+        public List<Receita> historico_receitas { get; set; }
 
 
 
@@ -102,6 +102,7 @@ namespace MrVeggie.Models {
         public DbSet<Ingrediente> Ingrediente { get; set; }
         public DbSet<UtilizadorReceitasPref> UtilizadorReceitasPref { get; set; }
         public DbSet<Receita> Receita { get; set; }
+        public DbSet<HistoricoUtilizador> HistoricoUtilizador { get; set; }
 
 
     }

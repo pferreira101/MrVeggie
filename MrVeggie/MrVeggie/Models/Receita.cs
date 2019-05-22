@@ -73,6 +73,11 @@ namespace MrVeggie.Models {
         [NotMapped]
         public IList<Utensilio> utensilios { get; set; }
 
+
+
+        [ForeignKey("receita_id")]
+        public List<HistoricoUtilizador> historico { get; set; }
+
     }
 
     public class ReceitaContext : DbContext {
