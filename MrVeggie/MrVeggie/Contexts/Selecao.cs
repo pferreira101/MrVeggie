@@ -29,7 +29,6 @@ namespace MrVeggie.Contexts {
             List<Receita> result = new List<Receita>(receitas);
 
 
-            System.Diagnostics.Debug.WriteLine(receitas);
 
             foreach (Receita r in receitas)
             {
