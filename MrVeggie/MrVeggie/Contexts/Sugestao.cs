@@ -113,5 +113,19 @@ namespace MrVeggie.Contexts {
             
             throw new NotImplementedException();
         }
+
+
+        public List<Receita> getHistorico(string email) {
+            int id_utilizador = _context_u.Utilizador.Where(u => u.email == email).First().id_utilizador;
+            List<Receita> receitas = new List<Receita>();
+
+            List<HistoricoUtilizador> historico_ids = _context_u.HistoricoUtilizador.Where(hu => hu.utilizador_id == id_utilizador).ToList();
+
+            foreach (HistoricoUtilizador hu in historico_ids) {
+                receitas.Add(_context_r.Receita.Find(hu.receita_id));
+            }
+
+            return receitas;
+        }
     }
 }

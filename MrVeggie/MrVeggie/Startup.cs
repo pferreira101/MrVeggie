@@ -28,6 +28,7 @@ namespace MrVeggie {
             services.AddDbContext<UnidadeContext>(options => options.UseSqlServer(connection));
             services.AddDbContext<UtensilioContext>(options => options.UseSqlServer(connection));
             services.AddDbContext<UtensiliosReceitaContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<HistoricoUtilizadorContext>(options => options.UseSqlServer(connection)); 
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                     .AddCookie(options =>
