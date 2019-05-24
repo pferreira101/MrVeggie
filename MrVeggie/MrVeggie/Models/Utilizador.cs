@@ -72,6 +72,9 @@ namespace MrVeggie.Models {
 
 
 
+        [ForeignKey("utilizador_id")]
+        public List<Agenda> agenda { get; set; }
+
 
 
         public void print() {

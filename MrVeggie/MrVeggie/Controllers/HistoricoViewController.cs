@@ -14,7 +14,7 @@ namespace MrVeggie.Controllers {
         private Sugestao sugestao;
 
         public HistoricoViewController(ReceitaContext context_r, UtilizadorContext context_u) {
-            sugestao = new Sugestao(context_r, context_u);
+            sugestao = new Sugestao(context_r, context_u, null);
         }
 
         [HttpGet]

@@ -78,6 +78,11 @@ namespace MrVeggie.Models {
         [ForeignKey("receita_id")]
         public List<HistoricoUtilizador> historico { get; set; }
 
+
+
+        [ForeignKey("receita_id")]
+        public List<Agenda> agenda { get; set; }
+
     }
 
     public class ReceitaContext : DbContext {

@@ -14,8 +14,7 @@ namespace MrVeggie.Contexts {
         private readonly IngredientesPassoContext _context_ip;
 
 
-        public Sugestao(ReceitaContext context_r, UtilizadorContext context_u, IngredientesPassoContext context_ip)
-        {
+        public Sugestao(ReceitaContext context_r, UtilizadorContext context_u, IngredientesPassoContext context_ip) {
             _context_r = context_r;
             _context_u = context_u;
             _context_ip = context_ip;

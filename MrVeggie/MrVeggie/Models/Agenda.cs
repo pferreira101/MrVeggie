@@ -32,7 +32,31 @@ namespace MrVeggie.Models {
 
     public class AgendaContext : DbContext {
 
+        public AgendaContext(DbContextOptions<AgendaContext> options) : base(options) {
 
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
+
+            modelBuilder.Entity<Agenda>().HasKey(hu => new { hu.dia, hu.refeicao, hu.utilizador_id });
+
+            modelBuilder.Entity<Agenda>()
+                        .HasOne<Utilizador>(hu => hu.utilizador)
+                        .WithMany(u => u.agenda)
+                        .HasForeignKey(hu => hu.utilizador_id)
+                        .HasConstraintName("FKAgenda98980");
+
+            modelBuilder.Entity<Agenda>()
+                        .HasOne<Receita>(hu => hu.receita)
+                        .WithMany(u => u.agenda)
+                        .HasForeignKey(hu => hu.receita_id)
+                        .HasConstraintName("FKAgenda50798");
+
+        }
+
+        public DbSet<Receita> Receita { get; set; }
+        public DbSet<Utilizador> Utilizador { get; set; }
+        public DbSet<Agenda> Agenda { get; set; }
 
     }
 }
