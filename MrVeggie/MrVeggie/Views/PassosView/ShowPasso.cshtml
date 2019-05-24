@@ -27,7 +27,8 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var ing in Model.ingredientes) {
+                @foreach (var ing in Model.ingredientes)
+                {
                     <tr>
                         <td>@ing.Key.nome</td>
                         <td>@ing.Value.quantidade @ing.Value.unidade</td>
@@ -64,15 +65,22 @@
 <p></p>
 
 <div>
-    @if (Model.ultimo == true) {
+    @if (Model.ultimo == true)
+    {
         <a class="btn btn-success" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id_receita="@Model.receita_id" asp-route-nr_passo="@anterior">Anterior</a>
         <a style="float:right" class="btn btn-success" asp-controller="AvaliacaoView" asp-action="AvaliarReceita" asp-route-id_receita="@Model.receita_id">Finalizar</a>
     }
-    else {
-        @if (Model.nr > 1) {
+    else
+    {
+        @if (Model.nr > 1)
+        {
             <a class="btn btn-success" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id_receita="@Model.receita_id" asp-route-nr_passo="@anterior">Anterior</a>
         }
         <a style="float:right" class="btn btn-success" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id_receita="@Model.receita_id" asp-route-nr_passo="@proximo">Próximo</a>
     }
 </div>
+
+@{
+    Model.readStep();
+}
 

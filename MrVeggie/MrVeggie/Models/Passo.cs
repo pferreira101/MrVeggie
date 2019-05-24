@@ -5,16 +5,20 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.CognitiveServices.Speech;
+
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MrVeggie.Models{
+namespace MrVeggie.Models
+{
 
-    public class Passo {
+    public class Passo
+    {
 
 
         [Key]
-        public int id_passo{ set; get; }
+        public int id_passo { set; get; }
 
         [Required]
         [Display(Name = "Número")]
@@ -65,29 +69,65 @@ namespace MrVeggie.Models{
         [NotMapped]
         public Dictionary<Ingrediente, Quantidade> ingredientes { get; set; }
 
-        
-        
-    }
-    
-    public class PassoContext : DbContext {
 
-        public PassoContext(DbContextOptions<PassoContext> options) : base(options) {
 
+        // VOICE
+
+        public void readStep()
+        {
+            var config = SpeechConfig.FromSubscription("652842a020de4fc9990d5cfc8f82fb98", "westeurope");
+            config.SetProperty("SpeechSynthesisLanguage", "pt-PT");
+            config.SetProperty("SpeechSynthesisVoiceName", "pt-PT-HeliaRUS");
+            var synthesizer = new SpeechSynthesizer(config);
+
+            // reforcar a ideia a ver se cola xD
+            synthesizer.Properties.SetProperty("SpeechSynthesisLanguage", "pt-PT");
+            synthesizer.Properties.SetProperty("SpeechSynthesisVoiceName", "pt-PT-HeliaRUS");
+
+            string text = "";
+
+            // falta por as unidades
+            foreach (var ing in ingredientes)
+            {
+                    if (tempo == 0)
+                    {
+
+                        text = operacao.desc + " " + ing.Value.quantidade + " de " + ing.Key.nome;
+                    }
+                    else
+                    {
+                        text = operacao.desc + " " + ing.Value.quantidade + " de " + ing.Key.nome + " durante " + tempo + " minutos.";
+                    }
+
+                    var result = synthesizer.SpeakTextAsync(text);
+
+            }
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder) {
-
-            // configures one-to-many relationship
-            modelBuilder.Entity<Passo>()
-                        .HasOne<Operacao>(p => p.operacao)
-                        .WithMany(op => op.passos)
-                        .HasForeignKey(p => p.operacao_id)
-                        .HasConstraintName("FKPasso568056");
-        }
-
-        public DbSet<Passo> Passo { get; set; }
-        public DbSet<IngredientesPasso> IngredientesPassos { get; set; }
-        public DbSet<Operacao> Operacao { get; set; }
-
     }
+
+        public class PassoContext : DbContext
+        {
+
+            public PassoContext(DbContextOptions<PassoContext> options) : base(options)
+            {
+
+            }
+
+            protected override void OnModelCreating(ModelBuilder modelBuilder)
+            {
+
+                // configures one-to-many relationship
+                modelBuilder.Entity<Passo>()
+                            .HasOne<Operacao>(p => p.operacao)
+                            .WithMany(op => op.passos)
+                            .HasForeignKey(p => p.operacao_id)
+                            .HasConstraintName("FKPasso568056");
+            }
+
+            public DbSet<Passo> Passo { get; set; }
+            public DbSet<IngredientesPasso> IngredientesPassos { get; set; }
+            public DbSet<Operacao> Operacao { get; set; }
+
+        }
 }
