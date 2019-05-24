@@ -1,7 +1,108 @@
-﻿
+﻿@model IEnumerable<MrVeggie.Models.Agenda>
+
 @{
     ViewData["Title"] = "ShowAgenda";
+    
 }
 
-<h1>ShowAgenda</h1>
+<h1>Agenda</h1>
 
+<h3>@Model.Count()</h3>
+<!--Table-->
+<table id="tablePreview" class="table">
+    <!--Table head-->
+    <thead>
+        <tr>
+            <th>Refeição</th>
+            <th>Segunda</th>
+            <th>Terça</th>
+            <th>Quarta</th>
+            <th>Quinta</th>
+            <th>Sexta</th>
+            <th>Sábado</th>
+            <th>Domingo</th>
+        </tr>
+    </thead>
+    <!--Table head-->
+    <!--Table body-->
+    <tbody>
+        <tr>
+            <th scope="row">Almoço</th>
+            <td>
+                @if (Model.ElementAt(0).receita != null) {
+                    <h5>@Model.ElementAt(0).receita.nome;</h5>
+                }
+            </td>
+            <td>
+                @if (Model.ElementAt(2).receita_id != null) {
+                    <h5>@Model.ElementAt(2).receita.nome;</h5>
+                }
+            </td>
+            <td>
+                @if (Model.ElementAt(4).receita != null) {
+                    <h5>@Model.ElementAt(4).receita.nome;</h5>
+                }
+            </td>
+            <td>
+                @if (Model.ElementAt(6).receita != null) {
+                    <h5>@Model.ElementAt(6).receita.nome;</h5>
+                }
+            </td>
+            <td>
+                @if (Model.ElementAt(8).receita != null) {
+                    <h5>@Model.ElementAt(8).receita.nome;</h5>
+                }
+            </td>
+            <td>
+                @if (Model.ElementAt(10).receita != null) {
+
+                }
+            </td>
+            <td>
+                @if (Model.ElementAt(12).receita != null) {
+
+                }
+            </td>         
+        </tr>
+        <tr>
+            <th scope="row">Jantar</th>
+            <td>
+                @if (Model.ElementAt(1).receita != null) {
+
+                }
+            </td>
+            <td>
+                @if (Model.ElementAt(3).receita != null) {
+
+                }
+            </td>
+            <td>
+                @if (Model.ElementAt(5).receita != null) {
+
+                }
+            </td>
+            <td>
+                @if (Model.ElementAt(7).receita != null) {
+
+                }
+            </td>
+            <td>
+                @if (Model.ElementAt(9).receita != null) {
+
+                }
+            </td>
+            <td>
+                @if (Model.ElementAt(11).receita != null) {
+
+                }
+            </td>
+            <td>
+                @if (Model.ElementAt(13).receita != null) {
+
+                }
+            </td>
+        </tr>
+    </tbody>
+    <!--Table body-->
+</table>
+<!--Table-->

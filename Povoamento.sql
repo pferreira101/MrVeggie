@@ -74,8 +74,9 @@ INSERT INTO UtilizadorReceitasPref VALUES (2, 2);
 --INSERT INTO UtilizadorReceitasPref VALUES (3, 2);
 --INSERT INTO UtilizadorReceitasPref VALUES (5, 2);
 
-INSERT INTO HistoricoUtilizador VALUES (2, 2, '20120618 10:34:09', 4);
+--INSERT INTO HistoricoUtilizador VALUES (2, 2, '20120618 10:34:09', 4);
 
+--INSERT INTO Agenda VALUES(1, 'a', 2, 2);
 
 INSERT INTO Utensilio VALUES ('Colher', 'url');
 

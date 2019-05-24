@@ -12,13 +12,16 @@ namespace MrVeggie.Contexts {
         private readonly ReceitaContext _context_r;
         private readonly UtilizadorContext _context_u;
         private readonly IngredientesPassoContext _context_ip;
+        private readonly AgendaContext _context_a;
 
 
-        public Sugestao(ReceitaContext context_r, UtilizadorContext context_u, IngredientesPassoContext context_ip) {
+        public Sugestao(ReceitaContext context_r, UtilizadorContext context_u, IngredientesPassoContext context_ip, AgendaContext context_a) {
             _context_r = context_r;
             _context_u = context_u;
             _context_ip = context_ip;
+            _context_a = context_a;
         }
+
 
         public List<Receita> getSugestoes() {
             List<Receita> r = new List<Receita>();
@@ -33,8 +36,7 @@ namespace MrVeggie.Contexts {
             Utilizador utilizador = _context_u.Utilizador.Where(u => u.email == email).First();
             List<Receita> r = new List<Receita>(4);
 
-            if (utilizador != null)
-            {
+            if (utilizador != null) {
                 int id_utilizador = utilizador.id_utilizador;
                 //r.Add(getReceitaSugeridaPorHistorico(id_utilizador));
                 r.Add(getReceitaSugeridaPorReceitasFav(id_utilizador));
@@ -45,21 +47,20 @@ namespace MrVeggie.Contexts {
 
             return r;
         }
-        private Receita getReceitaSugeridaPorReceitasFav(int idUtilizador)
-        {
+
+
+        private Receita getReceitaSugeridaPorReceitasFav(int idUtilizador) {
             Receita x;
 
             List<int> rIds = _context_u.UtilizadorReceitasPref.Where(u => u.utilizador_id == idUtilizador).Select(u => u.receita_id).ToList();
 
-            if (rIds.Count() == 0)
-            {
+            if (rIds.Count() == 0) {
                 Random random = new Random();
                 int rInt = random.Next(1, _context_r.Receita.ToArray().Count());
 
                 x = _context_r.Receita.Where(r => r.id_receita == rInt).First();
             }
-            else
-            {
+            else {
                 List<Receita> receitas = _context_r.Receita.Where(r => rIds.Contains(r.id_receita)).ToList();
 
                 Random random = new Random();
@@ -73,8 +74,7 @@ namespace MrVeggie.Contexts {
             return x;
         }
 
-        private Receita getReceitaSugeridaPorIngredientesFav(int idUtilizador)
-        {
+        private Receita getReceitaSugeridaPorIngredientesFav(int idUtilizador) {
             List<int> ingFav =  _context_u.UtilizadorIngredientesPref
                                                             .Where(uip => uip.utilizador_id == idUtilizador)
                                                             .Select(uip => uip.ingrediente_id).ToList()
@@ -84,17 +84,13 @@ namespace MrVeggie.Contexts {
             List<(int, Receita)> sugestoes = new List<(int, Receita)>();
 
 
-            foreach (Receita r in receitas)
-            {
-
+            foreach (Receita r in receitas) {
                 List<Passo> passos = _context_r.Passo.Where(p => p.receita_id == r.id_receita).ToList();
                 List<int> ings = new List<int>();
-                foreach (Passo p in passos)
-                {
+                foreach (Passo p in passos) {
                     ings.AddRange(_context_ip.IngredientesPasso.Where(ip => ip.passo_id == p.id_passo).Select(i => i.ingrediente_id).ToList());
                 }
                 sugestoes.Add((ings.Intersect(ingFav).Count(), r));
-
             }
 
             sugestoes.Sort((x1, x2) => x1.Item1.CompareTo(x2.Item1));
@@ -103,9 +99,6 @@ namespace MrVeggie.Contexts {
             int rInt = random.Next(1, Math.Min(4,sugestoes.Count()));
 
             return sugestoes.ElementAt(rInt).Item2;
-
-
-
         }
 
         private Receita getReceitaSugeridaPorHistorico(int id_utilizador) {
@@ -125,6 +118,31 @@ namespace MrVeggie.Contexts {
             }
 
             return receitas;
+        }
+
+
+
+        public List<Agenda> getAgenda(string email) {
+            int id_utilizador = _context_u.Utilizador.Where(u => u.email == email).First().id_utilizador;
+            
+            List<Agenda> agenda = _context_a.Agenda.Where(a => a.utilizador_id == id_utilizador).ToList();
+            List<Agenda> agenda_completa = new List<Agenda>();
+
+            for (int dia = 0; dia < 7; dia++) {
+                agenda_completa.Add(new Agenda(dia, 'a', -1, -1));
+                agenda_completa.Add(new Agenda(dia, 'j', -1, -1));
+            }
+
+            foreach (Agenda a in agenda) {
+                a.receita = _context_r.Receita.Find(a.receita_id);
+                int to_remove = a.dia * 2;
+                if (a.receita.Equals('j')) to_remove++;
+                agenda_completa.RemoveAt(to_remove);
+                agenda_completa.Insert(to_remove, a);
+            }
+
+
+            return agenda_completa;
         }
     }
 }

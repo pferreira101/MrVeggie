@@ -32,9 +32,8 @@ namespace MrVeggie.Controllers {
         private Sugestao sugestao;
 
 
-        public HomeController(ReceitaContext context_r, UtilizadorContext context_u, IngredientesPassoContext context_ip)
-        {
-            sugestao = new Sugestao(context_r, context_u, context_ip);
+        public HomeController(ReceitaContext context_r, UtilizadorContext context_u, IngredientesPassoContext context_ip) {
+            sugestao = new Sugestao(context_r, context_u, context_ip, null);
         }
 
         public IActionResult Index() {

@@ -122,7 +122,7 @@ ALTER TABLE IngredientesPasso ADD CONSTRAINT FKIngredient52444 FOREIGN KEY (ingr
 ALTER TABLE Passo ADD CONSTRAINT FKPasso568056 FOREIGN KEY (operacao) REFERENCES Operacao (id_op);
 ALTER TABLE Passo ADD CONSTRAINT FKPasso74792 FOREIGN KEY (sub_receita) REFERENCES Receita (id_receita);
 ALTER TABLE Agenda ADD CONSTRAINT FKAgenda98980 FOREIGN KEY (utilizador) REFERENCES Utilizador (id_utilizador);
-ALTER TABLE Agenda ADD CONSTRAINT FKAgenda98981 FOREIGN KEY (utilizador) REFERENCES Utilizador (id_utilizador);
+--ALTER TABLE Agenda ADD CONSTRAINT FKAgenda98981 FOREIGN KEY (utilizador) REFERENCES Utilizador (id_utilizador);
 ALTER TABLE Agenda ADD CONSTRAINT FKAgenda50798 FOREIGN KEY (receita) REFERENCES Receita (id_receita);
 ALTER TABLE UtensiliosReceita ADD CONSTRAINT FKUtensilios678874 FOREIGN KEY (utensilio) REFERENCES Utensilio (id_utensilio);
 ALTER TABLE IngredientesPasso ADD CONSTRAINT FKIngredient7679 FOREIGN KEY (unidade) REFERENCES Unidade (id_unidade);

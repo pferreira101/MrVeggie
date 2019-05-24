@@ -27,6 +27,14 @@ namespace MrVeggie.Models {
         public int receita_id { get; set; }
 
         public Receita receita { get; set; }
+
+
+        public Agenda(int dia, char refeicao, int utilizador_id, int receita_id) {
+            this.dia = dia;
+            this.refeicao = refeicao;
+            this.utilizador_id = utilizador_id;
+            this.receita_id = receita_id;
+        }
     }
 
 
