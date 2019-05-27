@@ -76,32 +76,49 @@ namespace MrVeggie.Models
         public void readStep()
         {
             var config = SpeechConfig.FromSubscription("652842a020de4fc9990d5cfc8f82fb98", "westeurope");
-            config.SetProperty("SpeechSynthesisLanguage", "pt-PT");
-            config.SetProperty("SpeechSynthesisVoiceName", "pt-PT-HeliaRUS");
-            var synthesizer = new SpeechSynthesizer(config);
 
-            // reforcar a ideia a ver se cola xD
-            synthesizer.Properties.SetProperty("SpeechSynthesisLanguage", "pt-PT");
-            synthesizer.Properties.SetProperty("SpeechSynthesisVoiceName", "pt-PT-HeliaRUS");
+            var language = "pt-PT";
+            config.SpeechSynthesisLanguage = language;
+            var voice = "Microsoft Server Speech Text to Speech Voice (pt-PT, HeliaRUS)";
+            config.SpeechSynthesisVoiceName = voice;
+
+
+            var synthesizer = new SpeechSynthesizer(config);
 
             string text = "";
 
-            // falta por as unidades
-            foreach (var ing in ingredientes)
+            if (ingredientes.Count == 0)
             {
+                if (tempo == 0)
+                {
+                    text = operacao.desc;
+                }
+                else
+                {
+                    text = operacao.desc + " durante " + tempo + " minutos.";
+                }
+
+                var result = synthesizer.SpeakTextAsync(text);
+            }
+            else
+            {
+                foreach (var ing in ingredientes)
+                {
                     if (tempo == 0)
                     {
 
-                        text = operacao.desc + " " + ing.Value.quantidade + " de " + ing.Key.nome;
+                        text = operacao.desc + " " + ing.Value.quantidade + " " + ing.Value.unidade + " de " + ing.Key.nome;
                     }
                     else
                     {
-                        text = operacao.desc + " " + ing.Value.quantidade + " de " + ing.Key.nome + " durante " + tempo + " minutos.";
+                        text = operacao.desc + " " + ing.Value.quantidade + " " + ing.Value.unidade + " de " + ing.Key.nome + " durante " + tempo + " minutos.";
                     }
 
                     var result = synthesizer.SpeakTextAsync(text);
 
+                }
             }
+                    
         }
 
     }
