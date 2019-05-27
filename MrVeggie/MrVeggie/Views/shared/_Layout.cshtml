@@ -4,16 +4,22 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
+
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" asp-append-version="true" />
     <link href="~/css/site.css" rel="stylesheet" asp-append-version="true" />
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
 </head>
+
 <body>
     <header>
         <div class="container" align="center" style="padding-top:5px;padding-bottom:5px;height: 110px;">
             <img id="no_border_img" src="~/images/Logo.png" height=100 />
         </div>
-       
+        
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3" style="padding-left:60px">
             <div class="container" align="left">
                 <ul class="navbar-nav">
@@ -38,8 +44,7 @@
                             <input class="form-control mr-sm-2" type="search" placeholder="Procurar" aria-label="Procurar">
                         </form>
                     </li>
-                    @if (User.Identity.IsAuthenticated)
-                    {
+                    @if (User.Identity.IsAuthenticated) {
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Olá @User.Identity.Name
@@ -55,8 +60,7 @@
                             </div>
                         </li>
                     }
-                    else
-                    {
+                    else {
                         <li class="nav-item">
                             <a class="nav-link mr-sm-2" asp-controller="UserView" asp-action="RegistaUtilizador">Registar</a>
                         </li>
@@ -78,7 +82,7 @@
     </div>
 
 
-    <footer class="border-top footer text-muted" style="background:lightgrey;" >
+    <footer class="border-top footer text-muted" style="background:lightgrey;">
 
         <div class="container">
             &copy; 2019 - MrVeggie
@@ -88,11 +92,14 @@
 
     </footer>
 
-
+   
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <!--
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>-->
 
     <script src="~/js/site.js" asp-append-version="true"></script>
 

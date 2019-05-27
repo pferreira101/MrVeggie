@@ -53,6 +53,18 @@ namespace MrVeggie.Controllers {
             Console.WriteLine("modelo invalido");
             return View(new ReceitaAndIngredienteViewModel { Ingredientes = selecao.getIngredientes(), receitas = selecao.getReceitas() });
         }
+
+
+
+
+
+        public ActionResult AddToFavorite() {
+            Console.WriteLine("\n\n\n\n\n ADICIONA AQUI \n\n\n\n\n");
+
+            // EM QUE CONTEXTO ADICIONAR AOS FAVORITOS? 
+
+            return new EmptyResult();
+        }
     }
 }
 
