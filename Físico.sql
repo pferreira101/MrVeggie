@@ -41,7 +41,7 @@ CREATE TABLE Utilizador (
   email           varchar(50) NOT NULL, 
   password        varchar(50) NOT NULL, 
   idade           int NOT NULL, 
-  sexo            char(1) NOT NULL, 
+  sexo            varchar(50) NOT NULL, 
   admin           bit DEFAULT '0' NOT NULL, 
   config_inicial  bit DEFAULT '0' NOT NULL, 
   PRIMARY KEY (id_utilizador));

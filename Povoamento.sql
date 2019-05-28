@@ -1,7 +1,7 @@
 USE MrVeggie;
 
 
-INSERT INTO Utilizador VALUES ('Pedro', 'pedro@gmail.com', '123', 20, 'M', 0, 0);
+INSERT INTO Utilizador VALUES ('Pedro', 'pedro@gmail.com', '123', 20, 'Masculino', 0, 0);
 
 INSERT INTO Ingrediente VALUES ('Alface', 'teste'), 
 								('Cogumelos', 'teste'), 

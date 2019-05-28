@@ -46,10 +46,10 @@ namespace MrVeggie.Controllers {
 
                 if (RegistrationStatus) {
                     ModelState.Clear();
-                    TempData["Success"] = "Registration Successful!";
+                    TempData["Success"] = "Registado Com Sucesso.";
                 }
                 else {
-                    TempData["Fail"] = "This User ID already exists. Registration Failed.";
+                    TempData["Fail"] = "Email já registado. Tentativa de registo falhada.";
                 }
             }
 

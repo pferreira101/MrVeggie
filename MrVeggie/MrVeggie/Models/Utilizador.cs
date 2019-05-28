@@ -15,35 +15,37 @@ namespace MrVeggie.Models {
         [Key]
         public int id_utilizador { set; get; }
 
-        [Required]
+        [Required(ErrorMessage = "Campo obrigatório")]
         [Display(Name = "Nome")]
         [StringLength(50)]
         public string nome { set; get; }
 
-        [Required]
+        [Required(ErrorMessage = "Campo obrigatório")]
         [Display(Name = "Email")]
         [DataType(DataType.EmailAddress)]
         public string email { set; get; }
 
-        [Required]
+        [Required(ErrorMessage = "Campo obrigatório")]
         [Display(Name = "Password")]
         [DataType(DataType.Password)]
         public string password { set; get; }
 
-        [Required]
+        [Required(ErrorMessage = "Campo obrigatório")]
         [Display(Name = "Idade")]
         public int idade { set; get; }
 
-        [Required]
+        [Required(ErrorMessage = "Campo obrigatório")]
         [Display(Name = "Sexo")]
-        public char sexo { get; set; }
+        public string sexo { get; set; }
+        public static string[] Generos = new[] { "Masculino", "Feminino", "Outro" };
+    
 
         [Required]
-        [Display(Name = "Sexo")]
+        [Display(Name = "Admin")]
         public bool admin { get; set; }
 
         [Required]
-        [Display(Name = "Sexo")]
+        [Display(Name = "Config")]
         public bool config_inicial { get; set; }
 
 
