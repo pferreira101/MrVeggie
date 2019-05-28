@@ -36,6 +36,7 @@ namespace MrVeggie.Controllers {
             sugestao = new Sugestao(context_r, context_u, context_ip, null);
         }
 
+
         public IActionResult Index() {
             List<Receita> sugestoes = new List<Receita>();
 
@@ -49,7 +50,6 @@ namespace MrVeggie.Controllers {
         }
          
 
-        [HttpGet]
         public IActionResult AboutUs() {
 
             return View();
