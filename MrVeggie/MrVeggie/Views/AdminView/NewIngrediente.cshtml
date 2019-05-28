@@ -1,0 +1,26 @@
+﻿@model MrVeggie.Models.Ingrediente
+
+@{
+    ViewData["Title"] = "NewIngrediente";
+}
+
+<h1>NewIngrediente</h1>
+
+
+<form asp-action="registaIngrediente">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="nome" class="control-label"></label>
+        <input asp-for="nome" class="form-control" />
+        <span asp-validation-for="nome" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="url_imagem" class="control-label"></label>
+        <input asp-for="url_imagem" class="form-control" />
+        <span asp-validation-for="url_imagem" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Registar" class="btn btn-default btn-success" />
+    </div>
+</form>
+
