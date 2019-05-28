@@ -46,7 +46,8 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var ing in Model.ingredientes) {
+                @foreach (var ing in Model.ingredientes)
+                {
                     <tr>
                         <td>@ing.Key.nome</td>
                         <td>@ing.Value.quantidade @ing.Value.unidade</td>
@@ -64,7 +65,8 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var utensilio in Model.utensilios) {
+                @foreach (var utensilio in Model.utensilios)
+                {
                     <tr>
                         <td>@utensilio.nome</td>
                     </tr>
@@ -78,10 +80,12 @@
 
 
 <div style="padding-bottom:50px;">
-    @if (User.Identity.IsAuthenticated) {
+    @if (User.Identity.IsAuthenticated)
+    {
         <a style="float:right" class="btn btn-success" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id="@Model.id_receita-1">Começar</a>
     }
-    else {
+    else
+    {
         <a style="float:right" class="btn btn-success" asp-controller="UserView" asp-action="LoginUtilizador" asp-route-id="@Model.id_receita">Começar</a>
     }
 </div>

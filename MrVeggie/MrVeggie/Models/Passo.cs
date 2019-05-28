@@ -7,8 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.CognitiveServices.Speech;
 
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace MrVeggie.Models
 {
@@ -60,66 +59,12 @@ namespace MrVeggie.Models
 
         public bool ultimo { get; set; }
 
-
-
-
         public ICollection<IngredientesPasso> ingredientes_passo { get; set; }
 
 
         [NotMapped]
         public Dictionary<Ingrediente, Quantidade> ingredientes { get; set; }
 
-
-
-        // VOICE
-
-        public void readStep()
-        {
-            var config = SpeechConfig.FromSubscription("652842a020de4fc9990d5cfc8f82fb98", "westeurope");
-
-            var language = "pt-PT";
-            config.SpeechSynthesisLanguage = language;
-            var voice = "Microsoft Server Speech Text to Speech Voice (pt-PT, HeliaRUS)";
-            config.SpeechSynthesisVoiceName = voice;
-
-
-            var synthesizer = new SpeechSynthesizer(config);
-
-            string text = "";
-
-            if (ingredientes.Count == 0)
-            {
-                if (tempo == 0)
-                {
-                    text = operacao.desc;
-                }
-                else
-                {
-                    text = operacao.desc + " durante " + tempo + " minutos.";
-                }
-
-                var result = synthesizer.SpeakTextAsync(text);
-            }
-            else
-            {
-                foreach (var ing in ingredientes)
-                {
-                    if (tempo == 0)
-                    {
-
-                        text = operacao.desc + " " + ing.Value.quantidade + " " + ing.Value.unidade + " de " + ing.Key.nome;
-                    }
-                    else
-                    {
-                        text = operacao.desc + " " + ing.Value.quantidade + " " + ing.Value.unidade + " de " + ing.Key.nome + " durante " + tempo + " minutos.";
-                    }
-
-                    var result = synthesizer.SpeakTextAsync(text);
-
-                }
-            }
-                    
-        }
 
     }
 
