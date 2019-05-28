@@ -1,9 +1,15 @@
-﻿@model MrVeggie.Models.Passo
+﻿@using MrVeggie.Models.Auxiliary;
+
+@model MrVeggie.Models.Passo
+
 
 @{ ViewData["Title"] = "ShowPasso";
 
     int proximo = Model.nr + 1;
     int anterior = Model.nr - 1;
+
+    TextToSpeech tts = new TextToSpeech(Model);
+    tts.readStep();
 
 }
 
@@ -72,6 +78,7 @@
 
 <p></p>
 
+
 <div>
     @if (Model.ultimo == true)
     {
@@ -87,8 +94,4 @@
         <a style="float:right" class="btn btn-success" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id_receita="@Model.receita_id" asp-route-nr_passo="@proximo">Próximo</a>
     }
 </div>
-
-@{
-    Model.readStep();
-}
 
