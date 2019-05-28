@@ -83,11 +83,6 @@ INSERT INTO Utensilio VALUES ('Colher', 'url');
 INSERT INTO UtensiliosReceita VALUES (1, 1);
 
 SELECT * FROM Utilizador;
-
---UPDATE Utilizador
---SET admin = 1
---WHERE email = 'admin@admin.com';
-
 SELECT * FROM Ingrediente;
 SELECT * FROM Receita;
 SELECT * FROM Operacao;
