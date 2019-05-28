@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "showReceita";
+
 }
 
 <p></p>
@@ -15,8 +16,13 @@
         <h1>@Model.nome</h1>
         <p>@Model.desc</p>
     </div>
-
+    <div style="text-align:right">
+        <wrapper style="float:right">
+            @Html.ActionLink("Favorito", "AddToFavorites", "ReceitaView");
+        </wrapper>
+    </div>
 </div>
+
 <p></p>
 <p></p>
 <p></p>
