@@ -88,7 +88,7 @@ namespace MrVeggie.Controllers {
 
                     
 
-                    if (u.admin) return RedirectToAction("Index", "Home");
+                    if (u.admin) return RedirectToAction("Index", "Admin");
                     else if(!u.config_inicial) return RedirectToAction("ConfigInicial", "IngredienteView");
                     else return RedirectToAction("Index", "Home");
 

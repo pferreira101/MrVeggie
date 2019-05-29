@@ -35,7 +35,6 @@ namespace MrVeggie.Models.Auxiliary
                     recognizer.StopContinuousRecognitionAsync().ConfigureAwait(false);
                 }
 
-                Console.WriteLine(e.Result.)
 
             };
 
