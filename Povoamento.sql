@@ -1,7 +1,7 @@
 USE MrVeggie;
 
 
-INSERT INTO Utilizador VALUES ('Pedro', 'pedro@gmail.com', '123', 20, 'M', 0, 0);
+INSERT INTO Utilizador VALUES ('Pedro', 'pedro@gmail.com', '123', 20, 'Masculino', 0, 0);
 
 INSERT INTO Ingrediente VALUES ('Alface', 'teste'), 
 								('Cogumelos', 'teste'), 
@@ -83,11 +83,6 @@ INSERT INTO Utensilio VALUES ('Colher', 'url');
 INSERT INTO UtensiliosReceita VALUES (1, 1);
 
 SELECT * FROM Utilizador;
-
---UPDATE Utilizador
---SET admin = 1
---WHERE email = 'admin@admin.com';
-
 SELECT * FROM Ingrediente;
 SELECT * FROM Receita;
 SELECT * FROM Operacao;

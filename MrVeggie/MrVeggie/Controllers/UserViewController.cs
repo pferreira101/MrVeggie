@@ -46,10 +46,10 @@ namespace MrVeggie.Controllers {
 
                 if (RegistrationStatus) {
                     ModelState.Clear();
-                    TempData["Success"] = "Registration Successful!";
+                    TempData["Success"] = "Registado Com Sucesso.";
                 }
                 else {
-                    TempData["Fail"] = "This User ID already exists. Registration Failed.";
+                    TempData["Fail"] = "Email já registado. Tentativa de registo falhada.";
                 }
             }
 
@@ -89,7 +89,7 @@ namespace MrVeggie.Controllers {
 
                     
 
-                    if (u.admin) return RedirectToAction("Index", "AdminView");
+                    if (u.admin) return RedirectToAction("Index", "Home");
                     else if(!u.config_inicial) return RedirectToAction("ConfigInicial", "IngredienteView");
                     else return RedirectToAction("Index", "Home");
 

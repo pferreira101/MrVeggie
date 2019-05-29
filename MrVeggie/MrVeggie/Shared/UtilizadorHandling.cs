@@ -3,6 +3,7 @@ using MrVeggie.Models;
 using MrVeggie.Models.Auxiliary;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -27,6 +28,12 @@ namespace MrVeggie.Shared {
 
 
         public bool RegistaUtilizador(Utilizador u) {
+            var userList = _context.Utilizador
+                           .Where(s => s.email == u.email)
+                           .ToList();
+
+            if (((List<Utilizador>)userList).Count != 0) return false;
+
             u.password = MyHelpers.HashPassword(u.password);
             _context.Utilizador.Add(u);
             _context.SaveChanges();

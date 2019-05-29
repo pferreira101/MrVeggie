@@ -12,7 +12,7 @@
         <p></p>
 
         @if (TempData["Success"] != null) {
-            <p class="alert alert-success">@TempData["Success"]  <a asp-action="LoginUtilizador">Click here to login</a></p>
+            <p class="alert alert-success">@TempData["Success"]  <a asp-action="LoginUtilizador">Clique aqui para fazer o Log In.</a></p>
         }
 
         @if (TempData["Fail"] != null) {
@@ -43,8 +43,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="sexo" class="control-label"></label>
-                <input asp-for="sexo" type="radio" name="Masculino" value='M' checked />
-                <input asp-for="sexo" type="radio" name="Feminino" value='F' />
+                        @foreach (var genero in MrVeggie.Models.Utilizador.Generos)
+                        {
+                            <input type="radio" asp-for="sexo" value="@genero" /> @genero
+                        }
+                        </br>
                 <span asp-validation-for="sexo" class="text-danger"></span>
             </div>
             <div class="form-group">
