@@ -18,6 +18,11 @@
         TextToSpeech tts = new TextToSpeech(Model);
         tts.readStep();
     }
+
+    string voice = ""; 
+
+    SpeechToText stt = new SpeechToText();
+    voice = stt.listen();
 }
 
 <div class="onoffswitch" style="float:right">
@@ -91,7 +96,6 @@
 
 <p></p>
 
-
 <div>
     @if (Model.ultimo == true)
     {
@@ -108,3 +112,19 @@
     }
 </div>
 
+@{   
+        Console.WriteLine("!!!!!!!!!!!!!!!!!!! VI O VALOR DE 'voice' " + voice);
+
+        if (voice.Equals("próximo") && !Model.ultimo)
+        {
+            < a asp - controller = "PassosView" asp - action = "ShowPasso" asp - route - id_receita = "@Model.receita_id" asp - route - nr_passo = "@proximo" />
+        }
+        else if (voice.Equals("anterior") && Model.nr > 1)
+        {
+            < a asp - controller = "PassosView" asp - action = "ShowPasso" asp - route - id_receita = "@Model.receita_id" asp - route - nr_passo = "@anterior" />
+        }
+        else if (voice.Equals("finalizar") && Model.ultimo)
+        {
+            < a asp - controller = "AvaliacaoView" asp - action = "AvaliarReceita" asp - route - id_receita = "@Model.receita_id" />
+            }
+    }
