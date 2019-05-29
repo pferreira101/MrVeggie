@@ -35,10 +35,17 @@ namespace MrVeggie.Models.Auxiliary
                     recognizer.StopContinuousRecognitionAsync().ConfigureAwait(false);
                 }
 
-                Console.WriteLine(e.Result.)
+                if (e.Result.Text.Contains("finalizar"))
+                {
+                    result = "finalizar";
+                    recognizer.StopContinuousRecognitionAsync().ConfigureAwait(false);
+                }
+
+                Console.WriteLine("*************** OUVI: " + e.Result.Text);
 
             };
 
+            Console.WriteLine("*************** MANDEI: " + result);
             return result;
         }
     }
