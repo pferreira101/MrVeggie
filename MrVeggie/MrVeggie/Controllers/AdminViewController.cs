@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MrVeggie.Contexts;
 using MrVeggie.Models;
-using MrVeggie.Models.Auxiliary;
 
 namespace MrVeggie.Controllers {
 
@@ -14,8 +13,8 @@ namespace MrVeggie.Controllers {
 
         private Admin admin;
 
-        public AdminViewController(IngredienteContext context_i, UtilizadorContext context_u, ReceitaContext context_r) {
-            admin = new Admin(context_i, context_u, context_r);
+        public AdminViewController(IngredienteContext context_i) {
+            admin = new Admin(context_i);
         }
 
 
@@ -28,9 +27,7 @@ namespace MrVeggie.Controllers {
         }
 
         public IActionResult Estatisticas() {
-            Estatistica est = admin.getEstatistica();
-
-            return View(est);
+            return View();
         }
 
         public IActionResult NewReceita() {

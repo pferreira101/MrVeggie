@@ -8,21 +8,10 @@
 
 <h3>Por favor, escolha 3 ingredientes.</h3>
 
-<script>
-    let ids = [];
-    $("div").on("click", function () {
-        // If the id is not already in the array, add it. If it is, remove it
-        ids.indexOf(this.id) === -1 ? ids.push(this.id) : ids.splice(ids.indexOf(this.id), 1);
-        $('input').val(ids.join(", ")); // populate the input with the array items separated with a comma
-        document.write("OLA");
-    });
-</script>
-
 <div class="container-fluid">
     <div class="row">
-
         @foreach (var ingrediente in Model) {
-            <div id="@ingrediente.id_ingrediente" class="col-md-3 shadow p-3 mb-5 bg-white rounded" style="margin: 3px">
+            <div class="col-md-3 shadow p-3 mb-5 bg-white rounded" style="margin: 3px">
 
                 <div class="row">
                     <div class="col-md-2">
@@ -40,6 +29,7 @@
                 </div>
             </div>
         }
+
     </div>
 </div>
 
