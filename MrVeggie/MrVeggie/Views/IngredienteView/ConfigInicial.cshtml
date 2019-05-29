@@ -2,10 +2,9 @@
 
 @{
     ViewData["Title"] = "Configuração Inicial";
+    List<string> ids = new List<string>();
 }
 
-<link rel="stylesheet" href="selectr.min.css">
-<script src="selectr.min.js"></script>
 
 
 <h1>Configuração Inicial</h1>
@@ -13,16 +12,56 @@
 <h3>Por favor, escolha 3 ingredientes.</h3>
 
 <script>
-    let ids = [];
-    $("div").on("click", function () {
-        // If the id is not already in the array, add it. If it is, remove it
-        ids.indexOf(this.id) === -1 ? ids.push(this.id) : ids.splice(ids.indexOf(this.id), 1);
-        $('input').val(ids.join(", ")); // populate the input with the array items separated with a comma
-    });
+    var ids = [];
+
+
+    function addToPref(id) {
+        if (ids.indexOf(id) == -1) {
+            ids.push(id);
+            //setSelected(id);
+        }
+        else {
+            ids.splice(ids.indexOf(id), 1);
+            //removeSelected(id);
+        }
+        $('input').val(ids.join(", ")); // Debug
+
+    }
+
+    function setSelected(id) {
+        var element = document.getElementById(id);
+        element.body.style.backgroundColor = green;
+    }
+
+    function removeSelected(id) {
+        var element = document.getElementById(id);
+        element.body.style.backgroundColor = white;
+    }
 
     function getIDsSelected() {
-        
+        $.ajax({
+            type: "POST",
+            url: "/IngredienteView/ConfigInicial",
+            data: JSON.stringify(ids),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                if (response != null) {
+                    alert(response);
+                } else {
+                    alert("Something went wrong");
+                }
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+
     }
+    
 
 </script>
 
@@ -32,7 +71,7 @@
 
             @foreach (var ingrediente in Model) {
 
-                <div id="@ingrediente.id_ingrediente" class="col-md-3 shadow p-3 mb-5 bg-white rounded" style="margin: 3px">
+                <div id="@ingrediente.id_ingrediente" onclick="addToPref(@ingrediente.id_ingrediente)" class="col-md-3 shadow p-3 mb-5 bg-white rounded" style="margin: 3px">
 
                     <div class="row">
                         <div class="col-md-2">
@@ -53,7 +92,7 @@
     </div>
 </div>
 
-<a class="btn btn-success" onclick="getIDsSelected">TESTE</a>
+<a class="btn btn-success" onclick="getIDsSelected()">TESTE</a>
 <a style="float:right" class="btn btn-success" asp-controller="UserView" asp-action="registaConfigInicial">Confirmar</a>
 
 

@@ -32,5 +32,11 @@ namespace MrVeggie.Controllers {
 
             return View(ingredientes);
         }
+
+
+        [HttpPost]
+        public void ConfigInicial(string ids) {
+            int id = 1;
+        }
     }
 }
