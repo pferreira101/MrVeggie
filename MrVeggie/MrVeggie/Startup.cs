@@ -46,7 +46,7 @@ namespace MrVeggie {
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseMvc();
+            
             app.UseAuthentication();
             app.UseMvcWithDefaultRoute();
             app.UseStaticFiles();

@@ -4,35 +4,56 @@
     ViewData["Title"] = "Configuração Inicial";
 }
 
+<link rel="stylesheet" href="selectr.min.css">
+<script src="selectr.min.js"></script>
+
+
 <h1>Configuração Inicial</h1>
 
 <h3>Por favor, escolha 3 ingredientes.</h3>
 
+<script>
+    let ids = [];
+    $("div").on("click", function () {
+        // If the id is not already in the array, add it. If it is, remove it
+        ids.indexOf(this.id) === -1 ? ids.push(this.id) : ids.splice(ids.indexOf(this.id), 1);
+        $('input').val(ids.join(", ")); // populate the input with the array items separated with a comma
+    });
+
+    function getIDsSelected() {
+        
+    }
+
+</script>
+
+
 <div class="container-fluid">
     <div class="row">
-        @foreach (var ingrediente in Model) {
-            <div class="col-md-3 shadow p-3 mb-5 bg-white rounded" style="margin: 3px">
 
-                <div class="row">
-                    <div class="col-md-2">
-                        <h2>
-                            @ingrediente.nome
-                        </h2>
-                    </div>
+            @foreach (var ingrediente in Model) {
 
-                </div>
-                <div class="row">
-                    <div class="container">
-                        <img class="d-block w-100" src="@ingrediente.url_imagem">
+                <div id="@ingrediente.id_ingrediente" class="col-md-3 shadow p-3 mb-5 bg-white rounded" style="margin: 3px">
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <h2>
+                                @ingrediente.nome
+                            </h2>
+                        </div>
 
                     </div>
-                </div>
-            </div>
-        }
+                    <div class="row">
+                        <div class="container">
+                            <img class="d-block w-100" src="@ingrediente.url_imagem">
 
+                        </div>
+                    </div>
+                </div>
+            }
     </div>
 </div>
 
+<a class="btn btn-success" onclick="getIDsSelected">TESTE</a>
 <a style="float:right" class="btn btn-success" asp-controller="UserView" asp-action="registaConfigInicial">Confirmar</a>
 
 

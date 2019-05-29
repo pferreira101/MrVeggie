@@ -36,15 +36,14 @@ namespace MrVeggie.Models {
 
         [Required(ErrorMessage = "Campo obrigatório")]
         [Display(Name = "Sexo")]
+        [StringLength(50)]
         public string sexo { get; set; }
         public static string[] Generos = new[] { "Masculino", "Feminino", "Outro" };
     
 
-        [Required]
         [Display(Name = "Admin")]
         public bool admin { get; set; }
 
-        [Required]
         [Display(Name = "Config")]
         public bool config_inicial { get; set; }
 

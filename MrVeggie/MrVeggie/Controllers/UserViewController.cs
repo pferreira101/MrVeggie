@@ -46,7 +46,7 @@ namespace MrVeggie.Controllers {
 
                 if (RegistrationStatus) {
                     ModelState.Clear();
-                    TempData["Success"] = "Registado Com Sucesso.";
+                    TempData["Success"] = "Registado com sucesso.";
                 }
                 else {
                     TempData["Fail"] = "Email já registado. Tentativa de registo falhada.";
@@ -67,8 +67,7 @@ namespace MrVeggie.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> LoginUtilizador([Bind] Utilizador u) {
-            ModelState.Remove("nome");
-            ModelState.Remove("email");
+            ModelState.Clear();
 
             if (ModelState.IsValid) {
                 var LoginStatus = this.utilizador_handling.validaUtilizador(u);
@@ -89,13 +88,13 @@ namespace MrVeggie.Controllers {
 
                     
 
-                    if (u.admin) return RedirectToAction("Index", "Home");
+                    if (u.admin) return RedirectToAction("Index", "Admin");
                     else if(!u.config_inicial) return RedirectToAction("ConfigInicial", "IngredienteView");
                     else return RedirectToAction("Index", "Home");
 
                 }
                 else {
-                    TempData["UserLoginFailed"] = "Login Failed. Please enter correct credentials";
+                    TempData["UserLoginFailed"] = "Por favor, insira as credenciais corretas.";
                 }
             }
 

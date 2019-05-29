@@ -1,4 +1,5 @@
 ﻿using MrVeggie.Models;
+using MrVeggie.Models.Auxiliary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,15 @@ namespace MrVeggie.Contexts {
     public class Admin {
 
         private IngredienteContext _context_i;
+        private UtilizadorContext _context_u;
+        private ReceitaContext _context_r;
 
-        public Admin(IngredienteContext context_i) {
+        public Admin(IngredienteContext context_i, UtilizadorContext context_u, ReceitaContext context_r) {
             _context_i = context_i;
+            _context_u = context_u;
+            _context_r = context_r;
         }
+
 
         public void registaIngrediente(string nome, string url) {
             Ingrediente ing = new Ingrediente(); // passar logo no construtor ?
@@ -22,6 +28,19 @@ namespace MrVeggie.Contexts {
 
             _context_i.Ingrediente.Add(ing);
             _context_i.SaveChanges();
+        }
+
+        public Estatistica getEstatistica() {
+
+            int nr_utilizadores = _context_u.Utilizador.Count();
+            int nr_masculino = _context_u.Utilizador.Where(u => u.sexo.Equals('m')).Count();
+            int nr_feminino = nr_utilizadores - nr_masculino;
+            int nr_receitas = _context_r.Receita.Count();
+            int nr_ingredientes = _context_i.Ingrediente.Count();
+            int registos_ultimo_mes = 0;
+
+
+            return new Estatistica(nr_utilizadores, nr_masculino, nr_feminino, nr_receitas, nr_ingredientes, registos_ultimo_mes);
         }
     }
 }
