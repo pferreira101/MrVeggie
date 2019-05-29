@@ -1,7 +1,7 @@
 USE MrVeggie;
 
 
-INSERT INTO Utilizador VALUES ('Pedro', 'pedro@gmail.com', '123', 20, 'Masculino', 0, 0);
+--INSERT INTO Utilizador VALUES ('Pedro', 'pedro@gmail.com', '123', 20, 'Masculino', 0, 0);
 
 INSERT INTO Ingrediente VALUES ('Alface', 'teste'), 
 								('Cogumelos', 'teste'), 
@@ -69,7 +69,7 @@ INSERT INTO IngredientesPasso VALUES (1, 1, 10, 1),
 
 
 --INSERT INTO UtilizadorIngredientesPref VALUES (2, 1);
-INSERT INTO UtilizadorReceitasPref VALUES (2, 2);
+--INSERT INTO UtilizadorReceitasPref VALUES (2, 2);
 --INSERT INTO UtilizadorReceitasPref VALUES (3, 1);
 --INSERT INTO UtilizadorReceitasPref VALUES (3, 2);
 --INSERT INTO UtilizadorReceitasPref VALUES (5, 2);
@@ -87,3 +87,8 @@ SELECT * FROM Ingrediente;
 SELECT * FROM Receita;
 SELECT * FROM Operacao;
 SELECT * FROM Passo;
+SELECT * FROM HistoricoUtilizador;
+
+--ALTER TABLE Utilizador
+--ALTER COLUMN sexo char not null;
+
