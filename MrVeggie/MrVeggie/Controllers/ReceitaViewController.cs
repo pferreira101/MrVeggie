@@ -55,9 +55,6 @@ namespace MrVeggie.Controllers {
         }
 
 
-
-
-
         public ActionResult AddToFavorite() {
             Console.WriteLine("\n\n\n\n\n ADICIONA AQUI \n\n\n\n\n");
 

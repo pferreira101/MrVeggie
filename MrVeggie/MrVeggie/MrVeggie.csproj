@@ -27,10 +27,15 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\images\" />
+    <Folder Include="Views\SupermercadosView\" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="wwwroot\css\Style.css" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="EmptyCSharpFile.cs" />
+    <Compile Remove="Microsoft\Maps.cs" />
+  </ItemGroup>
 </Project>
