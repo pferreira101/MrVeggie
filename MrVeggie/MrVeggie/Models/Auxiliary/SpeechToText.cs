@@ -20,32 +20,33 @@ namespace MrVeggie.Models.Auxiliary
 
             string result = "";
 
-            recognizer.StartContinuousRecognitionAsync();
-
-            recognizer.Recognizing += (s, e) => {
+            recognizer.Recognized += (s, e) => {
                 if (e.Result.Text.Contains("próximo"))
                 {
                     result = "próximo";
-                    recognizer.StopContinuousRecognitionAsync().ConfigureAwait(false);
+                    recognizer.StopContinuousRecognitionAsync();
                 }
 
                 if (e.Result.Text.Contains("anterior"))
                 {
                     result = "anterior";
-                    recognizer.StopContinuousRecognitionAsync().ConfigureAwait(false);
+                    recognizer.StopContinuousRecognitionAsync();
                 }
 
                 if (e.Result.Text.Contains("finalizar"))
                 {
                     result = "finalizar";
-                    recognizer.StopContinuousRecognitionAsync().ConfigureAwait(false);
+                    recognizer.StopContinuousRecognitionAsync();
                 }
 
+                
                 Console.WriteLine("*************** OUVI: " + e.Result.Text);
 
             };
 
-            Console.WriteLine("*************** MANDEI: " + result);
+            recognizer.StartContinuousRecognitionAsync();
+
+            Console.WriteLine("*************** MANDEI: " + result);  // nao esta a mandar o resultado
             return result;
         }
     }
