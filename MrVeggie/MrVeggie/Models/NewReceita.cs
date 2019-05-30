@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 
 namespace MrVeggie.Models
 {
@@ -9,5 +11,6 @@ namespace MrVeggie.Models
     {
         public Receita receita { get; set; }
         public List<Utensilio> utensilios { get; set; }
+        
     }
 }

@@ -45,16 +45,15 @@
             <input asp-for="receita.url_imagem" class="form-control" />
             <span asp-validation-for="receita.url_imagem" class="text-danger"></span>
         </div>
-
-        <!--
-        <select class="mdb-select md-form" multiple>
-            <option value="" disabled selected>Escolha os utensílios</option>
-            @foreach (var utensilio in Model.utensilios) {
-                <option value="utensilio.id_utensilio" name="utensilios">@utensilio.nome</option>
-            } 
-        </select>-->
-
+        <div class="form-group" name ="utensilios">
+            <select id="uts" name="uts" class="mdb-select md-form" multiple>
+                @foreach (var utensilio in Model.utensilios)
+                {
+                    <option value="@utensilio.id_utensilio">@utensilio.nome</option>
+                }
+            </select>
+        </div>
         <div class="form-group">
             <input type="submit" value="Registar" class="btn btn-default btn-success" />
         </div>
-    </form>
+</form>

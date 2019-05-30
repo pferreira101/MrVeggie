@@ -35,8 +35,13 @@ namespace MrVeggie.Contexts {
             _context_i.SaveChanges();
         }
 
-        public List<Utensilio> getUtensilios() {
+        public List<Utensilio> getUtensilios()
+        {
             return _context_uten.Utensilio.ToList();
+        }
+
+        public List<Utensilio> getUtensilios(Microsoft.Extensions.Primitives.StringValues stringValues) {
+            return _context_uten.Utensilio.Where(u => stringValues.Contains(u.id_utensilio.ToString()) ).ToList();
         }
 
         public Estatistica getEstatistica() {
@@ -62,10 +67,8 @@ namespace MrVeggie.Contexts {
         }
 
         public void registaReceita(Receita r, List<Utensilio> utensilios) {
+
             
-
-            _context_r.Receita.Add(r);
-
             if (utensilios != null)
             {
                 foreach (Utensilio u in utensilios)

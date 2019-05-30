@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using MrVeggie.Contexts;
 using MrVeggie.Models;
 using MrVeggie.Models.Auxiliary;
@@ -10,7 +11,8 @@ using MrVeggie.Models.Auxiliary;
 namespace MrVeggie.Controllers {
 
 
-    public class AdminViewController : Controller {
+    public class AdminViewController : Microsoft.AspNetCore.Mvc.Controller
+    {
 
         private Admin admin;
 
@@ -36,8 +38,9 @@ namespace MrVeggie.Controllers {
 
         public IActionResult NewReceita() {
             List<Utensilio> utensilios = admin.getUtensilios();
+            
 
-            return View(new NewReceita { receita = new Receita(), utensilios = utensilios } );
+            return View(new NewReceita { receita = new Receita(), utensilios = utensilios} );
         }
 
 
@@ -49,11 +52,11 @@ namespace MrVeggie.Controllers {
         }
 
 
+      
 
-
-        [HttpPost]
+        [Microsoft.AspNetCore.Mvc.HttpPost]
         public IActionResult registaReceita(NewReceita n) {
-
+            n.utensilios = admin.getUtensilios(Request.Form["uts"]);
             admin.registaReceita(n.receita, n.utensilios);
 
             return View("NewPasso",new NewPasso
@@ -68,13 +71,15 @@ namespace MrVeggie.Controllers {
         }
 
 
-        [HttpPost]
-        public IActionResult registaPasso(Tuple<Passo, List<Operacao>, List<Receita>, int, int> t)
+        [Microsoft.AspNetCore.Mvc.HttpPost]
+        public IActionResult registaPasso(NewPasso model)
         {
 
-            //admin.registaPasso();
+            //admin.registaPasso(model);
 
-            return RedirectToAction("NewPasso", "AdminView", t );
+            model.nPasso++;
+
+            return View("NewPasso", model);
         }
 
         public IActionResult NewPasso(Tuple<Passo, List<Operacao>, List<Receita>, int, int> t){
