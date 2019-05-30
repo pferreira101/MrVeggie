@@ -13,11 +13,13 @@ namespace MrVeggie.Contexts {
         private IngredienteContext _context_i;
         private UtilizadorContext _context_u;
         private ReceitaContext _context_r;
+        private OperacaoContext _context_op;
 
-        public Admin(IngredienteContext context_i, UtilizadorContext context_u, ReceitaContext context_r) {
+        public Admin(IngredienteContext context_i, UtilizadorContext context_u, ReceitaContext context_r, OperacaoContext context_op) {
             _context_i = context_i;
             _context_u = context_u;
             _context_r = context_r;
+            _context_op = context_op;
         }
 
 
@@ -44,8 +46,16 @@ namespace MrVeggie.Contexts {
         }
 
 
-        public void registaReceita(string nome, string desc, int dificuldade, float tempo_conf, int calorias, int n_pessoas, string url) {
+        public void registaReceita(string nome, string desc, int dificuldade, float tempo_conf, int calorias, int n_pessoas, string url_imagem) {
             throw new NotImplementedException();
+        }
+
+        public List<Receita> getReceitas(){
+            return _context_r.Receita.ToList();
+        }
+
+        public List<Operacao> getOperacoes(){
+            return _context_op.Operacao.ToList();
         }
     }
 }
