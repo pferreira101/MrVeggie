@@ -26,6 +26,7 @@ namespace MrVeggie.Models {
         [Required]
         public DateTime data_conf { get; set; }
 
+
         public int avaliacao { get; set; }
     }
 
