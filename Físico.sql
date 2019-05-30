@@ -60,7 +60,7 @@ CREATE TABLE HistoricoUtilizador (
   utilizador int NOT NULL, 
   receita    int NOT NULL, 
   data_conf  datetime NOT NULL, 
-  avaliacao  int NULL, 
+  avaliacao  int NOT NULL, 
   PRIMARY KEY (utilizador, receita, data_conf));
 
 CREATE TABLE IngredientesPasso (

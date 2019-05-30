@@ -39,7 +39,6 @@ namespace MrVeggie.Models {
 
         public DbSet<Utensilio> Utensilio { get; set; }
 
-
     }
 
 }
