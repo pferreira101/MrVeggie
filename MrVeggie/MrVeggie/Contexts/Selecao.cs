@@ -76,22 +76,6 @@ namespace MrVeggie.Contexts {
             return receitas.ToArray();
         }
 
-        public Receita[] getSugestoes(string email) {
-            int id = _context_u.Utilizador.Where(u => u.email.Equals(email)).First().id_utilizador;
-
-            List<Receita> receitas_pref = getUtilizadorReceitasPref(id);
-            /*
-            List<Receita> receitas = new List<Receita>();
-
-            Random random = new Random();
-
-            for (int i = 0; i < 5; i++) {
-                receitas.Add(receitas_pref.ElementAtOrDefault(random.Next(receitas_pref.Count())));
-            }
-            
-            return receitas.ToArray(); */
-            return receitas_pref.ToArray();
-        }
 
         public List<Receita> getUtilizadorReceitasPref(int id) {
             List<Receita> receitas = new List<Receita>();
@@ -103,6 +87,11 @@ namespace MrVeggie.Contexts {
             }
 
             return receitas;
+        }
+
+        public int[] getReceitas(string nome){
+
+            return _context_r.Receita.Where(r => r.nome.Contains(nome)).Select(r => r.id_receita).ToArray();
         }
         
 

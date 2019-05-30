@@ -83,6 +83,12 @@ namespace MrVeggie.Models {
         [ForeignKey("receita_id")]
         public List<Agenda> agenda { get; set; }
 
+
+
+        public bool Equals(Receita other)
+        {
+            return null != other && id_receita == other.id_receita;
+        }
     }
 
     public class ReceitaContext : DbContext {
