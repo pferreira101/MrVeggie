@@ -107,7 +107,7 @@ namespace MrVeggie.Contexts
             sugestoes.Sort((x1, x2) => x1.Item1.CompareTo(x2.Item1));
 
             Random random = new Random();
-            int rInt = random.Next(1, Math.Min(4, sugestoes.Count()));
+            int rInt = random.Next(0, Math.Min(4, sugestoes.Count()));
 
             return sugestoes.ElementAt(rInt).Item2;
         }
@@ -149,7 +149,7 @@ namespace MrVeggie.Contexts
             sugestoes.Sort((x1, x2) => x1.Item1.CompareTo(x2.Item1));
 
             Random random = new Random();
-            int rInt = random.Next(1, Math.Min(4, sugestoes.Count()));
+            int rInt = random.Next(0, Math.Min(4, receitas.Count()-1));
 
             return sugestoes.ElementAt(rInt).Item2;
         }

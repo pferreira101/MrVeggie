@@ -14,8 +14,13 @@ namespace MrVeggie.Controllers {
 
         private Admin admin;
 
+<<<<<<< HEAD
+        public AdminViewController(IngredienteContext context_i, UtilizadorContext context_u, ReceitaContext context_r, OperacaoContext context_op) {
+            admin = new Admin(context_i, context_u, context_r, context_op);
+=======
         public AdminViewController(IngredienteContext context_i, UtilizadorContext context_u, ReceitaContext context_r, UtensilioContext context_uten) {
             admin = new Admin(context_i, context_u, context_r, context_uten);
+>>>>>>> 1daf8d1952fc6e69bf938d65cb274a9ad1e2f263
         }
 
 
@@ -56,6 +61,20 @@ namespace MrVeggie.Controllers {
             admin.registaReceita(nome, desc, dificuldade, tempo_conf, calorias, n_pessoas, url_imagem);
 
             return RedirectToAction("NewPasso", "AdminView", admin.getNewReceitaID(nome));
+        }
+
+        [HttpPost]
+        public IActionResult registaPasso(Tuple<Passo, List<Operacao>, List<Receita>, int, int> t)
+        {
+
+            //admin.registaPasso();
+
+            return RedirectToAction("NewPasso", "AdminView", t );
+        }
+
+        public IActionResult NewPasso(Tuple<Passo, List<Operacao>, List<Receita>, int, int> t){
+          
+           return View(new Tuple<Passo, List<Operacao>, List<Receita>,int,int>(new Passo(), admin.getOperacoes(), admin.getReceitas(), t.Item4, t.Item5));
         }
     }
 }

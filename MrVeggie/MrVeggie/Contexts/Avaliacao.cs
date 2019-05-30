@@ -34,8 +34,7 @@ namespace MrVeggie.Contexts {
             _context_r.Update<Receita>(r);
             _context_r.SaveChanges();
 
-            _context_hu.Update<HistoricoUtilizador>(historico);
-            _context_hu.SaveChanges();
+            
         }
 
         public Receita getReceita(int id_receita) {

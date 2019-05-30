@@ -94,6 +94,7 @@
 @{
     Console.WriteLine("!!!!!!!!!!!!!!!!!!! VI O VALOR DE 'voice' " + voice);
 
+
     if (voice.Equals("próximo") && !Model.ultimo) {
         <a asp-controller = "PassosView" asp-action = "ShowPasso" asp-route-id_receita = "@Model.receita_id" asp-route-nr_passo = "@proximo" />
     }

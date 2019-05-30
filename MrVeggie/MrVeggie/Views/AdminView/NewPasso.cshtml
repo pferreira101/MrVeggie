@@ -1,7 +1,42 @@
-﻿
+﻿@model Tuple<MrVeggie.Models.Passo, List<MrVeggie.Models.Operacao>, List<MrVeggie.Models.Receita>, int, int>
+
 @{
     ViewData["Title"] = "NewPasso";
 }
 
 <h1>NewPasso</h1>
 
+<form asp-action="registaPasso">
+    <div class="form-group">
+        <label asp-for="Item1.desc" class="control-label"></label>
+        <input asp-for="Item1.desc" class="form-control" />
+        <span asp-validation-for="Item1.desc" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Item1.tempo" class="control-label"></label>
+        <input asp-for="Item1.tempo" class="form-control" />
+        <span asp-validation-for="Item1.tempo" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <select class="mdb-select md-form" multiple>
+            <option value="" disabled selected>Escolha a Operação</option>
+            @foreach(var operacao in Model.Item2) {
+                <option value="@operacao.id_op">@operacao.desc</option>
+            }
+        </select>
+
+    </div>
+    <div class="form-group">
+        <select class="mdb-select md-form" multiple>
+            <option value="" disabled selected>Escolha a subReceita</option>
+            @foreach (var receita in Model.Item3)
+            {
+                <option value="@receita.id_receita">@receita.nome</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Proximo Passo" class="btn btn-default btn-success" />
+        <input type="submit" value="Finalizar" class="btn btn-default btn-success" />
+    </div>
+</form>
