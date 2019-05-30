@@ -94,19 +94,6 @@
 @{
     Console.WriteLine("!!!!!!!!!!!!!!!!!!! VI O VALOR DE 'voice' " + voice);
 
-<<<<<<< HEAD
-    if (voice.Equals("próximo") && !Model.ultimo)
-    {
-        <a asp-controller="PassosView" asp-action="ShowPasso" asp-route-id_receita = "@Model.receita_id" asp-route-nr_passo="@proximo" />
-    }
-    else if (voice.Equals("anterior") && Model.nr > 1)
-    {
-        <a asp-controller="PassosView" asp-action="ShowPasso" asp-route-id_receita="@Model.receita_id" asp-route-nr_passo="@anterior" />
-    }
-    else if (voice.Equals("finalizar") && Model.ultimo)
-    {
-        <a asp-controller="AvaliacaoView" asp-action="AvaliarReceita" asp-route-id_receita = "@Model.receita_id" />
-=======
     if (voice.Equals("próximo") && !Model.ultimo) {
         <a asp-controller = "PassosView" asp-action = "ShowPasso" asp-route-id_receita = "@Model.receita_id" asp-route-nr_passo = "@proximo" />
     }
@@ -115,7 +102,7 @@
     }
     else if (voice.Equals("finalizar") && Model.ultimo) {
         <a asp-controller = "AvaliacaoView" asp-action = "AvaliarReceita" asp-route-id_receita = "@Model.receita_id" />
->>>>>>> be816eed7330a5722f4957e8e8e9639845e977f1
+
     }
 }
 
