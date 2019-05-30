@@ -1,7 +1,53 @@
-﻿
+﻿@model MrVeggie.Models.Receita
+
 @{
     ViewData["Title"] = "NewReceita";
 }
 
 <h1>NewReceita</h1>
 
+
+<form asp-action="registaReceita">
+    <div class="form-group">
+        <label asp-for="nome" class="control-label"></label>
+        <input asp-for="nome" class="form-control" />
+        <span asp-validation-for="nome" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="desc" class="control-label"></label>
+        <input asp-for="desc" class="form-control" />
+        <span asp-validation-for="desc" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <!--DROPDOWN-->
+        <label asp-for="dificuldade" class="control-label"></label>
+        <input asp-for="dificuldade" class="form-control" />
+        <span asp-validation-for="dificuldade" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="tempo_conf" class="control-label"></label>
+        <input asp-for="tempo_conf" class="form-control" />
+        <span asp-validation-for="tempo_conf" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="calorias" class="control-label"></label>
+        <input asp-for="calorias" class="form-control" />
+        <span asp-validation-for="calorias" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="n_pessoas" class="control-label"></label>
+        <input asp-for="n_pessoas" class="form-control" />
+        <span asp-validation-for="n_pessoas" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="url_imagem" class="control-label"></label>
+        <input asp-for="url_imagem" class="form-control" />
+        <span asp-validation-for="url_imagem" class="text-danger"></span>
+    </div>
+
+    <!--FALTA UTENSILIOS-->
+
+    <div class="form-group">
+        <input type="submit" value="Registar" class="btn btn-default btn-success" />
+    </div>
+</form>

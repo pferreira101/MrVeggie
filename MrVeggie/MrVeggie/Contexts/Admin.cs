@@ -42,5 +42,10 @@ namespace MrVeggie.Contexts {
 
             return new Estatistica(nr_utilizadores, nr_masculino, nr_feminino, nr_receitas, nr_ingredientes, registos_ultimo_mes);
         }
+
+
+        public void registaReceita(string nome, string desc, int dificuldade, float tempo_conf, int calorias, int n_pessoas, string url) {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -24,8 +24,7 @@
     <button class="dropbtn">Filtrar por ingrediente</button>
     <div class="dropdown-content">
         <form asp-action="showReceitas" method="post">
-            @foreach (var ingrediente in Model.Ingredientes)
-            {
+            @foreach (var ingrediente in Model.Ingredientes) {
                 <input type="checkbox" name=checkboxes value=@ingrediente.id_ingrediente> @ingrediente.nome<br>
             }
             <div class="form-group">

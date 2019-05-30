@@ -36,7 +36,15 @@ namespace MrVeggie.Controllers {
 
         [HttpPost]
         public void ConfigInicial(string ids) {
-            int id = 1;
+            string[] ids_ingrediente_str = ids.Split(",");
+
+            int[] ids_ingrediente = new int[ids_ingrediente_str.Count()];
+
+            for (int i = 0; i < ids_ingrediente_str.Count(); i++) {
+                ids_ingrediente[i] = Int32.Parse(ids_ingrediente_str[i]);
+            }
+
+            // adicionar......
         }
     }
 }

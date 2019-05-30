@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Configuração Inicial";
-    List<string> ids = new List<string>();
 }
 
 
@@ -39,7 +38,7 @@
     }
 
     function getIDsSelected() {
-        $.ajax({
+        /*$.ajax({
             type: "POST",
             url: "/IngredienteView/ConfigInicial",
             data: JSON.stringify(ids),
@@ -58,6 +57,13 @@
             error: function (response) {
                 alert(response.responseText);
             }
+        });*/
+        $.ajax({
+            url: '@Url.Action("ConfigInicial", "IngredienteView")',
+            type: 'POST',
+            dataType: 'text',
+            data: ids
+            
         });
 
     }
