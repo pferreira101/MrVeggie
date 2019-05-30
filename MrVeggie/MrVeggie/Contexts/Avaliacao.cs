@@ -38,7 +38,9 @@ namespace MrVeggie.Contexts {
             _context_hu.SaveChanges();
         }
 
-        
+        public Receita getReceita(int id_receita) {
+            return _context_r.Receita.Find(id_receita);
+        }
 
         public void addToHistorico(int id_receita, string email_utilizador) {
             int id_utilizador = _context_u.Utilizador.Where(u => u.email.Equals(email_utilizador)).First().id_utilizador; // SERÁ ASSIM QUE SE VAI BUSCAR?? METER ID NA COOKIE? COMO?! 
