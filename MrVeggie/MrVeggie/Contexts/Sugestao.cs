@@ -56,16 +56,19 @@ namespace MrVeggie.Contexts
 
         private Receita getReceitaSugeridaPorReceitasFav(int idUtilizador)
         {
-            Receita x;
+            Receita x = null;
 
             List<int> rIds = _context_u.UtilizadorReceitasPref.Where(u => u.utilizador_id == idUtilizador).Select(u => u.receita_id).ToList();
 
             if (rIds.Count() == 0)
             {
                 Random random = new Random();
-                int rInt = random.Next(0, _context_r.Receita.ToArray().Count()-1);
+                while (x == null) {
+                    int rInt = random.Next(0, _context_r.Receita.ToArray().Count() - 1);
 
-                x = _context_r.Receita.Find(rInt);
+                    x = _context_r.Receita.Find(rInt);
+                }
+                
             }
             else
             {

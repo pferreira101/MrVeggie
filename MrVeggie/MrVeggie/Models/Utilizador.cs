@@ -47,6 +47,13 @@ namespace MrVeggie.Models {
         [Display(Name = "Config")]
         public bool config_inicial { get; set; }
 
+        
+        [Display(Name = "Data Registo")]
+        public DateTime data_reg { get; set; }
+
+
+
+
 
 
         [ForeignKey("utilizador_id")]
