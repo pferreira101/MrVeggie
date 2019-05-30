@@ -14,8 +14,8 @@ namespace MrVeggie.Controllers {
 
         private Admin admin;
 
-        public AdminViewController(IngredienteContext context_i, UtilizadorContext context_u, ReceitaContext context_r) {
-            admin = new Admin(context_i, context_u, context_r);
+        public AdminViewController(IngredienteContext context_i, UtilizadorContext context_u, ReceitaContext context_r, UtensilioContext context_uten) {
+            admin = new Admin(context_i, context_u, context_r, context_uten);
         }
 
 
@@ -34,7 +34,9 @@ namespace MrVeggie.Controllers {
         }
 
         public IActionResult NewReceita() {
-            return View();
+            List<Utensilio> utensilios = admin.getUtensilios();
+
+            return View(new Tuple<Receita, List<Utensilio>>(null, utensilios));
         }
 
 
@@ -45,9 +47,11 @@ namespace MrVeggie.Controllers {
             return RedirectToAction("Index", "AdminView");
         }
 
-        public IActionResult registaReceita(string nome, string desc, int dificuldade, float tempo_conf, int calorias, int n_pessoas, string url) {
 
-            admin.registaReceita(nome, desc, dificuldade, tempo_conf, calorias, n_pessoas, url);
+
+        public IActionResult registaReceita(string nome, string desc, int dificuldade, float tempo_conf, int calorias, int n_pessoas, string url_imagem) {
+
+            admin.registaReceita(nome, desc, dificuldade, tempo_conf, calorias, n_pessoas, url_imagem);
 
             return RedirectToAction("Index", "AdminView");
         }
