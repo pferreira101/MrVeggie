@@ -42,18 +42,19 @@ namespace MrVeggie.Contexts {
         public Estatistica getEstatistica() {
 
             int nr_utilizadores = _context_u.Utilizador.Count();
-            int nr_masculino = _context_u.Utilizador.Where(u => u.sexo.Equals('m')).Count();
+            int nr_masculino = _context_u.Utilizador.Where(u => u.sexo.Equals("Masculino")).Count();
             int nr_feminino = nr_utilizadores - nr_masculino;
             int nr_receitas = _context_r.Receita.Count();
             int nr_ingredientes = _context_i.Ingrediente.Count();
-            int registos_ultimo_mes = 0;
 
+            DateTime today = DateTime.Now;
+            DateTime month_ago = today.AddMonths(-1);
+            int registos_ultimo_mes = _context_u.Utilizador.Where(u => u.data_reg.Date >= month_ago.Date).Count();
 
             return new Estatistica(nr_utilizadores, nr_masculino, nr_feminino, nr_receitas, nr_ingredientes, registos_ultimo_mes);
         }
 
-        public List<Ingrediente> getIngredientes()
-        {
+        public List<Ingrediente> getIngredientes() {
             return _context_i.Ingrediente.ToList();
         }
 

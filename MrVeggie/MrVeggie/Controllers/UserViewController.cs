@@ -42,6 +42,7 @@ namespace MrVeggie.Controllers {
         public IActionResult RegistaUtilizador([Bind] Utilizador u) {
 
             if (ModelState.IsValid) {
+                u.data_reg = DateTime.Now;
                 bool RegistrationStatus = this.utilizador_handling.RegistaUtilizador(u);
 
                 if (RegistrationStatus) {
