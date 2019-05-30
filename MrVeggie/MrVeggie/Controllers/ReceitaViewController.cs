@@ -41,6 +41,21 @@ namespace MrVeggie.Controllers {
         }
         
         [HttpPost]
+        public IActionResult showReceitasSearch(string searchBar){
+            List<Receita> receitas = new List<Receita>();
+            Ingrediente[] ingredientes = selecao.getIngredientes();
+
+            foreach(int i in selecao.getReceitas(searchBar)){
+                receitas.Add(preparacao.getIngredientes(i));
+            }
+            
+           
+           
+           return View("ShowReceitas",new ReceitaAndIngredienteViewModel { Ingredientes = ingredientes, receitas = receitas.ToArray() });
+        }
+
+
+        [HttpPost]
         public IActionResult showReceitas(int[] checkboxes)
         {
 
