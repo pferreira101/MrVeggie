@@ -60,6 +60,9 @@ namespace MrVeggie.Contexts {
             return new Estatistica(nr_utilizadores, nr_masculino, nr_feminino, nr_receitas, nr_ingredientes, registos_ultimo_mes);
         }
 
+        public int getNewReceitaID(string nome) {
+            return _context_r.Receita.Where(r => r.nome.Equals(nome)).First().id_receita;
+        }
 
 <<<<<<< HEAD
         public void registaReceita(string nome, string desc, int dificuldade, float tempo_conf, int calorias, int n_pessoas, string url_imagem) {
