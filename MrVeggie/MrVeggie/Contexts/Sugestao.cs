@@ -63,9 +63,9 @@ namespace MrVeggie.Contexts
             if (rIds.Count() == 0)
             {
                 Random random = new Random();
-                int rInt = random.Next(1, _context_r.Receita.ToArray().Count());
+                int rInt = random.Next(0, _context_r.Receita.ToArray().Count()-1);
 
-                x = _context_r.Receita.Where(r => r.id_receita == rInt).First();
+                x = _context_r.Receita.Find(rInt);
             }
             else
             {
