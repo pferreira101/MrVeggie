@@ -1,4 +1,4 @@
-﻿@model Tuple<MrVeggie.Models.Passo, List<MrVeggie.Models.Operacao>, List<MrVeggie.Models.Receita>, int, int>
+﻿@model MrVeggie.Models.NewPasso
 
 @{
     ViewData["Title"] = "NewPasso";
@@ -8,19 +8,20 @@
 
 <form asp-action="registaPasso">
     <div class="form-group">
-        <label asp-for="Item1.desc" class="control-label"></label>
-        <input asp-for="Item1.desc" class="form-control" />
-        <span asp-validation-for="Item1.desc" class="text-danger"></span>
+        <label asp-for="passo.desc" class="control-label"></label>
+        <input asp-for="passo.desc" class="form-control" />
+        <span asp-validation-for="passo.desc" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="Item1.tempo" class="control-label"></label>
-        <input asp-for="Item1.tempo" class="form-control" />
-        <span asp-validation-for="Item1.tempo" class="text-danger"></span>
+        <label asp-for="passo.tempo" class="control-label"></label>
+        <input asp-for="passo.tempo" class="form-control" />
+        <span asp-validation-for="passo.tempo" class="text-danger"></span>
     </div>
     <div class="form-group">
         <select class="mdb-select md-form" multiple>
             <option value="" disabled selected>Escolha a Operação</option>
-            @foreach(var operacao in Model.Item2) {
+            @foreach (var operacao in Model.operacoes)
+            {
                 <option value="@operacao.id_op">@operacao.desc</option>
             }
         </select>
@@ -29,9 +30,18 @@
     <div class="form-group">
         <select class="mdb-select md-form" multiple>
             <option value="" disabled selected>Escolha a subReceita</option>
-            @foreach (var receita in Model.Item3)
+            @foreach (var receita in Model.receitas)
             {
                 <option value="@receita.id_receita">@receita.nome</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <select class="mdb-select md-form" multiple>
+            <option value="" disabled selected>Escolha os ingredientes</option>
+            @foreach (var ingrediente in Model.ingredientes)
+            {
+                <option value="@ingrediente.id_ingrediente">@ingrediente.nome</option>
             }
         </select>
     </div>

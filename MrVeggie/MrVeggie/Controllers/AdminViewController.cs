@@ -37,7 +37,7 @@ namespace MrVeggie.Controllers {
         public IActionResult NewReceita() {
             List<Utensilio> utensilios = admin.getUtensilios();
 
-            return View();
+            return View(new NewReceita { receita = new Receita(), utensilios = utensilios } );
         }
 
 
@@ -52,12 +52,21 @@ namespace MrVeggie.Controllers {
 
 
         [HttpPost]
-        public IActionResult registaReceita(string nome, string desc, int dificuldade, float tempo_conf, int calorias, int n_pessoas, string url_imagem) {
+        public IActionResult registaReceita(NewReceita n) {
 
-            admin.registaReceita(nome, desc, dificuldade, tempo_conf, calorias, n_pessoas, url_imagem);
+            admin.registaReceita(n.receita, n.utensilios);
 
-            return RedirectToAction("NewPasso", "AdminView", admin.getNewReceitaID(nome));
+            return View("NewPasso",new NewPasso
+            {
+                passo = new Passo(),
+                id_receita = admin.getNewReceitaID(n.receita.nome),
+                ingredientes = admin.getIngredientes(),
+                nPasso = 1,
+                operacoes = admin.getOperacoes(),
+                receitas = admin.getReceitas()
+            });
         }
+
 
         [HttpPost]
         public IActionResult registaPasso(Tuple<Passo, List<Operacao>, List<Receita>, int, int> t)

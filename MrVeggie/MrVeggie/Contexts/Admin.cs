@@ -13,23 +13,15 @@ namespace MrVeggie.Contexts {
         private IngredienteContext _context_i;
         private UtilizadorContext _context_u;
         private ReceitaContext _context_r;
-<<<<<<< HEAD
         private OperacaoContext _context_op;
+        private UtensilioContext _context_uten;
 
-        public Admin(IngredienteContext context_i, UtilizadorContext context_u, ReceitaContext context_r, OperacaoContext context_op) {
+        public Admin(IngredienteContext context_i, UtilizadorContext context_u, ReceitaContext context_r, OperacaoContext context_op, UtensilioContext context_uten) {
             _context_i = context_i;
             _context_u = context_u;
             _context_r = context_r;
             _context_op = context_op;
-=======
-        private UtensilioContext _context_uten;
-
-        public Admin(IngredienteContext context_i, UtilizadorContext context_u, ReceitaContext context_r, UtensilioContext context_uten) {
-            _context_i = context_i;
-            _context_u = context_u;
-            _context_r = context_r;
             _context_uten = context_uten;
->>>>>>> 1daf8d1952fc6e69bf938d65cb274a9ad1e2f263
         }
 
 
@@ -60,30 +52,28 @@ namespace MrVeggie.Contexts {
             return new Estatistica(nr_utilizadores, nr_masculino, nr_feminino, nr_receitas, nr_ingredientes, registos_ultimo_mes);
         }
 
+        public List<Ingrediente> getIngredientes()
+        {
+            return _context_i.Ingrediente.ToList();
+        }
+
         public int getNewReceitaID(string nome) {
             return _context_r.Receita.Where(r => r.nome.Equals(nome)).First().id_receita;
         }
 
-<<<<<<< HEAD
-        public void registaReceita(string nome, string desc, int dificuldade, float tempo_conf, int calorias, int n_pessoas, string url_imagem) {
-            throw new NotImplementedException();
-=======
-        public void registaReceita(string nome, string desc, int dificuldade, float tempo_conf, int calorias, int n_pessoas, string url) {
-            Receita r = new Receita {
-                nome = nome,
-                desc = desc,
-                dificuldade = dificuldade,
-                tempo_conf = tempo_conf,
-                calorias = calorias,
-                n_pessoas = n_pessoas,
-                url_imagem = url,
-                avaliacao = 0,
-                n_avaliacoes = 0
-            };
+        public void registaReceita(Receita r, List<Utensilio> utensilios) {
+            
 
             _context_r.Receita.Add(r);
+
+            if (utensilios != null)
+            {
+                foreach (Utensilio u in utensilios)
+                {
+                    _context_r.UtensiliosReceita.Add(new UtensiliosReceita { receita_id = r.id_receita, utensilio_id = u.id_utensilio });
+                }
+            }
             _context_r.SaveChanges();
->>>>>>> 1daf8d1952fc6e69bf938d65cb274a9ad1e2f263
         }
 
         public List<Receita> getReceitas(){

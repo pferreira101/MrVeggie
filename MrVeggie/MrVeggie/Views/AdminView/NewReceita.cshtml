@@ -1,60 +1,57 @@
-﻿@model MrVeggie.Models.Receita
+﻿@model MrVeggie.Models.NewReceita
 
 @{
     ViewData["Title"] = "NewReceita";
 }
 
-<<<<<<< HEAD
-=======
+
     <h1>NewReceita</h1>
 
->>>>>>> 1daf8d1952fc6e69bf938d65cb274a9ad1e2f263
 
-
-    <form asp-action="registaReceita">
+    <form asp-action="registaReceita" method="post">
         <div class="form-group">
-            <label asp-for="nome" class="control-label"></label>
-            <input asp-for="nome" class="form-control" />
-            <span asp-validation-for="nome" class="text-danger"></span>
+            <label asp-for="receita.nome" class="control-label"></label>
+            <input asp-for="receita.nome" class="form-control" />
+            <span asp-validation-for="receita.nome" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="desc" class="control-label"></label>
-            <input asp-for="desc" class="form-control" />
-            <span asp-validation-for="desc" class="text-danger"></span>
+            <label asp-for="receita.desc" class="control-label"></label>
+            <input asp-for="receita.desc" class="form-control" />
+            <span asp-validation-for="receita.desc" class="text-danger"></span>
         </div>
         <div class="form-group">
             <!--DROPDOWN-->
-            <label asp-for="dificuldade" class="control-label"></label>
-            <input asp-for="dificuldade" class="form-control" />
-            <span asp-validation-for="dificuldade" class="text-danger"></span>
+            <label asp-for="receita.dificuldade" class="control-label"></label>
+            <input asp-for="receita.dificuldade" class="form-control" />
+            <span asp-validation-for="receita.dificuldade" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="tempo_conf" class="control-label"></label>
-            <input asp-for="tempo_conf" class="form-control" />
-            <span asp-validation-for="tempo_conf" class="text-danger"></span>
+            <label asp-for="receita.tempo_conf" class="control-label"></label>
+            <input asp-for="receita.tempo_conf" class="form-control" />
+            <span asp-validation-for="receita.tempo_conf" class="text-danger"></span>
         </div>
         <div class="form-group" >
-            <label asp-for="calorias" class="control-label"></label>
-            <input asp-for="calorias" class="form-control" />
-            <span asp-validation-for="calorias" class="text-danger"></span>
+            <label asp-for="receita.calorias" class="control-label"></label>
+            <input asp-for="receita.calorias" class="form-control" />
+            <span asp-validation-for="receita.calorias" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="n_pessoas" class="control-label"></label>
-            <input asp-for="n_pessoas" class="form-control" />
-            <span asp-validation-for="n_pessoas" class="text-danger"></span>
+            <label asp-for="receita.n_pessoas" class="control-label"></label>
+            <input asp-for="receita.n_pessoas" class="form-control" />
+            <span asp-validation-for="receita.n_pessoas" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="url_imagem" class="control-label"></label>
-            <input asp-for="url_imagem" class="form-control" />
-            <span asp-validation-for="url_imagem" class="text-danger"></span>
+            <label asp-for="receita.url_imagem" class="control-label"></label>
+            <input asp-for="receita.url_imagem" class="form-control" />
+            <span asp-validation-for="receita.url_imagem" class="text-danger"></span>
         </div>
 
-        <!--FALTA UTENSILIOS
+        <!--
         <select class="mdb-select md-form" multiple>
             <option value="" disabled selected>Escolha os utensílios</option>
-            foreach (var utensilio in Model.Item2) {
-                <option value="utensilio.id_utensilio">utensilio.nome</option>
-            }
+            @foreach (var utensilio in Model.utensilios) {
+                <option value="utensilio.id_utensilio" name="utensilios">@utensilio.nome</option>
+            } 
         </select>-->
 
         <div class="form-group">
