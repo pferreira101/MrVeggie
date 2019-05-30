@@ -6,7 +6,7 @@
 <html>
 <body>
     <div id='printoutPanel'></div>
-    <div id='myMap' style='position:relative;width:800px;height:600px;'></div>
+    <div id='myMap' style='position: relative; width: 800px; height: 600px;'></div>
     <script type='text/javascript'>
         function loadMapScenario() {
             var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
@@ -25,29 +25,19 @@
                 anchor: new Microsoft.Maps.Point(12, 39)
             });
             map.entities.push(pushpin);
-            var localizacoes = getLocationsFromModel();
-            addPins(map,localizacoes);
+            addPins(map);
         }
 
-        function getLocationsFromModel() {
-                var localizacoes = [];
-                @foreach (var local in Model)
-                {
-                    @:var localizacao = {lat:@local.latitude, long:@local.longitude};
-                    @:localizacoes.push(localizacao);
-                }
-                return localizacoes;
-            }
-
-        function addPins(map, localizacoes) {
+        function addPins(map) {
                 var locations = [];
-                $.each(localizacoes, function (index, localizacao) {
-                    var location = new Microsoft.Maps.Location(localizacao.lat, localizacao.long);
+                @foreach (var local in Model){
+                <text>
+                    var location = new Microsoft.Maps.Location(@local.latitude, @local.longitude);
                     locations.push(location);
-                    var order = index + 1;
                     var pin = new Microsoft.Maps.Pushpin(location, {});
                     map.entities.push(pin);
-                });
+                </text>
+                }
                 var rect = Microsoft.Maps.LocationRect.fromLocations(locations);
                 map.setView({ bounds: rect });
         }
