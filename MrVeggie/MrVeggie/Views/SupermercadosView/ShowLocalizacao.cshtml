@@ -1,0 +1,58 @@
+﻿@model IEnumerable<MrVeggie.Controllers.SupermercadosViewController.Location>
+@{
+    ViewData["Title"] = "MapaSupermercados";
+}
+<!DOCTYPE html>
+<html>
+<body>
+    <div id='printoutPanel'></div>
+    <div id='myMap' style='position:relative;width:800px;height:600px;'></div>
+    <script type='text/javascript'>
+        function loadMapScenario() {
+            var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+                credentials: 'Alvpuc-Z8ROrtuOcQZdVD1iaINzybihaHRnSHYWL8jwdEjVrXRj843L8ayxchoj7',
+            });
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var loc = new Microsoft.Maps.Location(
+                    position.coords.latitude,
+                    position.coords.longitude);
+
+                //Center the map on the user's location.
+                map.setView({ center: loc, zoom: 12 });
+            });
+            var pushpin = new Microsoft.Maps.Pushpin(map.getCenter(), {
+                icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png',
+                anchor: new Microsoft.Maps.Point(12, 39)
+            });
+            map.entities.push(pushpin);
+            var localizacoes = getLocationsFromModel();
+            addPins(map,localizacoes);
+        }
+
+        function getLocationsFromModel() {
+                var localizacoes = [];
+                @foreach (var local in Model)
+                {
+                    @:var localizacao = {lat:@local.latitude, long:@local.longitude};
+                    @:localizacoes.push(localizacao);
+                }
+                return localizacoes;
+            }
+
+        function addPins(map, localizacoes) {
+                var locations = [];
+                $.each(localizacoes, function (index, localizacao) {
+                    var location = new Microsoft.Maps.Location(localizacao.lat, localizacao.long);
+                    locations.push(location);
+                    var order = index + 1;
+                    var pin = new Microsoft.Maps.Pushpin(location, {});
+                    map.entities.push(pin);
+                });
+                var rect = Microsoft.Maps.LocationRect.fromLocations(locations);
+                map.setView({ bounds: rect });
+        }
+    </script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=loadMapScenario' async defer></script>
+</body>
+</html>
+
