@@ -44,5 +44,12 @@ namespace MrVeggie.Controllers {
 
             return RedirectToAction("Index", "AdminView");
         }
+
+        public IActionResult registaReceita(string nome, string desc, int dificuldade, float tempo_conf, int calorias, int n_pessoas, string url) {
+
+            admin.registaReceita(nome, desc, dificuldade, tempo_conf, calorias, n_pessoas, url);
+
+            return RedirectToAction("Index", "AdminView");
+        }
     }
 }
