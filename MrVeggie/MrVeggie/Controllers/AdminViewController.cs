@@ -14,13 +14,9 @@ namespace MrVeggie.Controllers {
 
         private Admin admin;
 
-<<<<<<< HEAD
-        public AdminViewController(IngredienteContext context_i, UtilizadorContext context_u, ReceitaContext context_r, OperacaoContext context_op) {
-            admin = new Admin(context_i, context_u, context_r, context_op);
-=======
-        public AdminViewController(IngredienteContext context_i, UtilizadorContext context_u, ReceitaContext context_r, UtensilioContext context_uten) {
-            admin = new Admin(context_i, context_u, context_r, context_uten);
->>>>>>> 1daf8d1952fc6e69bf938d65cb274a9ad1e2f263
+        public AdminViewController(IngredienteContext context_i, UtilizadorContext context_u, ReceitaContext context_r, UtensilioContext context_uten ,OperacaoContext context_op) {
+            admin = new Admin(context_i, context_u, context_r, context_op, context_uten);
+
         }
 
 
