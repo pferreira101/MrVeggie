@@ -43,7 +43,8 @@ CREATE TABLE Utilizador (
   idade           int NOT NULL, 
   sexo            varchar(50) NOT NULL, 
   admin           bit DEFAULT '0' NOT NULL, 
-  config_inicial  bit DEFAULT '0' NOT NULL, 
+  config_inicial  bit DEFAULT '0' NOT NULL,
+  data_reg  datetime NOT NULL, 
   PRIMARY KEY (id_utilizador));
 
 CREATE TABLE UtilizadorReceitasPref (
