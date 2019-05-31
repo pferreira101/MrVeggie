@@ -13,21 +13,21 @@
     Console.WriteLine("ESTADO: " + SoundControl.GetSoundState());
 
 
-    if (SoundControl.GetSoundState()) {
+    /*if (SoundControl.GetSoundState())
+    {
         TextToSpeech tts = new TextToSpeech(Model);
         tts.readStep();
-    }
+    }*/
 
-    SpeechToText sst = new SpeechToText();
-    string voice = "";
-    voice = sst.listen();
 }
 
 <div class="onoffswitch" style="float:right">
-    @if (SoundControl.GetSoundState()) {
+    @if (SoundControl.GetSoundState())
+    {
         <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
     }
-    else {
+    else
+    {
         <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
     }
     <label class="onoffswitch-label" for="myonoffswitch">
@@ -55,7 +55,8 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var ing in Model.ingredientes) {
+                @foreach (var ing in Model.ingredientes)
+                {
                     <tr>
                         <td>@ing.Key.nome</td>
                         <td>@ing.Value.quantidade @ing.Value.unidade</td>
@@ -91,35 +92,66 @@
 
 <p></p>
 
-@{
-    Console.WriteLine("!!!!!!!!!!!!!!!!!!! VI O VALOR DE 'voice' " + voice);
-
-
-    if (voice.Equals("próximo") && !Model.ultimo) {
-        <a asp-controller = "PassosView" asp-action = "ShowPasso" asp-route-id_receita = "@Model.receita_id" asp-route-nr_passo = "@proximo" />
-    }
-    else if (voice.Equals("anterior") && Model.nr > 1) {
-        <a asp-controller = "PassosView" asp-action = "ShowPasso" asp-route-id_receita = "@Model.receita_id" asp-route-nr_passo = "@anterior" />
-    }
-    else if (voice.Equals("finalizar") && Model.ultimo) {
-        <a asp-controller = "AvaliacaoView" asp-action = "AvaliarReceita" asp-route-id_receita = "@Model.receita_id" />
-
-    }
-}
-
-
-<p>@voice</p>
 
 <div>
-    @if (Model.ultimo == true) {
-        <a class="btn btn-success" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id_receita="@Model.receita_id" asp-route-nr_passo="@anterior">Anterior</a>
-        <a style="float:right" class="btn btn-success" asp-controller="AvaliacaoView" asp-action="AvaliarReceita" asp-route-id_receita="@Model.receita_id">Finalizar</a>
+    @if (Model.ultimo == true)
+    {
+        <a class="btn btn-success" id="anterior" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id_receita="@Model.receita_id" asp-route-nr_passo="@anterior">Anterior</a>
+        <a style="float:right" id="finalizar" class="btn btn-success" asp-controller="AvaliacaoView" asp-action="AvaliarReceita" asp-route-id_receita="@Model.receita_id">Finalizar</a>
     }
-    else {
-        @if (Model.nr > 1) {
-            <a class="btn btn-success" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id_receita="@Model.receita_id" asp-route-nr_passo="@anterior">Anterior</a>
+    else
+    {
+        @if (Model.nr > 1)
+        {
+            <a class="btn btn-success" id="anterior" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id_receita="@Model.receita_id" asp-route-nr_passo="@anterior">Anterior</a>
         }
-        <a style="float:right" class="btn btn-success" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id_receita="@Model.receita_id" asp-route-nr_passo="@proximo">Próximo</a>
+        <a style="float:right" class="btn btn-success" id="proximo" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id_receita="@Model.receita_id" asp-route-nr_passo="@proximo">Próximo</a>
     }
 </div>
 
+
+<script>
+
+    // BEGIN SPEECH RECOGNITION
+
+    window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
+    if ('SpeechRecognition' in window) {
+        // speech recognition API supported
+
+        var recognition = new SpeechRecognition();
+        recognition.continuous = true;
+        recognition.lang = "pt-PT";
+        recognition.interimResults = true;
+
+        recognition.onend = function () {
+            recognition.start();
+        }
+        recognition.onresult = function (event) {
+            var current = event.resultIndex;
+            var transcript = event.results[current][0].transcript;
+
+            if (transcript === "próximo") {
+                var prox = document.getElementById('proximo');
+                if (prox != null) prox.click();
+            }
+
+            if (transcript === "anterior") {
+                var ant = document.getElementById('anterior');
+                if (ant != null) ant.click();
+            }
+
+            if (transcript === "finalizar") {
+                var fin = document.getElementById('finalizar');
+                if (fin != null) fin.click();
+            }
+        }
+
+        recognition.start();
+    }
+
+    else {
+        // speech recognition API not supported
+        // mostrar algo?
+    }
+
+</script>
