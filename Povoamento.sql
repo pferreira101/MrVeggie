@@ -101,3 +101,9 @@ ALTER COLUMN avaliacao int not null;
 
 DELETE FROM HistoricoUtilizador
 WHERE avaliacao IS null;
+
+SELECT * FROM UtilizadorIngredientesPref;
+
+SELECT * FROM Agenda;
+
+SELECT * FROM UtilizadorReceitasPref;

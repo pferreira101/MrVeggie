@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using MrVeggie.Contexts;
 using MrVeggie.Models;
 using MrVeggie.Models.Auxiliary;
+using MrVeggie.Models.Pages;
 
 namespace MrVeggie.Controllers {
 
@@ -60,8 +61,7 @@ namespace MrVeggie.Controllers {
             admin.registaReceita(n.receita, n.utensilios);
             float[] r = new float[admin.getIngredientes().Count()];
             
-            return View("NewPasso",new NewPasso
-            {
+            return View("NewPasso", new NewPasso {
                 passo = new Passo(),
                 id_receita = admin.getNewReceitaID(n.receita.nome),
                 ingredientes = admin.getIngredientes(),

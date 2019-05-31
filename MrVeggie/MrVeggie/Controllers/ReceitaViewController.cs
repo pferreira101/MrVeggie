@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using MrVeggie.Contexts;
 using MrVeggie.Models;
 using MrVeggie.Models.Auxiliary;
+using MrVeggie.Models.Pages;
 using MrVeggie.Shared;
 
 namespace MrVeggie.Controllers {
