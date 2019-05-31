@@ -1,14 +1,44 @@
-﻿@model IEnumerable<MrVeggie.Models.Agenda>
+﻿@model MrVeggie.Models.Pages.AgendaReceitas
 
-@using MrVeggie.Models
 
 @{
     ViewData["Title"] = "ShowAgenda";
 }
 
+
+
+<script>
+
+    function writeChoices(id) {
+        var to_append = "";
+        var $row = $(id);
+
+        to_append += '<div class="dropdown" style="float:right">'';
+        to_append += '<a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
+        to_append += 'Agendar Refeição';
+        to_append += '</a>';
+        to_append += '<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">';
+        @foreach (var receita in Model.receitas) {
+            @:to_append += '<a class="dropdown-item">@receita.nome</a>';
+        }
+                           
+        to_append += '</div>';
+        to_append += '</div>';
+
+        $row.append(to_append);
+    }
+
+</script>
+
+
+
+
+
+
+
 <h1>Agenda</h1>
 
-<h3>@Model.Count()</h3>
+<h3>@Model.agenda.Count()</h3>
 <!--Table-->
 <table id="tablePreview" class="table">
     <!--Table head-->
@@ -29,41 +59,52 @@
     <tbody>
         <tr>
             <th scope="row">Almoço</th>
-            <td>
-                @if (Model.ElementAt(0).receita != null) {
-                    <p>@Model.ElementAt(0).receita.nome;</p>
+            <td id="1-1">
+                @if (Model.agenda.ElementAt(0).receita != null) {
+                    <p>@Model.agenda.ElementAt(0).receita.nome;</p>
+                }
+                else {
+                    <div class="dropdown" style="float:right">
+                        <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Agendar Refeição </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            @foreach (var receita in Model.receitas) {
+                                <a class="dropdown-item">@receita.nome</a>
+                            }
+
+                        </div>
+                    </div>
                 }
             </td>
-            <td>
-                @if (Model.ElementAt(2).receita != null) {
-                    <p>@Model.ElementAt(2).receita.nome</p>
+            <td id="2-1">
+                @if (Model.agenda.ElementAt(2).receita != null) {
+                    <p>@Model.agenda.ElementAt(2).receita.nome</p>
                 }
                 else {
 
                 }
             </td>
             <td>
-                @if (Model.ElementAt(4).receita != null) {
-                    <p>@Model.ElementAt(4).receita.nome</p>
+                @if (Model.agenda.ElementAt(4).receita != null) {
+                    <p>@Model.agenda.ElementAt(4).receita.nome</p>
                 }
             </td>
             <td>
-                @if (Model.ElementAt(6).receita != null) {
-                    <p>@Model.ElementAt(6).receita.nome</p>
+                @if (Model.agenda.ElementAt(6).receita != null) {
+                    <p>@Model.agenda.ElementAt(6).receita.nome</p>
                 }
             </td>
             <td>
-                @if (Model.ElementAt(8).receita != null) {
-                    <p>@Model.ElementAt(8).receita.nome</p>
+                @if (Model.agenda.ElementAt(8).receita != null) {
+                    <p>@Model.agenda.ElementAt(8).receita.nome</p>
                 }
             </td>
             <td>
-                @if (Model.ElementAt(10).receita != null) {
+                @if (Model.agenda.ElementAt(10).receita != null) {
 
                 }
             </td>
             <td>
-                @if (Model.ElementAt(12).receita != null) {
+                @if (Model.agenda.ElementAt(12).receita != null) {
 
                 }
             </td>         
@@ -71,37 +112,37 @@
         <tr>
             <th scope="row">Jantar</th>
             <td>
-                @if (Model.ElementAt(1).receita != null) {
+                @if (Model.agenda.ElementAt(1).receita != null) {
 
                 }
             </td>
             <td>
-                @if (Model.ElementAt(3).receita != null) {
+                @if (Model.agenda.ElementAt(3).receita != null) {
 
                 }
             </td>
             <td>
-                @if (Model.ElementAt(5).receita != null) {
+                @if (Model.agenda.ElementAt(5).receita != null) {
 
                 }
             </td>
             <td>
-                @if (Model.ElementAt(7).receita != null) {
+                @if (Model.agenda.ElementAt(7).receita != null) {
 
                 }
             </td>
             <td>
-                @if (Model.ElementAt(9).receita != null) {
+                @if (Model.agenda.ElementAt(9).receita != null) {
 
                 }
             </td>
             <td>
-                @if (Model.ElementAt(11).receita != null) {
+                @if (Model.agenda.ElementAt(11).receita != null) {
 
                 }
             </td>
             <td>
-                @if (Model.ElementAt(13).receita != null) {
+                @if (Model.agenda.ElementAt(13).receita != null) {
 
                 }
             </td>
