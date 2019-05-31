@@ -51,6 +51,8 @@ namespace MrVeggie.Contexts {
             return result.ToArray();
         }
 
+        
+
         public Ingrediente[] getIngredientes() {
             return _context_ing.Ingrediente.ToArray();
         }
@@ -93,7 +95,25 @@ namespace MrVeggie.Contexts {
 
             return _context_r.Receita.Where(r => r.nome.Contains(nome)).Select(r => r.id_receita).ToArray();
         }
-        
+
+
+
+
+        public void setUserIngrPrefs(int[] ids, string mail) {
+            Utilizador utilizador = _context_u.Utilizador.Where(u => u.email.Equals(mail)).First();
+
+            for (int i = 0; i < ids.Length; i++) {
+                UtilizadorIngredientesPref uip = new UtilizadorIngredientesPref();
+                uip.ingrediente_id = ids[i];
+                uip.utilizador_id = utilizador.id_utilizador;
+                _context_u.UtilizadorIngredientesPref.Add(uip); // TRATAR DOS REPETIDOS?? --------------------------------------------------------------
+            }
+
+            utilizador.config_inicial = true;
+            _context_u.Update(utilizador);
+
+            _context_u.SaveChanges();
+        }
 
     }
 }

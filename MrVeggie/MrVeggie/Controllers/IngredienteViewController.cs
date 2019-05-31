@@ -35,16 +35,10 @@ namespace MrVeggie.Controllers {
 
 
         [HttpPost]
-        public void ConfigInicial(string ids) {
-            string[] ids_ingrediente_str = ids.Split(",");
+        public void ConfigInicial([FromBody] int[] ids) {
+            //selecao.setUserIngrPrefs(ids, User.Identity.Name);
 
-            int[] ids_ingrediente = new int[ids_ingrediente_str.Count()];
-
-            for (int i = 0; i < ids_ingrediente_str.Count(); i++) {
-                ids_ingrediente[i] = Int32.Parse(ids_ingrediente_str[i]);
-            }
-
-            // adicionar......
+            //return RedirectToAction("Index", "Home");
         }
     }
 }
