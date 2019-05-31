@@ -99,6 +99,7 @@ namespace MrVeggie.Models {
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
+            modelBuilder.Entity<UtilizadorReceitasPref>().HasKey(urp => new { urp.utilizador_id, urp.receita_id });
 
             // configures one-to-many relationship
             modelBuilder.Entity<Passo>()

@@ -5,7 +5,25 @@
 
 }
 
+
+<script>
+
+    function adicionaFavoritos(receita) {
+        $.ajax({
+            url: '@Url.Action("AdicionaReceitaFavoritos", "ReceitaView")',
+            type: 'POST',
+            data: JSON.stringify(receita),
+            contentType: "application/json; charset=utf-8",
+            dataType: "text",
+        });
+    }
+
+</script>
+
+
+
 <p></p>
+
 
 <div class="wrapper">
     <div style="width: 30%; float: left;">
@@ -17,9 +35,7 @@
         <p>@Model.desc</p>
     </div>
     <div style="text-align:right">
-        <wrapper style="float:right">
-            @Html.ActionLink("Favorito", "AddToFavorites", "ReceitaView");
-        </wrapper>
+        <a class="dropdown-item" onclick="adicionaFavoritos(@Model.id_receita)">Adicionar aos Favoritos</a>
     </div>
 </div>
 

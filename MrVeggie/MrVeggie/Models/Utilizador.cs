@@ -106,7 +106,10 @@ namespace MrVeggie.Models {
 
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
+            modelBuilder.Entity<UtilizadorReceitasPref>().HasKey(urp => new { urp.utilizador_id, urp.receita_id });
 
+        }
 
         public DbSet<Utilizador> Utilizador { get; set; }
         public DbSet<UtilizadorIngredientesPref> UtilizadorIngredientesPref { get; set; }
