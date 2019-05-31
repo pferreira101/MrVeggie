@@ -5,6 +5,41 @@
     int i = 0;
 }
 
+
+
+
+
+<script>
+
+    function writeIngredienteLine() {
+        var $ingredientes = $('#ingredientes');
+        var to_append = '';
+
+        to_append += '<select id="teste" name="teste" class="mdb-select md-form">';
+        to_append += '<option value="" disabled selected>Escolha o ingrediente</option>';
+            @foreach (var ingrediente in Model.ingredientes) {
+               @:to_append += '<option value="@ingrediente.id_ingrediente">@ingrediente.nome</option>';
+            }
+        to_append += '</select>';
+        $ingredientes.append(to_append); // NO HTML ISTO ESTÁ A SER ESCRITO LOGO A SEGUIR A ABERTURA DA TAG, se alterar no f12 e por no sitio correto já dá direito
+
+    }
+
+    function nrIngredientes() {
+        var $nr = $('#nr').val();
+        
+        for (i = 0; i < $nr; i++) {
+            writeIngredienteLine();
+        }
+    }
+</script>
+
+
+
+
+
+
+
 <h1>NewPasso</h1>
 
 
@@ -24,8 +59,7 @@
     <div class="form-group">
         <select id="ops" name="ops" class="mdb-select md-form">
             <option value="" disabled selected>Escolha a Operação</option>
-            @foreach (var operacao in Model.operacoes)
-            {
+            @foreach (var operacao in Model.operacoes) {
                 <option value="@operacao.id_op">@operacao.desc</option>
             }
         </select>
@@ -34,27 +68,35 @@
     <div class="form-group">
         <select id="recs" name="recs" class="mdb-select md-form">
             <option value="" disabled selected>Escolha a subReceita</option>
-            @foreach (var receita in Model.receitas)
-            {
+            @foreach (var receita in Model.receitas) {
                 <option value="@receita.id_receita">@receita.nome</option>
             }
         </select>
     </div>
+
+    <div>
+        Por favor, indique o número de ingredientes presentes no passo:
+        <input id="nr" type="number" />
+        <button class="btn btn-default btn-success" onclick="nrIngredientes()">Confirmar</button>
+    </div>
     
+
+    <div id="ingredientes" class="form-group">
+
+    </div>
+
     <tr class="form-group">
         <th>
             <select id="ings" name="ings" class="mdb-select md-form" multiple>
                 <option value="" disabled selected>Escolha os ingredientes</option>
-                @foreach (var ingrediente in Model.ingredientes)
-                {
+                @foreach (var ingrediente in Model.ingredientes) {
                     <option value="@ingrediente.id_ingrediente">@ingrediente.nome</option>
 
                 }
             </select>
         </th>
         <th>
-            @foreach (var ingrediente in Model.ingredientes)
-            {
+            @foreach (var ingrediente in Model.ingredientes) {
                 <label asp-for="quantidades[i]" class="control-label"></label>
                 <input asp-for="quantidades[i]" value="@Model.quantidades[i]" class="form-control" />
                 <span asp-validation-for="quantidades[i]" class="text-danger"></span>
