@@ -101,11 +101,24 @@ namespace MrVeggie.Models {
     public class UtilizadorContext : DbContext {
 
         public UtilizadorContext(DbContextOptions<UtilizadorContext> options) : base(options) {
-
+            
 
 
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<UtensiliosReceita>().HasKey(ut => new
+            {
+                ut.receita_id,
+                ut.utensilio_id
+
+            });
+
+            modelBuilder.Entity<IngredientesPasso>().HasKey(ip => new { ip.passo_id, ip.ingrediente_id });
+
+
+        }
 
 
         public DbSet<Utilizador> Utilizador { get; set; }

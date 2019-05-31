@@ -100,12 +100,24 @@ namespace MrVeggie.Models {
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
 
+            modelBuilder.Entity<UtensiliosReceita>().HasKey(ut => new {
+                ut.receita_id,
+                ut.utensilio_id
+            });
+
+            modelBuilder.Entity<IngredientesPasso>().HasKey(ip => new { ip.passo_id, ip.ingrediente_id });
+
             // configures one-to-many relationship
             modelBuilder.Entity<Passo>()
                         .HasOne<Receita>(p => p.receita)     
                         .WithMany(r => r.passos)
                         .HasForeignKey(p => p.receita_id)
                         .HasConstraintName("FKPasso200762");
+
+
+            
+
+
         }
 
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MrVeggie.Models.Auxiliary;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -47,6 +48,11 @@ namespace MrVeggie.Models {
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
 
             modelBuilder.Entity<Agenda>().HasKey(hu => new { hu.dia, hu.refeicao, hu.utilizador_id });
+
+            modelBuilder.Entity<UtensiliosReceita>().HasKey(ut => new {
+                ut.receita_id,
+                ut.utensilio_id
+            });
 
             modelBuilder.Entity<Agenda>()
                         .HasOne<Utilizador>(hu => hu.utilizador)

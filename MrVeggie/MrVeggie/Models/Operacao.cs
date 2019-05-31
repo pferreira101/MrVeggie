@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MrVeggie.Models.Auxiliary;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -32,7 +33,14 @@ namespace MrVeggie.Models {
 
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+           
 
+            modelBuilder.Entity<IngredientesPasso>().HasKey(ip => new { ip.passo_id, ip.ingrediente_id });
+
+
+        }
         public DbSet<Operacao> Operacao { get; set; }
     }
     

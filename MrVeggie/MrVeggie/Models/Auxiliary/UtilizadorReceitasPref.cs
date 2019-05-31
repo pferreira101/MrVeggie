@@ -38,6 +38,8 @@ namespace MrVeggie.Models.Auxiliary {
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             modelBuilder.Entity<UtilizadorReceitasPref>().HasKey(uip => new { uip.utilizador_id, uip.receita_id });
 
+            modelBuilder.Entity<IngredientesPasso>().HasKey(ip => new { ip.passo_id, ip.ingrediente_id });
+
             modelBuilder.Entity<UtilizadorReceitasPref>()
                         .HasOne<Utilizador>(uip => uip.utilizador)
                         .WithMany(u => u.utilizador_receitas_pref)

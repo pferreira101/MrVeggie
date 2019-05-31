@@ -15,7 +15,7 @@ namespace MrVeggie.Models.Auxiliary {
         [JsonIgnore]
         public Passo passo { get; set; }
 
-        [Key]
+
         [Column("passo")]
         public int passo_id { get; set; }
 

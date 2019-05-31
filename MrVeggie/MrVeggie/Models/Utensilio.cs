@@ -27,13 +27,23 @@ namespace MrVeggie.Models {
 
         [ForeignKey("utensilio_id")]
         public ICollection<UtensiliosReceita> utensilios_receita { get; set; }
-
+        
         
     }
 
     public class UtensilioContext : DbContext {
 
         public UtensilioContext(DbContextOptions<UtensilioContext> options) : base(options) {
+            
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<UtensiliosReceita>().HasKey(ut => new
+            {
+                ut.receita_id,
+                ut.utensilio_id
+            });
 
         }
 
