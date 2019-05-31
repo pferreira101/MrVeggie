@@ -120,6 +120,7 @@ namespace MrVeggie.Contexts
             string email = _context_u.Utilizador.Where(u => u.id_utilizador == id_utilizador).First().email;
 
             IEnumerable<Receita> historico = getHistorico(email).Take(4);
+            if (historico.Count() == 0) return _context_r.Receita.Find(1);
             List<int> historicoIng = new List<int>();
             foreach (Receita r in historico)
             {

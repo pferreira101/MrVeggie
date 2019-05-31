@@ -2,9 +2,13 @@
 
 @{
     ViewData["Title"] = "NewPasso";
+    int i = 0;
 }
 
 <h1>NewPasso</h1>
+
+
+
 
 <form asp-action="registaPasso">
     <div class="form-group">
@@ -18,7 +22,7 @@
         <span asp-validation-for="passo.tempo" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <select class="mdb-select md-form" multiple>
+        <select id="ops" name="ops" class="mdb-select md-form">
             <option value="" disabled selected>Escolha a Operação</option>
             @foreach (var operacao in Model.operacoes)
             {
@@ -28,7 +32,7 @@
 
     </div>
     <div class="form-group">
-        <select id="receitas" name="receitas" class="mdb-select md-form" multiple>
+        <select id="recs" name="recs" class="mdb-select md-form">
             <option value="" disabled selected>Escolha a subReceita</option>
             @foreach (var receita in Model.receitas)
             {
@@ -36,17 +40,43 @@
             }
         </select>
     </div>
-    <div class="form-group">
-        <select class="mdb-select md-form" multiple>
-            <option value="" disabled selected>Escolha os ingredientes</option>
+    
+    <tr class="form-group">
+        <th>
+            <select id="ings" name="ings" class="mdb-select md-form" multiple>
+                <option value="" disabled selected>Escolha os ingredientes</option>
+                @foreach (var ingrediente in Model.ingredientes)
+                {
+                    <option value="@ingrediente.id_ingrediente">@ingrediente.nome</option>
+
+                }
+            </select>
+        </th>
+        <th>
             @foreach (var ingrediente in Model.ingredientes)
             {
-                <option value="@ingrediente.id_ingrediente">@ingrediente.nome</option>
+                <label asp-for="quantidades[i]" class="control-label"></label>
+                <input asp-for="quantidades[i]" value="@Model.quantidades[i]" class="form-control" />
+                <span asp-validation-for="quantidades[i]" class="text-danger"></span>
+                i++;
             }
-        </select>
-    </div>
+        </th>
+    </tr>
+
     <div class="form-group">
         <input type="submit" value="Proximo Passo" class="btn btn-default btn-success" />
-        <input type="submit" value="Finalizar" class="btn btn-default btn-success" />
+
+    </div>
+    <button asp-action="Index" type="submit" value="Finalizar" name="Finalizar" class="btn btn-default btn-success" />
+
+    <div hidden="hidden" class="form-group">
+        <label asp-for="nPasso" class="control-label">@Model.nPasso</label>
+        <input asp-for="nPasso" value="@Model.nPasso" class="form-control" />
+        <span asp-validation-for="nPasso" class="text-danger"></span>
+    </div>
+    <div hidden="hidden" class="form-group">
+        <label asp-for="id_receita" class="control-label">@Model.id_receita</label>
+        <input asp-for="id_receita" class="form-control" />
+        <span asp-validation-for="id_receita" class="text-danger"></span>
     </div>
 </form>

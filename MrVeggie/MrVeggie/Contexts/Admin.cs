@@ -1,4 +1,5 @@
-﻿using MrVeggie.Models;
+﻿using Microsoft.Extensions.Primitives;
+using MrVeggie.Models;
 using MrVeggie.Models.Auxiliary;
 using System;
 using System.Collections.Generic;
@@ -15,13 +16,15 @@ namespace MrVeggie.Contexts {
         private ReceitaContext _context_r;
         private OperacaoContext _context_op;
         private UtensilioContext _context_uten;
+        private IngredientesPassoContext _context_ip;
 
-        public Admin(IngredienteContext context_i, UtilizadorContext context_u, ReceitaContext context_r, OperacaoContext context_op, UtensilioContext context_uten) {
+        public Admin(IngredienteContext context_i, UtilizadorContext context_u, ReceitaContext context_r, OperacaoContext context_op, UtensilioContext context_uten, IngredientesPassoContext context_ip) {
             _context_i = context_i;
             _context_u = context_u;
             _context_r = context_r;
             _context_op = context_op;
             _context_uten = context_uten;
+            _context_ip = context_ip;
         }
 
 
@@ -59,8 +62,32 @@ namespace MrVeggie.Contexts {
             return new Estatistica(nr_utilizadores, nr_masculino, nr_feminino, nr_receitas, nr_ingredientes, registos_ultimo_mes);
         }
 
+        public List<Unidade> getUnidades()
+        {
+            return _context_ip.Unidade.ToList();  
+        }
+
         public List<Ingrediente> getIngredientes() {
             return _context_i.Ingrediente.ToList();
+        }
+
+        internal List<Ingrediente> getIngredientes(StringValues stringValues)
+        {
+            return _context_i.Ingrediente.Where(i => stringValues.Contains(i.id_ingrediente.ToString())).ToList();
+        }
+
+        public void registaPasso(NewPasso model)
+        {
+            _context_r.Passo.Add(model.passo);
+
+            _context_r.SaveChanges();
+
+            foreach (Ingrediente i in model.ingredientes)
+            {
+                _context_ip.Add(new IngredientesPasso { passo_id = model.passo.id_passo, ingrediente_id = i.id_ingrediente, unidade_id = 1, quantidade = 250 }); // por a selecionar a quantidade e unidade
+            }
+
+            _context_ip.SaveChanges();
         }
 
         public int getNewReceitaID(string nome) {
@@ -69,7 +96,10 @@ namespace MrVeggie.Contexts {
 
         public void registaReceita(Receita r, List<Utensilio> utensilios) {
 
-            
+            _context_r.Receita.Add(r);
+
+            _context_r.SaveChanges();
+
             if (utensilios != null)
             {
                 foreach (Utensilio u in utensilios)
@@ -80,12 +110,24 @@ namespace MrVeggie.Contexts {
             _context_r.SaveChanges();
         }
 
-        public List<Receita> getReceitas(){
+        public List<Receita> getReceitas()
+        {
             return _context_r.Receita.ToList();
         }
 
-        public List<Operacao> getOperacoes(){
+        public List<Receita> getReceitas(Microsoft.Extensions.Primitives.StringValues stringValues)
+        {
+            return _context_r.Receita.Where(r => stringValues.Contains(r.id_receita.ToString())).ToList();
+        }
+
+        public List<Operacao> getOperacoes()
+        {
             return _context_op.Operacao.ToList();
+        }
+
+        public List<Operacao> getOperacoes(Microsoft.Extensions.Primitives.StringValues stringValues)
+        {
+            return _context_op.Operacao.Where(op => stringValues.Contains(op.id_op.ToString())).ToList();
         }
     }
 }

@@ -16,8 +16,8 @@ namespace MrVeggie.Controllers {
 
         private Admin admin;
 
-        public AdminViewController(IngredienteContext context_i, UtilizadorContext context_u, ReceitaContext context_r, UtensilioContext context_uten ,OperacaoContext context_op) {
-            admin = new Admin(context_i, context_u, context_r, context_op, context_uten);
+        public AdminViewController(IngredienteContext context_i, UtilizadorContext context_u, ReceitaContext context_r, UtensilioContext context_uten ,OperacaoContext context_op, IngredientesPassoContext context_ip) {
+            admin = new Admin(context_i, context_u, context_r, context_op, context_uten, context_ip);
 
         }
 
@@ -52,13 +52,14 @@ namespace MrVeggie.Controllers {
         }
 
 
-      
+
 
         [Microsoft.AspNetCore.Mvc.HttpPost]
         public IActionResult registaReceita(NewReceita n) {
             n.utensilios = admin.getUtensilios(Request.Form["uts"]);
             admin.registaReceita(n.receita, n.utensilios);
-
+            float[] r = new float[admin.getIngredientes().Count()];
+            
             return View("NewPasso",new NewPasso
             {
                 passo = new Passo(),
@@ -66,7 +67,10 @@ namespace MrVeggie.Controllers {
                 ingredientes = admin.getIngredientes(),
                 nPasso = 1,
                 operacoes = admin.getOperacoes(),
-                receitas = admin.getReceitas()
+                receitas = admin.getReceitas(),
+                unidades = admin.getUnidades(),
+                quantidades = r
+
             });
         }
 
@@ -74,10 +78,24 @@ namespace MrVeggie.Controllers {
         [Microsoft.AspNetCore.Mvc.HttpPost]
         public IActionResult registaPasso(NewPasso model)
         {
+            
+            model.ingredientes = admin.getIngredientes(Request.Form["ings"]);
+            if (Request.Form["recs"].Count != 0)
+            {
+                model.passo.sub_receita_id = int.Parse(Request.Form["recs"].First());
+            }
 
-            //admin.registaPasso(model);
+            model.passo.nr = model.nPasso;    
+            model.passo.receita_id = model.id_receita;
+            model.passo.operacao_id = int.Parse(Request.Form["ops"].First());
+            
+
+            admin.registaPasso(model);
 
             model.nPasso++;
+            model.operacoes = admin.getOperacoes();
+            model.receitas = admin.getReceitas();
+            model.ingredientes = admin.getIngredientes();
 
             return View("NewPasso", model);
         }
@@ -86,5 +104,7 @@ namespace MrVeggie.Controllers {
           
            return View(new Tuple<Passo, List<Operacao>, List<Receita>,int,int>(new Passo(), admin.getOperacoes(), admin.getReceitas(), t.Item4, t.Item5));
         }
+
+        
     }
 }

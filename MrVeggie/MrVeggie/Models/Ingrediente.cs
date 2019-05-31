@@ -37,7 +37,11 @@ namespace MrVeggie.Models {
         public IngredienteContext(DbContextOptions<IngredienteContext> options) : base(options) {
 
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<IngredientesPasso>().HasKey(ip => new { ip.passo_id, ip.ingrediente_id });
 
+        }
         public DbSet<Ingrediente> Ingrediente { get; set; }
 
 

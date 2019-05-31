@@ -87,9 +87,9 @@ namespace MrVeggie.Controllers {
 
                     await HttpContext.SignInAsync(principal);
 
-                    
 
-                    if (u.admin) return RedirectToAction("Index", "Admin");
+
+                    if (u.admin) return RedirectToAction("Index", "AdminView") ;
                     else if(!u.config_inicial) return RedirectToAction("ConfigInicial", "IngredienteView");
                     else return RedirectToAction("Index", "Home");
 
