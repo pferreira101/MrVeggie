@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Configuração Inicial";
-    List<string> ids = new List<string>();
 }
 
 
@@ -13,6 +12,7 @@
 
 <script>
     var ids = [];
+
 
 
     function addToPref(id) {
@@ -39,7 +39,7 @@
     }
 
     function getIDsSelected() {
-        $.ajax({
+        /*$.ajax({
             type: "POST",
             url: "/IngredienteView/ConfigInicial",
             data: JSON.stringify(ids),
@@ -58,6 +58,13 @@
             error: function (response) {
                 alert(response.responseText);
             }
+        });*/
+        $.ajax({
+            url: '@Url.Action("ConfigInicial", "IngredienteView")',
+            type: 'POST',
+            data: JSON.stringify(ids),
+            contentType: "application/json; charset=utf-8",
+            dataType: "text",
         });
 
     }
@@ -93,6 +100,6 @@
 </div>
 
 <a class="btn btn-success" onclick="getIDsSelected()">TESTE</a>
-<a style="float:right" class="btn btn-success" asp-controller="UserView" asp-action="registaConfigInicial">Confirmar</a>
+<a style="float:right" onclick="getIDsSelected()" class="btn btn-success" asp-controller="Home" asp-action="Index">Confirmar</a>
 
 

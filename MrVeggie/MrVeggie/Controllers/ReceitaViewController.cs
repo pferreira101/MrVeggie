@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using MrVeggie.Contexts;
 using MrVeggie.Models;
 using MrVeggie.Models.Auxiliary;
+using MrVeggie.Models.Pages;
 using MrVeggie.Shared;
 
 namespace MrVeggie.Controllers {
@@ -17,8 +18,8 @@ namespace MrVeggie.Controllers {
         private Preparacao preparacao;
         
 
-        public ReceitaViewController(ReceitaContext context_r, PassoContext context_p, IngredientesPassoContext context_ip, IngredienteContext context_i) {
-            selecao = new Selecao(context_r, context_i, context_ip, null);
+        public ReceitaViewController(ReceitaContext context_r, PassoContext context_p, IngredientesPassoContext context_ip, IngredienteContext context_i, AgendaContext context_a, UtilizadorContext context_u) {
+            selecao = new Selecao(context_r, context_i, context_ip, context_u, context_a);
             preparacao = new Preparacao(context_r, context_p, context_ip, context_i);
         }
 
@@ -41,6 +42,21 @@ namespace MrVeggie.Controllers {
         }
         
         [HttpPost]
+        public IActionResult showReceitasSearch(string searchBar){
+            List<Receita> receitas = new List<Receita>();
+            Ingrediente[] ingredientes = selecao.getIngredientes();
+
+            foreach(int i in selecao.getReceitas(searchBar)){
+                receitas.Add(preparacao.getIngredientes(i));
+            }
+            
+           
+           
+           return View("ShowReceitas",new ReceitaAndIngredienteViewModel { Ingredientes = ingredientes, receitas = receitas.ToArray() });
+        }
+
+
+        [HttpPost]
         public IActionResult showReceitas(int[] checkboxes)
         {
 
@@ -55,12 +71,23 @@ namespace MrVeggie.Controllers {
         }
 
 
-        public ActionResult AddToFavorite() {
-            Console.WriteLine("\n\n\n\n\n ADICIONA AQUI \n\n\n\n\n");
 
-            // EM QUE CONTEXTO ADICIONAR AOS FAVORITOS? 
 
-            return new EmptyResult();
+
+        [HttpPost]
+        public bool VerificaAgenda([FromBody] string[] data) {
+            return selecao.verificaAgenda(Int32.Parse(data[0]), (data[1].ToCharArray())[0], User.Identity.Name);
+        }
+
+        [HttpPost]
+        public void MarcaAgenda([FromBody] string[] data) {
+            selecao.marcaAgenda(Int32.Parse(data[0]), (data[1].ToCharArray())[0], Int32.Parse(data[2]), User.Identity.Name);
+        }
+
+
+        [HttpPost]
+        public void AdicionaReceitaFavoritos([FromBody] int id_receita) {
+            selecao.adicionaReceitaFavoritos(id_receita, User.Identity.Name);
         }
     }
 }

@@ -47,6 +47,13 @@ namespace MrVeggie.Models {
         [Display(Name = "Config")]
         public bool config_inicial { get; set; }
 
+        
+        [Display(Name = "Data Registo")]
+        public DateTime data_reg { get; set; }
+
+
+
+
 
 
         [ForeignKey("utilizador_id")]
@@ -94,12 +101,19 @@ namespace MrVeggie.Models {
     public class UtilizadorContext : DbContext {
 
         public UtilizadorContext(DbContextOptions<UtilizadorContext> options) : base(options) {
-
+            
 
 
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
+            modelBuilder.Entity<UtilizadorReceitasPref>().HasKey(urp => new { urp.utilizador_id, urp.receita_id });
 
+            modelBuilder.Entity<UtensiliosReceita>().HasKey(ut => new { ut.receita_id, ut.utensilio_id });
+
+            modelBuilder.Entity<IngredientesPasso>().HasKey(ip => new { ip.passo_id, ip.ingrediente_id });
+
+        }
 
         public DbSet<Utilizador> Utilizador { get; set; }
         public DbSet<UtilizadorIngredientesPref> UtilizadorIngredientesPref { get; set; }

@@ -42,6 +42,7 @@ namespace MrVeggie.Controllers {
         public IActionResult RegistaUtilizador([Bind] Utilizador u) {
 
             if (ModelState.IsValid) {
+                u.data_reg = DateTime.Now;
                 bool RegistrationStatus = this.utilizador_handling.RegistaUtilizador(u);
 
                 if (RegistrationStatus) {
@@ -86,9 +87,9 @@ namespace MrVeggie.Controllers {
 
                     await HttpContext.SignInAsync(principal);
 
-                    
 
-                    if (u.admin) return RedirectToAction("Index", "Admin");
+
+                    if (u.admin) return RedirectToAction("Index", "AdminView") ;
                     else if(!u.config_inicial) return RedirectToAction("ConfigInicial", "IngredienteView");
                     else return RedirectToAction("Index", "Home");
 

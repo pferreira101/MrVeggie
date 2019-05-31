@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MrVeggie.Models.Auxiliary {
+namespace MrVeggie.Models {
 
     public class HistoricoUtilizador {
 
@@ -25,6 +25,7 @@ namespace MrVeggie.Models.Auxiliary {
 
         [Required]
         public DateTime data_conf { get; set; }
+
 
         public int avaliacao { get; set; }
     }

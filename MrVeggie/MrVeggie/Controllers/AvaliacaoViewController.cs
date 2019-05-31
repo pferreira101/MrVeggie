@@ -13,8 +13,8 @@ namespace MrVeggie.Controllers{
 
         private Avaliacao avaliacao;
 
-        public AvaliacaoViewController(ReceitaContext context_r, UtilizadorContext context_u) {
-            avaliacao = new Avaliacao(context_r, context_u);
+        public AvaliacaoViewController(ReceitaContext context_r, UtilizadorContext context_u, HistoricoUtilizadorContext context_hu) {
+            avaliacao = new Avaliacao(context_r, context_u, context_hu);
         }
 
 
@@ -22,6 +22,8 @@ namespace MrVeggie.Controllers{
         [HttpGet("{id_receita}")]
         public IActionResult AvaliarReceita(int id_receita) {
             Receita receita = avaliacao.getReceita(id_receita);
+
+            avaliacao.addToHistorico(id_receita, User.Identity.Name);
 
             return View(receita);
         }

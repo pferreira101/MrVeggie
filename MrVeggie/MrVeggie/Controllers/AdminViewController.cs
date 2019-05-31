@@ -3,19 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using MrVeggie.Contexts;
 using MrVeggie.Models;
 using MrVeggie.Models.Auxiliary;
+using MrVeggie.Models.Pages;
 
 namespace MrVeggie.Controllers {
 
 
-    public class AdminViewController : Controller {
+    public class AdminViewController : Microsoft.AspNetCore.Mvc.Controller
+    {
 
         private Admin admin;
 
-        public AdminViewController(IngredienteContext context_i, UtilizadorContext context_u, ReceitaContext context_r) {
-            admin = new Admin(context_i, context_u, context_r);
+        public AdminViewController(IngredienteContext context_i, UtilizadorContext context_u, ReceitaContext context_r, UtensilioContext context_uten ,OperacaoContext context_op, IngredientesPassoContext context_ip) {
+            admin = new Admin(context_i, context_u, context_r, context_op, context_uten, context_ip);
+
         }
 
 
@@ -34,7 +38,10 @@ namespace MrVeggie.Controllers {
         }
 
         public IActionResult NewReceita() {
-            return View();
+            List<Utensilio> utensilios = admin.getUtensilios();
+            
+
+            return View(new NewReceita { receita = new Receita(), utensilios = utensilios} );
         }
 
 
@@ -44,5 +51,60 @@ namespace MrVeggie.Controllers {
 
             return RedirectToAction("Index", "AdminView");
         }
+
+
+
+
+        [Microsoft.AspNetCore.Mvc.HttpPost]
+        public IActionResult registaReceita(NewReceita n) {
+            n.utensilios = admin.getUtensilios(Request.Form["uts"]);
+            admin.registaReceita(n.receita, n.utensilios);
+            float[] r = new float[admin.getIngredientes().Count()];
+            
+            return View("NewPasso", new NewPasso {
+                passo = new Passo(),
+                id_receita = admin.getNewReceitaID(n.receita.nome),
+                ingredientes = admin.getIngredientes(),
+                nPasso = 1,
+                operacoes = admin.getOperacoes(),
+                receitas = admin.getReceitas(),
+                unidades = admin.getUnidades(),
+                quantidades = r
+
+            });
+        }
+
+
+        [Microsoft.AspNetCore.Mvc.HttpPost]
+        public IActionResult registaPasso(NewPasso model)
+        {
+            
+            model.ingredientes = admin.getIngredientes(Request.Form["ings"]);
+            if (Request.Form["recs"].Count != 0)
+            {
+                model.passo.sub_receita_id = int.Parse(Request.Form["recs"].First());
+            }
+
+            model.passo.nr = model.nPasso;    
+            model.passo.receita_id = model.id_receita;
+            model.passo.operacao_id = int.Parse(Request.Form["ops"].First());
+            
+
+            admin.registaPasso(model);
+
+            model.nPasso++;
+            model.operacoes = admin.getOperacoes();
+            model.receitas = admin.getReceitas();
+            model.ingredientes = admin.getIngredientes();
+
+            return View("NewPasso", model);
+        }
+
+        public IActionResult NewPasso(Tuple<Passo, List<Operacao>, List<Receita>, int, int> t){
+          
+           return View(new Tuple<Passo, List<Operacao>, List<Receita>,int,int>(new Passo(), admin.getOperacoes(), admin.getReceitas(), t.Item4, t.Item5));
+        }
+
+        
     }
 }

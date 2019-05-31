@@ -1,5 +1,9 @@
 ﻿@model MrVeggie.Models.Auxiliary.Estatistica
 
+@{ 
+
+    float crescimento = (float)Model.registos_ultimo_mes/(Model.nr_utilizadores - Model.registos_ultimo_mes)*100;
+}
 
 <h1>Estatisticas</h1>
 
@@ -79,4 +83,15 @@ pieSeries.hiddenState.properties.startAngle = -90;
 </div>
 
 <div id="chartdiv">
+</div>
+
+<div class="row">
+    <div class="col-6" style="text-align:center">
+        <h1 style="text-align: center;"><strong>@Model.registos_ultimo_mes</strong></h1>
+        <p style="text-align: center;"><span style="color: #999999;">Novos registos</span></p>
+    </div>
+    <div class="col-6">
+        <h1 style="text-align: center;"><strong>@crescimento %</strong></h1>
+        <p style="text-align: center;"><span style="color: #999999;">Crescimento Mensal</span></p>
+    </div>
 </div>

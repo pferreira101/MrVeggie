@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MrVeggie.Contexts;
 using MrVeggie.Models;
+using MrVeggie.Models.Auxiliary;
 using MrVeggie.Shared;
 
 namespace MrVeggie.Controllers {
@@ -14,8 +15,8 @@ namespace MrVeggie.Controllers {
 
         private Selecao selecao;
 
-        public IngredienteViewController(IngredienteContext context) {
-            selecao = new Selecao(null, context,null, null);
+        public IngredienteViewController(IngredienteContext context_i, IngredientesPassoContext context_ip, UtilizadorContext context_u, AgendaContext context_a) {
+            selecao = new Selecao(null, context_i, context_ip, context_u, context_a);
         }
 
 
@@ -35,8 +36,9 @@ namespace MrVeggie.Controllers {
 
 
         [HttpPost]
-        public void ConfigInicial(string ids) {
-            int id = 1;
+        public void ConfigInicial([FromBody] int[] ids) {
+            selecao.setUserIngrPrefs(ids, User.Identity.Name);
+
         }
     }
 }

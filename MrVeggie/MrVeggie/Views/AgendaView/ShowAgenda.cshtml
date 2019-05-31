@@ -1,8 +1,9 @@
 ﻿@model IEnumerable<MrVeggie.Models.Agenda>
 
+@using MrVeggie.Models
+
 @{
     ViewData["Title"] = "ShowAgenda";
-    
 }
 
 <h1>Agenda</h1>
@@ -30,27 +31,30 @@
             <th scope="row">Almoço</th>
             <td>
                 @if (Model.ElementAt(0).receita != null) {
-                    <h5>@Model.ElementAt(0).receita.nome;</h5>
+                    <p>@Model.ElementAt(0).receita.nome;</p>
                 }
             </td>
             <td>
-                @if (Model.ElementAt(2).receita_id != null) {
-                    <h5>@Model.ElementAt(2).receita.nome;</h5>
+                @if (Model.ElementAt(2).receita != null) {
+                    <p>@Model.ElementAt(2).receita.nome</p>
+                }
+                else {
+
                 }
             </td>
             <td>
                 @if (Model.ElementAt(4).receita != null) {
-                    <h5>@Model.ElementAt(4).receita.nome;</h5>
+                    <p>@Model.ElementAt(4).receita.nome</p>
                 }
             </td>
             <td>
                 @if (Model.ElementAt(6).receita != null) {
-                    <h5>@Model.ElementAt(6).receita.nome;</h5>
+                    <p>@Model.ElementAt(6).receita.nome</p>
                 }
             </td>
             <td>
                 @if (Model.ElementAt(8).receita != null) {
-                    <h5>@Model.ElementAt(8).receita.nome;</h5>
+                    <p>@Model.ElementAt(8).receita.nome</p>
                 }
             </td>
             <td>

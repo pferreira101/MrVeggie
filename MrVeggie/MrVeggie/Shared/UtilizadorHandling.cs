@@ -35,7 +35,7 @@ namespace MrVeggie.Shared {
             if (((List<Utilizador>)userList).Count != 0) return false;
 
             u.password = MyHelpers.HashPassword(u.password);
-            _context.Utilizador.Add(u);
+            _context.Add(u);
             _context.SaveChanges();
 
             return true;

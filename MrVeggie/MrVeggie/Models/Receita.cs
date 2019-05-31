@@ -83,6 +83,12 @@ namespace MrVeggie.Models {
         [ForeignKey("receita_id")]
         public List<Agenda> agenda { get; set; }
 
+
+
+        public bool Equals(Receita other)
+        {
+            return null != other && id_receita == other.id_receita;
+        }
     }
 
     public class ReceitaContext : DbContext {
@@ -93,6 +99,14 @@ namespace MrVeggie.Models {
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
+            modelBuilder.Entity<UtilizadorReceitasPref>().HasKey(urp => new { urp.utilizador_id, urp.receita_id });
+
+            modelBuilder.Entity<UtensiliosReceita>().HasKey(ut => new {
+                ut.receita_id,
+                ut.utensilio_id
+            });
+
+            modelBuilder.Entity<IngredientesPasso>().HasKey(ip => new { ip.passo_id, ip.ingrediente_id });
 
             // configures one-to-many relationship
             modelBuilder.Entity<Passo>()
@@ -100,6 +114,11 @@ namespace MrVeggie.Models {
                         .WithMany(r => r.passos)
                         .HasForeignKey(p => p.receita_id)
                         .HasConstraintName("FKPasso200762");
+
+
+            
+
+
         }
 
 
