@@ -7,7 +7,6 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
-using Geolocation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MrVeggie.Controllers
@@ -22,18 +21,6 @@ namespace MrVeggie.Controllers
         }
 
 
-
-        public List<LatLongLocation> calculaMaisProximo(){
-            LatLongLocation[] localizacoes = new LatLongLocation[] { new LatLongLocation(41.857568, -8.206558),  new LatLongLocation(41.531926, -8.447604), new LatLongLocation(41.531928, -8.443604), new LatLongLocation(40.857568, -8.406558), new LatLongLocation(41.530129, -8.447593) };
-
-            LatLongLocation origin = new LatLongLocation(41.529002, -8.445308);
-            var results = localizacoes
-                           .OrderBy(x => GeoCalculator.GetDistance(origin.latitude, origin.longitude, x.latitude, x.longitude, 1))
-                           .Take(3)
-                           .ToList();
-
-            return results;
-        }
 
 
         public List<MarketLocation> ProcessQuery()
@@ -84,69 +71,6 @@ namespace MrVeggie.Controllers
                 results.Add(new MarketLocation(name,latitude, longitude));
             }
             return results;
-        }
-
-        /*public async Task<LatLongLocation> FazRequestAsync() {
-            //Create a request.
-            var request = new LocationRecogRequest()
-            {
-                CenterPoint = new Coordinate(41.557568, -8.406558),
-                DistanceUnits = DistanceUnitType.Kilometers,
-                IncludeEntityTypes = "address",
-                Top = 10,
-                Radius = 2,
-                VerbosePlaceNames = false,
-                BingMapsKey = "Alvpuc-Z8ROrtuOcQZdVD1iaINzybihaHRnSHYWL8jwdEjVrXRj843L8ayxchoj7"
-            };
-
-            //Process the request by using the ServiceManager.
-            var response = await ServiceManager.GetResponseAsync(request);
-
-            if (response != null &&
-                response.ResourceSets != null &&
-                response.ResourceSets.Length > 0 &&
-                response.ResourceSets[0].Resources != null &&
-                response.ResourceSets[0].Resources.Length > 0)
-            {
-                var result = response.ResourceSets[0].Resources[0] as BingMapsRESTToolkit.Location;
-                return new LatLongLocation(result.Point.Coordinates[0], result.Point.Coordinates[1]);
-            }
-            return null;
-        }
-        */
-
-        /*public static LatLongLocation Geocode(string address)
-        {
-            string point = "41.557568,-8.406558";
-            string key = "Alvpuc-Z8ROrtuOcQZdVD1iaINzybihaHRnSHYWL8jwdEjVrXRj843L8ayxchoj7";
-            //string url = "https://dev.virtualearth.net/REST/v1/LocationRecog/41.557568,-8.406558?radius=2&top=10&includeEntityTypes=businessAndPOI&key=Alvpuc-Z8ROrtuOcQZdVD1iaINzybihaHRnSHYWL8jwdEjVrXRj843L8ayxchoj7";
-            string url = "http://dev.virtualearth.net/REST/v1/locationrecog/47.609722,-122.333056?key=" + key + "&includeEntityTypes=address&output=json";
-
-            using (var client = new WebClient())
-            {
-                string response1 = client.DownloadString(url);
-                Console.WriteLine("**********\n"+response1);
-                DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(Response));
-                using (var es = new MemoryStream(Encoding.Unicode.GetBytes(response1)))
-                {
-                    var response = (ser.ReadObject(es) as Response); //Response is one of the Bing Maps DataContracts
-                    var result = response.ResourceSets[0].Resources[0] as BingMapsRESTToolkit.Location;
-                    return new LatLongLocation(result.Point.Coordinates[0], result.Point.Coordinates[1]);
-                }
-            }
-        }
-        */
-
-        public class LatLongLocation
-        {
-            public double latitude;
-            public double longitude;
-
-            public LatLongLocation(double latitude, double longitude)
-            {
-                this.latitude = latitude;
-                this.longitude = longitude;
-            }
         }
 
         public class MarketLocation
