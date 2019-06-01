@@ -12,6 +12,11 @@ namespace MrVeggie.Contexts {
         private readonly UtilizadorContext _context_u;
 
 
+        public Autenticacao(UtilizadorContext context_u) {
+            _context_u = context_u;
+        }
+
+
         public bool validaUtilizador(Utilizador u) {
             u.password = MyHelpers.HashPassword(u.password);
             var returnedUser = _context_u.Utilizador.Where(b => b.email == u.email && b.password == u.password).FirstOrDefault();
@@ -37,7 +42,7 @@ namespace MrVeggie.Contexts {
 
         public Utilizador getUtilizador(string email) {
 
-            return null;
+            return _context_u.Utilizador.Where(u => u.email.Equals(email)).First();
         }
     }
 }
