@@ -15,32 +15,27 @@ namespace MrVeggie.Models.Auxiliary
             p = p1;
         }
 
-        public void readStep()
+        public string[] getText()
         {
-            var config = SpeechConfig.FromSubscription("652842a020de4fc9990d5cfc8f82fb98", "westeurope");
 
-            var language = "pt-PT";
-            config.SpeechSynthesisLanguage = language;
-            var voice = "Microsoft Server Speech Text to Speech Voice (pt-PT, HeliaRUS)";
-            config.SpeechSynthesisVoiceName = voice;
-
-
-            var synthesizer = new SpeechSynthesizer(config);
+            string[] txts = new string[p.ingredientes.Count + 1];
 
             string text = "";
+
+            int i = 0;
 
             if (p.ingredientes.Count == 0)
             {
                 if (p.tempo == 0)
                 {
                     text = p.operacao.desc;
+                    txts[i++] = text;
                 }
                 else
                 {
                     text = p.operacao.desc + " durante " + p.tempo + " minutos.";
+                    txts[i++] = text;
                 }
-
-                var result = synthesizer.SpeakTextAsync(text);
             }
             else
             {
@@ -50,16 +45,17 @@ namespace MrVeggie.Models.Auxiliary
                     {
 
                         text = p.operacao.desc + " " + ing.Value.quantidade + " " + ing.Value.unidade + " de " + ing.Key.nome;
+                        txts[i++] = text;
                     }
                     else
                     {
                         text = p.operacao.desc + " " + ing.Value.quantidade + " " + ing.Value.unidade + " de " + ing.Key.nome + " durante " + p.tempo + " minutos.";
+                        txts[i++] = text;
                     }
-
-                    var result = synthesizer.SpeakTextAsync(text);
-
                 }
             }
+
+            return txts;
 
         }
 

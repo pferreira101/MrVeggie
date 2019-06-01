@@ -8,32 +8,17 @@
     int proximo = Model.nr + 1;
     int anterior = Model.nr - 1;
 
-    bool sound = SoundControl.GetSoundState();
+    TextToSpeech tts = new TextToSpeech(Model);
 
-    Console.WriteLine("ESTADO: " + SoundControl.GetSoundState());
-
-
-    /*if (SoundControl.GetSoundState())
-    {
-        TextToSpeech tts = new TextToSpeech(Model);
-        tts.readStep();
-    }*/
+    string[] txts = tts.getText();
 
 }
 
-<div class="onoffswitch" style="float:right">
-    @if (SoundControl.GetSoundState())
-    {
-        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
-    }
-    else
-    {
-        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
-    }
-    <label class="onoffswitch-label" for="myonoffswitch">
-        <span class="onoffswitch-inner"></span>
-        <span class="onoffswitch-switch"></span>
-    </label>
+<p id="aviso" style="font-size:80%;display:none"><b>Aviso:</b> O navegador que utiliza não suporta as funcionalidades de voz.</p>
+
+
+<div style="float:right">
+    <input type="image" id="ouvir" src="https://www.freeiconspng.com/uploads/green-sound-png-icon-15.png" onclick="ouvir()" width="60" height="60">
 </div>
 
 
@@ -119,9 +104,9 @@
         // speech recognition API supported
 
         var recognition = new SpeechRecognition();
-        recognition.continuous = true;
+        //recognition.continuous = true;
         recognition.lang = "pt-PT";
-        recognition.interimResults = true;
+        //recognition.interimResults = true;
 
         recognition.onend = function () {
             recognition.start();
@@ -144,6 +129,11 @@
                 var fin = document.getElementById('finalizar');
                 if (fin != null) fin.click();
             }
+
+            if (transcript === "ouvir") {
+                var ouv = document.getElementById('ouvir');
+                if (ouv != null) ouv.click();
+            }
         }
 
         recognition.start();
@@ -151,7 +141,34 @@
 
     else {
         // speech recognition API not supported
-        // mostrar algo?
+        document.getElementById('aviso').style.display = "block";
     }
+
+    // BEGIN SPEECH SYNTHESIZING
+
+    var synth = window.speechSynthesis;
+    window.speechSynthesis.getVoices();
+    var voices = [];
+
+    voices = synth.getVoices();
+
+    var txs = [];
+    txs = new Array();
+
+    @for (int fld = 0; fld < txts.Length; fld++) {
+            @:var tx = "@txts[fld]";
+            @:txs.push(tx);
+     }
+
+    function ouvir() {
+        var i;
+        for (i = 0; i < txs.length; i++) {
+            var utter = new SpeechSynthesisUtterance(txs[i]);
+            //utter.voice = voices[15];
+            utter.lang = "pt-PT";
+            synth.speak(utter);
+        }
+    }
+
 
 </script>
