@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MrVeggie.Models.Auxiliary;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -37,8 +38,20 @@ namespace MrVeggie.Models {
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
+            modelBuilder.Entity<IngredientesPasso>().HasKey(ip => new { ip.passo_id, ip.ingrediente_id });
+
+            modelBuilder.Entity<UtensiliosReceita>().HasKey(ut => new
+            {
+                ut.receita_id,
+                ut.utensilio_id
+            });
+
+            modelBuilder.Entity<UtilizadorReceitasPref>().HasKey(urp => new { urp.utilizador_id, urp.receita_id });
 
             modelBuilder.Entity<HistoricoUtilizador>().HasKey(hu => new { hu.utilizador_id, hu.receita_id, hu.data_conf });
+            modelBuilder.Entity<IngredientesPasso>().HasKey(ip => new { ip.passo_id, ip.ingrediente_id });
+            modelBuilder.Entity<UtensiliosReceita>().HasKey(ut => new { ut.receita_id, ut.utensilio_id });
+            modelBuilder.Entity<UtilizadorReceitasPref>().HasKey(urp => new { urp.utilizador_id, urp.receita_id });
 
             modelBuilder.Entity<HistoricoUtilizador>()
                         .HasOne<Utilizador>(hu => hu.utilizador)

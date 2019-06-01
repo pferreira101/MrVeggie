@@ -39,10 +39,7 @@ namespace MrVeggie.Models.Auxiliary {
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
-            modelBuilder.Entity<UtensiliosReceita>().HasKey(ut => new {
-                ut.receita_id,
-                ut.utensilio_id
-            });
+            modelBuilder.Entity<UtensiliosReceita>().HasKey(ut => new { ut.receita_id, ut.utensilio_id });
 
             modelBuilder.Entity<UtensiliosReceita>()
                         .HasOne<Utensilio>(ur => ur.utensilio)

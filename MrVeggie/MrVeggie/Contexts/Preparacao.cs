@@ -47,7 +47,6 @@ namespace MrVeggie.Contexts {
                     } 
                     ingredientes[i.Key].add(i.Value.quantidade);
 
-                    Console.WriteLine("****** LISTA TOTAL : INGREDIENTE {0} - QUANTIDADE {1} **************", i.Key.id_ingrediente, i.Value);
                 }
             }
             receita.ingredientes = ingredientes;
@@ -63,7 +62,7 @@ namespace MrVeggie.Contexts {
         }
 
 
-        private Dictionary<Ingrediente, Quantidade> getIngredientesPasso(int id_passo) {
+        public Dictionary<Ingrediente, Quantidade> getIngredientesPasso(int id_passo) {
             Dictionary<Ingrediente, Quantidade> ingredientes = new Dictionary<Ingrediente, Quantidade>();
 
             List<IngredientesPasso> ips = _context_ip.IngredientesPasso.Where(ip => ip.passo_id == id_passo).ToList();
@@ -74,7 +73,6 @@ namespace MrVeggie.Contexts {
                 Quantidade q = new Quantidade(ip.quantidade, unidade);
                 ingredientes.Add(i, q);
 
-                Console.WriteLine("****** LISTA PASSO {2} = INGREDIENTE {0} - QUANTIDADE {1} **************", i.id_ingrediente, ip.quantidade, ip.passo_id);
             }
 
             return ingredientes;
