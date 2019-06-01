@@ -12,21 +12,30 @@
 
     function writeIngredienteLine() {
         var $ingredientes = $('#ingredientes');
+        //$ingredientes.empty();
         var to_append = '';
-
-        to_append += '<select id="teste" name="teste" class="mdb-select md-form">';
+        to_append += '<div class="form-group">' ;
+        to_append += '<select required id="ings" name="ings" class="mdb-select md-form">';
         to_append += '<option value="" disabled selected>Escolha o ingrediente</option>';
             @foreach (var ingrediente in Model.ingredientes) {
                @:to_append += '<option value="@ingrediente.id_ingrediente">@ingrediente.nome</option>';
             }
         to_append += '</select>';
+        to_append += '<input id="quantidades" name="quantidades" type="number" step="0.05" />';
+        to_append += '<select required id="unds" name="unds" class="mdb-select md-form">';
+        to_append += '<option value="" disabled selected>Escolha a unidade</option>';
+            @foreach (var unidade in Model.unidades) {
+               @:to_append += '<option value="@unidade.id_unidade">@unidade.desc</option>';
+            }
+        to_append += '</select>';
+        to_append += '</div>';
         $ingredientes.append(to_append); // NO HTML ISTO ESTÁ A SER ESCRITO LOGO A SEGUIR A ABERTURA DA TAG, se alterar no f12 e por no sitio correto já dá direito
 
     }
 
     function nrIngredientes() {
         var $nr = $('#nr').val();
-        
+
         for (i = 0; i < $nr; i++) {
             writeIngredienteLine();
         }
@@ -44,7 +53,7 @@
 
 
 
-<form asp-action="registaPasso">
+<form action="registaPasso" method="post">
     <div class="form-group">
         <label asp-for="passo.desc" class="control-label"></label>
         <input asp-for="passo.desc" class="form-control" />
@@ -56,9 +65,10 @@
         <span asp-validation-for="passo.tempo" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <select id="ops" name="ops" class="mdb-select md-form">
+        <select required id="ops" name="ops" class="mdb-select md-form">
             <option value="" disabled selected>Escolha a Operação</option>
-            @foreach (var operacao in Model.operacoes) {
+            @foreach (var operacao in Model.operacoes)
+            {
                 <option value="@operacao.id_op">@operacao.desc</option>
             }
         </select>
@@ -67,48 +77,12 @@
     <div class="form-group">
         <select id="recs" name="recs" class="mdb-select md-form">
             <option value="" disabled selected>Escolha a subReceita</option>
-            @foreach (var receita in Model.receitas) {
+            @foreach (var receita in Model.receitas)
+            {
                 <option value="@receita.id_receita">@receita.nome</option>
             }
         </select>
     </div>
-
-    <div>
-        Por favor, indique o número de ingredientes presentes no passo:
-        <input id="nr" type="number" />
-        <button class="btn btn-default btn-success" onclick="nrIngredientes()">Confirmar</button>
-    </div>
-    
-
-    <div id="ingredientes" class="form-group">
-
-    </div>
-
-    <tr class="form-group">
-        <th>
-            <select id="ings" name="ings" class="mdb-select md-form" multiple>
-                <option value="" disabled selected>Escolha os ingredientes</option>
-                @foreach (var ingrediente in Model.ingredientes) {
-                    <option value="@ingrediente.id_ingrediente">@ingrediente.nome</option>
-
-                }
-            </select>
-        </th>
-        <th>
-            @foreach (var ingrediente in Model.ingredientes) {
-                <label asp-for="quantidades[i]" class="control-label"></label>
-                <input asp-for="quantidades[i]" value="@Model.quantidades[i]" class="form-control" />
-                <span asp-validation-for="quantidades[i]" class="text-danger"></span>
-                i++;
-            }
-        </th>
-    </tr>
-
-    <div class="form-group">
-        <input type="submit" value="Proximo Passo" class="btn btn-default btn-success" />
-
-    </div>
-    <button asp-action="Index" type="submit" value="Finalizar" name="Finalizar" class="btn btn-default btn-success" />
 
     <div hidden="hidden" class="form-group">
         <label asp-for="nPasso" class="control-label">@Model.nPasso</label>
@@ -120,4 +94,25 @@
         <input asp-for="id_receita" class="form-control" />
         <span asp-validation-for="id_receita" class="text-danger"></span>
     </div>
+
+    <div>
+        Por favor, indique o número de ingredientes presentes no passo:
+        <input id="nr" type="number" />
+        <button type="button" class="btn btn-default btn-success" onclick="nrIngredientes()">Confirmar</button>
+    </div>
+
+    <div id="ingredientes" class="form-group">
+
+    </div>
+
+
+    <div class="form-group">
+        <button asp-action="registaPasso" type="submit" class="btn btn-default btn-success">Proximo Passo</button>
+        <button asp-action="finalizaReceita" type="submit" class="btn btn-default btn-success">Finalizar</button>
+        
+    </div>
+
 </form>
+
+
+

@@ -21,6 +21,8 @@
         var pinText = ['1','2','3','4','5'];
         var i=0;
         var clicked;
+
+
         function loadMapScenario() {
             map = new Microsoft.Maps.Map('#myMap', {
                 credentials: 'Alvpuc-Z8ROrtuOcQZdVD1iaINzybihaHRnSHYWL8jwdEjVrXRj843L8ayxchoj7'
@@ -68,7 +70,7 @@
 
                     @foreach (var local in Model){
                         <text>
-                            var location = new Microsoft.Maps.Location(@local.latitude, @local.longitude);
+                            var location = new Microsoft.Maps.Location(Number(@local.latitude), Number(@local.longitude));
                             var pin = new Microsoft.Maps.Pushpin(location, {text: pinText[i], color: 'green'});
                             pin.metadata = {
                                 title: '@local.nome',
@@ -88,20 +90,20 @@
         function whichRoute(){
             switch(clicked) {
                 case "1":
-                        addRoute(userLoc, localizacoes[1]);
-                        break;
+                    addRoute(userLoc, localizacoes[1]);
+                    break;
                 case "2":
-                        addRoute(userLoc, localizacoes[2]);
-                        break;
+                    addRoute(userLoc, localizacoes[2]);
+                    break;
                 case "3":
-                        addRoute(userLoc, localizacoes[3]);
-                        break;
+                    addRoute(userLoc, localizacoes[3]);
+                    break;
                 case "4":
-                        addRoute(userLoc, localizacoes[4]);
-                        break;
+                    addRoute(userLoc, localizacoes[4]);
+                    break;
                 case "5":
-                        addRoute(userLoc, localizacoes[5]);
-                        break;
+                    addRoute(userLoc, localizacoes[5]);
+                    break;
             }
         }
 
@@ -125,7 +127,12 @@
         }
 
     </script>
+
 </head>
+
+
+
+
 <body onload='loadMapScenario();'>
     <div style="width:1200px;height: 600px">
         <div style="height: 100%; overflow-y:auto; width:390px; float:right; padding:10">

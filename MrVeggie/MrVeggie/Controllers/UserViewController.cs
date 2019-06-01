@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using MrVeggie.Models.Auxiliary;
+using MrVeggie.Contexts;
 
 namespace MrVeggie.Controllers {
 
@@ -16,20 +17,16 @@ namespace MrVeggie.Controllers {
     [Route("[controller]/[action]")]
     public class UserViewController : Controller {
 
-        private UtilizadorHandling utilizador_handling;
+        private Selecao selecao;
+        private Autenticacao autenticacao;
+        
 
-        public UserViewController(UtilizadorContext context, UtilizadorIngredientesPrefContext context_uip, UtilizadorReceitasPrefContext context_urp) {
-            //_context = context;
-            utilizador_handling = new UtilizadorHandling(context, context_uip, context_urp);
+        public UserViewController(ReceitaContext context_r, IngredienteContext context_ing, UtilizadorContext context_u, UtilizadorIngredientesPrefContext context_uip, UtilizadorReceitasPrefContext context_urp) {
+            autenticacao = new Autenticacao(context_u);
+            selecao = new Selecao(context_r, context_ing, null, context_u, null);
         }
 
 
-        [Authorize]
-        public IActionResult getUtilizadores() {
-            Utilizador[] users = utilizador_handling.getUtilizadores();
-
-            return View(users);
-        }
 
 
         [HttpGet]
@@ -43,7 +40,7 @@ namespace MrVeggie.Controllers {
 
             if (ModelState.IsValid) {
                 u.data_reg = DateTime.Now;
-                bool RegistrationStatus = this.utilizador_handling.RegistaUtilizador(u);
+                bool RegistrationStatus = autenticacao.RegistaUtilizador(u);
 
                 if (RegistrationStatus) {
                     ModelState.Clear();
@@ -71,11 +68,11 @@ namespace MrVeggie.Controllers {
             ModelState.Clear();
 
             if (ModelState.IsValid) {
-                var LoginStatus = this.utilizador_handling.validaUtilizador(u);
+                var LoginStatus = autenticacao.validaUtilizador(u);
                 if (LoginStatus) {
 
                     u.print();
-                    u = utilizador_handling._context.Utilizador.Where(user => user.email.Equals(u.email)).First(); // so sabe o email e a password de u. assim fica completo. 
+                    u = autenticacao.getUtilizador(u.email);
                     u.print();
 
                     var claims = new List<Claim> {
@@ -110,36 +107,22 @@ namespace MrVeggie.Controllers {
 
 
 
+
         [HttpGet]
         public IActionResult IngredientesPref() {
-            int id = utilizador_handling._context.Utilizador.Where(u => u.email.Equals(User.Identity.Name)).First().id_utilizador; // SERÁ ASSIM QUE SE VAI BUSCAR?? METER ID NA COOKIE? COMO?! 
 
-            Utilizador utilizador = utilizador_handling.getUtilizadorIngredientesPref(id);
+            List<Ingrediente> ingredientes_pref = selecao.getUtilizadorIngredientesPref(User.Identity.Name);
 
-            return View(utilizador);
+            return View(ingredientes_pref);
         }
 
         [HttpGet]
         public IActionResult ReceitasPref() {
-            int id = 1; // passar para argumento
 
-            Utilizador utilizador = utilizador_handling.getUtilizadorReceitasPref(2);
+            List<Receita> receitas = selecao.getUtilizadorReceitasPref(User.Identity.Name);
 
-            return View(utilizador);
+            return View(receitas);
         }
-
-
-        public RedirectToActionResult registaConfigInicial() { // receber id como parametro??
-            int id = utilizador_handling._context.Utilizador.Where(user => user.email.Equals(User.Identity.Name)).First().id_utilizador; // SERÁ ASSIM QUE SE VAI BUSCAR?? METER ID NA COOKIE? COMO?! 
-
-            Utilizador u = utilizador_handling._context.Utilizador.Find(id);
-
-            u.config_inicial = true;
-            utilizador_handling._context.SaveChanges();
-
-            return RedirectToAction("Index", "Home");
-        }
-
 
 
         

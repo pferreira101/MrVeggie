@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Primitives;
 using MrVeggie.Contexts;
 using MrVeggie.Models;
 using MrVeggie.Models.Auxiliary;
@@ -59,7 +60,7 @@ namespace MrVeggie.Controllers {
         public IActionResult registaReceita(NewReceita n) {
             n.utensilios = admin.getUtensilios(Request.Form["uts"]);
             admin.registaReceita(n.receita, n.utensilios);
-            float[] r = new float[admin.getIngredientes().Count()];
+          
             
             return View("NewPasso", new NewPasso {
                 passo = new Passo(),
@@ -69,7 +70,6 @@ namespace MrVeggie.Controllers {
                 operacoes = admin.getOperacoes(),
                 receitas = admin.getReceitas(),
                 unidades = admin.getUnidades(),
-                quantidades = r
 
             });
         }
@@ -88,21 +88,25 @@ namespace MrVeggie.Controllers {
             model.passo.nr = model.nPasso;    
             model.passo.receita_id = model.id_receita;
             model.passo.operacao_id = int.Parse(Request.Form["ops"].First());
-            
 
-            admin.registaPasso(model);
+           
+            admin.registaPasso(model, Request.Form["unds"], Request.Form["quantidades"]);
 
             model.nPasso++;
             model.operacoes = admin.getOperacoes();
             model.receitas = admin.getReceitas();
+            model.unidades = admin.getUnidades();
             model.ingredientes = admin.getIngredientes();
 
             return View("NewPasso", model);
         }
 
-        public IActionResult NewPasso(Tuple<Passo, List<Operacao>, List<Receita>, int, int> t){
-          
-           return View(new Tuple<Passo, List<Operacao>, List<Receita>,int,int>(new Passo(), admin.getOperacoes(), admin.getReceitas(), t.Item4, t.Item5));
+        [HttpPost]
+        public IActionResult finalizaReceita(NewPasso model)
+        {
+            admin.finalizaReceita(model.id_receita, model.nPasso);
+
+            return View("Index");
         }
 
         
