@@ -1,0 +1,43 @@
+﻿@model Dictionary<MrVeggie.Models.Ingrediente, MrVeggie.Models.Auxiliary.Quantidade>
+
+
+@{
+    ViewData["Title"] = "ShowIngredientesAgenda";
+}
+
+<h1>ShowIngredientes</h1>
+
+
+<script>
+
+    function send() {
+
+        var div = document.getElementById('lista');
+
+        var data = div.innerHTML;
+
+        $.ajax({
+            url: '@Url.Action("sendEmail", "AgendaView")',
+            type: 'POST',
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "text",
+            success: function () {             
+                   alert("Email enviado com sucesso");
+            }
+        });
+
+    }
+</script>
+
+<div id="lista">
+    <ul>
+        @foreach (var ing in Model) {
+            <li>
+                @ing.Key.nome - @ing.Value.quantidade @ing.Value.unidade
+            </li>
+        }
+    </ul>
+</div>
+
+<a class="btn btn-success" onclick="send()">Enviar para o e-mail</a>
