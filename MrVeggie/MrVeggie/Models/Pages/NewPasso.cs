@@ -12,7 +12,6 @@ namespace MrVeggie.Models.Pages {
         public List<Receita> receitas { get; set; }
         public List<Ingrediente> ingredientes { get; set; }
         public List<Unidade> unidades { get; set; }
-        public float[] quantidades { get; set; }
         public int id_receita { get; set; }
         public int nPasso { get; set; }
     }

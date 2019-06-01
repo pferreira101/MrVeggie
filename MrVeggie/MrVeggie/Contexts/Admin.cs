@@ -4,6 +4,7 @@ using MrVeggie.Models.Auxiliary;
 using MrVeggie.Models.Pages;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -77,18 +78,42 @@ namespace MrVeggie.Contexts {
             return _context_i.Ingrediente.Where(i => stringValues.Contains(i.id_ingrediente.ToString())).ToList();
         }
 
-        public void registaPasso(NewPasso model)
+        public void registaPasso(NewPasso model, StringValues unidades, StringValues quantidades)
         {
             _context_r.Passo.Add(model.passo);
 
             _context_r.SaveChanges();
 
+            float quantidade;
+
+            
+
+            int x = 0;
             foreach (Ingrediente i in model.ingredientes)
             {
-                _context_ip.Add(new IngredientesPasso { passo_id = model.passo.id_passo, ingrediente_id = i.id_ingrediente, unidade_id = 1, quantidade = 250 }); // por a selecionar a quantidade e unidade
+                
+                quantidade = float.Parse(quantidades.ElementAt(x), CultureInfo.InvariantCulture);
+               
+
+                _context_ip.Add(new IngredientesPasso
+                {
+                    passo_id = model.passo.id_passo,
+                    ingrediente_id = i.id_ingrediente,
+                    unidade_id = int.Parse(unidades.ElementAt(x++)),
+                    quantidade = quantidade
+
+                });
             }
 
             _context_ip.SaveChanges();
+        }
+
+        public void finalizaReceita(int id_receita, int nPasso)
+        {
+            var passo = _context_r.Passo.First(p => p.receita_id == id_receita && p.nr == nPasso-1);
+            passo.ultimo = true;
+            _context_r.Passo.Update(passo);
+            _context_r.SaveChanges();
         }
 
         public int getNewReceitaID(string nome) {
