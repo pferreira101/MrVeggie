@@ -9,11 +9,9 @@ using Microsoft.CognitiveServices.Speech;
 
 
 
-namespace MrVeggie.Models
-{
+namespace MrVeggie.Models {
 
-    public class Passo
-    {
+    public class Passo {
 
 
         [Key]
@@ -48,14 +46,14 @@ namespace MrVeggie.Models
         [JsonIgnore]
         public Receita receita { get; set; }
 
-        
+
         [Column("sub_receita")]
         public int? sub_receita_id { set; get; }
 
         [NotMapped]
         [JsonIgnore]
         public Receita sub_receita { get; set; }
-      
+
 
         public bool ultimo { get; set; }
 
@@ -68,28 +66,26 @@ namespace MrVeggie.Models
 
     }
 
-        public class PassoContext : DbContext
-        {
+    public class PassoContext : DbContext {
 
-            public PassoContext(DbContextOptions<PassoContext> options) : base(options)
-            {
+        public PassoContext(DbContextOptions<PassoContext> options) : base(options) {
 
-            }
+        }
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-            {
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
+            modelBuilder.Entity<IngredientesPasso>().HasKey(ip => new { ip.passo_id, ip.ingrediente_id });
 
-                // configures one-to-many relationship
-                modelBuilder.Entity<Passo>()
+            // configures one-to-many relationship
+            modelBuilder.Entity<Passo>()
                             .HasOne<Operacao>(p => p.operacao)
                             .WithMany(op => op.passos)
                             .HasForeignKey(p => p.operacao_id)
                             .HasConstraintName("FKPasso568056");
-            }
-
-            public DbSet<Passo> Passo { get; set; }
-            public DbSet<IngredientesPasso> IngredientesPassos { get; set; }
-            public DbSet<Operacao> Operacao { get; set; }
-
         }
+
+        public DbSet<Passo> Passo { get; set; }
+        public DbSet<IngredientesPasso> IngredientesPassos { get; set; }
+        public DbSet<Operacao> Operacao { get; set; }
+
+    }
 }

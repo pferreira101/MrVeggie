@@ -81,17 +81,19 @@ namespace MrVeggie.Contexts {
         }
 
 
-        public List<Receita> getUtilizadorReceitasPref(int id) {
+        public List<Receita> getUtilizadorReceitasPref(string email) {
             List<Receita> receitas = new List<Receita>();
+            int id_utilizador = _context_u.Utilizador.Where(u => u.email.Equals(email)).First().id_utilizador;
 
-            List<UtilizadorReceitasPref> receitas_ids = _context_u.UtilizadorReceitasPref.Where(uip => uip.utilizador_id == id).ToList();
+            List<UtilizadorReceitasPref> receitas_ids = _context_u.UtilizadorReceitasPref.Where(urp => urp.utilizador_id == id_utilizador).ToList();
 
-            foreach (var uip in receitas_ids) {
-                receitas.Add(_context_r.Receita.Find(uip.receita_id));
+            foreach (var urp in receitas_ids) {
+                receitas.Add(_context_r.Receita.Find(urp.receita_id));
             }
 
             return receitas;
         }
+
 
         public int[] getReceitas(string nome){
 
@@ -115,6 +117,20 @@ namespace MrVeggie.Contexts {
             _context_u.Update(utilizador);
 
             _context_u.SaveChanges();
+        }
+
+
+        public List<Ingrediente> getUtilizadorIngredientesPref(string email) {
+            List<Ingrediente> ingredientes = new List<Ingrediente>();
+            int id_utilizador = _context_u.Utilizador.Where(u => u.email.Equals(email)).First().id_utilizador;
+
+            List<UtilizadorIngredientesPref> ingredientes_ids = _context_u.UtilizadorIngredientesPref.Where(uip => uip.utilizador_id == id_utilizador).ToList();
+
+            foreach (var uip in ingredientes_ids) {
+                ingredientes.Add(_context_ing.Ingrediente.Find(uip.ingrediente_id));
+            }
+
+            return ingredientes;
         }
 
 

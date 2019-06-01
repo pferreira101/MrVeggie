@@ -1,4 +1,4 @@
-﻿@model MrVeggie.Models.Utilizador
+﻿@model IEnumerable<MrVeggie.Models.Ingrediente>
 @{
     ViewData["Title"] = "IngredientesPrefView";
 }
@@ -7,7 +7,7 @@
 
 <div class="container-fluid">
     <div class="row">
-        @foreach (var ingrediente in Model.ingredientes_pref) {
+        @foreach (var ingrediente in Model) {
             <div class="col-md-3 shadow p-3 mb-5 bg-white rounded" style="margin: 3px">
 
                 <div class="row">
