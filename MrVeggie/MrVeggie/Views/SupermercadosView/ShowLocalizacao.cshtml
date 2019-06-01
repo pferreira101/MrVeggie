@@ -32,7 +32,7 @@
             layer = new Microsoft.Maps.Layer();
             map.layers.insert(layer);
 
-            infobox = new Microsoft.Maps.Infobox(map.getCenter(), { visible: false , description: '<input type="button" value="Obter DireÃ§Ãµes" onClick="whichRoute();">'});
+            infobox = new Microsoft.Maps.Infobox(map.getCenter(), { visible: false , description: '<input type="button" value="Obter Direções" onClick="whichRoute();">'});
             infobox.setMap(map);
 
             Microsoft.Maps.Events.addHandler(layer, 'click', function (e) {
@@ -70,7 +70,7 @@
 
                     @foreach (var local in Model){
                         <text>
-                            var location = new Microsoft.Maps.Location(Number(@local.latitude), Number(@local.longitude));
+                            var location = new Microsoft.Maps.Location('@local.latitude', '@local.longitude');
                             var pin = new Microsoft.Maps.Pushpin(location, {text: pinText[i], color: 'green'});
                             pin.metadata = {
                                 title: '@local.nome',
@@ -110,7 +110,6 @@
 
         function addRoute(userLocation, marketLocation) {
             clearPreviousRoute(false);
-            infobox.setOptions({visible: false});
             var waypoint1 = new Microsoft.Maps.Directions.Waypoint({ location: userLocation });
             var waypoint2 = new Microsoft.Maps.Directions.Waypoint({ location: marketLocation });
             directionsManager.addWaypoint(waypoint1);
@@ -119,6 +118,7 @@
         }
 
         function clearPreviousRoute(recenter){
+            infobox.setOptions({visible: false});
             directionsManager.clearAll();
             directionsManager.clearDisplay();
             directionsManager.setRenderOptions({ itineraryContainer: document.getElementById('printoutPanel') });

@@ -56,14 +56,9 @@ namespace MrVeggie.Controllers {
                 if (longElement == null) throw new Exception("Longitude not found");
 
                 string name = nameElement.InnerText;
-                string lat = latElement.InnerText.ToString(CultureInfo.InvariantCulture).Replace("−", "-");
-                string lon = longElement.InnerText.ToString(CultureInfo.InvariantCulture).Replace("−", "-");
+                string latitude = latElement.InnerText;//.ToString(CultureInfo.InvariantCulture).Replace("−", "-");
+                string longitude = longElement.InnerText;//.ToString(CultureInfo.InvariantCulture).Replace("−", "-");
 
-                double latitude = 0;
-                Double.TryParse(lat, NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out latitude);
-
-                double longitude = 0;
-                Double.TryParse(lon, NumberStyles.AllowDecimalPoint| NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out longitude);
 
                 results.Add(new MarketLocation(name, latitude, longitude));
                 Console.WriteLine("LOCALIZAÇÃO : {0}, {1}, {2}", name, latitude, longitude);
@@ -73,11 +68,11 @@ namespace MrVeggie.Controllers {
         }
 
         public class MarketLocation {
-            public double latitude;
-            public double longitude;
+            public string latitude;
+            public string longitude;
             public string nome;
 
-            public MarketLocation(string nome, double latitude, double longitude) {
+            public MarketLocation(string nome, string latitude, string longitude) {
                 this.nome = nome;
                 this.latitude = latitude;
                 this.longitude = longitude;
