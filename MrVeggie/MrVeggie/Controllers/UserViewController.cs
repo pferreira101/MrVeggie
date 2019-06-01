@@ -17,13 +17,11 @@ namespace MrVeggie.Controllers {
     [Route("[controller]/[action]")]
     public class UserViewController : Controller {
 
-        private UtilizadorHandling utilizador_handling;
-        private Autenticacao autenticacao;
         private Selecao selecao;
+        private Autenticacao autenticacao;
+        
 
         public UserViewController(ReceitaContext context_r, IngredienteContext context_ing, UtilizadorContext context_u, UtilizadorIngredientesPrefContext context_uip, UtilizadorReceitasPrefContext context_urp) {
-            //_context = context;
-            utilizador_handling = new UtilizadorHandling(context_u, context_uip, context_urp);
             autenticacao = new Autenticacao(context_u);
             selecao = new Selecao(context_r, context_ing, null, context_u, null);
         }
@@ -120,25 +118,11 @@ namespace MrVeggie.Controllers {
 
         [HttpGet]
         public IActionResult ReceitasPref() {
-            int id = 1; // passar para argumento
 
             List<Receita> receitas = selecao.getUtilizadorReceitasPref(User.Identity.Name);
 
             return View(receitas);
         }
-
-
-        public RedirectToActionResult registaConfigInicial() { // receber id como parametro??
-            int id = utilizador_handling._context.Utilizador.Where(user => user.email.Equals(User.Identity.Name)).First().id_utilizador; // SERÁ ASSIM QUE SE VAI BUSCAR?? METER ID NA COOKIE? COMO?! 
-
-            Utilizador u = utilizador_handling._context.Utilizador.Find(id);
-
-            u.config_inicial = true;
-            utilizador_handling._context.SaveChanges();
-
-            return RedirectToAction("Index", "Home");
-        }
-
 
 
         
