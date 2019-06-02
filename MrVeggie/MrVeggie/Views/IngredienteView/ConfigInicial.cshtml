@@ -13,7 +13,15 @@
 <script>
     var ids = [];
 
+    function setSelected(id) {
+        var element = document.getElementById(id);
+        element.style.backgroundColor = '#fff';
+    }
 
+    function removeSelected(id) {
+        var element = document.getElementById(id);
+        element.style.backgroundColor = '#000';
+    }
 
     function addToPref(id) {
         if (ids.indexOf(id) == -1) {
@@ -24,47 +32,19 @@
             ids.splice(ids.indexOf(id), 1);
             //removeSelected(id);
         }
-        $('input').val(ids.join(", ")); // Debug
+        //$('input').val(ids.join(", ")); // Debug
 
     }
 
-    function setSelected(id) {
-        var element = document.getElementById(id);
-        element.body.style.backgroundColor = green;
-    }
-
-    function removeSelected(id) {
-        var element = document.getElementById(id);
-        element.body.style.backgroundColor = white;
-    }
 
     function getIDsSelected() {
-        /*$.ajax({
-            type: "POST",
-            url: "/IngredienteView/ConfigInicial",
-            data: JSON.stringify(ids),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (response) {
-                if (response != null) {
-                    alert(response);
-                } else {
-                    alert("Something went wrong");
-                }
-            },
-            failure: function (response) {
-                alert(response.responseText);
-            },
-            error: function (response) {
-                alert(response.responseText);
-            }
-        });*/
+
         $.ajax({
             url: '@Url.Action("ConfigInicial", "IngredienteView")',
             type: 'POST',
             data: JSON.stringify(ids),
             contentType: "application/json; charset=utf-8",
-            dataType: "text",
+            dataType: "text"
         });
 
     }
@@ -78,7 +58,7 @@
 
         @foreach (var ingrediente in Model) {
 
-            <div class="card shadow p-3 mb-5 bg-white rounded" style="margin: 3px; width:18rem" onclick="addToPref(@ingrediente.id_ingrediente)">
+            <div id="@ingrediente.id_ingrediente" class="card shadow p-3 mb-5 bg-white rounded" style="margin: 3px; width:18rem" onclick="addToPref(@ingrediente.id_ingrediente)">
                 <img id="no_border_img" class="card-img-top" src="@ingrediente.url_imagem" alt="Error loading image">
                 <div class="card-body">
                     <h3 class="card-title">@ingrediente.nome</h3>

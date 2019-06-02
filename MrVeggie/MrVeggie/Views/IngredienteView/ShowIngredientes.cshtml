@@ -35,13 +35,20 @@
             <div class="card shadow p-3 mb-5 bg-white rounded" style="margin: 3px; width:18rem">
                 <img id="no_border_img" class="card-img-top" src="@ingrediente.url_imagem" alt="Error loading image">
                 <div class="card-body">
-                    <h3 class="card-title">@ingrediente.nome</h3>
-                    @if (User.Identity.IsAuthenticated) {
-                        <a onclick="adicionaFavoritos(@ingrediente.id_ingrediente)">Adicionar aos Favoritos</a>
-                    }
-                    else {
-                        <a asp-controller="UserView" asp-action="LoginUtilizador">Adicionar aos Favoritos</a>
-                    }
+                    <h3 class="card-title">
+                        @ingrediente.nome
+
+                        @if (User.Identity.IsAuthenticated) {
+                            <img src="~/img/like.png" onclick="adicionaFavoritos(@ingrediente.id_ingrediente)" style="width:20%; padding-left:10px" />
+                        }
+                        else {
+                            <a asp-controller="UserView" asp-action="LoginUtilizador">
+                                <img src="~/img/like.png" style="width:20%; padding-left:10px" />
+                            </a>
+                        }
+
+                    </h3>
+                    
                 </div>
             </div>
             /*<div class="col-md-3 shadow p-3 mb-5 bg-white rounded" style="margin: 3px">
