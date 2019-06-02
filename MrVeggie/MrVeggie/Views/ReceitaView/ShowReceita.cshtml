@@ -8,6 +8,25 @@
 
 <script>
 
+    function sendEmail() {
+
+        var div = document.getElementById('lista_ingredientes');
+
+        var data = div.innerHTML;
+
+        $.ajax({
+            url: '@Url.Action("sendEmail", "AgendaView")',
+            type: 'POST',
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "text",
+            success: function () {
+                   alert("Email enviado com sucesso");
+            }
+        });
+
+    }
+
     function adicionaFavoritos(receita) {
         $.ajax({
             url: '@Url.Action("AdicionaReceitaFavoritos", "ReceitaView")',
@@ -37,7 +56,7 @@
             });
         })
     }
-    
+
 </script>
 
 
@@ -70,9 +89,10 @@
 
 <div>
     <h2>Requisitos</h2>
-
-    <a style="float:right" class="btn btn-link" onclick="enviaLocalizacao();">Onde comprar?</a>
-
+    <div style="float:right">
+        <a style="float:right" class="btn btn-link" onclick="enviaLocalizacao();">Onde comprar?</a>
+        <a style="float: left" class="btn btn-link" onclick="sendEmail();">Receber lista ingredientes no mail</a>
+    </div>
 </div>
 
 
@@ -92,7 +112,7 @@
 
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="lista_ingredientes">
                 @foreach (var ing in Model.ingredientes) {
                     <tr>
                         <td>@ing.Key.nome</td>
