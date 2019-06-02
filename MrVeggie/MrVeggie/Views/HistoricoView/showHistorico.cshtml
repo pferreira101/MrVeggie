@@ -4,7 +4,25 @@
     ViewData["Title"] = "HistóricoUtilizador";
 }
 
-<h1>HistóricoUtilizador</h1>
+<section class="banner-area relative">
+    <div class="container">
+        <div class="row height align-items-center justify-content-center">
+            <div class="banner-content col-lg-5">
+                <h1>Histórico</h1>
+                <hr>
+                <div class="breadcrmb">
+                    <p>
+                        <a asp-controller="Home" asp-action="Index">Início</a>
+                        <span class="lnr lnr-arrow-right"></span>
+                        Área Pessoal
+                        <span class="lnr lnr-arrow-right"></span>
+                        <a asp-controller="HistoricoView" asp-action="showHistorico">Histórico</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <div class="container-fluid">
     <div class="row">

@@ -6,14 +6,38 @@
 
 
 
-<h1>Configuração Inicial</h1>
+<section class="banner-area relative">
+    <div class="container">
+        <div class="row height align-items-center justify-content-center">
+            <div class="banner-content col-lg-5">
+                <h1>Configuração</h1>
+                <hr>
+                <div class="breadcrmb">
+                    <p>
+                        <a asp-controller="Home" asp-action="Index">Início</a>
+                        <span class="lnr lnr-arrow-right"></span>
+                        <a asp-controller="IngredienteView" asp-action="ConfigInicial">Configuração Inicial</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <h3>Por favor, escolha 3 ingredientes.</h3>
 
 <script>
     var ids = [];
 
+    function setSelected(id) {
+        var element = document.getElementById(id);
+        element.style.backgroundColor = '#fff';
+    }
 
+    function removeSelected(id) {
+        var element = document.getElementById(id);
+        element.style.backgroundColor = '#000';
+    }
 
     function addToPref(id) {
         if (ids.indexOf(id) == -1) {
@@ -24,21 +48,13 @@
             ids.splice(ids.indexOf(id), 1);
             //removeSelected(id);
         }
-        $('input').val(ids.join(", ")); // Debug
+        //$('input').val(ids.join(", ")); // Debug
 
     }
 
-    function setSelected(id) {
-        var element = document.getElementById(id);
-        element.body.style.backgroundColor = green;
-    }
-
-    function removeSelected(id) {
-        var element = document.getElementById(id);
-        element.body.style.backgroundColor = white;
-    }
 
     function getIDsSelected() {
+<<<<<<< HEAD
         /*$.ajax({
             type: "POST",
             url: "/IngredienteView/ConfigInicial",
@@ -75,6 +91,16 @@
         }
 
        
+=======
+
+        $.ajax({
+            url: '@Url.Action("ConfigInicial", "IngredienteView")',
+            type: 'POST',
+            data: JSON.stringify(ids),
+            contentType: "application/json; charset=utf-8",
+            dataType: "text"
+        });
+>>>>>>> 6a329b99c6127665ca61652e7b7ef3ba70c059bd
 
     }
     
@@ -87,7 +113,7 @@
 
         @foreach (var ingrediente in Model) {
 
-            <div class="card shadow p-3 mb-5 bg-white rounded" style="margin: 3px; width:18rem" onclick="addToPref(@ingrediente.id_ingrediente)">
+            <div id="@ingrediente.id_ingrediente" class="card shadow p-3 mb-5 bg-white rounded" style="margin: 3px; width:18rem" onclick="addToPref(@ingrediente.id_ingrediente)">
                 <img id="no_border_img" class="card-img-top" src="@ingrediente.url_imagem" alt="Error loading image">
                 <div class="card-body">
                     <h3 class="card-title">@ingrediente.nome</h3>

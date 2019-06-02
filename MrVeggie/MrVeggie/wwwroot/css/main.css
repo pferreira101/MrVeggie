@@ -1,4 +1,4 @@
-/*--------------------------- Color variations ----------------------*/
+﻿/*--------------------------- Color variations ----------------------*/
 /* Medium Layout: 1280px */
 /* Tablet Layout: 768px */
 /* Mobile Layout: 320px */
@@ -101,7 +101,9 @@ a,
 a:focus,
 a:hover {
   text-decoration: none;
-  outline: 0; }
+  outline: 0;
+  color: black;
+}
 
 .btn.active.focus,
 .btn.active:focus,
@@ -812,7 +814,7 @@ th {
 
 .go-down {
   position: relative;
-  margin-top: -65px;
+  margin-top: 0px;
   z-index: 222222;
   text-align: center; }
   .go-down .go-down-img {
@@ -1895,7 +1897,7 @@ h1, h2, h3, h4, h5, h6 {
       margin-top: 0px; } }
   .menu-right li .dropdown-menu a {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     text-transform: capitalize; }
 @media (max-width: 1280px) and (min-width: 799px) {
   .menu-right {
@@ -1924,12 +1926,9 @@ h1, h2, h3, h4, h5, h6 {
 /* Start Home Banner Area 
 ============================================================================================ */
 .home-banner-area {
-  background: url(../img/pequeno.png) no-repeat center; }
+  background: url(../img/bg.jpg) no-repeat center; }
   .home-banner-area .height {
-    height: 750px; }
-  @media (max-width: 991px) {
-    .home-banner-area .height {
-      height: 500px !important; } }
+    height: 500px; } }
 
 .home-banner-content {
   text-align: center;
@@ -1960,9 +1959,9 @@ h1, h2, h3, h4, h5, h6 {
 /* Start Banner Area 
 ============================================================================================ */
 .banner-area {
-  background: url(../img/pequeno.png) no-repeat center; }
+  background: url(../img/small.png) no-repeat center; }
   .banner-area .height {
-    height: 400px; }
+    height: 200px; }
 
 .banner-content {
   text-align: center;
@@ -2151,6 +2150,96 @@ h1, h2, h3, h4, h5, h6 {
 
 /* End Gallery Area css
 ============================================================================================ */
+
+.rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+
+    .rate:not(:checked) > input {
+        position: absolute;
+        top: -9999px;
+    }
+
+    .rate:not(:checked) > label {
+        float: right;
+        width: 1em;
+        overflow: hidden;
+        white-space: nowrap;
+        cursor: pointer;
+        font-size: 30px;
+        color: #ccc;
+    }
+
+        .rate:not(:checked) > label:before {
+            content: '★ ';
+        }
+
+    .rate > input:checked ~ label {
+        color: #ffc700;
+    }
+
+    .rate:not(:checked) > label:hover,
+    .rate:not(:checked) > label:hover ~ label {
+        color: #deb217;
+    }
+
+    .rate > input:checked + label:hover,
+    .rate > input:checked + label:hover ~ label,
+    .rate > input:checked ~ label:hover,
+    .rate > input:checked ~ label:hover ~ label,
+    .rate > label:hover ~ input:checked ~ label {
+        color: #c59b08;
+    }
+
+/* Dropdown Button */
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+    /* Links inside the dropdown */
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+        /* Change color of dropdown links on hover */
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
 
 
 

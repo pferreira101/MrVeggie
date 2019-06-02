@@ -8,6 +8,25 @@
 
 <script>
 
+    function sendEmail() {
+
+        var div = document.getElementById('lista_ingredientes');
+
+        var data = div.innerHTML;
+
+        $.ajax({
+            url: '@Url.Action("sendEmail", "AgendaView")',
+            type: 'POST',
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "text",
+            success: function () {
+                   alert("Email enviado com sucesso");
+            }
+        });
+
+    }
+
     function adicionaFavoritos(receita) {
         $.ajax({
             url: '@Url.Action("AdicionaReceitaFavoritos", "ReceitaView")',
@@ -37,42 +56,70 @@
             });
         })
     }
-    
+
 </script>
 
 
 
-<p></p>
+<section class="banner-area relative">
+    <div class="container">
+        <div class="row height align-items-center justify-content-center">
+            <div class="banner-content col-lg-5">
+                <h1>Detalhes</h1>
+                <hr>
+                <div class="breadcrmb">
+                    <p>
+                        <a asp-controller="Home" asp-action="Index">Início</a>
+                        <span class="lnr lnr-arrow-right"></span>
+                        <a asp-controller="ReceitaView" asp-action="showReceitas">Receitas</a>                        
+                        <span class="lnr lnr-arrow-right"></span>
+                        <a asp-controller="ReceitaView" asp-action="showReceita">@Model.nome</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="row">
+    <div class="wrapper">
+        <div style="width: 35%; float: left;">
+            <img src="@Model.url_imagem" style="width: 100%">
+        </div>
+
+        <div style="padding-left: 20px">
+            <div class="wrapper">
+                <h1>
+                    @Model.nome
+                    @if (User.Identity.IsAuthenticated) {
+                        <img id="like" src="~/img/like.png" onclick="adicionaFavoritos(@Model.id_receita)" style="width:6%; padding-left:10px" />
+                    }
+                    else {
+                        <a asp-controller="UserView" asp-action="LoginUtilizador">
+                            <img id="like" src="~/img/like.png" style="width:6%" />
+                        </a>
+                    }
+                </h1>
 
 
-<div class="wrapper">
-    <div style="width: 30%; float: left;">
-        <img src="@Model.url_imagem" style="width: 100%">
+
+            </div>
+            <p>@Model.desc</p>
+        </div>
 
     </div>
-    <div style="margin-left: 6%">
-        <h1>@Model.nome</h1>
-        <p>@Model.desc</p>
-    </div>
-    <div style="text-align:right">
-        @if (User.Identity.IsAuthenticated) {
-            <a onclick="adicionaFavoritos(@Model.id_receita)">Adicionar aos Favoritos</a>
-        }
-        else {
-            <a asp-controller="UserView" asp-action="LoginUtilizador">Adicionar aos Favoritos</a>
-        }
-    </div>
+
 </div>
 
-<p></p>
-<p></p>
-<p></p>
+
+
 
 <div>
     <h2>Requisitos</h2>
-
-    <a style="float:right" class="btn btn-link" onclick="enviaLocalizacao();">Onde comprar?</a>
-
+    <div style="float:right">
+        <a style="float:right" class="btn btn-link" onclick="enviaLocalizacao();">Onde comprar?</a>
+        <a style="float: left" class="btn btn-link" onclick="sendEmail();">Receber lista ingredientes no mail</a>
+    </div>
 </div>
 
 
@@ -92,7 +139,7 @@
 
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="lista_ingredientes">
                 @foreach (var ing in Model.ingredientes) {
                     <tr>
                         <td>@ing.Key.nome</td>

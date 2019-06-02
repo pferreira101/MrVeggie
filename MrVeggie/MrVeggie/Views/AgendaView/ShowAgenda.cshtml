@@ -31,7 +31,25 @@
 
 
 
-<h1>Agenda</h1>
+<section class="banner-area relative">
+    <div class="container">
+        <div class="row height align-items-center justify-content-center">
+            <div class="banner-content col-lg-5">
+                <h1>Agenda</h1>
+                <hr>
+                <div class="breadcrmb">
+                    <p>
+                        <a asp-controller="Home" asp-action="Index">Início</a>
+                        <span class="lnr lnr-arrow-right"></span>
+                        Área Pessoal
+                        <span class="lnr lnr-arrow-right"></span>
+                        <a asp-controller="AgendaView" asp-action="showAgenda">Agenda</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!--Table-->
 <table id="tablePreview" class="table">
@@ -59,7 +77,7 @@
                 }
                 else {
                     <div class="dropdown" style="float:right">
-                        <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Agendar Refeição </a>
+                        <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Refeição </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             @foreach (var receita in Model.receitas) {
                                 <a class="dropdown-item" onclick="marcaAgenda(@receita.id_receita, 0, 'a')">@receita.nome</a>
@@ -75,7 +93,7 @@
                 }
                 else {
                     <div class="dropdown" style="float:right">
-                        <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Agendar Refeição </a>
+                        <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Refeição </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             @foreach (var receita in Model.receitas) {
                                 <a class="dropdown-item" onclick="marcaAgenda(@receita.id_receita, 1, 'a')">@receita.nome</a>
@@ -91,7 +109,7 @@
                 }
                 else {
                     <div class="dropdown" style="float:right">
-                        <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Agendar Refeição </a>
+                        <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Refeição </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             @foreach (var receita in Model.receitas) {
                                 <a class="dropdown-item" onclick="marcaAgenda(@receita.id_receita, 2, 'a')">@receita.nome</a>
@@ -107,7 +125,7 @@
                 }
                 else {
                     <div class="dropdown" style="float:right">
-                        <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Agendar Refeição </a>
+                        <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Refeição </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             @foreach (var receita in Model.receitas) {
                                 <a class="dropdown-item" onclick="marcaAgenda(@receita.id_receita, 3, 'a')">@receita.nome</a>
@@ -123,7 +141,7 @@
                 }
                 else {
                     <div class="dropdown" style="float:right">
-                        <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Agendar Refeição </a>
+                        <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Refeição </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             @foreach (var receita in Model.receitas) {
                                 <a class="dropdown-item" onclick="marcaAgenda(@receita.id_receita, 4, 'a')">@receita.nome</a>
@@ -139,7 +157,7 @@
                 }
                 else {
                     <div class="dropdown" style="float:right">
-                        <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Agendar Refeição </a>
+                        <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">   Refeição </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             @foreach (var receita in Model.receitas) {
                                 <a class="dropdown-item" onclick="marcaAgenda(@receita.id_receita, 5, 'a')">@receita.nome</a>
@@ -154,7 +172,7 @@
                 }
                 else {
                     <div class="dropdown" style="float:right">
-                        <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Agendar Refeição </a>
+                        <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">   Refeição </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             @foreach (var receita in Model.receitas) {
                                 <a class="dropdown-item" onclick="marcaAgenda(@receita.id_receita, 6, 'a')">@receita.nome</a>
@@ -173,7 +191,7 @@
                 }
                 else {
                     <div class="dropdown" style="float:right">
-                        <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Agendar Refeição </a>
+                        <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">   Refeição </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             @foreach (var receita in Model.receitas) {
                                 <a class="dropdown-item" onclick="marcaAgenda(@receita.id_receita, 0, 'j')">@receita.nome</a>
@@ -189,7 +207,7 @@
                 }
                 else {
                     <div class="dropdown" style="float:right">
-                        <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Agendar Refeição </a>
+                        <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">   Refeição </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             @foreach (var receita in Model.receitas) {
                                 <a class="dropdown-item" onclick="marcaAgenda(@receita.id_receita, 1, 'j')">@receita.nome</a>
@@ -205,7 +223,7 @@
                 }
                 else {
                     <div class="dropdown" style="float:right">
-                        <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Agendar Refeição </a>
+                        <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">   Refeição </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             @foreach (var receita in Model.receitas) {
                                 <a class="dropdown-item" onclick="marcaAgenda(@receita.id_receita, 2, 'j')">@receita.nome</a>
@@ -221,7 +239,8 @@
                 }
                 else {
                     <div class="dropdown" style="float:right">
-                        <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Agendar Refeição </a>
+                        <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">   Refeição </a>
+
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             @foreach (var receita in Model.receitas) {
                                 <a class="dropdown-item" onclick="marcaAgenda(@receita.id_receita, 3, 'j')">@receita.nome</a>
@@ -237,7 +256,7 @@
                 }
                 else {
                     <div class="dropdown" style="float:right">
-                        <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Agendar Refeição </a>
+                        <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">   Refeição </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             @foreach (var receita in Model.receitas) {
                                 <a class="dropdown-item" onclick="marcaAgenda(@receita.id_receita, 4, 'j')">@receita.nome</a>
@@ -253,7 +272,7 @@
                 }
                 else {
                     <div class="dropdown" style="float:right">
-                        <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Agendar Refeição </a>
+                        <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">   Refeição </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             @foreach (var receita in Model.receitas) {
                                 <a class="dropdown-item" onclick="marcaAgenda(@receita.id_receita, 5, 'j')">@receita.nome</a>
@@ -269,7 +288,7 @@
                 }
                 else {
                     <div class="dropdown" style="float:right">
-                        <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Agendar Refeição </a>
+                        <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">   Refeição </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             @foreach (var receita in Model.receitas) {
                                 <a class="dropdown-item" onclick="marcaAgenda(@receita.id_receita, 6, 'j')">@receita.nome</a>
