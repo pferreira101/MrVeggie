@@ -17,11 +17,7 @@ namespace MrVeggie {
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services) {
-<<<<<<< HEAD
             var connection = @"Server=DESKTOP-F88H89P;Database=MrVeggie;Trusted_Connection=True;ConnectRetryCount=0";
-=======
-            var connection = @"Server=DESKTOP-CM5S8K1;Database=MrVeggie;Trusted_Connection=True;ConnectRetryCount=0";
->>>>>>> 6a329b99c6127665ca61652e7b7ef3ba70c059bd
 
 
             services.AddDbContext<UtilizadorContext>(options => options.UseSqlServer(connection));

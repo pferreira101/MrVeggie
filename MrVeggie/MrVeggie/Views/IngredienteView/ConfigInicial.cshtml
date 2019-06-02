@@ -54,27 +54,7 @@
 
 
     function getIDsSelected() {
-<<<<<<< HEAD
-        /*$.ajax({
-            type: "POST",
-            url: "/IngredienteView/ConfigInicial",
-            data: JSON.stringify(ids),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (response) {
-                if (response != null) {
-                    alert(response);
-                } else {
-                    alert("Something went wrong");
-                }
-            },
-            failure: function (response) {
-                alert(response.responseText);
-            },
-            error: function (response) {
-                alert(response.responseText);
-            }
-        });*/
+        
         if (ids.length >= 3) {
             $.ajax({
                 url: '@Url.Action("ConfigInicial", "IngredienteView")',
@@ -89,18 +69,6 @@
         } else {
             alert('Escolha pelo menos 3 ingredientes');
         }
-
-       
-=======
-
-        $.ajax({
-            url: '@Url.Action("ConfigInicial", "IngredienteView")',
-            type: 'POST',
-            data: JSON.stringify(ids),
-            contentType: "application/json; charset=utf-8",
-            dataType: "text"
-        });
->>>>>>> 6a329b99c6127665ca61652e7b7ef3ba70c059bd
 
     }
     

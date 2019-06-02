@@ -425,7 +425,9 @@
   .datepicker th.datepicker-switch {
 	width: 145px;
   }
-  .datepicker thead tr:first-child th,
+  .datepicker t
+  
+  tr:first-child th,
   .datepicker tfoot tr th {
 	cursor: pointer;
   }
