@@ -3,9 +3,9 @@ USE MrVeggie;
 
 --INSERT INTO Utilizador VALUES ('Pedro', 'pedro@gmail.com', '123', 20, 'Masculino', 0, 0);
 
-INSERT INTO Ingrediente VALUES ('Alface', 'teste'), 
-								('Cogumelos', 'teste'), 
-								('Soja', 'teste'),
+INSERT INTO Ingrediente VALUES ('Alface', 'https://i.imgur.com/0Cpru8Y.jpg'), 
+								('Cogumelos', 'https://i.imgur.com/kBdqmlk.jpg'), 
+								('Soja', 'https://i.imgur.com/5ckWIbE.jpg'),
 								('Azeite', 'https://www.celeiro.pt/media/contentmanager/content/cache/400x400/cuide-de-si/temas-de-saude/azeite.jpg'),
 								('Alho', 'http://clinicaexvitam.com/wp-content/uploads/2017/11/alho.jpg'),
 								('Cebola', 'https://www.mulherportuguesa.com/wp-content/uploads/2000/09/Cebola.jpg'),
@@ -80,7 +80,7 @@ INSERT INTO Passo VALUES (1, 'DESC', 20, 1, 1, null, 0), --1
 						 ;
 
 INSERT INTO Unidade VALUES ('gramas'), ('colher(es) de sopa'), ('unidades'), ('lata'), ('colher(es) de cafe'), ('litros'),('colher(es) de sobremesa'), ('molhos'), ('quadrados'), ('fatias');
-
+select * from ingrediente;
 select * from IngredientesPasso;
 INSERT INTO IngredientesPasso VALUES (1, 1, 10, 1), 
 									 (1, 2, 20, 1), 
@@ -97,15 +97,15 @@ INSERT INTO IngredientesPasso VALUES (1, 1, 10, 1),
 									 (13, 12, 10, 3),
 									 (13, 13, 5, 3),
 									 (14, 6, 1, 3),
-									 (20, 14, 2, 8),
+									 (20, 15, 2, 8),
 									 (21, 11, 1, 1),
 									 (21, 4, 1, 2),
-									 (21, 15, 1, 5), 
+									 (21, 18, 1, 5), 
 									 (22, 16, 8, 9),
 									 (23, 17, 8, 10),
-									 (25, 18, 1, 3),
-									 (27, 19, 1, 1),
-									 (27, 20, 1, 1)
+									 (25, 19, 1, 3),
+									 (27, 20, 1, 1),
+									 (27, 21, 1, 1)
 									 ;
 
 
@@ -134,6 +134,7 @@ INSERT INTO UtensiliosReceita VALUES (1, 1),
 									 (4, 3),
 									 (4, 7);
 
+Insert into Utilizador Values('Admin','admin@admin.com', '202cb962ac59075b964b07152d234b70', 21, 'Masculino', 1, 0, GETDATE());
 SELECT * FROM Utilizador;
 --UPDATE Utilizador
 --SET admin = 1
