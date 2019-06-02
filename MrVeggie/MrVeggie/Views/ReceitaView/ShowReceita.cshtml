@@ -21,6 +21,23 @@
         });
     }
 
+    function enviaLocalizacao(){
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var userLoc = [position.coords.latitude, position.coords.longitude];
+
+            $.post({
+                url: '@Url.Action("ShowLocalizacao", "SupermercadosView")',
+                type: 'POST',
+                data: JSON.stringify(userLoc),
+                contentType: "application/json; charset=utf-8",
+                dataType: "text",
+                success: function (response) {
+                    window.location =  response;
+                }
+            });
+        })
+    }
+    
 </script>
 
 
@@ -54,7 +71,7 @@
 <div>
     <h2>Requisitos</h2>
 
-    <a style="float:right" class="btn btn-link" asp-controller="SupermercadosView" asp-action="ShowLocalizacao">Onde comprar?</a>
+    <a style="float:right" class="btn btn-link" onclick="enviaLocalizacao();">Onde comprar?</a>
 
 </div>
 

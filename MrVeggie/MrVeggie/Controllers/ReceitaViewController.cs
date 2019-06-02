@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Primitives;
 using MrVeggie.Contexts;
 using MrVeggie.Models;
 using MrVeggie.Models.Auxiliary;
@@ -59,10 +60,39 @@ namespace MrVeggie.Controllers {
         [HttpPost]
         public IActionResult showReceitas(int[] checkboxes)
         {
-
-            if (ModelState.IsValid && checkboxes.Length != 0)
+            if (ModelState.IsValid)
             {
-                ReceitaAndIngredienteViewModel m = new ReceitaAndIngredienteViewModel { Ingredientes = selecao.getIngredientes(), receitas = selecao.getReceitas(checkboxes)};
+                List<Receita> receitas;
+                if (checkboxes.Length != 0)
+                {
+                    receitas = selecao.getReceitas(checkboxes).ToList();
+                }
+                else
+                {
+                    receitas = selecao.getReceitas().ToList();
+                }
+
+                if (Request.Form["dificuldades"].Count != 0)
+                {
+                    filtrarDificuldade(receitas, Request.Form["dificuldades"]);
+                }
+
+                if(Request.Form["calorias"].Count != 0)
+                {
+                    filtrarCalorias(receitas, Request.Form["calorias"]);
+                }
+
+                if(Request.Form["pessoas"].Count != 0)
+                {
+                    filtrarPessoas(receitas, Request.Form["pessoas"]);  
+                }
+
+                if (Request.Form["tempo"].Count != 0)
+                {
+                    filtrarTempo(receitas, Request.Form["tempo"]);
+                }
+
+                ReceitaAndIngredienteViewModel m = new ReceitaAndIngredienteViewModel { Ingredientes = selecao.getIngredientes(), receitas = receitas };
                 Console.WriteLine("modelo valido");
                 return View(m);
             }
@@ -70,9 +100,57 @@ namespace MrVeggie.Controllers {
             return View(new ReceitaAndIngredienteViewModel { Ingredientes = selecao.getIngredientes(), receitas = selecao.getReceitas() });
         }
 
+        private void filtrarTempo(List<Receita> receitas, StringValues tempo)
+        {
+            List<Receita> aux = new List<Receita>(receitas);
 
+            foreach (Receita r in aux)
+            {
+                if (r.tempo_conf > int.Parse(tempo.Last()))
+                {
+                    receitas.Remove(r);
+                }
+            }
+        }
 
+        private void filtrarPessoas(List<Receita> receitas, StringValues pessoas)
+        {
+            List<Receita> aux = new List<Receita>(receitas);
 
+            foreach (Receita r in aux)
+            {
+                if (r.n_pessoas > int.Parse(pessoas.Last()))
+                {
+                    receitas.Remove(r);
+                }
+            }
+        }
+
+        private void filtrarCalorias(List<Receita> receitas, StringValues calorias)
+        {
+            List<Receita> aux = new List<Receita>(receitas);
+
+            foreach (Receita r in aux)
+            {
+                if (r.calorias > int.Parse(calorias.Last()) )
+                {
+                    receitas.Remove(r);
+                }
+            }
+        }
+
+        private void filtrarDificuldade(List<Receita> receitas, StringValues dificuldades)
+        {
+            List<Receita> aux = new List<Receita>(receitas);
+
+            foreach(Receita r in aux)
+            {
+                if (!dificuldades.Contains(r.dificuldade.ToString()))
+                {
+                    receitas.Remove(r);
+                }
+            }
+        }
 
         [HttpPost]
         public bool VerificaAgenda([FromBody] string[] data) {

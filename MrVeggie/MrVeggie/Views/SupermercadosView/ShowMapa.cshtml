@@ -1,7 +1,12 @@
 ﻿@model IEnumerable<MrVeggie.Controllers.SupermercadosViewController.MarketLocation>
 @{
     ViewData["Title"] = "MapaSupermercados";
+
 }
+@using Microsoft.AspNetCore.Html;
+
+
+
 
 <!DOCTYPE html>
 <html>
@@ -73,7 +78,7 @@
                             var location = new Microsoft.Maps.Location('@local.latitude', '@local.longitude');
                             var pin = new Microsoft.Maps.Pushpin(location, {text: pinText[i], color: 'green'});
                             pin.metadata = {
-                                title: '@local.nome',
+                                title: @(new HtmlString(local.nome)),
                                 subtitle: pinText[i]
                             };
                             pins.push(pin);
