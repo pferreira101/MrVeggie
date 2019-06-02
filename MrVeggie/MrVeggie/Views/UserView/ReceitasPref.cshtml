@@ -3,37 +3,61 @@
     ViewData["Title"] = "ReceitasPrefView";
 }
 
-<h1>ReceitasPrefView</h1>
+<section class="banner-area relative">
+    <div class="container">
+        <div class="row height align-items-center justify-content-center">
+            <div class="banner-content col-lg-5">
+                <h1 style="font-size:160%">Receitas Preferidas</h1>
+                <hr>
+                <div class="breadcrmb">
+                    <p>
+                        <a asp-controller="Home" asp-action="Index">Início</a>
+                        <span class="lnr lnr-arrow-right"></span>
+                        Área Pessoal
+                        <span class="lnr lnr-arrow-right"></span>
+                        <a asp-controller="UserView" asp-action="ReceitasPref">Receitas Preferidas</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<form class="form-inline" asp-controller="ReceitaView" asp-action="showReceitasSearch" method="post">
+    <input class="form-control mr-sm-2" type="search" name="searchBar" placeholder="Procurar" aria-label="Procurar" style="width:90%">
+</form>
 
 <div class="container-fluid">
     <div class="row">
-        @foreach (var receita in Model) {
+        @foreach (var receita in Model)
+        {
             <!--<div class="col-md-3 shadow p-3 mb-5 bg-white rounded" style="margin: 3px">
 
-            <div class="row">
-                <div class="col-md-2">
-                    <h2>
-                        <a id="link_preto" asp-controller="ReceitaView" asp-action="ShowReceita" asp-route-id="@receita.id_receita">@receita.nome</a>
-                    </h2>
-                </div>
-
-            </div>
-            <div class="row">
-                <div class="container">
-                    <img class="d-block w-100" src="~/images/teste.jpg">
+                <div class="row">
+                    <div class="col-md-2">
+                        <h2>
+                            <a id="link_preto" asp-controller="ReceitaView" asp-action="ShowReceita" asp-route-id="@receita.id_receita">@receita.nome</a>
+                        </h2>
+                    </div>
 
                 </div>
-            </div>
-        </div>-->
-            <div class="card shadow p-3 mb-5 bg-white rounded" style="margin: 3px; width:18rem">
-                <img id="no_border_img" class="card-img-top" src="@receita.url_imagem" alt="Error loading image">
-                <div class="card-body">
-                    <h3 class="card-title">
-                        <a id="link_preto" asp-controller="ReceitaView" asp-action="ShowReceita" asp-route-id="@receita.id_receita">@receita.nome</a>
-                    </h3>
+                <div class="row">
+                    <div class="container">
+                        <img class="d-block w-100" src="~/images/teste.jpg">
+
+                    </div>
                 </div>
-            </div>
-        }
+            </div>-->
+
+                            <div class="card shadow p-3 mb-5 bg-white rounded" style="margin: 3px; width:18rem">
+                                <img id="no_border_img" class="card-img-top" src="@receita.url_imagem" alt="Error loading image">
+                                <div class="card-body">
+                                    <h3 class="card-title">
+                                        <a id="link_preto" asp-controller="ReceitaView" asp-action="ShowReceita" asp-route-id="@receita.id_receita">@receita.nome</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        }
 
     </div>
 </div>
