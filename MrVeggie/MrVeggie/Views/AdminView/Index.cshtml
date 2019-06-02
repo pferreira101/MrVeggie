@@ -1,5 +1,6 @@
-﻿
-
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -8,11 +9,21 @@
     <title>MrVeggie</title>
 </head>
 <body>
-
-    <a asp-controller="AdminView" asp-action="Estatisticas">Estatísticas</a>
-    <a asp-controller="AdminView" asp-action="NewIngrediente">Registar Ingrediente</a>
-    <a asp-controller="AdminView" asp-action="NewReceita">Registar Receita</a>
-    <a asp-controller="AdminView" asp-action="NewOperacao">Registar Operação</a>
+    <section class="banner-area relative">
+        <div class="container">
+            <div class="row height align-items-center justify-content-center">
+                <div class="banner-content col-lg-5">
+                    <h1>MrVeggie</h1>
+                    <hr>
+                    <div class="breadcrmb">
+                        <p>
+                            O seu assistente de cozinha vegetariano
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 </body>
 </html>

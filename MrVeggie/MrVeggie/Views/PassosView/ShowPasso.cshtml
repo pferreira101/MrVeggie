@@ -31,9 +31,10 @@
 
             if (timer < 0) {
                 timer = duration;
+                alert('Atenção, acabou o tempo!');
                 clearInterval(interval);
             }
-        }, 10);
+        }, 1000);
     }
 
     function setTime(duration) {

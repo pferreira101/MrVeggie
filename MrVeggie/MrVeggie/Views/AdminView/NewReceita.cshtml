@@ -1,6 +1,8 @@
 ﻿@model MrVeggie.Models.Pages.NewReceita
 
 @{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
 }
 
 
@@ -45,7 +47,7 @@
             <span asp-validation-for="receita.url_imagem" class="text-danger"></span>
         </div>
         <div class="form-group" name ="utensilios">
-            <select id="uts" name="uts" class="mdb-select md-form" multiple>
+            <select id="uts" name="uts" multiple class="form-control form-control-sm">
                 @foreach (var utensilio in Model.utensilios)
                 {
                     <option value="@utensilio.id_utensilio">@utensilio.nome</option>

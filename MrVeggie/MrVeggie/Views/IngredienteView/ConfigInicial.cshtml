@@ -59,13 +59,22 @@
                 alert(response.responseText);
             }
         });*/
-        $.ajax({
-            url: '@Url.Action("ConfigInicial", "IngredienteView")',
-            type: 'POST',
-            data: JSON.stringify(ids),
-            contentType: "application/json; charset=utf-8",
-            dataType: "text",
-        });
+        if (ids.length >= 3) {
+            $.ajax({
+                url: '@Url.Action("ConfigInicial", "IngredienteView")',
+                type: 'POST',
+                data: JSON.stringify(ids),
+                contentType: "application/json; charset=utf-8",
+                dataType: "text",
+                success: function (response) {
+                    window.location = response;
+                }
+            });
+        } else {
+            alert('Escolha pelo menos 3 ingredientes');
+        }
+
+       
 
     }
     
@@ -88,6 +97,6 @@
     </div>
 </div>
 
-<a style="float:right" onclick="getIDsSelected()" class="btn btn-success" asp-controller="Home" asp-action="Index">Confirmar</a>
+<a style="float:right" onclick="getIDsSelected()" class="btn btn-success">Confirmar</a>
 
 

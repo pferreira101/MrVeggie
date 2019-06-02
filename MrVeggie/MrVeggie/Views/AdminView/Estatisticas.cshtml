@@ -1,8 +1,9 @@
 ﻿@model MrVeggie.Models.Auxiliary.Estatistica
 
-@{ 
-
-    float crescimento = (float)Model.registos_ultimo_mes/(Model.nr_utilizadores - Model.registos_ultimo_mes)*100;
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    
+    float crescimento = (float)Model.registos_ultimo_mes / (Model.nr_utilizadores - Model.registos_ultimo_mes) * 100;
 }
 
 <h1>Estatisticas</h1>

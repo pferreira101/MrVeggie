@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿
+@{
+    ViewData["Title"] = "_LayoutAdmin";
+}
+
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -40,12 +45,14 @@
             <div class="header-wrap">
                 <div class="header-top d-flex justify-content-between align-items-center navbar-expand-md">
                     <div class="col menu-left">
-                        <a id="home" asp-controller="Home" asp-action="Index">Início</a>
-                        <a id="receitas" asp-controller="ReceitaView" asp-action="showReceitas">Receitas</a>
-                        <a id="ingredientes" asp-controller="IngredienteView" asp-action="showIngredientes">Ingredientes</a>
+                        <a id="home" asp-controller="AdminView" asp-action="Estatisticas">Inicio</a>
+                        <a id="receita" asp-controller="AdminView" asp-action="NewReceita">Adicionar Receitas</a>
+                        <a id="estatistica" asp-controller="AdminView" asp-action="Estatistica">Estatisticas</a>
+                        <a id="operacao" asp-controller="AdminView" asp-action="NewOperacao">Adicionar Operações</a>
+
                     </div>
                     <div class="col-3 logo">
-                        <a asp-controller="Home" asp-action="Index"><img class="mx-auto" src="~/img/Logo.png" alt=""></a>
+                        <a asp-controller="AdminView" asp-action="Estatisticas"><img class="mx-auto" src="~/img/Logo.png" alt=""></a>
                     </div>
                     <nav class="col navbar navbar-expand-md justify-content-end">
 
@@ -58,7 +65,7 @@
                         <div class="collapse navbar-collapse menu-right" id="collapsibleNavbar">
                             <ul class="navbar-nav justify-content-center w-100">
                                 <li class="nav-item hide-lg">
-                                    <a class="nav-link" asp-controller="AdminView" asp-action="Index">Início</a>
+                                    <a class="nav-link" asp-controller="Home" asp-action="Index">Início</a>
                                 </li>
                                 <li class="nav-item hide-lg">
                                     <a class="nav-link" asp-controller="ReceitaView" asp-action="showReceitas">Receitas</a>
@@ -68,9 +75,7 @@
                                 </li>
 
                                 <li>
-                                    <form class="form-inline" asp-controller="ReceitaView" asp-action="showReceitasSearch" method="post">
-                                        <input class="form-control mr-sm-2" type="search" name="searchBar" placeholder="Procurar" aria-label="Procurar" style="width:90%">
-                                    </form>
+                                    <a id="ingrediente" asp-controller="AdminView" asp-action="NewIngrediente">Adicionar Ingrediente</a>
                                 </li>
                                 <!-- Dropdown -->
                                 @if (User.Identity.IsAuthenticated)

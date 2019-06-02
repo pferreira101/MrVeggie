@@ -37,9 +37,9 @@ namespace MrVeggie.Controllers {
 
 
         [HttpPost]
-        public void ConfigInicial([FromBody] int[] ids) {
+        public IActionResult ConfigInicial([FromBody] int[] ids) {
             selecao.setUserIngrPrefs(ids, User.Identity.Name);
-
+            return Content(Url.Action("Index","Home"));
         }
 
 
