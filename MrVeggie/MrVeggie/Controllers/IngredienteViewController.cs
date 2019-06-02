@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MrVeggie.Contexts;
 using MrVeggie.Models;
@@ -39,6 +40,13 @@ namespace MrVeggie.Controllers {
         public void ConfigInicial([FromBody] int[] ids) {
             selecao.setUserIngrPrefs(ids, User.Identity.Name);
 
+        }
+
+
+
+        [HttpPost]
+        public void AdicionaIngredienteFavoritos([FromBody] int id_ingrediente) {
+            selecao.adicionaIngredienteFavoritos(id_ingrediente, User.Identity.Name);
         }
     }
 }

@@ -128,3 +128,68 @@ ALTER TABLE Agenda ADD CONSTRAINT FKAgenda50798 FOREIGN KEY (receita) REFERENCES
 ALTER TABLE UtensiliosReceita ADD CONSTRAINT FKUtensilios678874 FOREIGN KEY (utensilio) REFERENCES Utensilio (id_utensilio);
 ALTER TABLE IngredientesPasso ADD CONSTRAINT FKIngredient7679 FOREIGN KEY (unidade) REFERENCES Unidade (id_unidade);
 ALTER TABLE UtensiliosReceita ADD CONSTRAINT FKUtensilios299728 FOREIGN KEY (receita) REFERENCES Receita (id_receita);
+
+
+
+USE [msdb]
+GO
+DECLARE @jobId BINARY(16)
+EXEC  msdb.dbo.sp_add_job @job_name=N'Limpa Agenda', 
+		@enabled=1, 
+		@notify_level_eventlog=0, 
+		@notify_level_email=2, 
+		@notify_level_page=2, 
+		@delete_level=0, 
+		@category_name=N'[Uncategorized (Local)]', 
+		@owner_login_name=N'DESKTOP-CM5S8K1\Pedro', @job_id = @jobId OUTPUT
+select @jobId
+GO
+EXEC msdb.dbo.sp_add_jobserver @job_name=N'Limpa Agenda', @server_name = N'DESKTOP-CM5S8K1'
+GO
+USE [msdb]
+GO
+EXEC msdb.dbo.sp_add_jobstep @job_name=N'Limpa Agenda', @step_name=N'Elimina', 
+		@step_id=1, 
+		@cmdexec_success_code=0, 
+		@on_success_action=1, 
+		@on_fail_action=2, 
+		@retry_attempts=0, 
+		@retry_interval=0, 
+		@os_run_priority=0, @subsystem=N'TSQL', 
+		@command=N'DELETE FROM Agenda
+WHERE dia >= 0;', 
+		@database_name=N'MrVeggie', 
+		@flags=0
+GO
+USE [msdb]
+GO
+EXEC msdb.dbo.sp_update_job @job_name=N'Limpa Agenda', 
+		@enabled=1, 
+		@start_step_id=1, 
+		@notify_level_eventlog=0, 
+		@notify_level_email=2, 
+		@notify_level_page=2, 
+		@delete_level=0, 
+		@description=N'', 
+		@category_name=N'[Uncategorized (Local)]', 
+		@owner_login_name=N'DESKTOP-CM5S8K1\Pedro', 
+		@notify_email_operator_name=N'', 
+		@notify_page_operator_name=N''
+GO
+USE [msdb]
+GO
+DECLARE @schedule_id int
+EXEC msdb.dbo.sp_add_jobschedule @job_name=N'Limpa Agenda', @name=N'Segunda', 
+		@enabled=1, 
+		@freq_type=8, 
+		@freq_interval=2, 
+		@freq_subday_type=1, 
+		@freq_subday_interval=0, 
+		@freq_relative_interval=0, 
+		@freq_recurrence_factor=1, 
+		@active_start_date=20190602, 
+		@active_end_date=99991231, 
+		@active_start_time=0, 
+		@active_end_time=235959, @schedule_id = @schedule_id OUTPUT
+select @schedule_id
+GO

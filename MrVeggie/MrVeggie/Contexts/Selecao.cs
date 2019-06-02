@@ -53,7 +53,7 @@ namespace MrVeggie.Contexts {
             return result.ToArray();
         }
 
-        
+       
 
         public Ingrediente[] getIngredientes() {
             return _context_ing.Ingrediente.ToArray();
@@ -176,5 +176,19 @@ namespace MrVeggie.Contexts {
             }
         }
 
+
+        public void adicionaIngredienteFavoritos(int id_ingrediente, string email) {
+            int id_utilizador = _context_u.Utilizador.Where(u => u.email.Equals(email)).First().id_utilizador;
+
+            UtilizadorIngredientesPref uip = new UtilizadorIngredientesPref {
+                ingrediente_id = id_ingrediente,
+                utilizador_id = id_utilizador
+            };
+
+            //if (_context_u.UtilizadorIngredientesPref.Find(id_utilizador, id_ingrediente) == null) {
+                _context_u.UtilizadorIngredientesPref.Add(uip);
+                _context_u.SaveChanges();
+            //}
+        }
     }
 }
