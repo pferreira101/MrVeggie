@@ -1,36 +1,36 @@
 ﻿@model IEnumerable<MrVeggie.Models.Receita>
-@{ int i = 0;}
+    @{ int i = 0;}
 
-<section class="home-banner-area relative">
-    <div class="container">
-        <div class="row height align-items-center justify-content-center">
-            <div class="banner-content col-lg-5">
-                <h1>MrVeggie</h1>
-                <hr>
-                <div class="breadcrmb">
-                    <p>
-                        O seu assistente de cozinha vegetariano
-                    </p>
+    <section class="home-banner-area relative">
+        <div class="container">
+            <div class="row height align-items-center justify-content-center">
+                <div class="banner-content col-lg-5">
+                    <h1>MrVeggie</h1>
+                    <hr>
+                    <div class="breadcrmb">
+                        <p>
+                            O seu assistente de cozinha vegetariano
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
+    </section>
+
+    <div class="go-down">
+        <a href="#sugestoes_area">
+            <img class="go-down-img" src="~/img/go-down.png" height="45" alt="">
+        </a>
     </div>
-</section>
 
-<div class="go-down">
-    <a href="#sugestoes_area">
-        <img class="go-down-img" src="~/img/go-down.png" height="45" alt="">
-    </a>
-</div>
-
-<section id="sugestoes_area">
-    <section class="container section-half">
-        <div class="callto-action-area relative">
-            <div class="row d-flex justify-content-center">
-                <div class="col-lg-12 p-0">
-                    <div class="cta-owl owl-carousel">
-                        @foreach (var r in Model)
-                        {
+    <section id="sugestoes_area">
+        <section class="container section-half">
+            <div class="callto-action-area relative">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-12 p-0">
+                        <div class="cta-owl owl-carousel">
+                            @foreach (var r in Model)
+                            {
                             <div class="item">
                                 <div class="cta-img">
                                     <img src="@r.url_imagem" class="img-fluid" style="margin-left: auto; margin-right: auto;" alt="">
@@ -42,16 +42,16 @@
                                     </p>
                                 </div>
                             </div>
-                        }
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
+
     </section>
 
-</section>
 
-
-<script>
-    document.getElementById("home").classList.add('active');
-</script>
+    <script>
+        document.getElementById("home").classList.add('active');
+    </script>
