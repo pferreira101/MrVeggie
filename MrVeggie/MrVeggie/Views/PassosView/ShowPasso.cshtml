@@ -7,7 +7,7 @@
 
     int proximo = Model.nr + 1;
     int anterior = Model.nr - 1;
-
+    string url = "https://localhost:5001/ReceitaView/ShowReceita/";
     TextToSpeech tts = new TextToSpeech(Model);
 
     string[] txts = tts.getText();
@@ -74,6 +74,16 @@
 <p>
     @Model.desc
 </p>
+
+@if(Model.sub_receita != null)
+{
+    url += Model.sub_receita.id_receita.ToString();
+
+<p>
+    Veja tambem:
+    <a href=@url target="_blank">@Model.sub_receita.desc</a>
+</p>
+}
 
 <p></p>
 
