@@ -137,14 +137,27 @@ SELECT * FROM Receita;
 SELECT * FROM Operacao;
 SELECT * FROM Passo;
 
-ALTER TABLE HistoricoUtilizador
-ALTER COLUMN avaliacao int not null;
+--ALTER TABLE HistoricoUtilizador
+--ALTER COLUMN avaliacao int not null;
 
-DELETE FROM HistoricoUtilizador
-WHERE avaliacao IS null;
+--DELETE FROM HistoricoUtilizador
+--WHERE avaliacao IS null;
 
 SELECT * FROM UtilizadorIngredientesPref;
 
 SELECT * FROM Agenda;
 
 SELECT * FROM UtilizadorReceitasPref;
+
+--DELETE FROM Agenda
+--WHERE utilizador > 0;
+
+--DELETE FROM Receita
+--WHERE id_receita > 2;
+
+SELECT * FROM UtensiliosReceita;
+
+--DELETE FROM UtensiliosReceita
+--WHERE receita > 1;
+
+SELECT * FROM HistoricoUtilizador;

@@ -17,8 +17,8 @@ namespace MrVeggie.Controllers {
         private Execucao execucao;
 
 
-        public PassosViewController(PassoContext context_p, IngredientesPassoContext context_ip, IngredienteContext context_i) {
-            execucao = new Execucao(context_p, context_ip, context_i);
+        public PassosViewController(PassoContext context_p, IngredientesPassoContext context_ip, IngredienteContext context_i, ReceitaContext context_r) {
+            execucao = new Execucao(context_p, context_ip, context_i, context_r);
         }
 
 

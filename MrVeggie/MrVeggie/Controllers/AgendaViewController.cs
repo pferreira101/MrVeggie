@@ -17,15 +17,18 @@ namespace MrVeggie.Controllers {
 
         private Sugestao sugestao { get; set; }
         private Preparacao preparacao { get; set; }
+        private Selecao selecao { get; set; }
+
 
         public AgendaViewController(ReceitaContext context_r, UtilizadorContext context_u, AgendaContext context_a, IngredienteContext context_i, PassoContext context_p, IngredientesPassoContext context_ip) {
             sugestao = new Sugestao(context_r, context_u, null, context_a);
             preparacao = new Preparacao(context_r, context_p, context_ip, context_i);
+            selecao = new Selecao(context_r, context_i, context_ip, context_u, context_a);
         }
 
 
         public IActionResult ShowAgenda() {
-            
+
             List<Agenda> agenda = sugestao.getAgenda(User.Identity.Name);
             List<Receita> receitas = sugestao.getReceitas();
 
@@ -36,6 +39,17 @@ namespace MrVeggie.Controllers {
 
             return View(ar);
         }
+
+
+        [HttpPost]
+        public void MarcaAgenda([FromBody] string[] data) {
+            int id_receita = Int32.Parse(data[0]);
+            int dia = Int32.Parse(data[1]);
+            char refeicao = data[2].ToCharArray()[0];
+
+            selecao.marcaAgenda(dia, refeicao, id_receita, User.Identity.Name);
+        }
+
 
         public IActionResult ShowIngredientesAgenda() {
 
@@ -75,6 +89,7 @@ namespace MrVeggie.Controllers {
             MailMessage mail = new MailMessage();
             SmtpClient client = new SmtpClient("smtp.gmail.com");
 
+           
             mail.From = new MailAddress("mr.veggiept@gmail.com");
             mail.To.Add(User.Identity.Name);
             mail.Subject = "Lista de ingredientes semanal";

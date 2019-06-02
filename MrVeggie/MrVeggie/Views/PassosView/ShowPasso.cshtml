@@ -7,12 +7,46 @@
 
     int proximo = Model.nr + 1;
     int anterior = Model.nr - 1;
-
+    string url = "https://localhost:5001/ReceitaView/ShowReceita/";
     TextToSpeech tts = new TextToSpeech(Model);
 
     string[] txts = tts.getText();
 
 }
+
+<script>
+    var ativado = 0;
+    function startTimer(duration, display) {
+        var timer = duration, minutes, seconds;
+        var interval = setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = minutes + ":" + seconds;
+
+            timer--;
+
+            if (timer == 0) alarm('Acabou o tempo!');
+            if (timer < 0) {
+                timer = duration;
+                clearInterval(interval);
+            }
+        }, 10);
+    }
+
+    function setTime(duration) {
+        if (ativado == 0) {
+            var display = document.getElementById('timer');
+            startTimer(duration * 60, display);
+            ativado = 1;
+        }
+        
+    }
+
+</script>
 
 <p id="aviso" style="font-size:80%;display:none"><b>Aviso:</b> O navegador que utiliza não suporta as funcionalidades de voz.</p>
 
@@ -40,8 +74,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var ing in Model.ingredientes)
-                {
+                @foreach (var ing in Model.ingredientes) {
                     <tr>
                         <td>@ing.Key.nome</td>
                         <td>@ing.Value.quantidade @ing.Value.unidade</td>
@@ -57,9 +90,11 @@
 
     <div class="col-md-2">
         <p></p>
-        <figure>
+        <figure onclick="setTime(@Model.tempo)">
             <img id="no_border_img" src="~/images/relogio.png" style="max-width:60%" />
-            <figcaption> <h3>@Model.tempo min</h3> </figcaption>
+            <figcaption>
+                    <h3 id="timer">@Model.tempo min</h3>
+            </figcaption>
         </figure>
     </div>
 
@@ -75,19 +110,25 @@
     @Model.desc
 </p>
 
+@if (Model.sub_receita != null) {
+    url += Model.sub_receita.id_receita.ToString();
+
+    <p>
+        Veja tambem:
+        <a href=@url target="_blank">@Model.sub_receita.desc</a>
+    </p>
+}
+
 <p></p>
 
 
 <div>
-    @if (Model.ultimo == true)
-    {
+    @if (Model.ultimo == true) {
         <a class="btn btn-success" id="anterior" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id_receita="@Model.receita_id" asp-route-nr_passo="@anterior">Anterior</a>
         <a style="float:right" id="finalizar" class="btn btn-success" asp-controller="AvaliacaoView" asp-action="AvaliarReceita" asp-route-id_receita="@Model.receita_id">Finalizar</a>
     }
-    else
-    {
-        @if (Model.nr > 1)
-        {
+    else {
+        @if (Model.nr > 1) {
             <a class="btn btn-success" id="anterior" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id_receita="@Model.receita_id" asp-route-nr_passo="@anterior">Anterior</a>
         }
         <a style="float:right" class="btn btn-success" id="proximo" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id_receita="@Model.receita_id" asp-route-nr_passo="@proximo">Próximo</a>
