@@ -44,29 +44,38 @@
 
 <p></p>
 
+<div class="row">
+    <div class="wrapper">
+        <div style="width: 35%; float: left;">
+            <img src="@Model.url_imagem" style="width: 100%">
+        </div>
 
-<div class="wrapper">
-    <div style="width: 30%; float: left;">
-        <img src="@Model.url_imagem" style="width: 100%">
+        <div style="padding-left: 20px">
+            <div class="wrapper">
+                <h1>
+                    @Model.nome
+                    @if (User.Identity.IsAuthenticated) {
+                        <img id="like" src="~/img/like.png" onclick="adicionaFavoritos(@Model.id_receita)" style="width:6%; padding-left:10px" />
+                    }
+                    else {
+                        <a asp-controller="UserView" asp-action="LoginUtilizador">
+                            <img id="like" src="~/img/like.png" style="width:6%" />
+                        </a>
+                    }
+                </h1>
+
+
+
+            </div>
+            <p>@Model.desc</p>
+        </div>
 
     </div>
-    <div style="margin-left: 6%">
-        <h1>@Model.nome</h1>
-        <p>@Model.desc</p>
-    </div>
-    <div style="text-align:right">
-        @if (User.Identity.IsAuthenticated) {
-            <a onclick="adicionaFavoritos(@Model.id_receita)">Adicionar aos Favoritos</a>
-        }
-        else {
-            <a asp-controller="UserView" asp-action="LoginUtilizador">Adicionar aos Favoritos</a>
-        }
-    </div>
+
 </div>
 
-<p></p>
-<p></p>
-<p></p>
+
+
 
 <div>
     <h2>Requisitos</h2>
