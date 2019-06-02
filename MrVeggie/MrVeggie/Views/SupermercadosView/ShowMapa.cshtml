@@ -37,7 +37,7 @@
             layer = new Microsoft.Maps.Layer();
             map.layers.insert(layer);
 
-            infobox = new Microsoft.Maps.Infobox(map.getCenter(), { visible: false , description: '<input type="button" value="Obter Direções" onClick="whichRoute();">'});
+            infobox = new Microsoft.Maps.Infobox(map.getCenter(), { visible: false });
             infobox.setMap(map);
 
             Microsoft.Maps.Events.addHandler(layer, 'click', function (e) {
@@ -45,6 +45,7 @@
                 clicked = m.subtitle;
                 infobox.setOptions({
                     title: m.title,
+                    description: m.text +'\n'+ '<input type="button" value="Obter Direções" onClick="whichRoute();">',
                     location: e.target.getLocation(),
                     visible: true
                 });
@@ -79,7 +80,8 @@
                             var pin = new Microsoft.Maps.Pushpin(location, {text: pinText[i], color: 'green'});
                             pin.metadata = {
                                 title: @(new HtmlString(local.nome)),
-                                subtitle: pinText[i]
+                                subtitle: pinText[i],
+                                text: '@local.address'
                             };
                             pins.push(pin);
                             localizacoes.push(location);

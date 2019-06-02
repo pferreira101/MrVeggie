@@ -240,6 +240,7 @@
                 else {
                     <div class="dropdown" style="float:right">
                         <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">   Refeição </a>
+
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             @foreach (var receita in Model.receitas) {
                                 <a class="dropdown-item" onclick="marcaAgenda(@receita.id_receita, 3, 'j')">@receita.nome</a>
