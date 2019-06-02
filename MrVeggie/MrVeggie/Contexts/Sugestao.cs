@@ -173,7 +173,7 @@ namespace MrVeggie.Contexts {
             foreach (Agenda a in agenda) {
                 a.receita = _context_r.Receita.Find(a.receita_id);
                 int to_remove = a.dia * 2;
-                if (a.receita.Equals('j')) to_remove++;
+                if (a.refeicao.Equals('j')) to_remove++;
                 agenda_completa.RemoveAt(to_remove);
                 agenda_completa.Insert(to_remove, a);
             }
