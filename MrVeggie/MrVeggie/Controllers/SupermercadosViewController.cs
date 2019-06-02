@@ -8,6 +8,7 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using BingMapsRESTToolkit;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -24,7 +25,7 @@ namespace MrVeggie.Controllers {
         }
 
         [HttpGet]
-        public ActionResult ShowMapa(){
+        public async Task<ActionResult> ShowMapa(){
             string[] user_loc=null;
             var value = TempData["Loc"];
             if (value is string json)
@@ -32,11 +33,11 @@ namespace MrVeggie.Controllers {
                 user_loc = JsonConvert.DeserializeObject<string[]>(json);
             }
             Console.WriteLine("****User Loc: " + user_loc[0] + " , " + user_loc[1]);
-            return View(ProcessQuery(user_loc[0], user_loc[1]));
+            return View(await GetMarkets(user_loc[0], user_loc[1]));
         }
 
 
-        public List<MarketLocation> ProcessQuery(string user_lat, string user_long) {
+        public async Task<List<MarketLocation>> GetMarkets(string user_lat, string user_long) {
             double Radius = 10; // km  
             int maxResults = 5;
             string bingMapsKey = "Alvpuc-Z8ROrtuOcQZdVD1iaINzybihaHRnSHYWL8jwdEjVrXRj843L8ayxchoj7";
@@ -49,10 +50,10 @@ namespace MrVeggie.Controllers {
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(response.GetResponseStream());
 
-            return ProcessEntityElements(xmlDoc);
+            return await ExtractInfoFromXML(xmlDoc);
         }
 
-        private List<MarketLocation> ProcessEntityElements(XmlDocument response) {
+        private async Task<List<MarketLocation>> ExtractInfoFromXML(XmlDocument response) {
             List<MarketLocation> results = new List<MarketLocation>();
             XmlNodeList entryElements = response.GetElementsByTagName("entry");
 
@@ -73,23 +74,55 @@ namespace MrVeggie.Controllers {
                 string latitude = latElement.InnerText;
                 string longitude = longElement.InnerText;
 
+                double lat; Double.TryParse(latitude, out lat);
+                double longi;  Double.TryParse(longitude, out longi);
+                string address = await getAddress(new Coordinate(lat, longi));
 
-                results.Add(new MarketLocation(name, latitude, longitude));
-                Console.WriteLine("LOCALIZAÇÃO : {0}, {1}, {2}, {3}", name, latitude, longitude, name.Length);
+                results.Add(new MarketLocation(name, latitude, longitude, address));
+                Console.WriteLine("LOCALIZAÇÃO : {0}, {1}, {2}, {3}", name, latitude, longitude, address);
             }
-
             return results;
+        }
+
+        public async Task<String> getAddress(Coordinate point)
+        {
+            //Create a request.
+            var request = new ReverseGeocodeRequest()
+            {
+                Point = point,
+                IncludeIso2 = true,
+                IncludeNeighborhood = true,
+                BingMapsKey = "Alvpuc-Z8ROrtuOcQZdVD1iaINzybihaHRnSHYWL8jwdEjVrXRj843L8ayxchoj7"
+            };
+
+            //Process the request by using the ServiceManager.
+            var response = await ServiceManager.GetResponseAsync(request);
+
+            if (response != null &&
+                response.ResourceSets != null &&
+                response.ResourceSets.Length > 0 &&
+                response.ResourceSets[0].Resources != null &&
+                response.ResourceSets[0].Resources.Length > 0)
+            {
+
+                var result = response.ResourceSets[0].Resources[0] as BingMapsRESTToolkit.Location;
+                return result.Address.FormattedAddress;
+            }
+            return null;
+
         }
 
         public class MarketLocation {
             public string latitude;
             public string longitude;
             public string nome;
+            public string address;
 
-            public MarketLocation(string nome, string latitude, string longitude) {
+            public MarketLocation(string nome, string latitude, string longitude, string address) {
                 this.nome = nome;
                 this.latitude = latitude;
                 this.longitude = longitude;
+                this.address = address;
             }
         }
     }
