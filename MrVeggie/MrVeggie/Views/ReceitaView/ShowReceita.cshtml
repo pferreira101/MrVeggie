@@ -95,9 +95,17 @@
             </thead>
             <tbody>
                 @foreach (var utensilio in Model.utensilios) {
-                    <tr>
-                        <td>@utensilio.nome</td>
-                    </tr>
+                <tr>
+                    <td>
+                        <wrapper>
+                            @utensilio.nome
+                            <img id="hover" src="@utensilio.url_imagem" />
+                        </wrapper>
+                        
+                        
+                    </td>
+                    <p>
+                </tr>
                 }
             </tbody>
         </table>

@@ -76,30 +76,18 @@
 <div class="container-fluid">
     <div class="row">
 
-            @foreach (var ingrediente in Model) {
+        @foreach (var ingrediente in Model) {
 
-                <div id="@ingrediente.id_ingrediente" onclick="addToPref(@ingrediente.id_ingrediente)" class="col-md-3 shadow p-3 mb-5 bg-white rounded" style="margin: 3px">
-
-                    <div class="row">
-                        <div class="col-md-2">
-                            <h2>
-                                @ingrediente.nome
-                            </h2>
-                        </div>
-
-                    </div>
-                    <div class="row">
-                        <div class="container">
-                            <img class="d-block w-100" src="@ingrediente.url_imagem">
-
-                        </div>
-                    </div>
+            <div class="card shadow p-3 mb-5 bg-white rounded" style="margin: 3px; width:18rem" onclick="addToPref(@ingrediente.id_ingrediente)">
+                <img id="no_border_img" class="card-img-top" src="@ingrediente.url_imagem" alt="Error loading image">
+                <div class="card-body">
+                    <h3 class="card-title">@ingrediente.nome</h3>
                 </div>
-            }
+            </div>
+        }
     </div>
 </div>
 
-<a class="btn btn-success" onclick="getIDsSelected()">TESTE</a>
 <a style="float:right" onclick="getIDsSelected()" class="btn btn-success" asp-controller="Home" asp-action="Index">Confirmar</a>
 
 

@@ -8,21 +8,29 @@
 <div class="container-fluid">
     <div class="row">
         @foreach (var receita in Model) {
-            <div class="col-md-3 shadow p-3 mb-5 bg-white rounded" style="margin: 3px">
+            <!--<div class="col-md-3 shadow p-3 mb-5 bg-white rounded" style="margin: 3px">
 
-                <div class="row">
-                    <div class="col-md-2">
-                        <h2>
-                            <a asp-controller="Home" asp-action="Index" id="link_preto">@receita.nome</a>
-                        </h2>
-                    </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <h2>
+                        <a id="link_preto" asp-controller="ReceitaView" asp-action="ShowReceita" asp-route-id="@receita.id_receita">@receita.nome</a>
+                    </h2>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="container">
+                    <img class="d-block w-100" src="~/images/teste.jpg">
 
                 </div>
-                <div class="row">
-                    <div class="container">
-                        <img class="d-block w-100" src="~/images/teste.jpg">
-
-                    </div>
+            </div>
+        </div>-->
+            <div class="card shadow p-3 mb-5 bg-white rounded" style="margin: 3px; width:18rem">
+                <img id="no_border_img" class="card-img-top" src="@receita.url_imagem" alt="Error loading image">
+                <div class="card-body">
+                    <h3 class="card-title">
+                        <a id="link_preto" asp-controller="ReceitaView" asp-action="ShowReceita" asp-route-id="@receita.id_receita">@receita.nome</a>
+                    </h3>
                 </div>
             </div>
         }

@@ -75,25 +75,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <h1>Receitas</h1>
 
 
@@ -116,8 +97,113 @@
 
 <div class="container-fluid" style="float:left;padding-bottom:75px;">
     <div class="row">
-        @foreach (var receita in Model.receitas)
-        {
+        @foreach (var receita in Model.receitas) {
+
+            <div class="card shadow p-3 mb-5 bg-white rounded" style="margin: 3px; width:18rem">
+                <img class="card-img-top" src="@receita.url_imagem" alt="Error Loading Image">
+                <div class="card-body">
+                    <h3 class="card-title">@receita.nome</h3>
+
+
+                    <div class="container" style="display:inline-block">
+                        <div class="row">
+                            <div class="column" style="float: left; width: 25%; padding-left:6px">
+                                <figure>
+                                    @{
+                                        if (receita.dificuldade == 1) {
+                                            dificuldade = "Fácil";
+                                            dificuldade_img = "facil.png";
+                                        }
+                                        else if (receita.dificuldade == 2) {
+                                            dificuldade = "Média";
+                                            dificuldade_img = "media.png";
+                                        }
+                                        else {
+                                            dificuldade = "Difícil";
+                                            dificuldade_img = "dificil.png";
+                                        }
+                                    }
+                                    <img id="no_border_img" src="~/images/@dificuldade_img" style="width:50%" />
+                                    <figcaption style="text-align: center"> @dificuldade </figcaption>
+                                </figure>
+                            </div>
+                            <div class="column" style="float: left; width: 25%; padding-left:20px">
+                                <figure>
+                                    <img id="no_border_img" src="~/images/pessoa.png" style="width:100%" />
+                                    <figcaption style="text-align: center"> @receita.n_pessoas  </figcaption>
+                                </figure>
+                            </div>
+                            <div class="column" style="float: left; width: 25%; padding-left:20px">
+                                <figure id="element3">
+                                    <img id="no_border_img" src="~/images/relogio.png" style="width:100%" />
+                                    <figcaption style="text-align: center"> @receita.tempo_conf </figcaption>
+                                </figure>
+                            </div>
+                            <div class="column" style="float: left; width: 25%; padding-left:20px">
+                                <figure id="element3">
+                                    <img id="no_border_img" src="~/images/calories.png" style="width:100%" />
+                                    <figcaption style="text-align: center"> @receita.calorias </figcaption>
+                                </figure>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="dropdown" >
+                                <a class="btn dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Agendar Refeição
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" onclick="verificaAgenda(1, 'a', @receita.id_receita)">Segunda - Almoço</a>
+                                    <a class="dropdown-item" onclick="verificaAgenda(1, 'j', @receita.id_receita)">Segunda - Jantar</a>
+                                    <a class="dropdown-item" onclick="verificaAgenda(2, 'a', @receita.id_receita)">Terça - Almoço</a>
+                                    <a class="dropdown-item" onclick="verificaAgenda(2, 'j', @receita.id_receita)">Terça - Jantar</a>
+                                    <a class="dropdown-item" onclick="verificaAgenda(3, 'a', @receita.id_receita)">Quarta - Almoço</a>
+                                    <a class="dropdown-item" onclick="verificaAgenda(3, 'j', @receita.id_receita)">Quarta - Jantar</a>
+                                    <a class="dropdown-item" onclick="verificaAgenda(4, 'a', @receita.id_receita)">Quinta - Almoço</a>
+                                    <a class="dropdown-item" onclick="verificaAgenda(4, 'j', @receita.id_receita)">Quinta - Jantar</a>
+                                    <a class="dropdown-item" onclick="verificaAgenda(5, 'a', @receita.id_receita)">Sexta - Almoço</a>
+                                    <a class="dropdown-item" onclick="verificaAgenda(5, 'j', @receita.id_receita)">Sexta - Jantar</a>
+                                    <a class="dropdown-item" onclick="verificaAgenda(6, 'a', @receita.id_receita)">Sábado - Almoço</a>
+                                    <a class="dropdown-item" onclick="verificaAgenda(6, 'j', @receita.id_receita)">Sábado - Jantar</a>
+                                    <a class="dropdown-item" onclick="verificaAgenda(7, 'a', @receita.id_receita)">Domingo - Almoço</a>
+                                    <a class="dropdown-item" onclick="verificaAgenda(7, 'j', @receita.id_receita)">Domingo - Jantar</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="column" style="width:60%">
+                                @{
+                                    if (Math.Round(receita.avaliacao) == 1) {
+                                        star_img = "star1.png";
+                                    }
+                                    else if (Math.Round(receita.avaliacao) == 2) {
+                                        star_img = "star2.png";
+                                    }
+                                    else if (Math.Round(receita.avaliacao) == 3) {
+                                        star_img = "star3.png";
+                                    }
+                                    else if (Math.Round(receita.avaliacao) == 4) {
+                                        star_img = "star4.png";
+                                    }
+                                    else if (Math.Round(receita.avaliacao) == 5) {
+                                        star_img = "star5.png";
+                                    }
+                                    else {
+                                        star_img = "star0.png";
+                                    }
+                                }
+                                <img id="no_border_img" src="~/images/@star_img" style="width:100%;" />
+                            </div>
+                            <div class="column">
+                                <a class="btn btn-success" asp-controller="ReceitaView" asp-action="showReceita" asp-route-id="@receita.id_receita">Ver</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!--
             <div class="col-md-3 shadow p-3 mb-5 bg-white rounded" style="margin: 3px;">
                 <div class="row">
                     <div class="container">
@@ -135,18 +221,15 @@
                             <div class="column" style="float: left; width: 33.33%; padding: 35px;">
                                 <figure>
                                     @{
-                                        if (receita.dificuldade == 1)
-                                        {
+                                        if (receita.dificuldade == 1) {
                                             dificuldade = "Fácil";
                                             dificuldade_img = "facil.png";
                                         }
-                                        else if (receita.dificuldade == 2)
-                                        {
+                                        else if (receita.dificuldade == 2) {
                                             dificuldade = "Média";
                                             dificuldade_img = "media.png";
                                         }
-                                        else
-                                        {
+                                        else {
                                             dificuldade = "Difícil";
                                             dificuldade_img = "dificil.png";
                                         }
@@ -197,40 +280,34 @@
                     <div class="row">
                         <div class="column" style="float: left; width: 65%; padding: 25px">
                             @{
-                                if (Math.Round(receita.avaliacao) == 1)
-                                {
+                                if (Math.Round(receita.avaliacao) == 1) {
                                     star_img = "star1.png";
                                 }
-                                else if (Math.Round(receita.avaliacao) == 2)
-                                {
+                                else if (Math.Round(receita.avaliacao) == 2) {
                                     star_img = "star2.png";
                                 }
-                                else if (Math.Round(receita.avaliacao) == 3)
-                                {
+                                else if (Math.Round(receita.avaliacao) == 3) {
                                     star_img = "star3.png";
                                 }
-                                else if (Math.Round(receita.avaliacao) == 4)
-                                {
+                                else if (Math.Round(receita.avaliacao) == 4) {
                                     star_img = "star4.png";
                                 }
-                                else if (Math.Round(receita.avaliacao) == 5)
-                                {
+                                else if (Math.Round(receita.avaliacao) == 5) {
                                     star_img = "star5.png";
                                 }
-                                else
-                                {
+                                else {
                                     star_img = "star0.png";
                                 }
                             }
-                            <img id="no_border_img" src="~/images/@star_img" style="width:100%;"/>
+                            <img id="no_border_img" src="~/images/@star_img" style="width:100%;" />
                         </div>
                         <div class="column" style="float: left; width: 35%; padding: 25px">
                             <a class="btn btn-success" asp-controller="ReceitaView" asp-action="showReceita" asp-route-id="@receita.id_receita">Ver</a>
                         </div>
                     </div>
-                    
 
-                </div>
+
+                </div>-->
 
             </div>
         }
