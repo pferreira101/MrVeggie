@@ -88,11 +88,11 @@ namespace MrVeggie.Controllers {
         public void sendEmail([FromBody] string ingredientes) {
             MailMessage mail = new MailMessage();
             SmtpClient client = new SmtpClient("smtp.gmail.com");
-            string init = "<p>Olá!</p> <p>Lista semanal dos ingredientes:</p>";
+            string init = "<p>Olá!</p> <p>Lista dos ingredientes:</p>";
             string end = "<p>Boa semana,</p> <p>Mr. Veggie</p>";
             mail.From = new MailAddress("mr.veggiept@gmail.com");
             mail.To.Add(User.Identity.Name);
-            mail.Subject = "Lista de ingredientes semanal";
+            mail.Subject = "Lista de ingredientes";
             mail.Body = init + ingredientes + end;
             mail.IsBodyHtml = true;
 
