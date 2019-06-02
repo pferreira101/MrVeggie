@@ -4,20 +4,57 @@
     ViewData["Title"] = "Ingredientes";
 }
 
+
+<script>
+    function adicionaFavoritos(ingrediente) {
+        $.ajax({
+            url: '@Url.Action("AdicionaIngredienteFavoritos", "IngredienteView")',
+            type: 'POST',
+            data: JSON.stringify(ingrediente),
+            contentType: "application/json; charset=utf-8",
+            dataType: "text",
+            success: function () {
+                alert('Ingrediente adicionado aos favoritos');
+            },
+            error: function () {
+                alert('Ingrediente já se encontra nos favoritos');
+            }
+        });
+    }
+</script>
+
+
+
+
+
 <h1>Ingredientes</h1>
 
 <div class="container-fluid">
     <div class="row">
         @foreach (var ingrediente in Model) {
-            <div class="col-md-3 shadow p-3 mb-5 bg-white rounded" style="margin: 3px" >
+            <div class="card shadow p-3 mb-5 bg-white rounded" style="margin: 3px; width:18rem">
+                <img id="no_border_img" class="card-img-top" src="@ingrediente.url_imagem" alt="Error loading image">
+                <div class="card-body">
+                    <h3 class="card-title">@ingrediente.nome</h3>
+                    @if (User.Identity.IsAuthenticated) {
+                        <a onclick="adicionaFavoritos(@ingrediente.id_ingrediente)">Adicionar aos Favoritos</a>
+                    }
+                    else {
+                        <a asp-controller="UserView" asp-action="LoginUtilizador">Adicionar aos Favoritos</a>
+                    }
+                </div>
+            </div>
+            /*<div class="col-md-3 shadow p-3 mb-5 bg-white rounded" style="margin: 3px">
 
                 <div class="row">
                     <div class="col-md-2">
                         <h2>
-                            <a asp-controller="Home" asp-action="Index" id="link_preto">@ingrediente.nome</a>
+                            @ingrediente.nome
                         </h2>
                     </div>
-                    
+                    <div class="col-md-1">
+                       
+                    </div>
                 </div>
                 <div class="row">
                     <div class="container">

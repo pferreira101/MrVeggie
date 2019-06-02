@@ -108,6 +108,12 @@ namespace MrVeggie.Contexts {
             _context_ip.SaveChanges();
         }
 
+        internal void registaOperacao(Operacao op)
+        {
+            _context_op.Add(op);
+            _context_op.SaveChanges();
+        }
+
         public void finalizaReceita(int id_receita, int nPasso)
         {
             var passo = _context_r.Passo.First(p => p.receita_id == id_receita && p.nr == nPasso-1);

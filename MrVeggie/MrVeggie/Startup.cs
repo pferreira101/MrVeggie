@@ -19,6 +19,7 @@ namespace MrVeggie {
         public void ConfigureServices(IServiceCollection services) {
             var connection = @"Server=DESKTOP-DG02KJM\SQLSERVER;Database=MrVeggie;Trusted_Connection=True;ConnectRetryCount=0";
 
+
             services.AddDbContext<UtilizadorContext>(options => options.UseSqlServer(connection));
             services.AddDbContext<IngredienteContext>(options => options.UseSqlServer(connection));
             services.AddDbContext<ReceitaContext>(options => options.UseSqlServer(connection));

@@ -23,19 +23,24 @@ namespace MrVeggie.Contexts {
 
         public void avalia(int id_receita, string email_utilizador, int pontuacao) {
             Receita r = _context_r.Receita.Find(id_receita);
-            int id_utilizador = _context_u.Utilizador.Where(u => u.email.Equals(email_utilizador)).First().id_utilizador; // SERÁ ASSIM QUE SE VAI BUSCAR?? METER ID NA COOKIE? COMO?! 
+            int id_utilizador = _context_u.Utilizador.Where(u => u.email.Equals(email_utilizador)).First().id_utilizador;
 
-            r.avaliacao = ((r.avaliacao * r.n_avaliacoes) + pontuacao) / (r.n_avaliacoes+1);
+            r.avaliacao = ((r.avaliacao * r.n_avaliacoes) + pontuacao) / (r.n_avaliacoes + 1);
             r.n_avaliacoes++;
+
+            
+            _context_r.Update<Receita>(r);
+            _context_r.SaveChanges();
+
 
             HistoricoUtilizador historico = _context_hu.HistoricoUtilizador.Where(hu => hu.utilizador_id == id_utilizador && hu.receita_id == id_receita).OrderByDescending(hu => hu.data_conf).First();
             historico.avaliacao = pontuacao;
 
-            _context_r.Update<Receita>(r);
-            _context_r.SaveChanges();
-
-            
+            _context_hu.Update<HistoricoUtilizador>(historico);
+            _context_hu.SaveChanges();
         }
+
+
 
         public Receita getReceita(int id_receita) {
             return _context_r.Receita.Find(id_receita);

@@ -109,6 +109,17 @@ namespace MrVeggie.Controllers {
             return View("Index");
         }
 
-        
+        public IActionResult NewOperacao()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult registaOperacao(Operacao model)
+        {
+            admin.registaOperacao(model);
+
+            return View("Index");
+        }
     }
 }

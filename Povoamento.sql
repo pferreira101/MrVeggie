@@ -122,12 +122,19 @@ SELECT * FROM HistoricoUtilizador;
 
 --INSERT INTO Agenda VALUES(1, 'a', 2, 2);
 
-INSERT INTO Utensilio VALUES ('Colher', 'url');
-
-INSERT INTO UtensiliosReceita VALUES (1, 1);
+INSERT INTO Utensilio VALUES ('Colher', 'url'), ('Fogão', 'url'), ('Forno','url'),('Faca','url'),('Tabua de cozinha', 'url'), ('Panela', 'url'), ('Pincel', 'url');
+select * from UtensiliosReceita;
+INSERT INTO UtensiliosReceita VALUES (1, 1),
+									 (2, 2),
+									 (2, 6),
+									 (2, 5),
+									 (2, 4),
+									 (3, 4),
+									 (3, 5),
+									 (4, 3),
+									 (4, 7);
 
 SELECT * FROM Utilizador;
-
 --UPDATE Utilizador
 --SET admin = 1
 --WHERE email = 'admin@admin.com';
@@ -137,14 +144,27 @@ SELECT * FROM Receita;
 SELECT * FROM Operacao;
 SELECT * FROM Passo;
 
-ALTER TABLE HistoricoUtilizador
-ALTER COLUMN avaliacao int not null;
+--ALTER TABLE HistoricoUtilizador
+--ALTER COLUMN avaliacao int not null;
 
-DELETE FROM HistoricoUtilizador
-WHERE avaliacao IS null;
+--DELETE FROM HistoricoUtilizador
+--WHERE avaliacao IS null;
 
 SELECT * FROM UtilizadorIngredientesPref;
 
 SELECT * FROM Agenda;
 
 SELECT * FROM UtilizadorReceitasPref;
+
+--DELETE FROM Agenda
+--WHERE utilizador > 0;
+
+--DELETE FROM Receita
+--WHERE id_receita > 2;
+
+SELECT * FROM UtensiliosReceita;
+
+--DELETE FROM UtensiliosReceita
+--WHERE receita > 1;
+
+SELECT * FROM HistoricoUtilizador;

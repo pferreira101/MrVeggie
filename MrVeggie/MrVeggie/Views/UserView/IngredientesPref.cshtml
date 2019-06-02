@@ -8,12 +8,12 @@
 <div class="container-fluid">
     <div class="row">
         @foreach (var ingrediente in Model) {
-            <div class="col-md-3 shadow p-3 mb-5 bg-white rounded" style="margin: 3px">
+            <!--<div class="col-md-3 shadow p-3 mb-5 bg-white rounded" style="margin: 3px">
 
                 <div class="row">
                     <div class="col-md-2">
                         <h2>
-                            <a asp-controller="Home" asp-action="Index" id="link_preto">@ingrediente.nome</a>
+                            @ingrediente.nome
                         </h2>
                     </div>
 
@@ -23,6 +23,12 @@
                         <img class="d-block w-100" src="@ingrediente.url_imagem">
 
                     </div>
+                </div>
+            </div>-->
+            <div class="card shadow p-3 mb-5 bg-white rounded" style="margin: 3px; width:18rem" >
+                <img id="no_border_img" class="card-img-top" src="@ingrediente.url_imagem" alt="Error loading image">
+                <div class="card-body">
+                    <h3 class="card-title">@ingrediente.nome</h3>
                 </div>
             </div>
         }

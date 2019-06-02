@@ -3,6 +3,17 @@ for details on configuring this project to bundle and minify static web assets. 
 
 
 /****************TESTES******************/
+wrapper img {
+    display: none;
+}
+
+wrapper:hover img {
+    display: block;
+}
+
+
+
+
 
 .div_slide {
     background-color: rgba(46, 46, 46, 0.5);
@@ -99,7 +110,6 @@ color: black;
 
 a:hover, a:active {
     color: #ffffff;
-    background-color: #2ca31a;
 }
 
 .navbar {

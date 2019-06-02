@@ -15,9 +15,29 @@
             data: JSON.stringify(receita),
             contentType: "application/json; charset=utf-8",
             dataType: "text",
+            success: function () {
+                alert('Receita adicionada aos favoritos');
+            }
         });
     }
 
+    function enviaLocalizacao(){
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var userLoc = [position.coords.latitude, position.coords.longitude];
+
+            $.post({
+                url: '@Url.Action("ShowLocalizacao", "SupermercadosView")',
+                type: 'POST',
+                data: JSON.stringify(userLoc),
+                contentType: "application/json; charset=utf-8",
+                dataType: "text",
+                success: function (response) {
+                    window.location =  response;
+                }
+            });
+        })
+    }
+    
 </script>
 
 
@@ -35,7 +55,12 @@
         <p>@Model.desc</p>
     </div>
     <div style="text-align:right">
-        <a class="dropdown-item" onclick="adicionaFavoritos(@Model.id_receita)">Adicionar aos Favoritos</a>
+        @if (User.Identity.IsAuthenticated) {
+            <a onclick="adicionaFavoritos(@Model.id_receita)">Adicionar aos Favoritos</a>
+        }
+        else {
+            <a asp-controller="UserView" asp-action="LoginUtilizador">Adicionar aos Favoritos</a>
+        }
     </div>
 </div>
 
@@ -46,7 +71,7 @@
 <div>
     <h2>Requisitos</h2>
 
-    <a style="float:right" class="btn btn-link" asp-controller="SupermercadosView" asp-action="ShowLocalizacao">Onde comprar?</a>
+    <a style="float:right" class="btn btn-link" onclick="enviaLocalizacao();">Onde comprar?</a>
 
 </div>
 
@@ -68,8 +93,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var ing in Model.ingredientes)
-                {
+                @foreach (var ing in Model.ingredientes) {
                     <tr>
                         <td>@ing.Key.nome</td>
                         <td>@ing.Value.quantidade @ing.Value.unidade</td>
@@ -87,11 +111,18 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var utensilio in Model.utensilios)
-                {
-                    <tr>
-                        <td>@utensilio.nome</td>
-                    </tr>
+                @foreach (var utensilio in Model.utensilios) {
+                <tr>
+                    <td>
+                        <wrapper>
+                            @utensilio.nome
+                            <img id="hover" src="@utensilio.url_imagem" />
+                        </wrapper>
+                        
+                        
+                    </td>
+                    <p>
+                </tr>
                 }
             </tbody>
         </table>
@@ -102,13 +133,11 @@
 
 
 <div style="padding-bottom:50px;">
-    @if (User.Identity.IsAuthenticated)
-    {
+    @if (User.Identity.IsAuthenticated) {
         <a style="float:right" class="btn btn-success" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id="@Model.id_receita-1">Começar</a>
     }
-    else
-    {
-        <a style="float:right" class="btn btn-success" asp-controller="UserView" asp-action="LoginUtilizador" asp-route-id="@Model.id_receita">Começar</a>
+    else {
+        <a style="float:right" class="btn btn-success" asp-controller="UserView" asp-action="LoginUtilizador">Começar</a>
     }
 </div>
 
