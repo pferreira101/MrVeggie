@@ -35,9 +35,11 @@ namespace MrVeggie.Controllers {
 
         [HttpGet("{id}")]
         public IActionResult showReceita(int id) {
-            Receita receita = preparacao.getIngredientes(id);
+            
 
+            Receita receita = preparacao.getIngredientes(id);
             if (receita == null) return NotFound();
+
 
             return View(receita);
         }
