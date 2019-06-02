@@ -122,12 +122,19 @@ SELECT * FROM HistoricoUtilizador;
 
 --INSERT INTO Agenda VALUES(1, 'a', 2, 2);
 
-INSERT INTO Utensilio VALUES ('Colher', 'url');
-
-INSERT INTO UtensiliosReceita VALUES (1, 1);
+INSERT INTO Utensilio VALUES ('Colher', 'url'), ('Fogão', 'url'), ('Forno','url'),('Faca','url'),('Tabua de cozinha', 'url'), ('Panela', 'url'), ('Pincel', 'url');
+select * from UtensiliosReceita;
+INSERT INTO UtensiliosReceita VALUES (1, 1),
+									 (2, 2),
+									 (2, 6),
+									 (2, 5),
+									 (2, 4),
+									 (3, 4),
+									 (3, 5),
+									 (4, 3),
+									 (4, 7);
 
 SELECT * FROM Utilizador;
-
 --UPDATE Utilizador
 --SET admin = 1
 --WHERE email = 'admin@admin.com';

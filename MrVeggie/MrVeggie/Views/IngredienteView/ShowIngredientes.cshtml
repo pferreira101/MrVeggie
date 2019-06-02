@@ -32,7 +32,19 @@
 <div class="container-fluid">
     <div class="row">
         @foreach (var ingrediente in Model) {
-            <div class="col-md-3 shadow p-3 mb-5 bg-white rounded" style="margin: 3px" >
+            <div class="card shadow p-3 mb-5 bg-white rounded" style="margin: 3px; width:18rem">
+                <img id="no_border_img" class="card-img-top" src="@ingrediente.url_imagem" alt="Error loading image">
+                <div class="card-body">
+                    <h3 class="card-title">@ingrediente.nome</h3>
+                    @if (User.Identity.IsAuthenticated) {
+                        <a onclick="adicionaFavoritos(@ingrediente.id_ingrediente)">Adicionar aos Favoritos</a>
+                    }
+                    else {
+                        <a asp-controller="UserView" asp-action="LoginUtilizador">Adicionar aos Favoritos</a>
+                    }
+                </div>
+            </div>
+            /*<div class="col-md-3 shadow p-3 mb-5 bg-white rounded" style="margin: 3px">
 
                 <div class="row">
                     <div class="col-md-2">
@@ -41,12 +53,7 @@
                         </h2>
                     </div>
                     <div class="col-md-1">
-                        @if (User.Identity.IsAuthenticated) {
-                            <a onclick="adicionaFavoritos(@ingrediente.id_ingrediente)">Adicionar aos Favoritos</a>
-                        }
-                        else {
-                            <a asp-controller="UserView" asp-action="LoginUtilizador">Adicionar aos Favoritos</a>
-                        }
+                       
                     </div>
                 </div>
                 <div class="row">
