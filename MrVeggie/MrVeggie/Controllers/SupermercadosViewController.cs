@@ -9,25 +9,39 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+
 
 namespace MrVeggie.Controllers {
 
     [Route("[controller]/[action]")]
     public class SupermercadosViewController : Controller {
 
-        public ActionResult ShowLocalizacao() {
-            return View(ProcessQuery());
+        [HttpPost]
+        public IActionResult ShowLocalizacao([FromBody] string[] user_loc) {
+            TempData["Loc"] = JsonConvert.SerializeObject(user_loc);
+            return Content(Url.Action("ShowMapa", "SupermercadosView"));
+        }
+
+        [HttpGet]
+        public ActionResult ShowMapa(){
+            string[] user_loc=null;
+            var value = TempData["Loc"];
+            if (value is string json)
+            {
+                user_loc = JsonConvert.DeserializeObject<string[]>(json);
+            }
+            Console.WriteLine("****User Loc: " + user_loc[0] + " , " + user_loc[1]);
+            return View(ProcessQuery(user_loc[0], user_loc[1]));
         }
 
 
-        public List<MarketLocation> ProcessQuery() {
-            double SearchLatitude = 41.480687;
-            double SearchLongitude = -8.527346;
+        public List<MarketLocation> ProcessQuery(string user_lat, string user_long) {
             double Radius = 10; // km  
             int maxResults = 5;
             string bingMapsKey = "Alvpuc-Z8ROrtuOcQZdVD1iaINzybihaHRnSHYWL8jwdEjVrXRj843L8ayxchoj7";
             string requestUrl = string.Format(CultureInfo.InvariantCulture, "http://spatial.virtualearth.net/REST/v1/data/c2ae584bbccc4916a0acf75d1e6947b4/NavteqEU/NavteqPOIs" +
-                "?spatialFilter=nearby({0},{1},{2})&$filter=EntityTypeID Eq 5400&$top={3}&key={4}", SearchLatitude, SearchLongitude, Radius, maxResults, bingMapsKey);
+                "?spatialFilter=nearby({0},{1},{2})&$filter=EntityTypeID Eq 5400&$top={3}&key={4}", user_lat, user_long, Radius, maxResults, bingMapsKey);
 
             HttpWebRequest request = WebRequest.Create(requestUrl) as HttpWebRequest;
             HttpWebResponse response = request.GetResponse() as HttpWebResponse;
@@ -55,13 +69,13 @@ namespace MrVeggie.Controllers {
                 XmlNode longElement = propElement.GetElementsByTagName("d:Longitude")[0];
                 if (longElement == null) throw new Exception("Longitude not found");
 
-                string name = nameElement.InnerText;
-                string latitude = latElement.InnerText;//.ToString(CultureInfo.InvariantCulture).Replace("−", "-");
-                string longitude = longElement.InnerText;//.ToString(CultureInfo.InvariantCulture).Replace("−", "-");
+                string name = JsonConvert.SerializeObject(nameElement.InnerText);
+                string latitude = latElement.InnerText;
+                string longitude = longElement.InnerText;
 
 
                 results.Add(new MarketLocation(name, latitude, longitude));
-                Console.WriteLine("LOCALIZAÇÃO : {0}, {1}, {2}", name, latitude, longitude);
+                Console.WriteLine("LOCALIZAÇÃO : {0}, {1}, {2}, {3}", name, latitude, longitude, name.Length);
             }
 
             return results;
