@@ -3832,7 +3832,6 @@ input[type=submit].btn-block {
 
 .custom-select[multiple],
 .custom-select[size]:not([size="1"]) {
-    height: auto;
     padding-right: .75rem;
     background-image: none
 }

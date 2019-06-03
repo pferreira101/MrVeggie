@@ -47,8 +47,7 @@
                     <div class="col menu-left">
                         <a id="home" asp-controller="AdminView" asp-action="Index">Inicio</a>
                         <a id="receita" asp-controller="AdminView" asp-action="NewReceita">Adicionar Receitas</a>
-                        <a id="estatistica" asp-controller="AdminView" asp-action="Estatisticas">Estatisticas</a>
-                        <a id="operacao" asp-controller="AdminView" asp-action="NewOperacao">Adicionar Operações</a>
+                        
 
                     </div>
                     <div class="col-3 logo">
@@ -85,11 +84,8 @@
                                             Área Privada
                                         </a>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" asp-controller="AgendaView" asp-action="ShowAgenda">Agenda</a>
-                                            <a class="dropdown-item" asp-controller="HistoricoView" asp-action="showHistorico">Histórico</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" asp-controller="UserView" asp-action="ReceitasPref">Receitas preferidas</a>
-                                            <a class="dropdown-item" asp-controller="UserView" asp-action="IngredientesPref">Ingredientes preferidos</a>
+                                            <a class="dropdown-item" id="estatistica" asp-controller="AdminView" asp-action="Estatisticas">Estatisticas</a>
+                                            <a class="dropdown-item" id="operacao" asp-controller="AdminView" asp-action="NewOperacao">Adicionar Operações</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" asp-controller="UserView" asp-action="Logout">Logout</a>
                                         </div>
