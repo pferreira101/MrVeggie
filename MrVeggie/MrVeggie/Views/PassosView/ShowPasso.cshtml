@@ -1,4 +1,4 @@
-﻿@using MrVeggie.Models.Auxiliary;
+﻿@using Microsoft.AspNetCore.Html;
 
 @model MrVeggie.Models.Passo
 
@@ -10,6 +10,28 @@
     string url = "https://localhost:5001/PassosView/ShowPasso/";
 
 }
+
+<style>
+    #no_border_img {
+        opacity: 1;
+        -webkit-transition: .3s ease-in-out;
+        transition: .3s ease-in-out;
+    }
+
+        #no_border_img:hover {
+            opacity: .5;
+        }
+
+    #ouvir {
+        opacity: 1;
+        -webkit-transition: .3s ease-in-out;
+        transition: .3s ease-in-out;
+    }
+
+        #ouvir:hover {
+            opacity: .5;
+        }
+</style>
 
 <script>
     var ativado = 0;
@@ -40,7 +62,7 @@
             startTimer(duration * 60, display);
             ativado = 1;
         }
-        
+
     }
 
 </script>
@@ -82,7 +104,8 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var ing in Model.ingredientes) {
+                @foreach (var ing in Model.ingredientes)
+                {
                     <tr>
                         <td>@ing.Key.nome</td>
                         <td>@ing.Value.quantidade @ing.Value.unidade</td>
@@ -98,10 +121,10 @@
 
     <div class="col-md-2">
         <p></p>
-        <figure onclick="setTime(@Model.tempo)">
-            <img id="no_border_img" src="~/img/relogio.png" style="max-width:60%" />
-            <figcaption>
-                    <h3 id="timer">@Model.tempo min</h3>
+        <figure onclick="setTime(@Model.tempo)" align="center">
+            <img id="no_border_img" src="~/img/relogio.png" style="width:60%" />
+            <figcaption style="text-align:center">
+                <h3 id="timer">@Model.tempo min</h3>
             </figcaption>
         </figure>
     </div>
@@ -118,8 +141,9 @@
     @Model.desc
 </p>
 
-@if (Model.sub_receita != null) {
-    url += Model.sub_receita.id_receita.ToString()+"-1";
+@if (Model.sub_receita != null)
+{
+    url += Model.sub_receita.id_receita.ToString() + "-1";
 
     <p>
         Veja tambem:
@@ -130,13 +154,16 @@
 <p></p>
 
 
-<div>
-    @if (Model.ultimo == true) {
+<div style="margin-bottom:50px">
+    @if (Model.ultimo == true)
+    {
         <a class="btn btn-success" id="anterior" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id_receita="@Model.receita_id" asp-route-nr_passo="@anterior">Anterior</a>
         <a style="float:right" id="finalizar" class="btn btn-success" asp-controller="AvaliacaoView" asp-action="AvaliarReceita" asp-route-id_receita="@Model.receita_id">Finalizar</a>
     }
-    else {
-        @if (Model.nr > 1) {
+    else
+    {
+        @if (Model.nr > 1)
+        {
             <a class="btn btn-success" id="anterior" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id_receita="@Model.receita_id" asp-route-nr_passo="@anterior">Anterior</a>
         }
         <a style="float:right" class="btn btn-success" id="proximo" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id_receita="@Model.receita_id" asp-route-nr_passo="@proximo">Próximo</a>
@@ -183,6 +210,11 @@
                 var ouv = document.getElementById('ouvir');
                 if (ouv != null) ouv.click();
             }
+
+            if (transcript === "tempo") {
+                var tmp = document.getElementById('no_border_img');
+                if (tmp != null) tmp.click();
+            }
         }
 
         recognition.start();
@@ -201,7 +233,7 @@
 
     voices = synth.getVoices();
 
-    var txt = "@Model.desc";
+    var txt = "@(new HtmlString(Model.desc))";
 
     function ouvir() {
         var utter = new SpeechSynthesisUtterance(txt);
