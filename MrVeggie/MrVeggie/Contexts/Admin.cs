@@ -187,14 +187,10 @@ namespace MrVeggie.Contexts {
 
 
         /// <summary>
-        /// 
+        /// Método que regista uma receita juntamente com os seus utensílios
         /// </summary>
-        /// <param name="nome"></param>
-        /// <returns></returns>
-        public int getNewReceitaID(string nome) {
-            return _context_r.Receita.Where(r => r.nome.Equals(nome)).First().id_receita;
-        }
-
+        /// <param name="r">Receita a registar</param>
+        /// <param name="utensilios">Utensílios da receita</param>
         public void registaReceita(Receita r, List<Utensilio> utensilios) {
 
             _context_r.Receita.Add(r);
@@ -209,20 +205,46 @@ namespace MrVeggie.Contexts {
             _context_r.SaveChanges();
         }
 
+
+
+        /// <summary>
+        /// Método que retorna a lista de todas as receitas do sistema.
+        /// </summary>
+        /// <returns>Lista de receitas</returns>
         public List<Receita> getReceitas() {
             return _context_r.Receita.ToList();
         }
 
-        public List<Receita> getReceitas(Microsoft.Extensions.Primitives.StringValues stringValues) {
-            return _context_r.Receita.Where(r => stringValues.Contains(r.id_receita.ToString())).ToList();
+
+
+        /// <summary>
+        /// Método que retorna a lista de todas as receitas filtradas pelos IDs da string argumento.
+        /// </summary>
+        /// <param name="ids">Lista de IDs das receitas</param>
+        /// <returns>Lista de receitas filtradas</returns>
+        public List<Receita> getReceitas(Microsoft.Extensions.Primitives.StringValues ids) {
+            return _context_r.Receita.Where(r => ids.Contains(r.id_receita.ToString())).ToList();
         }
 
+
+
+        /// <summary>
+        /// Método que retorna a lista de Operações do sistema
+        /// </summary>
+        /// <returns>Lista de operações</returns>
         public List<Operacao> getOperacoes() {
             return _context_op.Operacao.ToList();
         }
 
-        public List<Operacao> getOperacoes(Microsoft.Extensions.Primitives.StringValues stringValues) {
-            return _context_op.Operacao.Where(op => stringValues.Contains(op.id_op.ToString())).ToList();
+
+
+        /// <summary>
+        /// Método que retorna a lista de operações filtradas pelos IDs da string argumento.
+        /// </summary>
+        /// <param name="ids">Lista de IDs das operações</param>
+        /// <returns>Lista de operações filtradas</returns>
+        public List<Operacao> getOperacoes(Microsoft.Extensions.Primitives.StringValues ids) {
+            return _context_op.Operacao.Where(op => ids.Contains(op.id_op.ToString())).ToList();
         }
     }
 }
