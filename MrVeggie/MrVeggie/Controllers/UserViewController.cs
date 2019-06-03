@@ -71,9 +71,7 @@ namespace MrVeggie.Controllers {
                 var LoginStatus = autenticacao.validaUtilizador(u);
                 if (LoginStatus) {
 
-                    u.print();
                     u = autenticacao.getUtilizador(u.email);
-                    u.print();
 
                     var claims = new List<Claim> {
                         new Claim(ClaimTypes.Name, u.email)

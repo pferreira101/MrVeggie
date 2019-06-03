@@ -16,6 +16,15 @@ namespace MrVeggie.Contexts {
         private readonly IngredientesPassoContext _context_ip;
         private readonly IngredienteContext _context_ing;
 
+
+
+        /// <summary>
+        /// Construtor da classe Preparacao.
+        /// </summary>
+        /// <param name="context_r">Contexto das receitas</param>
+        /// <param name="context_p">Contexto dos passos</param>
+        /// <param name="context_ip">Contexto dos ingredientes do passo</param>
+        /// <param name="context_i">Contexto dos ingredientes</param>
         public Preparacao(ReceitaContext context_r, PassoContext context_p, IngredientesPassoContext context_ip, IngredienteContext context_i) {
             _context_passo = context_p;
             _context_ip = context_ip;
@@ -25,8 +34,12 @@ namespace MrVeggie.Contexts {
 
 
 
-        // o nome é para estar em conformidade com o diagrama - getDetalhesReceita
-        public Receita getIngredientes(int id_receita) {
+        /// <summary>
+        /// Método que retorna toda a informação relativa a uma receita.
+        /// </summary>
+        /// <param name="id_receita">ID da receita</param>
+        /// <returns>Receita completa</returns>
+        public Receita getDetalhesReceita(int id_receita) {
             Receita receita = _context_r.Receita.Find(id_receita);
 
             var passos = _context_r.Passo.Where(p => p.receita_id == id_receita);
@@ -62,6 +75,12 @@ namespace MrVeggie.Contexts {
         }
 
 
+
+        /// <summary>
+        /// Método que retorna os ingredientes e as respetivas quantidades de um passo.
+        /// </summary>
+        /// <param name="id_passo">ID do passo</param>
+        /// <returns>Ingredintes e as suas quantidades</returns>
         public Dictionary<Ingrediente, Quantidade> getIngredientesPasso(int id_passo) {
             Dictionary<Ingrediente, Quantidade> ingredientes = new Dictionary<Ingrediente, Quantidade>();
 

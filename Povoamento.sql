@@ -135,9 +135,10 @@ INSERT INTO UtensiliosReceita VALUES (1, 1),
 									 (4, 7);
 
 SELECT * FROM Utilizador;
---UPDATE Utilizador
---SET admin = 1
---WHERE email = 'admin@admin.com';
+
+UPDATE Utilizador
+SET admin = 0
+WHERE email = 'pedri.nho.moreira.19@gmail.com';
 
 SELECT * FROM Ingrediente;
 SELECT * FROM Receita;

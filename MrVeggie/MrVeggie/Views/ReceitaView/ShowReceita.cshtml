@@ -117,8 +117,13 @@
 <div>
     <h2>Requisitos</h2>
     <div style="float:right">
-        <a style="float:right" class="btn btn-link" onclick="enviaLocalizacao();">Onde comprar?</a>
-        <a style="float: left" class="btn btn-link" onclick="sendEmail();">Receber lista ingredientes no mail</a>
+        <a style="float:right" class="btn btn-link" onclick="enviaLocalizacao()">Onde comprar?</a>
+        @if (User.Identity.IsAuthenticated) {
+            <a style="float: left;" class="btn btn-link" onclick="sendEmail()">Receber lista ingredientes no e-mail</a>
+        }
+        else {
+            <a style="float:left; color:#777777" class="btn btn-link" asp-controller="UserView" asp-action="LoginUtilizador"> Receber lista ingredientes no e-mail </a>
+        }
     </div>
 </div>
 

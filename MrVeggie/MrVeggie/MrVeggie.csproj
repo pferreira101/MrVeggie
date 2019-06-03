@@ -5,10 +5,22 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Users\Pedro\Documents\MIEI\3_Ano\2_Semestre\Laboratórios de Informática IV\li4-projeto\MrVeggie\MrVeggie\MrVeggie.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>C:\Users\Pedro\Documents\MIEI\3_Ano\2_Semestre\Laboratórios de Informática IV\li4-projeto\MrVeggie\MrVeggie\MrVeggie.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="AjaxControlToolkit" Version="18.1.1" />
     <PackageReference Include="BingMapsRESTToolkit" Version="1.1.4" />
     <PackageReference Include="bootstrap" Version="4.3.1" />
+    <PackageReference Include="docfx.console" Version="2.42.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Google.Cloud.Speech.V1" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNet.Razor" Version="3.2.7" />

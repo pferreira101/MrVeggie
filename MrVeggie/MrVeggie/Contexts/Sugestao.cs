@@ -15,6 +15,14 @@ namespace MrVeggie.Contexts {
         private readonly AgendaContext _context_a;
 
 
+
+        /// <summary>
+        /// Construtor da classe Sugestao
+        /// </summary>
+        /// <param name="context_r">Contexto das receitas</param>
+        /// <param name="context_u">Contexto dos utilizadores</param>
+        /// <param name="context_ip">Contexto dos ingredientes passo</param>
+        /// <param name="context_a">Contexto da agenda</param>
         public Sugestao(ReceitaContext context_r, UtilizadorContext context_u, IngredientesPassoContext context_ip, AgendaContext context_a) {
             _context_r = context_r;
             _context_u = context_u;
@@ -22,19 +30,36 @@ namespace MrVeggie.Contexts {
             _context_a = context_a;
         }
 
+
+
+        /// <summary>
+        /// Método que retorna todas as receitas do sistema.
+        /// </summary>
+        /// <returns>Lista das receitas</returns>
         public List<Receita> getReceitas() {
             return _context_r.Receita.ToList();
         }
 
+
+
+        /// <summary>
+        /// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        /// </summary>
+        /// <returns></returns>
         public List<Receita> getSugestoes() {
             List<Receita> r = new List<Receita>();
 
             r.Add(_context_r.Receita.Find(1));
-            Console.WriteLine("********************************************************* {0}", r.Count());
             return r;
         }
 
 
+
+        /// <summary>
+        /// Método que retorna a lista das receitas sugeridas para um utilizador
+        /// </summary>
+        /// <param name="email">Email do utilizador</param>
+        /// <returns>Lista das receitas sugeridas</returns>
         public List<Receita> getSugestoes(string email) {
             Utilizador utilizador = _context_u.Utilizador.Where(u => u.email == email).First();
             List<Receita> r = new List<Receita>(4);
@@ -51,10 +76,16 @@ namespace MrVeggie.Contexts {
         }
 
 
-        private Receita getReceitaSugeridaPorReceitasFav(int idUtilizador) {
+
+        /// <summary>
+        /// Método que retorna uma receita como sugestão a um utilizador, baseada nas suas receitas favoritas.
+        /// </summary>
+        /// <param name="id_utilizador">ID do utilizador</param>
+        /// <returns>Receita sugerida</returns>
+        private Receita getReceitaSugeridaPorReceitasFav(int id_utilizador) {
             Receita x = null;
 
-            List<int> rIds = _context_u.UtilizadorReceitasPref.Where(u => u.utilizador_id == idUtilizador).Select(u => u.receita_id).ToList();
+            List<int> rIds = _context_u.UtilizadorReceitasPref.Where(u => u.utilizador_id == id_utilizador).Select(u => u.receita_id).ToList();
 
             if (rIds.Count() == 0) {
                 Random random = new Random();
@@ -63,7 +94,6 @@ namespace MrVeggie.Contexts {
 
                     x = _context_r.Receita.Find(rInt);
                 }
-
             }
             else {
                 List<Receita> receitas = _context_r.Receita.Where(r => rIds.Contains(r.id_receita)).ToList();
@@ -74,27 +104,33 @@ namespace MrVeggie.Contexts {
                 x = receitas.ElementAt(rInt);
             }
 
-
-
             return x;
         }
 
-        private Receita getReceitaSugeridaPorIngredientesFav(int idUtilizador) {
+
+
+        /// <summary>
+        /// Método que retorna uma receita como sugestão a um utilizador, baseada nos seus ingredientes favoritos.
+        /// </summary>
+        /// <param name="id_utilizador">ID do utilizador</param>
+        /// <returns>Receita sugerida</returns>
+        private Receita getReceitaSugeridaPorIngredientesFav(int id_utilizador) {
             List<int> ingFav = _context_u.UtilizadorIngredientesPref
-                                                            .Where(uip => uip.utilizador_id == idUtilizador)
+                                                            .Where(uip => uip.utilizador_id == id_utilizador)
                                                             .Select(uip => uip.ingrediente_id).ToList()
                                                             .ToList();
 
             List<Receita> receitas = _context_r.Receita.ToList();
             List<(int, Receita)> sugestoes = new List<(int, Receita)>();
 
-
             foreach (Receita r in receitas) {
                 List<Passo> passos = _context_r.Passo.Where(p => p.receita_id == r.id_receita).ToList();
                 List<int> ings = new List<int>();
+
                 foreach (Passo p in passos) {
                     ings.AddRange(_context_ip.IngredientesPasso.Where(ip => ip.passo_id == p.id_passo).Select(i => i.ingrediente_id).ToList());
                 }
+
                 sugestoes.Add((ings.Intersect(ingFav).Count(), r));
             }
 
@@ -106,14 +142,24 @@ namespace MrVeggie.Contexts {
             return sugestoes.ElementAt(rInt).Item2;
         }
 
+
+
+        /// <summary>
+        /// Método que retorna uma receita como sugestão a um utilizador, baseada no seu histórico.
+        /// </summary>
+        /// <param name="id_utilizador">ID do utilizador</param>
+        /// <returns>Receita sugerida</returns>
         private Receita getReceitaSugeridaPorHistorico(int id_utilizador) {
             string email = _context_u.Utilizador.Where(u => u.id_utilizador == id_utilizador).First().email;
 
             IEnumerable<Receita> historico = getHistorico(email).Take(4);
             if (historico.Count() == 0) return _context_r.Receita.Find(1);
+
             List<int> historicoIng = new List<int>();
+
             foreach (Receita r in historico) {
                 List<Passo> passos = _context_r.Passo.Where(p => p.receita_id == r.id_receita).ToList();
+
                 foreach (Passo p in passos) {
                     historicoIng.AddRange(_context_ip.IngredientesPasso.Where(ip => ip.passo_id == p.id_passo).Select(i => i.ingrediente_id).ToList());
                 }
@@ -123,14 +169,15 @@ namespace MrVeggie.Contexts {
             List<Receita> receitas = _context_r.Receita.ToList();
             List<(int, Receita)> sugestoes = new List<(int, Receita)>();
 
-
             foreach (Receita r in receitas) {
                 if (!historico.Contains(r)) {
                     List<Passo> passos = _context_r.Passo.Where(p => p.receita_id == r.id_receita).ToList();
                     List<int> ings = new List<int>();
+
                     foreach (Passo p in passos) {
                         ings.AddRange(_context_ip.IngredientesPasso.Where(ip => ip.passo_id == p.id_passo).Select(i => i.ingrediente_id).ToList());
                     }
+
                     sugestoes.Add((ings.Intersect(historicoIng).Count(), r));
                 }
             }
@@ -144,8 +191,14 @@ namespace MrVeggie.Contexts {
         }
 
 
-        public List<Receita> getHistorico(string mail) {
-            int id_utilizador = _context_u.Utilizador.Where(u => u.email.Equals(mail)).First().id_utilizador;
+
+        /// <summary>
+        /// Método que retorna a lista das receitas já executadas por um utilizador
+        /// </summary>
+        /// <param name="email">Email do utilizador</param>
+        /// <returns></returns>
+        public List<Receita> getHistorico(string email) {
+            int id_utilizador = _context_u.Utilizador.Where(u => u.email.Equals(email)).First().id_utilizador;
             List<Receita> receitas = new List<Receita>();
 
             List<HistoricoUtilizador> historico_ids = _context_u.HistoricoUtilizador.Where(hu => hu.utilizador_id == id_utilizador).ToList();
@@ -159,6 +212,11 @@ namespace MrVeggie.Contexts {
 
 
 
+        /// <summary>
+        /// Método que retorna a lista com as entradas da agenda (completa) de um utilizador.
+        /// </summary>
+        /// <param name="email">Email do utilizador</param>
+        /// <returns>Lista da agenda</returns>
         public List<Agenda> getAgenda(string email) {
             int id_utilizador = _context_u.Utilizador.Where(u => u.email == email).First().id_utilizador;
 
@@ -177,7 +235,6 @@ namespace MrVeggie.Contexts {
                 agenda_completa.RemoveAt(to_remove);
                 agenda_completa.Insert(to_remove, a);
             }
-
 
             return agenda_completa;
         }

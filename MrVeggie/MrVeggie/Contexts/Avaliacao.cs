@@ -14,6 +14,14 @@ namespace MrVeggie.Contexts {
         private readonly UtilizadorContext _context_u;
         private readonly HistoricoUtilizadorContext _context_hu;
 
+
+
+        /// <summary>
+        /// Construtor da class Avaliacao
+        /// </summary>
+        /// <param name="context_r">Contexto das receitas</param>
+        /// <param name="context_u">Contexto do utilizador</param>
+        /// <param name="context_hu">Contexto do histórico do utilizador</param>
         public Avaliacao(ReceitaContext context_r, UtilizadorContext context_u, HistoricoUtilizadorContext context_hu) {
             _context_r = context_r;
             _context_u = context_u;
@@ -21,6 +29,14 @@ namespace MrVeggie.Contexts {
         }
 
 
+
+
+        /// <summary>
+        /// Método que regista a avaliação dada por um utilizador para uma determinada receita
+        /// </summary>
+        /// <param name="id_receita">Receita a avaliar</param>
+        /// <param name="email_utilizador">Email do utilizador</param>
+        /// <param name="pontuacao">Pontuação dada</param>
         public void avalia(int id_receita, string email_utilizador, int pontuacao) {
             Receita r = _context_r.Receita.Find(id_receita);
             int id_utilizador = _context_u.Utilizador.Where(u => u.email.Equals(email_utilizador)).First().id_utilizador;
@@ -42,12 +58,24 @@ namespace MrVeggie.Contexts {
 
 
 
+        /// <summary>
+        /// Método que retorna a receita para um dado identificador.
+        /// </summary>
+        /// <param name="id_receita">ID da receita</param>
+        /// <returns>Receita encontrada</returns>
         public Receita getReceita(int id_receita) {
             return _context_r.Receita.Find(id_receita);
         }
 
-        public void addToHistorico(int id_receita, string email_utilizador) {
-            int id_utilizador = _context_u.Utilizador.Where(u => u.email.Equals(email_utilizador)).First().id_utilizador; // SERÁ ASSIM QUE SE VAI BUSCAR?? METER ID NA COOKIE? COMO?! 
+
+
+        /// <summary>
+        /// Método que adiciona uma receita ao histórico de um utilizador
+        /// </summary>
+        /// <param name="id_receita">Receita a adicionar</param>
+        /// <param name="email">Email do utilizador</param>
+        public void addToHistorico(int id_receita, string email) {
+            int id_utilizador = _context_u.Utilizador.Where(u => u.email.Equals(email)).First().id_utilizador; // SERÁ ASSIM QUE SE VAI BUSCAR?? METER ID NA COOKIE? COMO?! 
 
             HistoricoUtilizador hu = new HistoricoUtilizador();
             hu.avaliacao = 0;
