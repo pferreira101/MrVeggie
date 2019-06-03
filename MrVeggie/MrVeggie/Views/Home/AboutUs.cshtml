@@ -3,29 +3,55 @@
     ViewData["Title"] = "AboutUs";
 }
 
-<div class="wrapper">
-    <div style="width: 35%; float: left;">
-        <img id="no_border_img" src="~/img/Logo.png" style="width: 100%">
+<script>
+    document.getElementById("about").classList.add('active');
+</script>
 
+<section class="banner-area relative">
+    <div class="container">
+        <div class="row height align-items-center justify-content-center">
+            <div class="banner-content col-lg-5">
+                <h1>Sobre nós</h1>
+                <hr>
+                <div class="breadcrmb">
+                    <p>
+                        <a asp-controller="Home" asp-action="Index">Início</a>
+                        <span class="lnr lnr-arrow-right"></span>
+                        <a asp-controller="Home" asp-action="AboutUs">Sobre nós</a>
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
+</section>
+
+<div class="wrapper">
+    <div style="width: 35%;">
+        <center>
+            <img src="~/img/Logo.png" style="width: 100%;">
+        </center>
+    </div>
+
     <div style="margin-left: 6%">
         <h1>O que sou?</h1>
         <p>
             MrVeggie é uma plataforma registada pelo PAN - Pessoas Animais e  Natureza, com a função de ajudar as pessoas na confeção e seleção de pratos vegetarianos.
             Trata-se portanto de um assistente pessoal de cozinha, orientado para o vegetarianismo.
-            Esta plataforma tem como objetivo motivar o maior número de pessoas a utilizar o regime vegetariano, facilitando o acesso a informação sobre as receitas do mesmo.
+            Esta plataforma tem como objetivo motivar o maior número de pessoas a introduzir um regime vegetariano na sua dieta, facilitando o acesso a informação sobre as receitas do mesmo.
+        </p>
+
+        <p></p>
+        <p></p>
+
+        <h1>O que faço?</h1>
+        <p>
+            Neste site é possivel consultar receitas vegetarianas, verificar os ingredientes e utensílios necessários e executar as receitas passo a passo.
+            Durante o processo de execução, o utilizador pode interagir com a plataforma utilizando os comandos por voz "ouvir", "próximo", "anterior" e "finalizar". Para usufruir desta funcionalidade, deve utilizar o navegador Google Chrome.
+            Na fase de apresentação dos ingredientes é possivel ver o local mais próximo onde os comprar.
+            Possuimos também uma agenda personalizada para cada utilizador, onde este pode marcar as suas receitas para a presente semana e obter a lista dos ingredientes necessários para toda a semana, na aplicação ou no email.
         </p>
     </div>
 
 </div>
-<p></p>
-<p></p>
 
-<h1>O que faço?</h1>
-<p>
-   Neste site é possivel, consultar um conjunto de receitas, verificar os ingredientes e utensilios necessários, executar as receitas passo a passo. 
-   Durante o processo de execução o utilizador pode interagir com a plataforma com os comandos por voz "ouvir", "próximo" e "anterior". 
-   Na fase de apresentação dos ingredientes é possivel ver o local mais próximo para os comprar. 
-   Possuimos também uma agenda personalizada para cada utilizador onde este pode marcar as suas receitas para a presente semana e obter a lista dos ingredientes necessários para toda a semana, na aplicação ou no email.
-</p>
 

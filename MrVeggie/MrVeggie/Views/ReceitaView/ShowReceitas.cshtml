@@ -30,87 +30,102 @@
     </div>
 </section>
 
-<section class="section-bg">
-    <div class="container">
+<form class="form-inline" asp-controller="ReceitaView" asp-action="showReceitasSearch" method="post">
+    <input class="form-control mr-sm-2" type="search" name="searchBar" placeholder="Procurar" aria-label="Procurar">
+</form>
+
+<section class="section-bg" style="padding-top:30px;background-color:white">
         <form asp-action="showReceitas" method="post">
-            <div style="float:right">
-                <div class="dropdown">
-                    <button type="button" class="dropbtn">Filtrar por ingrediente</button>
-                    <div class="dropdown-content">
-                        @foreach (var ingrediente in Model.Ingredientes)
-                        {
-                            <input type="checkbox" name=checkboxes value=@ingrediente.id_ingrediente> @ingrediente.nome<br>
-                        }
-                    </div>
-                </div>
+            <div style="float:left">
+                <ul class="lateral">
+                    <li class="l1">
+                        <div class="dropdown" style="text-align:left">
+                            <button type="button" class="dropbtn" style="width:130px">Ingredientes</button>
+                            <div class="dropdown-content">
+                                @foreach (var ingrediente in Model.Ingredientes)
+                                {
+                                    <input type="checkbox" name=checkboxes value=@ingrediente.id_ingrediente> @ingrediente.nome<br>
+                                }
+                            </div>
+                        </div>
+                    </li>
 
-                <div class="dropdown">
-                    <button type="button" class="dropbtn">Filtrar por dificuldade</button>
-                    <div class="dropdown-content">
-                        <input type="checkbox" name=dificuldades value=1> Facil<br>
-                        <input type="checkbox" name=dificuldades value=2> Médio<br>
-                        <input type="checkbox" name=dificuldades value=3> Dificil<br>
-                    </div>
-                </div>
+                    <li class="l1">
+                        <div class="dropdown" style="text-align:left">
+                            <button type="button" class="dropbtn" style="width:130px">Dificuldade</button>
+                            <div class="dropdown-content">
+                                <input type="checkbox" name=dificuldades value=1> Facil<br>
+                                <input type="checkbox" name=dificuldades value=2> Médio<br>
+                                <input type="checkbox" name=dificuldades value=3> Dificil<br>
+                            </div>
+                        </div>
+                    </li>
 
-                <div class="dropdown">
-                    <button type="button" class="dropbtn">Filtrar por calorias</button>
-                    <div class="dropdown-content">
-                        <input type="checkbox" name=calorias value=300> <= 300<br>
-                        <input type="checkbox" name=calorias value=500> <= 500<br>
-                        <input type="checkbox" name=calorias value=700> <= 700<br>
-                        <input type="checkbox" name=calorias value=1000> <= 1000<br>
-                    </div>
-                </div>
+                    <li class="l1">
+                        <div class="dropdown" style="text-align:left">
+                            <button type="button" class="dropbtn" style="width:130px">Calorias</button>
+                            <div class="dropdown-content">
+                                <input type="checkbox" name=calorias value=300> <= 300<br>
+                                <input type="checkbox" name=calorias value=500> <= 500<br>
+                                <input type="checkbox" name=calorias value=700> <= 700<br>
+                                <input type="checkbox" name=calorias value=1000> <= 1000<br>
+                            </div>
+                        </div>
+                    </li>
 
-                <div class="dropdown">
-                    <button type="button" class="dropbtn">Filtrar por pessoas</button>
-                    <div class="dropdown-content">
-                        <input type="checkbox" name=pessoas value=1> <= 1<br>
-                        <input type="checkbox" name=pessoas value=2> <= 2<br>
-                        <input type="checkbox" name=pessoas value=3> <= 3<br>
-                        <input type="checkbox" name=pessoas value=4> <= 4<br>
-                        <input type="checkbox" name=pessoas value=5> <= 5<br>
-                        <input type="checkbox" name=pessoas value=6> <= 6<br>
-                        <input type="checkbox" name=pessoas value=7> <= 7<br>
-                        <input type="checkbox" name=pessoas value=8> <= 8<br>
-                        <input type="checkbox" name=pessoas value=9> <= 9<br>
-                        <input type="checkbox" name=pessoas value=10> <= 10<br>
-                    </div>
-                </div>
-
-
-                <div class="dropdown">
-                    <button type="button" class="dropbtn">Filtrar por tempo</button>
-                    <div class="dropdown-content">
-                        <input type="checkbox" name=tempo value=30> <= 30<br>
-                        <input type="checkbox" name=tempo value=60> <= 60<br>
-                        <input type="checkbox" name=tempo value=120> <= 120<br>
-                    </div>
-                </div>
-
-                <div class="form-group" float="right">
-                    <input type="submit" value="Filtrar" class="btn btn-default btn-primary" />
-                </div>
+                    <li class="l1">
+                        <div class="dropdown" style="text-align:left">
+                            <button type="button" class="dropbtn" style="width:130px">Pessoas</button>
+                            <div class="dropdown-content">
+                                <input type="checkbox" name=pessoas value=1> <= 1<br>
+                                <input type="checkbox" name=pessoas value=2> <= 2<br>
+                                <input type="checkbox" name=pessoas value=3> <= 3<br>
+                                <input type="checkbox" name=pessoas value=4> <= 4<br>
+                                <input type="checkbox" name=pessoas value=5> <= 5<br>
+                                <input type="checkbox" name=pessoas value=6> <= 6<br>
+                                <input type="checkbox" name=pessoas value=7> <= 7<br>
+                                <input type="checkbox" name=pessoas value=8> <= 8<br>
+                                <input type="checkbox" name=pessoas value=9> <= 9<br>
+                                <input type="checkbox" name=pessoas value=10> <= 10<br>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="l1">
+                        <div class="dropdown"  style="text-align:left">
+                            <button type="button" class="dropbtn" style="width:130px">Tempo</button>
+                            <div class="dropdown-content">
+                                <input type="checkbox" name=tempo value=30> <= 30<br>
+                                <input type="checkbox" name=tempo value=60> <= 60<br>
+                                <input type="checkbox" name=tempo value=120> <= 120<br>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="l1">
+                        <div class="form-group" float="right">
+                            <input type="submit" value="Filtrar" class="btn btn-default btn-primary" />
+                        </div>
+                    </li>
+                </ul>
+                
 
             </div>
         </form>
 
 
-        <div class="container-fluid" style="float:left">
+        <div class="container-fluid" style="text-align:center;padding-left:200px">
             <div class="row">
                 @foreach (var receita in Model.receitas)
                 {
 
-                    <div class="card shadow p-3 mb-5 bg-white rounded" style="margin: 3px; width:18rem">
-                        <img class="card-img-top" src="@receita.url_imagem" alt="Error Loading Image">
+                    <div class="card shadow p-3 mb-5 bg-white rounded" style="margin: 3px; width:17rem">
+                        <img class="card-img-top" src="@receita.url_imagem" alt="Error Loading Image" style="height:150px">
                         <div class="card-body">
-                            <h3 class="card-title">@receita.nome</h3>
+                            <h3 class="card-title" style="height:100px">@receita.nome</h3>
 
 
                             <div class="container" style="display:inline-block">
                                 <div class="row">
-                                    <div class="column" style="float: left; width: 25%; padding-left:6px">
+                                    <div class="column" style="float: left; width: 22%; padding-left:0px">
                                         <figure>
                                             @{
                                                 if (receita.dificuldade == 1)
@@ -130,22 +145,22 @@
                                                 }
                                             }
                                             <img id="no_border_img" src="~/img/@dificuldade_img" style="width:50%" />
-                                            <figcaption style="text-align: center"> @dificuldade </figcaption>
+                                            <figcaption style="text-align: center;margin-top:10px"> @dificuldade </figcaption>
                                         </figure>
                                     </div>
-                                    <div class="column" style="float: left; width: 25%; padding-left:20px">
+                                    <div class="column" style="float: left; width: 25%; padding-left:14px">
                                         <figure>
                                             <img id="no_border_img" src="~/img/pessoa.png" style="width:100%" />
                                             <figcaption style="text-align: center"> @receita.n_pessoas  </figcaption>
                                         </figure>
                                     </div>
-                                    <div class="column" style="float: left; width: 25%; padding-left:20px">
+                                    <div class="column" style="float: left; width: 25%; padding-left:14px">
                                         <figure id="element3">
                                             <img id="no_border_img" src="~/img/relogio.png" style="width:100%" />
                                             <figcaption style="text-align: center"> @receita.tempo_conf </figcaption>
                                         </figure>
                                     </div>
-                                    <div class="column" style="float: left; width: 25%; padding-left:20px">
+                                    <div class="column" style="float: left; width: 25%; padding-left:14px">
                                         <figure id="element3">
                                             <img id="no_border_img" src="~/img/calories.png" style="width:100%" />
                                             <figcaption style="text-align: center"> @receita.calorias </figcaption>
@@ -153,9 +168,9 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <div class="row" style="height:40px;margin-bottom:20px;margin-top:20px">
                                     <div class="dropdown">
-                                        <a class="btn dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <a class="btn dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-align:center;width:75%">
                                             Agendar Refeição
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -177,8 +192,8 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="column" style="width:60%">
+                                <div class="row" style="height:40px">
+                                    <div class="column" style="text-align:center;width:50%;margin-left:10px;margin-right:30px">
                                         @if (Math.Round(receita.avaliacao) == 1)
                                         {
                                             star_img = "star1.png";
@@ -204,7 +219,7 @@
                                             star_img = "star0.png";
                                         }
 
-                                        <img id="no_border_img" src="~/img/@star_img" style="width:100%;" />
+                                        <img id="no_border_img" src="~/img/@star_img" style="width:110%;" />
                                     </div>
                                     <div class="column">
                                         <a class="btn btn-success" asp-controller="ReceitaView" asp-action="showReceita" asp-route-id="@receita.id_receita">Ver</a>
@@ -218,7 +233,6 @@
 
             </div>
         </div>
-    </div>
 </section>
 
 

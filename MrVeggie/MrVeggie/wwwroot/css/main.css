@@ -130,8 +130,10 @@ a:hover {
   font-size: 1em;
   line-height: inherit; }
 
+
 .gray-bg {
-  background: #f9f9ff; }
+    background: #f9f9ff;
+}
 
 h1,
 h2,
@@ -933,6 +935,18 @@ th {
   .switch-wrap p {
     margin: 0; }
 
+.circle {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    font-size: 65px;
+    color: #ffffff;
+    line-height: 180px;
+    text-align: center;
+    background: #14bf00;
+}
+
+
 /*---------- End Elements Page -------------*/
 .sample-text-area {
   background: #f9f9ff;
@@ -979,6 +993,21 @@ h6 {
 
 h1, h2, h3, h4, h5, h6 {
   line-height: 1.5em; }
+
+.lateral {
+    list-style-type: none;
+    width: 100px;
+    padding: 0;
+    text-align: right;
+    right:0;
+    list-style-position: inside;
+}
+
+.l1 {
+    padding: 2px; /* Add some padding */
+    text-decoration: none; /* Remove default text underline */
+    display: block;
+}
 
 .typography h1, .typography h2, .typography h3, .typography h4, .typography h5, .typography h6 {
   color: #777777; }
@@ -1784,19 +1813,19 @@ h1, h2, h3, h4, h5, h6 {
 .logo {
   text-align: center; }
   .logo img {
-    width: 60%; }
+    width: 70%; }
     @media (max-width: 767px) {
       .logo img {
-        width: 60%; } }
+        width: 70%; } }
     @media (max-width: 576px) {
       .logo img {
-        width: 60%; } }
+        width: 70%; } }
     @media (max-width: 480px) {
       .logo img {
-        width: 60%; } }
+        width: 70%; } }
     @media (max-width: 320px) {
       .logo img {
-        width: 60%; } }
+        width: 70%; } }
   @media (max-width: 767px) {
     .logo {
       position: absolute;
