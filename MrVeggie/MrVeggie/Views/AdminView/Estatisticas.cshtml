@@ -6,7 +6,25 @@
     float crescimento = (float)Model.registos_ultimo_mes / (Model.nr_utilizadores - Model.registos_ultimo_mes) * 100;
 }
 
-<h1>Estatisticas</h1>
+<section class="banner-area relative">
+    <div class="container">
+        <div class="row height align-items-center justify-content-center">
+            <div class="banner-content col-lg-5">
+                <h1>Estatísticas</h1>
+                <hr>
+                <div class="breadcrmb">
+                    <p>
+                        <a asp-controller="AdminView" asp-action="Index">Início</a>
+                        <span class="lnr lnr-arrow-right"></span>
+                        Admin
+                        <span class="lnr lnr-arrow-right"></span>
+                        <a asp-controller="AdminView" asp-action="Estatisticas">Estatísticas</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 
 <!-- Styles -->

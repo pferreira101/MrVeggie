@@ -46,7 +46,7 @@
                 <div class="header-top d-flex justify-content-between align-items-center navbar-expand-md">
                     <div class="col menu-left">
                         <a id="home" asp-controller="AdminView" asp-action="Index">Inicio</a>
-                        <a id="receita" asp-controller="AdminView" asp-action="NewReceita">Adicionar Receitas</a>
+                        
                         
 
                     </div>
@@ -73,19 +73,20 @@
                                     <a class="nav-link" asp-controller="IngredienteView" asp-action="showIngredientes">Ingredientes</a>
                                 </li>
 
-                                <li>
-                                    <a id="ingrediente" asp-controller="AdminView" asp-action="NewIngrediente">Adicionar Ingrediente</a>
-                                </li>
+   
                                 <!-- Dropdown -->
                                 @if (User.Identity.IsAuthenticated)
                                 {
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                                            Área Privada
+                                            Área do Administrador
                                         </a>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" id="estatistica" asp-controller="AdminView" asp-action="Estatisticas">Estatisticas</a>
-                                            <a class="dropdown-item" id="operacao" asp-controller="AdminView" asp-action="NewOperacao">Adicionar Operações</a>
+                                            <a class="dropdown-item" id="estatistica" asp-controller="AdminView" asp-action="Estatisticas">Estatísticas</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" id="receita" asp-controller="AdminView" asp-action="NewReceita">Adicionar Receita</a>
+                                            <a class="dropdown-item" id="operacao" asp-controller="AdminView" asp-action="NewOperacao">Adicionar Operação</a>
+                                            <a class="dropdown-item" id="ingrediente" asp-controller="AdminView" asp-action="NewIngrediente">Adicionar Ingrediente</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" asp-controller="UserView" asp-action="Logout">Logout</a>
                                         </div>
