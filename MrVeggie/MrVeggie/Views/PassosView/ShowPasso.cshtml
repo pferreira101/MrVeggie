@@ -7,7 +7,7 @@
 
     int proximo = Model.nr + 1;
     int anterior = Model.nr - 1;
-    string url = "https://localhost:5001/ReceitaView/ShowReceita/";
+    string url = "https://localhost:5001/PassosView/ShowPasso/";
     TextToSpeech tts = new TextToSpeech(Model);
 
     string[] txts = tts.getText();
@@ -47,6 +47,17 @@
     }
 
 </script>
+
+<section class="banner-area relative">
+    <div class="container">
+        <div class="row height align-items-center justify-content-center">
+            <div class="banner-content col-lg-5">
+                <h1>Passo @Model.nr</h1>
+                <hr>
+            </div>
+        </div>
+    </div>
+</section>
 
 <p id="aviso" style="font-size:80%;display:none"><b>Aviso:</b> O navegador que utiliza não suporta as funcionalidades de voz.</p>
 
@@ -111,7 +122,7 @@
 </p>
 
 @if (Model.sub_receita != null) {
-    url += Model.sub_receita.id_receita.ToString();
+    url += Model.sub_receita.id_receita.ToString()+"-1";
 
     <p>
         Veja tambem:

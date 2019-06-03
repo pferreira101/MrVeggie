@@ -4,8 +4,29 @@
     ViewData["Title"] = "LoginUtilizador";
 }
 
+<script>
+    document.getElementById("log").classList.add('active');
+</script>
 
-<div class="row" style="align-content:center; padding-top:40px">
+<section class="banner-area relative">
+    <div class="container">
+        <div class="row height align-items-center justify-content-center">
+            <div class="banner-content col-lg-5">
+                <h1>Login</h1>
+                <hr>
+                <div class="breadcrmb">
+                    <p>
+                        <a asp-controller="Home" asp-action="Index">Início</a>
+                        <span class="lnr lnr-arrow-right"></span>
+                        <a asp-controller="UserView" asp-action="LoginUtilizador">Login</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="row" align="center">
     <div class="col-md-4"></div>
 
     <div class="col-md-4 border shadow p-3 mb-5 bg-white rounded" >

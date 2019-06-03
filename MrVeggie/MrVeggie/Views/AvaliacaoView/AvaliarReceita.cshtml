@@ -3,31 +3,43 @@
     ViewData["Title"] = "AvaliarReceita";
 }
 
-<h1 align="center">Avaliação</h1>
-
-<p align="center">Acabou de realizar a receita "@Model.nome". Gostaria de a avaliar?</p>
-
-<form asp-action="AvaliarReceitaUtilizador" method="post">
-    <div class="rate" align="center">
-
-        <input type="radio" id="star1" name="rate" value="1" />
-        <label for="star1">1 star</label>
-
-        <input type="radio" id="star2" name="rate" value="2" />
-        <label for="star2">2 stars</label>
-
-        <input type="radio" id="star3" name="rate" value="3" />
-        <label for="star3">3 stars</label>
-
-        <input type="radio" id="star4" name="rate" value="4" />
-        <label for="star4">4 stars</label>
-
-        <input type="radio" id="star5" name="rate" value="5" />
-        <label for="star5">5 stars</label>
-
-
-        <div class="form-group">
-            <input type="submit" value="Avaliar" class="btn btn-default btn-primary" />
+<section class="banner-area relative">
+    <div class="container">
+        <div class="row height align-items-center justify-content-center">
+            <div class="banner-content col-lg-5">
+                <h1>Avaliação</h1>
+                <hr>
+            </div>
         </div>
     </div>
-</form>
+</section>
+
+<p align="center">Acabou de realizar a receita "@Model.nome". <br /> Gostaria de a avaliar?</p>
+
+<div style="margin: 0 auto;width: 15.8%;display:block">
+    <form asp-action="AvaliarReceitaUtilizador" method="post">
+        <div class="rate">
+
+            <input type="radio" id="star1" name="rate" value="1" align=center/>
+            <label for="star1">1 star</label>
+
+            <input type="radio" id="star2" name="rate" value="2" align=center/>
+            <label for="star2">2 stars</label>
+
+            <input type="radio" id="star3" name="rate" value="3" align=center/>
+            <label for="star3">3 stars</label>
+
+            <input type="radio" id="star4" name="rate" value="4" align=center/>
+            <label for="star4">4 stars</label>
+
+            <input type="radio" id="star5" name="rate" value="5" align=center/>
+            <label for="star5">5 stars</label>
+
+
+            <div class="form-group">
+                <input type="submit" value="Avaliar" class="btn btn-default btn-primary" style="width:96%"/>
+            </div>
+        </div>
+    </form>
+</div>
+

@@ -669,11 +669,7 @@
 			if (this.o.calendarWeeks){
 				var cell = '<th class="cw">&nbsp;</th>';
 				html += cell;
-                this.picker.find('.datepicker-days t
-                    
-                    
-                    
-                    tr: first - child').prepend(cell);
+				this.picker.find('.datepicker-days thead tr:first-child').prepend(cell);
 			}
 			while (dowCnt < this.o.weekStart + 7){
 				html += '<th class="dow">'+dates[this.o.language].daysMin[(dowCnt++)%7]+'</th>';

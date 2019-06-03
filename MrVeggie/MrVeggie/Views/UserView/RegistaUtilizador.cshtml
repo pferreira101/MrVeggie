@@ -3,8 +3,29 @@
     ViewData["Title"] = "RegistaUtilizador";
 }
 
+<script>
+    document.getElementById("reg").classList.add('active');
+</script>
 
-<div class="row" style="align-content:center; padding-top:40px">
+<section class="banner-area relative">
+    <div class="container">
+        <div class="row height align-items-center justify-content-center">
+            <div class="banner-content col-lg-5">
+                <h1>Registar</h1>
+                <hr>
+                <div class="breadcrmb">
+                    <p>
+                        <a asp-controller="Home" asp-action="Index">Início</a>
+                        <span class="lnr lnr-arrow-right"></span>
+                        <a asp-controller="UserView" asp-action="RegistaUtilizador">Registar</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="row" style="align-content:center;">
     <div class="col-md-4"></div>
 
     <div class="col-md-4 border shadow p-3 mb-5 bg-white rounded">
@@ -12,7 +33,7 @@
         <p></p>
 
         @if (TempData["Success"] != null) {
-            <p class="alert alert-success">@TempData["Success"]  <a asp-action="LoginUtilizador">Clique aqui para fazer o Log In.</a></p>
+            <p class="alert alert-success">@TempData["Success"]  <a asp-action="LoginUtilizador" style="color:blue">Clique aqui para fazer o Login.</a></p>
         }
 
         @if (TempData["Fail"] != null) {
