@@ -169,6 +169,7 @@
                                 </div>
 
                                 <div class="row" style="height:40px;margin-bottom:20px;margin-top:20px">
+                                    @if (User.Identity.IsAuthenticated) {
                                     <div class="dropdown">
                                         <a class="btn dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-align:center;width:75%">
                                             Agendar Refeição
@@ -190,6 +191,8 @@
                                             <a class="dropdown-item" onclick="verificaAgenda(6, 'j', @receita.id_receita)">Domingo - Jantar</a>
                                         </div>
                                     </div>
+                                    }
+                                    
                                 </div>
 
                                 <div class="row" style="height:40px">

@@ -57,7 +57,7 @@ namespace MrVeggie.Controllers {
             List<Receita> receitas = new List<Receita>();
 
             foreach(Agenda a in agenda) {
-                if(a.receita_id != -1) receitas.Add(preparacao.getIngredientes(a.receita_id));
+                if(a.receita_id != -1) receitas.Add(preparacao.getDetalhesReceita(a.receita_id));
             }
 
             Dictionary<Ingrediente, Quantidade> ingredientes = new Dictionary<Ingrediente, Quantidade>();

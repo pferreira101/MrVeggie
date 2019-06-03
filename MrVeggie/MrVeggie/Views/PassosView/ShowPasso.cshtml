@@ -8,9 +8,6 @@
     int proximo = Model.nr + 1;
     int anterior = Model.nr - 1;
     string url = "https://localhost:5001/PassosView/ShowPasso/";
-    TextToSpeech tts = new TextToSpeech(Model);
-
-    string[] txts = tts.getText();
 
 }
 
@@ -204,22 +201,11 @@
 
     voices = synth.getVoices();
 
-    var txs = [];
-    txs = new Array();
-
-    @for (int fld = 0; fld < txts.Length; fld++) {
-            @:var tx = "@txts[fld]";
-            @:txs.push(tx);
-     }
-
     function ouvir() {
-        var i;
-        for (i = 0; i < txs.length; i++) {
-            var utter = new SpeechSynthesisUtterance(txs[i]);
-            //utter.voice = voices[15];
-            utter.lang = "pt-PT";
-            synth.speak(utter);
-        }
+        var utter = new SpeechSynthesisUtterance(@Model.desc);
+        //utter.voice = voices[15];
+        utter.lang = "pt-PT";
+        synth.speak(utter);
     }
 
 
