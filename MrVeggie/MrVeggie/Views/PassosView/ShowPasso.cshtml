@@ -201,8 +201,10 @@
 
     voices = synth.getVoices();
 
+    var txt = "@Model.desc";
+
     function ouvir() {
-        var utter = new SpeechSynthesisUtterance(@Model.desc);
+        var utter = new SpeechSynthesisUtterance(txt);
         //utter.voice = voices[15];
         utter.lang = "pt-PT";
         synth.speak(utter);
