@@ -49,7 +49,8 @@ namespace MrVeggie.Contexts {
         public List<Receita> getSugestoes() {
             List<Receita> r = new List<Receita>();
 
-            r.Add(_context_r.Receita.Find(1));
+            Random rand = new Random();
+            r.Add(_context_r.Receita.Find(rand.Next(0,_context_r.Receita.Count()-1)));
             return r;
         }
 

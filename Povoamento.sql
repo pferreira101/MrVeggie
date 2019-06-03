@@ -1,6 +1,6 @@
 USE MrVeggie;
 
-
+select * from UtilizadorIngredientesPref where utilizador = 2;
 --INSERT INTO Utilizador VALUES ('Pedro', 'pedro@gmail.com', '123', 20, 'Masculino', 0, 0);
 
 INSERT INTO Ingrediente VALUES ('Alface', 'https://i.imgur.com/0Cpru8Y.jpg'), 

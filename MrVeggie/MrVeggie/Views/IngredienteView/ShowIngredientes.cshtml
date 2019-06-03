@@ -1,31 +1,65 @@
-﻿@model IEnumerable<MrVeggie.Models.Ingrediente>
+﻿@model Tuple<IEnumerable<MrVeggie.Models.Ingrediente>, List<Boolean>>
 
 @{
     ViewData["Title"] = "Ingredientes";
+    int n = 0;
 }
 
+
 <style>
-    #fav {
+    #fav{
         opacity: 1;
         -webkit-transition: .3s ease-in-out;
         transition: .3s ease-in-out;
     }
 
-        #fav:hover {
-            opacity: .5;
-        }
+    #fav:hover {
+        opacity: .5;
+    }
 </style>
+   
+
 
 <script>
     function adicionaFavoritos(ingrediente) {
+
+            $.ajax({
+                url: '@Url.Action("AdicionaIngredienteFavoritos", "IngredienteView")',
+                type: 'POST',
+                data: JSON.stringify(ingrediente),
+                contentType: "application/json; charset=utf-8",
+                dataType: "text",
+                success: function () {
+                var html;
+                html = "Remover dos favoritos <img src=\"/img/unlike.png\" id=\"fav\" onclick=\"removeFavoritos(" + ingrediente + ")\" style=\"width:20%; padding-left:10px\" />";
+                var ing = document.getElementById(ingrediente);
+                ing.innerHTML = html;
+
+                },
+                error: function () {
+                alert('Ingrediente já se encontra nos favoritos');
+                }
+            });
+
+
+
+
+
+    }
+
+    function removeFavoritos(ingrediente) {
         $.ajax({
-            url: '@Url.Action("AdicionaIngredienteFavoritos", "IngredienteView")',
+        url: '@Url.Action("RemoveIngredienteFavoritos", "IngredienteView")',
             type: 'POST',
             data: JSON.stringify(ingrediente),
             contentType: "application/json; charset=utf-8",
             dataType: "text",
             success: function () {
-                alert('Ingrediente adicionado aos favoritos');
+                var html = [];
+                html = "Adicionar aos favoritos <img src=\"/img/like.png\" id=\"fav\" onclick=\"adicionaFavoritos("+ ingrediente +")\" style=\"width:20%; padding-left:10px\" />";
+                var ing = document.getElementById(ingrediente);
+                ing.innerHTML = html;
+
             },
             error: function () {
                 alert('Ingrediente já se encontra nos favoritos');
@@ -56,7 +90,7 @@
 
 <div class="container-fluid">
     <div class="row">
-        @foreach (var ingrediente in Model) {
+        @foreach (var ingrediente in Model.Item1) {
             <div class="card shadow p-3 mb-5 bg-white rounded" style="margin: 3px; width:18rem">
                 <img id="no_border_img" class="card-img-top" src="@ingrediente.url_imagem" alt="Error loading image" style="height:150px">
                 <div class="card-body">
@@ -65,10 +99,22 @@
                     </h3>
                     @if (User.Identity.IsAuthenticated)
                     {
-                    <p>
-                        Adicionar aos favoritos
-                        <img src="~/img/like.png" id="fav" onclick="adicionaFavoritos(@ingrediente.id_ingrediente)" style="width:20%; padding-left:10px" />
-                    </p>
+
+                        @if (Model.Item2.ElementAt(n))
+                        {
+                            <p id="@ingrediente.id_ingrediente">
+                                Adicionar aos favoritos
+                                <img src="~/img/like.png" id="fav" onclick="adicionaFavoritos(@ingrediente.id_ingrediente)" style="width:20%; padding-left:10px" />
+                            </p>
+                        }
+                        else
+                        {
+                            <p id="@ingrediente.id_ingrediente">
+                                Remover dos favoritos
+                                <img src="~/img/unlike.png" id="fav" onclick="removeFavoritos(@ingrediente.id_ingrediente)" style="width:20%; padding-left:10px" />
+                            </p>
+                        }
+                        n++;
                     }
                     else
                     {

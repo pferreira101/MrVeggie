@@ -24,8 +24,15 @@ namespace MrVeggie.Controllers {
         [HttpGet]
         public IActionResult showIngredientes() {
             Ingrediente[] ingredientes = selecao.getIngredientes();
+            List<Boolean> nPossui = new List<bool>();
+            if (User.Identity.IsAuthenticated)
+            {
+                nPossui = selecao.getFavs(User.Identity.Name);
+            }
+            
+            
 
-            return View(ingredientes);
+            return View(new Tuple<IEnumerable<MrVeggie.Models.Ingrediente>, List<Boolean>>(ingredientes,nPossui));
         }
 
         [HttpGet]
@@ -47,6 +54,12 @@ namespace MrVeggie.Controllers {
         [HttpPost]
         public void AdicionaIngredienteFavoritos([FromBody] int id_ingrediente) {
             selecao.adicionaIngredienteFavoritos(id_ingrediente, User.Identity.Name);
+        }
+
+        [HttpPost]
+        public void removeIngredienteFavoritos([FromBody] int id_ingrediente)
+        {
+            selecao.removeIngredienteFavoritos(id_ingrediente, User.Identity.Name);
         }
     }
 }

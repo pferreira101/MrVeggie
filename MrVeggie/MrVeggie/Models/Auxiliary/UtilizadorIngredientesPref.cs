@@ -14,7 +14,7 @@ namespace MrVeggie.Models.Auxiliary {
         [NotMapped]
         public Ingrediente Ingrediente { get; set; }
 
-        [Key]
+    
         [Column("ingrediente")]
         //[ForeignKey("Ingrediente")]
         public int ingrediente_id { get; set; }

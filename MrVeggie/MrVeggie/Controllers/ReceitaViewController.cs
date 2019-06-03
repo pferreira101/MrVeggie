@@ -36,10 +36,17 @@ namespace MrVeggie.Controllers {
         [HttpGet("{id}")]
         public IActionResult showReceita(int id) {
             Receita receita = preparacao.getDetalhesReceita(id);
+           
+            if (User.Identity.IsAuthenticated)
+            {
+                bool isFav = selecao.isFav(id, User.Identity.Name);
 
+                if (receita == null) return NotFound();
+
+                return View(new Tuple<Receita, Boolean>(receita, !isFav));
+            }
             if (receita == null) return NotFound();
-
-            return View(receita);
+            return View(new Tuple<Receita, Boolean>(receita, true));
         }
         
         [HttpPost]
@@ -166,6 +173,12 @@ namespace MrVeggie.Controllers {
         [HttpPost]
         public void AdicionaReceitaFavoritos([FromBody] int id_receita) {
             selecao.adicionaReceitaFavoritos(id_receita, User.Identity.Name);
+        }
+
+        [HttpPost]
+        public void RemoveReceitaFavoritos([FromBody] int id_receita)
+        {
+            selecao.removeReceitaFavoritos(id_receita, User.Identity.Name);
         }
     }
 }
