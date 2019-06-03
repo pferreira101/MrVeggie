@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>C:\Users\Pedro\Documents\MIEI\3_Ano\2_Semestre\Laboratórios de Informática IV\li4-projeto\MrVeggie\MrVeggie\MrVeggie.xml</DocumentationFile>
+    <DocumentationFile></DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

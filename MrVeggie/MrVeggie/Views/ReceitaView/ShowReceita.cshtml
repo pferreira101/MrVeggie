@@ -135,29 +135,26 @@
                 </h1>
             </div>
             <div align="center">
-<<<<<<< HEAD
-=======
-                Favoritos
->>>>>>> e550d38a5d89c60f5fc7d8a1411b884232206ca6
                 @if (User.Identity.IsAuthenticated)
                 {
                     <div id="receita" align="center">
                         
                         @if (Model.Item2){
                             @:Adicionar aos favoritos
-                            <img id="like" src="~/img/like.png" onclick="adicionaFavoritos(@Model.Item1.id_receita)" style="width:6%;" />
+                            <img id="rec" src="~/img/like.png" onclick="adicionaFavoritos(@Model.Item1.id_receita)" style="width:6%;" />
                         }
                         else
                         {
                             @:Remove dos favoritos
-                            <img id="like" src="~/img/unlike.png" onclick="removeFavoritos(@Model.Item1.id_receita)" style="width:6%;" />
+                            <img id="rec" src="~/img/unlike.png" onclick="removeFavoritos(@Model.Item1.id_receita)" style="width:6%;" />
                         }
                     </div> 
                 }
                 else
                 {
+                    @:Adicionar aos favoritos
                     <a asp-controller="UserView" asp-action="LoginUtilizador">
-                        <img id="like" src="~/img/like.png" style="width:6%" />
+                            <img id="rec" src="~/img/like.png" style="width:6%" />
                     </a>
                 }
             </div>
