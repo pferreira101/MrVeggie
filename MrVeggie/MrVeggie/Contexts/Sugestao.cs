@@ -100,7 +100,7 @@ namespace MrVeggie.Contexts {
                 List<Receita> receitas = _context_r.Receita.Where(r => rIds.Contains(r.id_receita)).ToList();
 
                 Random random = new Random();
-                int rInt = random.Next(1, receitas.Count());
+                int rInt = random.Next(0, receitas.Count()-1);
 
                 x = receitas.ElementAt(rInt);
             }
