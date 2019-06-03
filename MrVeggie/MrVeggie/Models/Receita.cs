@@ -108,6 +108,8 @@ namespace MrVeggie.Models {
 
             modelBuilder.Entity<IngredientesPasso>().HasKey(ip => new { ip.passo_id, ip.ingrediente_id });
 
+            modelBuilder.Entity<UtilizadorIngredientesPref>().HasKey(uip => new { uip.utilizador_id, uip.ingrediente_id });
+
             // configures one-to-many relationship
             modelBuilder.Entity<Passo>()
                         .HasOne<Receita>(p => p.receita)     

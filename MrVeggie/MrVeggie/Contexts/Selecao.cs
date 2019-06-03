@@ -17,6 +17,8 @@ namespace MrVeggie.Contexts {
 
 
 
+
+
         /// <summary>
         /// Construtor do objecto da classe Selecao
         /// </summary>
@@ -33,6 +35,20 @@ namespace MrVeggie.Contexts {
             _context_a = context_a;
         }
 
+        public bool isFav(int id_receita, string email)
+        {
+            int id_utilizador = _context_u.Utilizador.Where(u => u.email.Equals(email)).Select(u => u.id_utilizador).First();
+
+            if (_context_u.UtilizadorReceitasPref.Find(id_utilizador, id_receita) != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
 
 
         /// <summary>
@@ -41,6 +57,24 @@ namespace MrVeggie.Contexts {
         /// <returns>Array com todas as receitas</returns>
         public Receita[] getReceitas() {
             return _context_r.Receita.ToArray();
+        }
+
+        public void removeIngredienteFavoritos(int id_ingrediente, string email)
+        {
+                int id_utilizador = _context_u.Utilizador.Where(u => u.email.Equals(email)).First().id_utilizador;
+
+                UtilizadorIngredientesPref uip = new UtilizadorIngredientesPref
+                {
+                    ingrediente_id = id_ingrediente,
+                    utilizador_id = id_utilizador
+                };
+
+                
+                _context_u.UtilizadorIngredientesPref.Remove(uip);
+                _context_u.SaveChanges();
+               
+
+            
         }
 
 
@@ -137,6 +171,16 @@ namespace MrVeggie.Contexts {
             _context_u.Update(utilizador);
 
             _context_u.SaveChanges();
+        }
+
+        public void removeReceitaFavoritos(int id_receita, string email)
+        {
+            Utilizador utilizador = _context_u.Utilizador.Where(u => u.email.Equals(email)).First();
+            UtilizadorReceitasPref pref = _context_u.UtilizadorReceitasPref.Find(utilizador.id_utilizador, id_receita);
+
+            _context_u.UtilizadorReceitasPref.Remove(pref);
+            _context_u.SaveChanges();
+
         }
 
 
@@ -238,5 +282,35 @@ namespace MrVeggie.Contexts {
             }
             
         }
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        public List<bool> getFavs(string email)
+        {
+            int id = _context_u.Utilizador.Where(u => u.email.Equals(email)).Select(u => u.id_utilizador).First();
+            List<Boolean> r = new List<bool>();
+            List<Ingrediente> ings = _context_ing.Ingrediente.ToList();
+            List<int> ingredientesPrefs = _context_u.UtilizadorIngredientesPref.Where(iPref => iPref.utilizador_id == id ).Select(iPref => iPref.ingrediente_id).ToList();
+
+            foreach (Ingrediente i in ings)
+            {
+                if (!ingredientesPrefs.Contains(i.id_ingrediente))
+                {
+                    r.Add(true);
+                }
+                else
+                {
+                    r.Add(false);
+                }
+            }
+
+            return r;
+        }
     }
 }
+

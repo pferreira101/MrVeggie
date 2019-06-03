@@ -49,7 +49,8 @@ namespace MrVeggie.Contexts {
         public List<Receita> getSugestoes() {
             List<Receita> r = new List<Receita>();
 
-            r.Add(_context_r.Receita.Find(1));
+            Random rand = new Random();
+            r.Add(_context_r.Receita.Find(rand.Next(1,_context_r.Receita.Count())));
             return r;
         }
 
@@ -90,7 +91,7 @@ namespace MrVeggie.Contexts {
             if (rIds.Count() == 0) {
                 Random random = new Random();
                 while (x == null) {
-                    int rInt = random.Next(0, _context_r.Receita.ToArray().Count() - 1);
+                    int rInt = random.Next(1, _context_r.Receita.ToArray().Count());
 
                     x = _context_r.Receita.Find(rInt);
                 }
@@ -99,7 +100,7 @@ namespace MrVeggie.Contexts {
                 List<Receita> receitas = _context_r.Receita.Where(r => rIds.Contains(r.id_receita)).ToList();
 
                 Random random = new Random();
-                int rInt = random.Next(0, receitas.Count() - 1);
+                int rInt = random.Next(1, receitas.Count());
 
                 x = receitas.ElementAt(rInt);
             }
@@ -137,7 +138,7 @@ namespace MrVeggie.Contexts {
             sugestoes.Sort((x1, x2) => x1.Item1.CompareTo(x2.Item1));
 
             Random random = new Random();
-            int rInt = random.Next(0, Math.Min(4, sugestoes.Count()));
+            int rInt = random.Next(1, Math.Min(4, sugestoes.Count()));
 
             return sugestoes.ElementAt(rInt).Item2;
         }
@@ -185,7 +186,7 @@ namespace MrVeggie.Contexts {
             sugestoes.Sort((x1, x2) => x1.Item1.CompareTo(x2.Item1));
 
             Random random = new Random();
-            int rInt = random.Next(0, Math.Min(4, receitas.Count() - 1));
+            int rInt = random.Next(1, Math.Min(4, receitas.Count()));
 
             return sugestoes.ElementAt(rInt).Item2;
         }
