@@ -30,23 +30,24 @@
     var ids = [];
 
     function setSelected(id) {
-        var element = document.getElementById(id);
-        element.style.backgroundColor = '#fff';
+        var card = document.getElementById(id);
+        card.style.backgroundColor = 'rgba(79 ,156 ,91, 0.2)';
+        
     }
 
     function removeSelected(id) {
-        var element = document.getElementById(id);
-        element.style.backgroundColor = '#000';
+        var card = document.getElementById(id);
+        card.style.backgroundColor = '#ffffff';
     }
 
     function addToPref(id) {
         if (ids.indexOf(id) == -1) {
             ids.push(id);
-            //setSelected(id);
+            setSelected(id);
         }
         else {
             ids.splice(ids.indexOf(id), 1);
-            //removeSelected(id);
+            removeSelected(id);
         }
         //$('input').val(ids.join(", ")); // Debug
 
@@ -81,7 +82,7 @@
 
         @foreach (var ingrediente in Model) {
 
-            <div id="@ingrediente.id_ingrediente" class="card shadow p-3 mb-5 bg-white rounded" style="margin: 3px; width:18rem" onclick="addToPref(@ingrediente.id_ingrediente)">
+            <div id="@ingrediente.id_ingrediente" class="card shadow p-3 mb-5 rounded" style="margin: 3px; width:18rem; background-color:white"  onclick="addToPref(@ingrediente.id_ingrediente)">
                 <img id="no_border_img" class="card-img-top" src="@ingrediente.url_imagem" alt="Error loading image">
                 <div class="card-body">
                     <h3 class="card-title">@ingrediente.nome</h3>
