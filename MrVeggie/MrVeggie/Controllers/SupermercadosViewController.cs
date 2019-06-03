@@ -25,11 +25,10 @@ namespace MrVeggie.Controllers {
         }
 
         [HttpGet]
-        public async Task<ActionResult> ShowMapa(){
-            string[] user_loc=null;
+        public async Task<ActionResult> ShowMapa() {
+            string[] user_loc = null;
             var value = TempData["Loc"];
-            if (value is string json)
-            {
+            if (value is string json) {
                 user_loc = JsonConvert.DeserializeObject<string[]>(json);
             }
             Console.WriteLine("****User Loc: " + user_loc[0] + " , " + user_loc[1]);
@@ -75,21 +74,19 @@ namespace MrVeggie.Controllers {
                 string latitude = latElement.InnerText;
                 string longitude = longElement.InnerText;
 
-                double lat; Double.TryParse(latitude, out lat);
-                double longi;  Double.TryParse(longitude, out longi);
+                double lat; Double.TryParse(latitude, NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out lat);
+                double longi; Double.TryParse(longitude, NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out longi);
                 string address = await getAddress(new Coordinate(lat, longi));
 
                 results.Add(new MarketLocation(name, latitude, longitude, address));
-                Console.WriteLine("LOCALIZAÇÃO : {0}, {1}, {2}, {3}", name, latitude, longitude, address);
             }
+
             return results;
         }
 
-        public async Task<String> getAddress(Coordinate point)
-        {
+        public async Task<String> getAddress(Coordinate point) {
             //Create a request.
-            var request = new ReverseGeocodeRequest()
-            {
+            var request = new ReverseGeocodeRequest() {
                 Point = point,
                 IncludeIso2 = true,
                 IncludeNeighborhood = true,
@@ -103,14 +100,13 @@ namespace MrVeggie.Controllers {
                 response.ResourceSets != null &&
                 response.ResourceSets.Length > 0 &&
                 response.ResourceSets[0].Resources != null &&
-                response.ResourceSets[0].Resources.Length > 0)
-            {
+                response.ResourceSets[0].Resources.Length > 0) {
 
                 var result = response.ResourceSets[0].Resources[0] as BingMapsRESTToolkit.Location;
                 return result.Address.FormattedAddress;
             }
-            return null;
 
+            return null;
         }
 
         public class MarketLocation {

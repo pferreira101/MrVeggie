@@ -24,7 +24,7 @@
     </div>
 </section>
 
-<h3>Por favor, escolha 3 ingredientes.</h3>
+<h3 style="padding-bottom:30px">Por favor, escolha 3 ingredientes.</h3>
 
 <script>
     var ids = [];
@@ -83,15 +83,15 @@
         @foreach (var ingrediente in Model) {
 
             <div id="@ingrediente.id_ingrediente" class="card shadow p-3 mb-5 rounded" style="margin: 3px; width:18rem; background-color:white"  onclick="addToPref(@ingrediente.id_ingrediente)">
-                <img id="no_border_img" class="card-img-top" src="@ingrediente.url_imagem" alt="Error loading image">
+                <img id="no_border_img" class="card-img-top" src="@ingrediente.url_imagem" alt="Error loading image" style="height:150px">
                 <div class="card-body">
-                    <h3 class="card-title">@ingrediente.nome</h3>
+                    <h3 class="card-title" style="height:65px">@ingrediente.nome</h3>
                 </div>
             </div>
         }
     </div>
 </div>
 
-<a style="float:right" onclick="getIDsSelected()" class="btn btn-success">Confirmar</a>
+<a style="float:right;color:white;margin-bottom:30px" onclick="getIDsSelected()" class="btn btn-success">Confirmar</a>
 
 

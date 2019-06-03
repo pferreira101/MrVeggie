@@ -7,9 +7,6 @@
 }
 
 
-
-
-
 <script>
    
     function writeIngredienteLine() {
@@ -45,12 +42,25 @@
 </script>
 
 
-
-
-
-
-
-<h1>Adicionar Passo</h1>
+<section class="banner-area relative">
+    <div class="container">
+        <div class="row height align-items-center justify-content-center">
+            <div class="banner-content col-lg-5">
+                <h1 style="font-size:150%">Adicionar Passo</h1>
+                <hr>
+                <div class="breadcrmb">
+                    <p>
+                        <a asp-controller="AdminView" asp-action="Index">Início</a>
+                        <span class="lnr lnr-arrow-right"></span>
+                        Admin
+                        <span class="lnr lnr-arrow-right"></span>
+                        <a asp-controller="AdminView" asp-action="NewPasso">Adicionar Passo</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 
 
@@ -84,7 +94,7 @@
 
     <div style="margin-top:10px" class="form-group" >
         <select id="recs" name="recs" class="form-control">
-            <option value="" disabled selected>Escolha a subReceita</option>
+            <option value="" disabled selected>Escolha a subreceita</option>
             @foreach (var receita in Model.receitas)
             {
                 <option value="@receita.id_receita">@receita.nome</option>

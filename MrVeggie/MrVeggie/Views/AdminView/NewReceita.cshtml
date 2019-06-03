@@ -7,7 +7,26 @@
 
 
 
-<h1>Adicionar Receita</h1>
+<section class="banner-area relative">
+    <div class="container">
+        <div class="row height align-items-center justify-content-center">
+            <div class="banner-content col-lg-5">
+                <h1 style="font-size:150%">Adicionar Receita</h1>
+                <hr>
+                <div class="breadcrmb">
+                    <p>
+                        <a asp-controller="AdminView" asp-action="Index">Início</a>
+                        <span class="lnr lnr-arrow-right"></span>
+                        Admin
+                        <span class="lnr lnr-arrow-right"></span>
+                        <a asp-controller="AdminView" asp-action="NewReceita">Adicionar Receita</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 
 
 <form asp-action="registaReceita" method="post">
@@ -47,9 +66,9 @@
         <input asp-for="receita.url_imagem" class="form-control" />
         <span asp-validation-for="receita.url_imagem" class="text-danger"></span>
     </div>
-    
+
     <div class="dropdown">
-        <button type="button" class="dropbtn">Selecionar Utensilios</button>
+        <button type="button" class="dropbtn">Selecionar Utensílios</button>
         <div class="dropdown-content">
             @foreach (var utensilio in Model.utensilios)
             {
@@ -59,7 +78,7 @@
     </div>
 
     <div style="margin-top:10px" class="form-group">
-        <input type="submit" value="Registar" class="btn btn-default btn-success" />
+        <input type="submit" value="Adicionar passos" class="btn btn-default btn-success" style="float:right;margin-bottom:30px" />
     </div>
 </form>
 

@@ -64,7 +64,7 @@ namespace MrVeggie.Controllers {
             
             return View("NewPasso", new NewPasso {
                 passo = new Passo(),
-                id_receita = admin.getNewReceitaID(n.receita.nome),
+                id_receita = n.receita.id_receita,
                 ingredientes = admin.getIngredientes(),
                 nPasso = 1,
                 operacoes = admin.getOperacoes(),

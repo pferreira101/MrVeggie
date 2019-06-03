@@ -7,7 +7,7 @@
 
 <style>
     #link{
-        color:forestgreen;
+        color:lightgreen;
     }
     #link:hover{
         color:darkgreen;
@@ -135,6 +135,10 @@
                 </h1>
             </div>
             <div align="center">
+<<<<<<< HEAD
+=======
+                Favoritos
+>>>>>>> e550d38a5d89c60f5fc7d8a1411b884232206ca6
                 @if (User.Identity.IsAuthenticated)
                 {
                     <div id="receita" align="center">
@@ -170,12 +174,12 @@
 
 <div style="margin-top:20px">
     <div style="float:right">
-        <a style="float:right" class="btn btn-link" onclick="enviaLocalizacao()">Onde comprar?</a>
+        <a style="float:right" class="btn btn-link" id="link" onclick="enviaLocalizacao()">Onde comprar?</a>
         @if (User.Identity.IsAuthenticated) {
-            <a style="float: left;" class="btn btn-link" onclick="sendEmail()">Receber lista ingredientes no e-mail</a>
+            <a style="float: left;" class="btn btn-link" id="link" onclick="sendEmail()">Receber lista ingredientes no e-mail</a>
         }
         else {
-            <a style="float:left; color:#777777" class="btn btn-link" asp-controller="UserView" asp-action="LoginUtilizador"> Receber lista ingredientes no e-mail </a>
+            <a style="float:left" id="link" class="btn btn-link" asp-controller="UserView" asp-action="LoginUtilizador"> Receber lista ingredientes no e-mail </a>
         }
     </div>
 </div>
@@ -208,7 +212,7 @@
             </tbody>
         </table>
     </div>
-  <!--  <div class="tab-pane fade" id="nav-utensilios" role="tabpanel" aria-labelledby="nav-utensilios-tab">
+    <div class="tab-pane fade" id="nav-utensilios" role="tabpanel" aria-labelledby="nav-utensilios-tab">
         <table class="table">
             <thead>
                 <tr>
@@ -221,7 +225,6 @@
                     <td>
                         <wrapper>
                             @utensilio.nome
-                            <img id="hover" src="@utensilio.url_imagem" />
                         </wrapper>
                         
                         
@@ -232,7 +235,7 @@
             </tbody>
         </table>
     </div>
-</div>-->
+</div>
 
 <p></p>
 
