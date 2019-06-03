@@ -5,6 +5,25 @@
 
 }
 
+<style>
+    #link{
+        color:forestgreen;
+    }
+    #link:hover{
+        color:darkgreen;
+    }
+    #like 
+    {
+        opacity: 1;
+        -webkit-transition: .3s ease-in-out;
+        transition: .3s ease-in-out;
+    }
+
+    #like:hover {
+        opacity: .5;
+    }
+</style>
+
 
 <script>
 
@@ -81,44 +100,48 @@
     </div>
 </section>
 
-<div class="row">
-    <div class="wrapper">
-        <div style="width: 35%; float: left;">
-            <img src="@Model.url_imagem" style="width: 100%">
-        </div>
-
-        <div style="padding-left: 20px">
-            <div class="wrapper">
-                <h1>
-                    @Model.nome
-                    @if (User.Identity.IsAuthenticated) {
-                        <img id="like" src="~/img/like.png" onclick="adicionaFavoritos(@Model.id_receita)" style="width:6%; padding-left:10px" />
-                    }
-                    else {
-                        <a asp-controller="UserView" asp-action="LoginUtilizador">
-                            <img id="like" src="~/img/like.png" style="width:6%" />
-                        </a>
-                    }
-                </h1>
-
-
-
+<div>
+    <div class="row">
+        <div class="col">
+            <div style="width: 100%;">
+                <img src="@Model.url_imagem" style="width: 100%;border-radius: 8px;">
             </div>
-            <p>@Model.desc</p>
         </div>
 
+        <div class="col">
+            <div>
+                <h1 align="center">
+                    @Model.nome
+                </h1>
+            </div>
+            <div align="center">
+                Adicionar aos favoritos
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <img id="like" src="~/img/like.png" onclick="adicionaFavoritos(@Model.id_receita)" style="width:6%;" />
+                }
+                else
+                {
+                    <a asp-controller="UserView" asp-action="LoginUtilizador">
+                        <img id="like" src="~/img/like.png" style="width:6%" />
+                    </a>
+                }
+            </div>
+            <div style="margin-top:20px">
+                    <p>@Model.desc</p>
+            </div>
+         </div>
     </div>
-
+        
 </div>
 
 
 
 
-<div>
-    <h2>Requisitos</h2>
+<div style="margin-top:20px">
     <div style="float:right">
-        <a style="float:right" class="btn btn-link" onclick="enviaLocalizacao();">Onde comprar?</a>
-        <a style="float: left" class="btn btn-link" onclick="sendEmail();">Receber lista ingredientes no mail</a>
+        <a style="float:right" class="btn btn-link" id="link" onclick="enviaLocalizacao();">Onde comprar?</a>
+        <a style="float: left" class="btn btn-link" id="link" onclick="sendEmail();">Receber lista de ingredientes no email</a>
     </div>
 </div>
 
