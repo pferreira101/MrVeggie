@@ -130,7 +130,7 @@ ALTER TABLE IngredientesPasso ADD CONSTRAINT FKIngredient7679 FOREIGN KEY (unida
 ALTER TABLE UtensiliosReceita ADD CONSTRAINT FKUtensilios299728 FOREIGN KEY (receita) REFERENCES Receita (id_receita);
 
 
-
+/*
 USE [msdb]
 GO
 DECLARE @jobId BINARY(16)
@@ -141,7 +141,7 @@ EXEC  msdb.dbo.sp_add_job @job_name=N'Limpa Agenda',
 		@notify_level_page=2, 
 		@delete_level=0, 
 		@category_name=N'[Uncategorized (Local)]', 
-		@owner_login_name=N'DESKTOP-CM5S8K1\Pedro', @job_id = @jobId OUTPUT
+		@owner_login_name=N'DESKTOP-F88H99P\nelso', @job_id = @jobId OUTPUT
 select @jobId
 GO
 EXEC msdb.dbo.sp_add_jobserver @job_name=N'Limpa Agenda', @server_name = N'DESKTOP-CM5S8K1'
@@ -172,7 +172,7 @@ EXEC msdb.dbo.sp_update_job @job_name=N'Limpa Agenda',
 		@delete_level=0, 
 		@description=N'', 
 		@category_name=N'[Uncategorized (Local)]', 
-		@owner_login_name=N'DESKTOP-CM5S8K1\Pedro', 
+		@owner_login_name=N'DESKTOP-F88H99P\nelso', 
 		@notify_email_operator_name=N'', 
 		@notify_page_operator_name=N''
 GO
@@ -193,3 +193,4 @@ EXEC msdb.dbo.sp_add_jobschedule @job_name=N'Limpa Agenda', @name=N'Segunda',
 		@active_end_time=235959, @schedule_id = @schedule_id OUTPUT
 select @schedule_id
 GO
+*/

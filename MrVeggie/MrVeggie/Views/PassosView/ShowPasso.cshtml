@@ -7,7 +7,7 @@
 
     int proximo = Model.nr + 1;
     int anterior = Model.nr - 1;
-    string url = "https://localhost:5001/ReceitaView/ShowReceita/";
+    string url = "https://localhost:5001/PassosView/ShowPasso/";
     TextToSpeech tts = new TextToSpeech(Model);
 
     string[] txts = tts.getText();
@@ -111,7 +111,7 @@
 </p>
 
 @if (Model.sub_receita != null) {
-    url += Model.sub_receita.id_receita.ToString();
+    url += Model.sub_receita.id_receita.ToString()+"-1";
 
     <p>
         Veja tambem:
