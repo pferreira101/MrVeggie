@@ -232,8 +232,11 @@ namespace MrVeggie.Contexts {
                 utilizador_id = id_utilizador
             };
 
-            _context_u.UtilizadorIngredientesPref.Add(uip);
-            _context_u.SaveChanges();
+            if (_context_u.UtilizadorIngredientesPref.Find(id_utilizador, id_ingrediente) == null) {
+                _context_u.UtilizadorIngredientesPref.Add(uip);
+                _context_u.SaveChanges();
+            }
+            
         }
     }
 }
