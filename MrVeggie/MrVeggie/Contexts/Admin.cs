@@ -20,6 +20,17 @@ namespace MrVeggie.Contexts {
         private UtensilioContext _context_uten;
         private IngredientesPassoContext _context_ip;
 
+
+
+        /// <summary>
+        /// Construtor da classe Admin
+        /// </summary>
+        /// <param name="context_i">Contexto dos ingredientes</param>
+        /// <param name="context_u">Contexto dos utilizadores</param>
+        /// <param name="context_r">Contexto das receitas</param>
+        /// <param name="context_op">Contexto das operações</param>
+        /// <param name="context_uten">Contexto dos utensílios</param>
+        /// <param name="context_ip">Contexto dos ingredientes passo</param>
         public Admin(IngredienteContext context_i, UtilizadorContext context_u, ReceitaContext context_r, OperacaoContext context_op, UtensilioContext context_uten, IngredientesPassoContext context_ip) {
             _context_i = context_i;
             _context_u = context_u;
@@ -30,6 +41,11 @@ namespace MrVeggie.Contexts {
         }
 
 
+        /// <summary>
+        /// Método que regista um ingrediente dado o seu nome e o URL da imagem.
+        /// </summary>
+        /// <param name="nome">Nome da receita</param>
+        /// <param name="url">URL da imagem</param>
         public void registaIngrediente(string nome, string url) {
             Ingrediente ing = new Ingrediente {
                 nome = nome,
@@ -40,15 +56,33 @@ namespace MrVeggie.Contexts {
             _context_i.SaveChanges();
         }
 
-        public List<Utensilio> getUtensilios()
-        {
+
+
+        /// <summary>
+        /// Método que retorna a lista dos utensílios disponíveis.
+        /// </summary>
+        /// <returns>Lista dos utensílios</returns>
+        public List<Utensilio> getUtensilios() {
             return _context_uten.Utensilio.ToList();
         }
 
-        public List<Utensilio> getUtensilios(Microsoft.Extensions.Primitives.StringValues stringValues) {
-            return _context_uten.Utensilio.Where(u => stringValues.Contains(u.id_utensilio.ToString()) ).ToList();
+
+
+        /// <summary>
+        /// Método que retorna a lista dos utensílios cujo o ID esteja contido na lista argumento.
+        /// </summary>
+        /// <param name="ids">Lista dos IDs dos utensílios</param>
+        /// <returns>Lista dos respetivos utensílios</returns>
+        public List<Utensilio> getUtensilios(Microsoft.Extensions.Primitives.StringValues ids) {
+            return _context_uten.Utensilio.Where(u => ids.Contains(u.id_utensilio.ToString())).ToList();
         }
 
+
+
+        /// <summary>
+        /// Método que retornas as estatísticas do crescimento do programa.
+        /// </summary>
+        /// <returns>Estatísticas</returns>
         public Estatistica getEstatistica() {
 
             int nr_utilizadores = _context_u.Utilizador.Count();
@@ -64,39 +98,56 @@ namespace MrVeggie.Contexts {
             return new Estatistica(nr_utilizadores, nr_masculino, nr_feminino, nr_receitas, nr_ingredientes, registos_ultimo_mes);
         }
 
-        public List<Unidade> getUnidades()
-        {
-            return _context_ip.Unidade.ToList();  
+
+
+        /// <summary>
+        /// Método que retorna as unidades presentes no sistema.
+        /// </summary>
+        /// <returns>Lista das unidades</returns>
+        public List<Unidade> getUnidades() {
+            return _context_ip.Unidade.ToList();
         }
 
+
+
+        /// <summary>
+        /// Método que retorna os ingredientes presentes no sistema.
+        /// </summary>
+        /// <returns>Lista dos ingredientes</returns>
         public List<Ingrediente> getIngredientes() {
             return _context_i.Ingrediente.ToList();
         }
 
-        internal List<Ingrediente> getIngredientes(StringValues stringValues)
-        {
-            return _context_i.Ingrediente.Where(i => stringValues.Contains(i.id_ingrediente.ToString())).ToList();
+
+
+        /// <summary>
+        /// Método que retorna a lista dos ingredientes cujo ID esteja presente na lista argumento.
+        /// </summary>
+        /// <param name="ids">IDs a verificar</param>
+        /// <returns>Lista de ingredientes filtrada</returns>
+        public List<Ingrediente> getIngredientes(StringValues ids) {
+            return _context_i.Ingrediente.Where(i => ids.Contains(i.id_ingrediente.ToString())).ToList();
         }
 
-        public void registaPasso(NewPasso model, StringValues unidades, StringValues quantidades)
-        {
+
+
+        /// <summary>
+        /// Método que regista um novo passo para uma receita.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="unidades"></param>
+        /// <param name="quantidades"></param>
+        public void registaPasso(NewPasso model, StringValues unidades, StringValues quantidades) {
             _context_r.Passo.Add(model.passo);
 
             _context_r.SaveChanges();
 
             float quantidade;
-
-            
-
             int x = 0;
-            foreach (Ingrediente i in model.ingredientes)
-            {
-                
+            foreach (Ingrediente i in model.ingredientes) {
                 quantidade = float.Parse(quantidades.ElementAt(x), CultureInfo.InvariantCulture);
-               
 
-                _context_ip.Add(new IngredientesPasso
-                {
+                _context_ip.Add(new IngredientesPasso {
                     passo_id = model.passo.id_passo,
                     ingrediente_id = i.id_ingrediente,
                     unidade_id = int.Parse(unidades.ElementAt(x++)),
@@ -108,20 +159,38 @@ namespace MrVeggie.Contexts {
             _context_ip.SaveChanges();
         }
 
-        internal void registaOperacao(Operacao op)
-        {
+
+
+        /// <summary>
+        /// Método que regista uma nova operação no sistema.
+        /// </summary>
+        /// <param name="op">Operação a adicionar</param>
+        public void registaOperacao(Operacao op) {
             _context_op.Add(op);
             _context_op.SaveChanges();
         }
 
-        public void finalizaReceita(int id_receita, int nPasso)
-        {
-            var passo = _context_r.Passo.First(p => p.receita_id == id_receita && p.nr == nPasso-1);
+
+
+        /// <summary>
+        /// Método que regista como último um passo de uma receita
+        /// </summary>
+        /// <param name="id_receita">ID da receita</param>
+        /// <param name="nPasso">Nr do último passo</param>
+        public void finalizaReceita(int id_receita, int nPasso) {
+            var passo = _context_r.Passo.First(p => p.receita_id == id_receita && p.nr == nPasso - 1);
             passo.ultimo = true;
             _context_r.Passo.Update(passo);
             _context_r.SaveChanges();
         }
 
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nome"></param>
+        /// <returns></returns>
         public int getNewReceitaID(string nome) {
             return _context_r.Receita.Where(r => r.nome.Equals(nome)).First().id_receita;
         }
@@ -132,33 +201,27 @@ namespace MrVeggie.Contexts {
 
             _context_r.SaveChanges();
 
-            if (utensilios != null)
-            {
-                foreach (Utensilio u in utensilios)
-                {
+            if (utensilios != null) {
+                foreach (Utensilio u in utensilios) {
                     _context_r.UtensiliosReceita.Add(new UtensiliosReceita { receita_id = r.id_receita, utensilio_id = u.id_utensilio });
                 }
             }
             _context_r.SaveChanges();
         }
 
-        public List<Receita> getReceitas()
-        {
+        public List<Receita> getReceitas() {
             return _context_r.Receita.ToList();
         }
 
-        public List<Receita> getReceitas(Microsoft.Extensions.Primitives.StringValues stringValues)
-        {
+        public List<Receita> getReceitas(Microsoft.Extensions.Primitives.StringValues stringValues) {
             return _context_r.Receita.Where(r => stringValues.Contains(r.id_receita.ToString())).ToList();
         }
 
-        public List<Operacao> getOperacoes()
-        {
+        public List<Operacao> getOperacoes() {
             return _context_op.Operacao.ToList();
         }
 
-        public List<Operacao> getOperacoes(Microsoft.Extensions.Primitives.StringValues stringValues)
-        {
+        public List<Operacao> getOperacoes(Microsoft.Extensions.Primitives.StringValues stringValues) {
             return _context_op.Operacao.Where(op => stringValues.Contains(op.id_op.ToString())).ToList();
         }
     }
