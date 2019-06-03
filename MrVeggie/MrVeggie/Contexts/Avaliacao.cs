@@ -44,18 +44,15 @@ namespace MrVeggie.Contexts {
             r.avaliacao = ((r.avaliacao * r.n_avaliacoes) + pontuacao) / (r.n_avaliacoes + 1);
             r.n_avaliacoes++;
 
-            
-           
 
+            _context_r.Update<Receita>(r);
+            _context_r.SaveChanges();
 
             HistoricoUtilizador historico = _context_hu.HistoricoUtilizador.Where(hu => hu.utilizador_id == id_utilizador && hu.receita_id == id_receita).OrderByDescending(hu => hu.data_conf).First();
             historico.avaliacao = pontuacao;
 
             _context_hu.Update<HistoricoUtilizador>(historico);
             _context_hu.SaveChanges();
-
-            _context_r.Update<Receita>(r);
-            _context_r.SaveChanges();
         }
 
 

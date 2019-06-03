@@ -154,6 +154,11 @@
 <p></p>
 
 
+<div style="display:none;" id="video">
+    <!--VIDEO-->
+</div>
+
+
 <div style="margin-bottom:50px">
     @if (Model.ultimo == true)
     {
@@ -167,6 +172,7 @@
             <a class="btn btn-success" id="anterior" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id_receita="@Model.receita_id" asp-route-nr_passo="@anterior">Anterior</a>
         }
         <a style="float:right" class="btn btn-success" id="proximo" asp-controller="PassosView" asp-action="ShowPasso" asp-route-id_receita="@Model.receita_id" asp-route-nr_passo="@proximo">Próximo</a>
+
     }
 </div>
 
@@ -175,11 +181,11 @@
 
     // BEGIN SPEECH RECOGNITION
 
-    window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
+    window.SpeechRecognition = window.SpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition || window.webkitSpeechRecognition;
     if ('SpeechRecognition' in window) {
         // speech recognition API supported
 
-        var recognition = new SpeechRecognition();
+        var recognition = new webkitSpeechRecognition();
         //recognition.continuous = true;
         recognition.lang = "pt-PT";
         //recognition.interimResults = true;
@@ -221,25 +227,31 @@
     }
 
     else {
-        // speech recognition API not supported
+        // speech API not supported
         document.getElementById('aviso').style.display = "block";
     }
 
     // BEGIN SPEECH SYNTHESIZING
 
     var synth = window.speechSynthesis;
-    window.speechSynthesis.getVoices();
-    var voices = [];
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.getVoices();
+        var voices = [];
 
-    voices = synth.getVoices();
+        voices = synth.getVoices();
 
-    var txt = "@(new HtmlString(Model.desc))";
+        var txt = "@(new HtmlString(Model.desc))";
 
-    function ouvir() {
-        var utter = new SpeechSynthesisUtterance(txt);
-        //utter.voice = voices[15];
-        utter.lang = "pt-PT";
-        synth.speak(utter);
+        function ouvir() {
+            var utter = new SpeechSynthesisUtterance(txt);
+            //utter.voice = voices[15];
+            utter.lang = "pt-PT";
+            synth.speak(utter);
+        }
+    }
+    else {
+        // speech API not supported
+        document.getElementById('aviso').style.display = "block";
     }
 
 
