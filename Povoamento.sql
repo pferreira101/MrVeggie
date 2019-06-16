@@ -1,6 +1,6 @@
 USE MrVeggie;
 
-select * from UtilizadorIngredientesPref where utilizador = 2;
+--select * from UtilizadorIngredientesPref where utilizador = 2;
 --INSERT INTO Utilizador VALUES ('Pedro', 'pedro@gmail.com', '123', 20, 'Masculino', 0, 0);
 
 INSERT INTO Ingrediente VALUES ('Alface', 'https://i.imgur.com/0Cpru8Y.jpg'), 
@@ -27,14 +27,14 @@ INSERT INTO Ingrediente VALUES ('Alface', 'https://i.imgur.com/0Cpru8Y.jpg'),
 								;
 
 select * from Receita;
-INSERT INTO Receita VALUES ('Lasanha', 'lasanha asdfsadf', 40, 4, 2, 1, 200, 2, 'https://www.pingodoce.pt/wp-content/uploads/2016/07/lasanhadelegumes617.jpg'), 
+INSERT INTO Receita VALUES ('Lasanha', 'Uma lasanha deliciosa sem o pecado da carde.', 40, 4, 2, 1, 200, 2, 'https://www.pingodoce.pt/wp-content/uploads/2016/07/lasanhadelegumes617.jpg'), 
 						   ('Sopa de tomate com lentilhas', 'Esta sopa de tomate com lentilhas vermelhas e espinafres é uma excelente forma de começar a sua refeição. Sirva com folhas de manjericão e iogurte grego.', 
-							 25, 0, 0, 1, 157, 6, 'https://www.pingodoce.pt/wp-content/uploads/2019/01/sopa-tomate-com-lentilhas.jpg'),
-						   ('Picar Cebola', 'Tutorial de como picar facilmente uma cebola', 2, 0, 0, 1, 0, 0, 'https://i.imgur.com/wTllztN.jpg'),
-						   ('Laços folhados com espargos', 'Uma receita rápida para servir como entrada ou para uma refeição leve. Os laços folhados com espargos frescos, acompanham com um molho de mel e tomilho fresco.' ,30, 0, 0, 1, 321, 8,'https://i.imgur.com/NTT8iV8.jpg')
+							 25, 4, 2, 1, 157, 6, 'https://www.pingodoce.pt/wp-content/uploads/2019/01/sopa-tomate-com-lentilhas.jpg'),
+						   ('Picar Cebola', 'Tutorial de como picar facilmente uma cebola', 2, 5, 1, 1, 0, 0, 'https://i.imgur.com/wTllztN.jpg'),
+						   ('Laços folhados com espargos', 'Uma receita rápida para servir como entrada ou para uma refeição leve. Os laços folhados com espargos frescos, acompanham com um molho de mel e tomilho fresco.' ,30, 4, 2, 2, 321, 8,'https://i.imgur.com/NTT8iV8.jpg')
 						   ;
 
-INSERT INTO Operacao VALUES('Teste'),
+INSERT INTO Operacao VALUES('Mexer'),
 						   ('Aquecer'),
 						   ('Cozinhar'),
 						   ('Juntar'),
@@ -50,8 +50,8 @@ INSERT INTO Operacao VALUES('Teste'),
 						   ;
 
 select * from Passo;
-INSERT INTO Passo VALUES (1, 'DESC', 20, 1, 1, null, 0), --1
-						 (2, 'DESC', 25, 1, 1, null, 1), --2
+INSERT INTO Passo VALUES (1, '', 20, 1, 1, null, 0), --1
+						 (2, '', 25, 1, 1, null, 1), --2
 						 (1, 'Aqueça o azeite numa panela.', 0, 2, 2, null, 0), --3
 						 (2, 'Junte uma cebola picada e dois dentes de alho.', 0, 4, 2, 3, 0), --4 juntar sub receita pica
 						 (3, 'Deixe cozinhar em lume moderado até a cebola estar mole.', 0, 3, 2, null, 0),--5
@@ -72,14 +72,14 @@ INSERT INTO Passo VALUES (1, 'DESC', 20, 1, 1, null, 0), --1
 						 (2, 'Corte os pés aos espargos, e coloque-os numa taça.', 0, 9, 4,null, 0),
 						 (3, 'Tempere com sal, pimenta, azeite e misture.', 0, 10, 4, null, 0),
 						 (4, 'Disponha os quadrados de massa folhada sobre um tabuleiro de forno forrado com papel vegetal.', 0, 4, 4, null, 0),
-						 (5, 'Coloque uma fatia de queijo brie sobre cada quadrado de massa e coloque por cima três espargos.', 0 , 4, 4, null, 0),
+						 (5, 'Coloque uma fatia de queijo sobre cada quadrado de massa e coloque por cima três espargos.', 0 , 4, 4, null, 0),
 						 (6, 'Feche os quadrados de massa, unindo duas pontas contrárias.', 0, 11, 4, null, 0),
 						 (7, 'Pincele com o ovo batido', 0, 12, 4, null, 0),
 						 (8, 'Leve ao forno cerca de 12 minutos, ou até estarem dourados.', 12, 13, 4, null, 0),
 						 (9, 'Regue com o mel e polvilhe com o tomilho.', 0, 4, 4, null, 1)
 						 ;
 
-INSERT INTO Unidade VALUES ('gramas'), ('colher(es) de sopa'), ('unidades'), ('lata'), ('colher(es) de cafe'), ('litros'),('colher(es) de sobremesa'), ('molhos'), ('quadrados'), ('fatias');
+INSERT INTO Unidade VALUES ('gramas'), ('colheres de sopa'), ('unidades'), ('lata'), ('colheres de cafe'), ('litros'),('colheres de sobremesa'), ('molhos'), ('quadrados'), ('fatias');
 select * from ingrediente;
 select * from IngredientesPasso;
 INSERT INTO IngredientesPasso VALUES (1, 1, 10, 1), 
@@ -116,7 +116,7 @@ INSERT INTO IngredientesPasso VALUES (1, 1, 10, 1),
 --INSERT INTO UtilizadorReceitasPref VALUES (5, 2);
 
 --INSERT INTO HistoricoUtilizador VALUES (2, 2, '20120618 10:34:09', 4);
-SELECT * FROM HistoricoUtilizador;
+--SELECT * FROM HistoricoUtilizador;
 --INSERT INTO HistoricoUtilizador VALUES (2, 2, '20120618 12:34:09', 0);
 
 
@@ -134,17 +134,14 @@ INSERT INTO UtensiliosReceita VALUES (1, 1),
 									 (4, 3),
 									 (4, 7);
 
-Insert into Utilizador Values('Admin','admin@admin.com', '202cb962ac59075b964b07152d234b70', 21, 'Masculino', 1, 0, GETDATE());
+Insert into Utilizador Values('Admin','admin@admin.com', '202cb962ac59075b964b07152d234b70', 21, 'Masculino', 1, 0, '2019-05-05 22:28:39.270');
 SELECT * FROM Utilizador;
 
-UPDATE Utilizador
-SET admin = 0
-WHERE email = 'pedri.nho.moreira.19@gmail.com';
 
-SELECT * FROM Ingrediente;
-SELECT * FROM Receita;
-SELECT * FROM Operacao;
-SELECT * FROM Passo;
+--SELECT * FROM Ingrediente;
+--SELECT * FROM Receita;
+--SELECT * FROM Operacao;
+--SELECT * FROM Passo;
 
 --ALTER TABLE HistoricoUtilizador
 --ALTER COLUMN avaliacao int not null;
@@ -152,11 +149,11 @@ SELECT * FROM Passo;
 --DELETE FROM HistoricoUtilizador
 --WHERE avaliacao IS null;
 
-SELECT * FROM UtilizadorIngredientesPref;
+--SELECT * FROM UtilizadorIngredientesPref;
 
-SELECT * FROM Agenda;
+--SELECT * FROM Agenda;
 
-SELECT * FROM UtilizadorReceitasPref;
+--SELECT * FROM UtilizadorReceitasPref;
 
 --DELETE FROM Agenda
 --WHERE utilizador > 0;
@@ -164,9 +161,9 @@ SELECT * FROM UtilizadorReceitasPref;
 --DELETE FROM Receita
 --WHERE id_receita > 2;
 
-SELECT * FROM UtensiliosReceita;
+--SELECT * FROM UtensiliosReceita;
 
 --DELETE FROM UtensiliosReceita
 --WHERE receita > 1;
 
-SELECT * FROM HistoricoUtilizador;
+--SELECT * FROM HistoricoUtilizador;

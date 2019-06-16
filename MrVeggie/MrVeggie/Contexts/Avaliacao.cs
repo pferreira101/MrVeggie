@@ -44,15 +44,20 @@ namespace MrVeggie.Contexts {
             r.avaliacao = ((r.avaliacao * r.n_avaliacoes) + pontuacao) / (r.n_avaliacoes + 1);
             r.n_avaliacoes++;
 
-
             _context_r.Update<Receita>(r);
             _context_r.SaveChanges();
 
-            HistoricoUtilizador historico = _context_hu.HistoricoUtilizador.Where(hu => hu.utilizador_id == id_utilizador && hu.receita_id == id_receita).OrderByDescending(hu => hu.data_conf).First();
-            historico.avaliacao = pontuacao;
+            try {
+                HistoricoUtilizador historico = _context_u.HistoricoUtilizador.Where(hu => hu.utilizador_id == id_utilizador && hu.receita_id == id_receita).OrderByDescending(hu => hu.data_conf).First();
 
-            _context_hu.Update<HistoricoUtilizador>(historico);
-            _context_hu.SaveChanges();
+                historico.avaliacao = pontuacao;
+
+                _context_u.HistoricoUtilizador.Update(historico);
+                _context_u.SaveChanges();
+            }
+            catch {
+            }
+            
         }
 
 
@@ -74,7 +79,7 @@ namespace MrVeggie.Contexts {
         /// <param name="id_receita">Receita a adicionar</param>
         /// <param name="email">Email do utilizador</param>
         public void addToHistorico(int id_receita, string email) {
-            int id_utilizador = _context_u.Utilizador.Where(u => u.email.Equals(email)).First().id_utilizador; // SERÁ ASSIM QUE SE VAI BUSCAR?? METER ID NA COOKIE? COMO?! 
+            int id_utilizador = _context_u.Utilizador.Where(u => u.email.Equals(email)).First().id_utilizador; 
 
             HistoricoUtilizador hu = new HistoricoUtilizador();
             hu.avaliacao = 0;

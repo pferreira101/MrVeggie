@@ -123,12 +123,10 @@ ALTER TABLE IngredientesPasso ADD CONSTRAINT FKIngredient52444 FOREIGN KEY (ingr
 ALTER TABLE Passo ADD CONSTRAINT FKPasso568056 FOREIGN KEY (operacao) REFERENCES Operacao (id_op);
 ALTER TABLE Passo ADD CONSTRAINT FKPasso74792 FOREIGN KEY (sub_receita) REFERENCES Receita (id_receita);
 ALTER TABLE Agenda ADD CONSTRAINT FKAgenda98980 FOREIGN KEY (utilizador) REFERENCES Utilizador (id_utilizador);
---ALTER TABLE Agenda ADD CONSTRAINT FKAgenda98981 FOREIGN KEY (utilizador) REFERENCES Utilizador (id_utilizador);
 ALTER TABLE Agenda ADD CONSTRAINT FKAgenda50798 FOREIGN KEY (receita) REFERENCES Receita (id_receita);
 ALTER TABLE UtensiliosReceita ADD CONSTRAINT FKUtensilios678874 FOREIGN KEY (utensilio) REFERENCES Utensilio (id_utensilio);
 ALTER TABLE IngredientesPasso ADD CONSTRAINT FKIngredient7679 FOREIGN KEY (unidade) REFERENCES Unidade (id_unidade);
 ALTER TABLE UtensiliosReceita ADD CONSTRAINT FKUtensilios299728 FOREIGN KEY (receita) REFERENCES Receita (id_receita);
-
 
 /*
 USE [msdb]
@@ -141,7 +139,7 @@ EXEC  msdb.dbo.sp_add_job @job_name=N'Limpa Agenda',
 		@notify_level_page=2, 
 		@delete_level=0, 
 		@category_name=N'[Uncategorized (Local)]', 
-		@owner_login_name=N'DESKTOP-F88H99P\nelso', @job_id = @jobId OUTPUT
+		@owner_login_name=N'DESKTOP-CM5S8K1\Pedro', @job_id = @jobId OUTPUT
 select @jobId
 GO
 EXEC msdb.dbo.sp_add_jobserver @job_name=N'Limpa Agenda', @server_name = N'DESKTOP-CM5S8K1'
@@ -172,7 +170,7 @@ EXEC msdb.dbo.sp_update_job @job_name=N'Limpa Agenda',
 		@delete_level=0, 
 		@description=N'', 
 		@category_name=N'[Uncategorized (Local)]', 
-		@owner_login_name=N'DESKTOP-F88H99P\nelso', 
+		@owner_login_name=N'DESKTOP-CM5S8K1\Pedro', 
 		@notify_email_operator_name=N'', 
 		@notify_page_operator_name=N''
 GO
